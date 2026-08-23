@@ -6513,7 +6513,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@. Alle Zeiten in %2$@."
+            "value": "%1$@. Alle Zeiten: %2$@."
           }
         },
         "fr": {
@@ -6549,7 +6549,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@. Wszystkie godziny w strefie %2$@."
+            "value": "%1$@. Wszystkie godziny: %2$@."
           }
         },
         "ja": {

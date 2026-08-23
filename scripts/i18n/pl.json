@@ -99,7 +99,7 @@
   "data.card.sunrise": "Wschód Słońca",
   "data.card.sunset": "Zachód Słońca",
   "data.card.uv": "Indeks UV",
-  "data.context.subtitle": "\\(day). Wszystkie godziny w strefie \\(zoneName).",
+  "data.context.subtitle": "\\(day). Wszystkie godziny: \\(zoneName).",
   "data.done": "Gotowe",
   "data.eclipse.alreadyUnderWay": "Słońce wschodzi tu, gdy zaćmienie już trwa, więc pierwszego kontaktu nie da się zobaczyć.",
   "data.eclipse.caption": "Najbliższe zaćmienie Słońca widoczne z tego miejsca oraz najbliższe zaćmienie Księżyca, gdziekolwiek wypada, szukane w ciągu najbliższych pięciu lat. Zaćmienie Księżyca zachodzi w tej samej chwili na całej Ziemi, więc jest wypisane nawet wtedy, gdy Księżyc jest tu pod horyzontem. Wszystkie godziny są lokalne dla tego miejsca.",

@@ -99,7 +99,7 @@
   "data.card.sunrise": "Sonnenaufgang",
   "data.card.sunset": "Sonnenuntergang",
   "data.card.uv": "UV-Index",
-  "data.context.subtitle": "\\(day). Alle Zeiten in \\(zoneName).",
+  "data.context.subtitle": "\\(day). Alle Zeiten: \\(zoneName).",
   "data.done": "Fertig",
   "data.eclipse.alreadyUnderWay": "Die Sonne geht hier auf, während die Finsternis schon läuft, es gibt also keinen ersten Kontakt zu sehen.",
   "data.eclipse.caption": "Die nächste von diesem Ort aus sichtbare Sonnenfinsternis und die nächste Mondfinsternis, wo immer sie stattfindet, gesucht über die kommenden fünf Jahre. Eine Mondfinsternis läuft überall auf der Erde im selben Moment ab, deshalb wird auch dann eine aufgeführt, wenn der Mond hier unter dem Horizont steht. Alle Zeiten gelten in der Ortszeit dieses Ortes.",
