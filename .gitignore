@@ -1,0 +1,12 @@
+.DS_Store
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+.asc/private/
+*.p8
+*.p12
+*.mobileprovision
+*.cer
+node_modules/
+.vercel/
