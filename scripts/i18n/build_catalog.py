@@ -20,11 +20,40 @@ I18N = ROOT / "scripts" / "i18n"
 OUT = ROOT / "Sources" / "Sunlit" / "Resources" / "Localizable.xcstrings"
 
 LANGUAGES = ["de", "fr", "it", "es", "es-MX", "nl", "pl", "ja", "pt-BR"]
-PLACEHOLDER = re.compile(r"\\\(([a-zA-Z0-9_.]+)\)")
+
+# The English now comes from the compiler, so it carries real format specifiers
+# such as %@. The translations were written against the earlier Swift-shaped
+# source, so they carry \(name) instead. Converting them here, positionally
+# against the English, is what keeps a translator's reordering intact: the first
+# placeholder in the English becomes %1$@ wherever it lands in the translation.
+SWIFT_PLACEHOLDER = re.compile(r"\\\(([A-Za-z0-9_.]+)\)")
+FORMAT_PLACEHOLDER = re.compile(r"%(?:\d+\$)?[@a-zA-Z]")
+
+
+def swift_placeholder_order(text):
+    return SWIFT_PLACEHOLDER.findall(text)
+
+
+def to_format_string(translated, english_names):
+    """Rewrite \(name) into %N$@ using the English order as the numbering."""
+    if not english_names:
+        return translated
+
+    def replace(match):
+        name = match.group(1)
+        if name not in english_names:
+            return match.group(0)
+        return "%%%d$@" % (english_names.index(name) + 1)
+
+    return SWIFT_PLACEHOLDER.sub(replace, translated)
 
 
 def main():
     english = json.loads((I18N / "keys.json").read_text(encoding="utf-8"))
+    # The Swift-shaped source the translators worked from, kept so the
+    # placeholder NAMES are known and can be numbered in the English order.
+    swift_path = I18N / "keys_swift_form.json"
+    source_swift = json.loads(swift_path.read_text(encoding="utf-8")) if swift_path.exists() else {}
     problems = []
     translations = {}
 
@@ -43,17 +72,26 @@ def main():
         if extra:
             problems.append(f"{code}: {len(extra)} keys not in the source, first {sorted(extra)[:3]}")
 
+        converted = {}
         for key, value in data.items():
             if key not in english:
                 continue
-            # An interpolation that is dropped or renamed shows the reader a
-            # literal backslash-paren in a shipped build, or crashes the format.
-            if PLACEHOLDER.findall(english[key]) != PLACEHOLDER.findall(value):
+            names = swift_placeholder_order(source_swift.get(key, ""))
+            rewritten = to_format_string(value, names)
+            converted[key] = rewritten
+            # A dropped or added placeholder either shows the reader a literal
+            # percent sign or crashes the format at runtime.
+            wanted = len(FORMAT_PLACEHOLDER.findall(english[key]))
+            got = len(FORMAT_PLACEHOLDER.findall(rewritten))
+            if wanted != got:
                 problems.append(
-                    f"{code}: placeholders differ on {key!r}: "
-                    f"{PLACEHOLDER.findall(english[key])} vs {PLACEHOLDER.findall(value)}")
+                    f"{code}: {key!r} needs {wanted} placeholders, has {got}: {rewritten!r}")
+            if SWIFT_PLACEHOLDER.search(rewritten):
+                problems.append(
+                    f"{code}: {key!r} still carries a Swift interpolation: {rewritten!r}")
             if re.search(r"[–—]", value):
                 problems.append(f"{code}: dash punctuation in {key!r}")
+        translations[code] = converted
 
     if problems:
         print(f"{len(problems)} problems, catalogue NOT written:\n")

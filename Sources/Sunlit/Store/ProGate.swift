@@ -11,9 +11,21 @@ final class ProGate {
     /// Whether the non-consumable has been purchased.
     private(set) var isPurchased: Bool = false
 
+    /// When frozen, the store's asynchronous entitlement refresh cannot change
+    /// the answer. Used only by the screenshot harness.
+    private var isFrozen = false
+
     /// Set by the store layer when entitlements change, and by tests.
     func setPurchased(_ purchased: Bool) {
+        guard !isFrozen else { return }
         isPurchased = purchased
+    }
+
+    /// Grants and then freezes, so a later refresh cannot take it back.
+    func freezePurchased(_ purchased: Bool) {
+        isFrozen = false
+        isPurchased = purchased
+        isFrozen = true
     }
 
     /// The one question every gated feature asks.

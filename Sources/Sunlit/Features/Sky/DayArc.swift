@@ -115,9 +115,22 @@ struct DayArc: View {
         let bottom = plot.clampedY(GoldenHour.goldenLowerAltitude)
         guard bottom > top else { return }
         let band = CGRect(x: plot.rect.minX, y: top, width: plot.rect.width, height: bottom - top)
-        // The accent carries the hue; the two rules carry the shape, so the band is still
-        // a band in greyscale, where #FFB020 can match the sky it lies on exactly.
-        context.fill(Path(band), with: .color(SkyColors.sun.opacity(0.18)))
+        // A gradient rather than a flat wash. Eighteen percent of #FFB020 laid over the
+        // twilight violet the gradient shows at this hour mixes to a flat brown, which
+        // reads as a bar drawn across the picture rather than as light lying in it. Fading
+        // to almost nothing at both edges makes it a band of light again, and it costs no
+        // legibility: the two hairlines still carry the shape, so it is still a band in
+        // greyscale, where the accent can match the sky it lies on exactly.
+        context.fill(
+            Path(band),
+            with: .linearGradient(
+                Gradient(stops: [
+                    .init(color: SkyColors.sun.opacity(0.04), location: 0),
+                    .init(color: SkyColors.sun.opacity(0.24), location: 0.5),
+                    .init(color: SkyColors.sun.opacity(0.04), location: 1),
+                ]),
+                startPoint: CGPoint(x: band.midX, y: band.minY),
+                endPoint: CGPoint(x: band.midX, y: band.maxY)))
         context.stroke(Self.rule(y: top, in: plot), with: .color(line), lineWidth: hairline)
         context.stroke(Self.rule(y: bottom, in: plot), with: .color(line), lineWidth: hairline)
     }

@@ -30,6 +30,24 @@ final class AppState {
     /// Whether `place` is the device's own location rather than a chosen one.
     var isCurrentLocation: Bool
 
+    /// True only while the app is being driven for screenshots.
+    ///
+    /// Two pieces of ordinary behaviour are wrong during a capture and are
+    /// suppressed by this flag: the Sky view returns to live time whenever the
+    /// selected day is today, which throws away the instant the capture chose,
+    /// and the store overwrites the entitlement asynchronously a moment after
+    /// launch, which locks the screens the capture is meant to show. Both were
+    /// observed, not guessed: the first capture came out at the wall clock time
+    /// with a lock banner across it.
+    var isCaptureMode: Bool = false
+
+    /// Which tab a capture should open on, or nil for the default.
+    ///
+    /// Set from a launch argument rather than by tapping the tab bar, because a
+    /// tap depends on where the bar happens to be laid out and a poster set has
+    /// to be reproducible across ten languages and two device sizes.
+    var captureScreen: String?
+
     init(place: Place, pro: ProGate = ProGate()) {
         self.place = place
         self.day = Calendar.current.startOfDay(for: Date())

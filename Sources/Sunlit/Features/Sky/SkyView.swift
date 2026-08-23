@@ -192,6 +192,10 @@ struct SkyView: View {
     /// the hour away, which is the opposite of what the one shared place and instant are
     /// for. Only the Now button clears it.
     private func alignInstantToSelection() {
+        // A capture has already chosen its instant, and the branch below would
+        // throw it away the moment the chosen day happens to be today. The first
+        // capture came out at the wall clock time for exactly this reason.
+        guard !state.isCaptureMode else { return }
         let dayStart = dayStartDate
         if let heldHour {
             state.scrubSeconds = dayStart

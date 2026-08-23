@@ -58,6 +58,8 @@ enum CaptureHarness {
 
     /// Applies the configuration to the live state.
     static func apply(_ configuration: Configuration, to state: AppState) {
+        state.isCaptureMode = true
+        state.captureScreen = configuration.screen
         state.place = configuration.place
         state.isCurrentLocation = false
 
@@ -67,7 +69,9 @@ enum CaptureHarness {
         state.scrubSeconds = configuration.instant.timeIntervalSince(state.day)
 
         if configuration.grantPro {
-            state.pro.setPurchased(true)
+            // Freeze rather than set: StoreService.refreshEntitlements runs a
+            // moment later and would otherwise put the lock back.
+            state.pro.freezePurchased(true)
         }
     }
 }

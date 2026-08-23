@@ -54,5 +54,15 @@ struct RootView: View {
         .sheet(isPresented: $showingPaywall) {
             PaywallView()
         }
+        .onChange(of: state.captureScreen, initial: true) { _, screen in
+            // Screenshot capture only. Nothing sets this in a shipped run.
+            switch screen {
+            case "sky": tab = .sky
+            case "ar": tab = .ar
+            case "map": tab = .map
+            case "data": tab = .data
+            default: break
+            }
+        }
     }
 }
