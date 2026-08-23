@@ -1,105 +1,72 @@
 Sunlit computes the position of the sun, the moon and the centre of the Milky Way
-on the device, for any date and any place. There is no account and no sign in, so
-there are no demo credentials to provide. Launching the app takes you straight to
-the Sky view.
+on the device, for any date and any place. No account, no sign in, no demo
+credentials. Launching goes straight to the Sky view.
 
-NO ACCOUNT, NO NETWORK NEEDED TO TEST
-Every astronomical and solar number in this app is computed locally by SunlitCore.
-No API is called at runtime for any of them. Put the phone in aeroplane mode and
-every calculation, curve and table still works, including the offline city search
-over 34,106 embedded entries. The only two things that use a network are
-the Apple Maps tile layer in the Map view and MapKit place search, exactly as in
-any map application. The rays, the day path and the shadow drawn on top of the map
-are computed locally and appear with or without a connection.
+NO ACCOUNT OR NETWORK NEEDED TO TEST
+Every figure is computed locally. In aeroplane mode every calculation, curve and
+table still works, including the offline city search over 34,106 entries. Two
+things use a network, both Apple's: the map tiles, and the time zone of a pin
+dropped somewhere new. What is drawn on the map is computed locally.
 
-THE FOUR VIEWS AND HOW TO REACH THEM
-All four are tabs in the main navigation at the bottom of the screen, in this
-order:
-1. Sky. The home screen, shown on launch. The background gradient is drawn from
-   the real solar altitude at the selected instant. Drag the time scrubber below
-   the arc and the whole screen moves through the day.
-2. AR. Second tab. Live camera with the sun and moon paths, hour marks, and the
-   June solstice, December solstice and equinox reference curves. See the camera
-   note below.
-3. Map. Third tab. Sunrise and sunset direction rays from the pin, the moon rays,
-   the day path over the terrain, and a shadow projection whose object height is
-   adjustable. Tap anywhere to move the pin.
-4. Data. Fourth tab. Civil, nautical and astronomical twilight, solar noon, day
-   length, the moon phase calendar, upcoming eclipses with local circumstances,
-   the annual altitude curve, and export.
-
-The place and the date live in a header shared by all four views. Changing either
-one changes all four.
+THE FOUR VIEWS are tabs at the bottom: Sky (home, the gradient is drawn from the
+real solar altitude, drag the scrubber to move through the day), AR (camera with
+the sun and moon paths and the solstice and equinox curves), Map (sunrise and
+sunset azimuth rays and a shadow projection), Data (twilights, moon calendar,
+eclipses, annual curve, export). Place and date live in a shared header and
+govern all four.
 
 CAMERA PERMISSION AND GRACEFUL DEGRADATION
-The AR view is the only feature that uses the camera, and it asks only when that
-tab is first opened. NSCameraUsageDescription is localised in all ten languages.
-If permission is refused, or granted and later revoked in Settings, the AR view
-does not fail and does not block: it drops the camera layer and draws the same sun
-path, moon path, hour marks and the solstice and equinox reference curves over the
-app's own sky gradient instead. Nothing else in the app needs the camera.
-
-Location permission is requested so the current place can be used. A place can
-also be chosen from the embedded offline city list or by dropping a pin in the Map
-view, so the app is fully testable if location is refused.
+The AR view is the only feature using the camera and asks when that tab is first
+opened. NSCameraUsageDescription is localised in all ten languages. If permission
+is refused or later revoked, the view does not fail: it drops the camera layer
+and draws the same paths over the app's own sky gradient. If location is refused,
+a place can still be chosen from the offline list or by dropping a pin, so the
+app stays fully testable.
 
 THE FREE TIER
-Today, at the current location, is free forever, in all four views. That includes
-the sun position and compass, the AR sun path, sunrise and sunset, all three
-twilights, golden hour and blue hour, solar noon, day length, shadow length, and
-the UV index and irradiance figures for today. Nothing in that list is time
-limited and there is no trial. The paywall states what stays free before it states
-what costs money.
+Today, at the current location, is free forever, in all four views: sun position,
+compass, AR sun path, sunrise, sunset, all three twilights, golden and blue hour,
+solar noon, day length, shadow length, and the UV and irradiance figures. Nothing
+in that list is time limited and there is no trial. The paywall states what stays
+free before it states what costs money.
 
 THE ONE IN-APP PURCHASE
-Sunlit Pro, product id com.levinschwab.sunlit.pro, a single non consumable at
-9.99 EUR (Apple's equivalent price tier in each storefront). There is no
-subscription and no second product. It unlocks: any date other than today, saved
-places and any location other than the current one, the moon (phase, path, rise,
-set, distance, calendar), the Milky Way (galactic centre, galactic plane,
-visibility windows), the annual path overlay with solstice and equinox curves, the
-measured horizon profile and the obstruction periods it produces, eclipses with
-local circumstances, widgets, event notifications, and CSV and image export.
-
-To reach the paywall, tap the date in the shared header and choose any day other
-than today. Restore Purchases is on the paywall and in Settings.
+Sunlit Pro, com.levinschwab.sunlit.pro, a single non consumable at 9.99 EUR. No
+subscription, no second product. It unlocks: any date other than today, saved
+places and any location other than the current one, the moon, the Milky Way, the
+annual path overlay, the measured skyline and its obstruction periods, eclipses
+with local circumstances, widgets, event notifications, and CSV and image export.
+To reach the paywall, tap the date in the header and choose any day but today.
+Restore Purchases is on the paywall and in Settings.
 
 UV INDEX AND IRRADIANCE ARE CLEAR SKY MODELS
-They are not measurements and the app never presents them as measurements. The UV
-index is computed from the solar zenith angle, a latitude and season ozone
-climatology embedded in the app, the site elevation and the earth to sun distance.
-Irradiance is the Haurwitz clear sky model for global horizontal irradiance, with
-the Erbs correlation splitting direct and diffuse. Every place these two numbers
-appear carries a visible clear sky model caption, and the App Store description
-says the same in every language. Cloud is not modelled and the app says so.
+They are not measurements and are never presented as such. UV comes from the
+solar zenith angle, an embedded latitude and season ozone climatology, the site
+elevation and the earth to sun distance. Irradiance is the Haurwitz clear sky
+model with the Erbs correlation splitting direct and diffuse. Every place these
+appear carries a visible clear sky caption, and the store description says the
+same in every language. Cloud is not modelled and the app says so.
 
-ACCURACY CLAIMS IN THE LISTING
-Solar position uses the NREL Solar Position Algorithm, accurate to 0.0003 degrees.
-Lunar position uses a truncated ELP-2000/82 series, accurate to about 10
-arcseconds. Rise, set and twilight times come from a numerical solver rather than
-an interpolation, so grazing events and high latitudes are handled, and polar day
-and polar night are reported explicitly instead of a fabricated time. These are
-the only accuracy claims made, and each is verified in the test suite against
+ACCURACY CLAIMS
+Solar position uses the NREL Solar Position Algorithm, accurate to 0.0003
+degrees. Lunar position uses a truncated ELP-2000/82 series, accurate to about 10
+arcseconds. Rise and set come from a numerical solver, so high latitudes are
+handled and polar day and night are reported explicitly rather than as an
+invented time. These are the only accuracy claims made, each verified against
 published reference values.
 
 PRIVACY
-The app collects nothing. No account, no email address, no analytics, no crash
-reporter, no advertising and no tracking SDK of any kind. The App Privacy answer
-is Data Not Collected, which is accurate. Saved places and the measured horizon
-profile are written to a file inside the app container and never leave the device.
-Privacy policy: https://sunlit-app.vercel.app/privacy
-Terms of Use: the paywall links to Apple's standard EULA at
-https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ which is the
-licence that applies. Our own supplementary terms, which repeat the clear sky
-caveat and state what the purchase includes, are at
+The app collects nothing: no account, no email, no analytics, no crash reporter,
+no advertising, no tracking SDK. The App Privacy answer is Data Not Collected.
+Saved places and the measured skyline are written inside the app container and
+never leave the device.
+Privacy: https://sunlit-app.vercel.app/privacy
+Terms: the paywall links to Apple's standard EULA; supplementary terms are at
 https://sunlit-app.vercel.app/terms
 
 ATTRIBUTION
-The offline city list is GeoNames cities15000, licensed CC BY 4.0. The attribution
-appears in Settings, in the repository and on the website.
+The offline city list is GeoNames cities15000, CC BY 4.0, credited in Settings,
+in the repository and on the website.
 
-DEVICE
-iPhone only, TARGETED_DEVICE_FAMILY = 1, portrait, iOS 17.0 and later.
-
-CONTACT
-Levin Schwab, levin.schwab@gmx.de
+DEVICE: iPhone only, portrait, iOS 17.0 and later.
+CONTACT: Levin Schwab, levin.schwab@gmx.de
