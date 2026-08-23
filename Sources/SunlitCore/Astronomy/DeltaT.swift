@@ -19,8 +19,9 @@ import Foundation
 // the later copy writes u = (y-1820)/100, meaning the decimal year. This file
 // follows the later reading, which is also what both reproductions use. The
 // choice is not cosmetic: at the -1999 end of the range the two readings differ
-// by up to eleven seconds, because there the parabola changes by roughly
-// twenty-four seconds for every year of argument.
+// by up to twenty-three seconds, because there the parabola changes by roughly
+// twenty-four seconds for every year of argument, and y - year runs from 1/24
+// to 23/24 of a year as the month goes from January to December.
 
 /// Delta T, the difference TT minus UT1, in seconds.
 ///

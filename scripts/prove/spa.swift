@@ -29,22 +29,29 @@ let place = Coordinates.Geographic(latitude: 39.742476, longitude: -105.1786, el
 let air = SolarPositionSPA.Atmosphere(pressureMillibars: 820, temperatureCelsius: 11)
 let r = SolarPositionSPA.evaluate(julianDay: jd, place: place, deltaT: 67, atmosphere: air)
 
+// The report prints the Julian day rounded to six decimals. That rounding is
+// worth 2.2e-7 days, and the earth's heliocentric longitude advances 0.9923
+// degrees per day, so feeding the PRINTED number back in as input shifts L by
+// 2.2e-7 degrees. That artefact was once mistaken in this project for a
+// property of the coefficient tables. The instant is therefore computed from
+// the calendar date here, and the printed value is only compared against.
 check("julian day",                 r.julianDay,                 2452930.312847,  1e-6)
-check("heliocentric longitude L",   r.heliocentricLongitude,     24.0182616917,   1e-5)
-check("heliocentric latitude B",    r.heliocentricLatitude,      -0.0001011219,   1e-8)
-check("radius vector R",            r.radiusVector,              0.9965422974,    1e-8)
-check("geocentric longitude Theta", r.geocentricLongitude,       204.0182616917,  1e-5)
-check("geocentric latitude beta",   r.geocentricLatitude,        0.0001011219,    1e-8)
+check("heliocentric longitude L",   r.heliocentricLongitude,     24.0182616917,   1e-9)
+check("heliocentric latitude B",    r.heliocentricLatitude,      -0.0001011219,   1e-10)
+check("radius vector R",            r.radiusVector,              0.9965422974,    1e-10)
+check("geocentric longitude Theta", r.geocentricLongitude,       204.0182616917,  1e-9)
+check("geocentric latitude beta",   r.geocentricLatitude,        0.0001011219,    1e-10)
 check("nutation in longitude",      r.nutationInLongitude,       -0.00399840,     1e-7)
 check("nutation in obliquity",      r.nutationInObliquity,       0.00166657,      1e-7)
 check("true obliquity epsilon",     r.trueObliquity,             23.440465,       1e-6)
 check("aberration",                 r.aberrationCorrection,      -0.005711359,    1e-8)
-check("apparent longitude lambda",  r.apparentLongitude,         204.0085519281,  1e-5)
+check("apparent longitude lambda",  r.apparentLongitude,         204.0085519281,  1e-9)
 // The paper's value for nu, recovered from its own published H, alpha and the
 // observer longitude rather than trusted from a transcription: the report
 // defines H = nu + longitude - alpha, so nu = H + alpha - longitude =
 // 11.105900 + 202.22741 + 105.1786 = 318.51191. An earlier draft of this test
-// carried 318.5119364822, which is wrong by 2.66e-5 degrees. That it is wrong is
+// carried 318.5119364822, which is wrong by 2.66e-5 degrees. The report itself
+// prints nu to four decimals as 318.5119, which this reproduces to 9.8e-6. That it is wrong is
 // not a matter of opinion: an error of that size in nu propagates one for one
 // into H and moves the azimuth by 3.4e-5 degrees, and both H and the azimuth
 // reproduce the paper to better than 2e-6. The implementation was right and the

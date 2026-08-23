@@ -1,0 +1,49 @@
+{
+  "productId": "com.levinschwab.sunlit.pro",
+  "referenceName": "Sunlit Pro",
+  "type": "NON_CONSUMABLE",
+  "priceEur": "9.99",
+  "reviewNote": "One non consumable that unlocks the paid capabilities in all four views: any date other than today, saved places and any location other than the current one, the moon (phase, path, rise, set, distance, calendar), the Milky Way (galactic centre, galactic plane, visibility windows), the annual path overlay with solstice and equinox curves, the measured horizon profile and its obstruction periods, eclipses with local circumstances, widgets, event notifications, and CSV and image export. There is no subscription and no second product. To reach the paywall, tap the date in the header and choose any day other than today. Today at the current location stays free in all four views after the purchase exists, and Restore Purchases is on the paywall and in Settings.",
+  "localizations": {
+    "en-US": {
+      "name": "Sunlit Pro",
+      "description": "Any date, any place, the moon and export."
+    },
+    "de-DE": {
+      "name": "Sunlit Pro",
+      "description": "Jedes Datum, jeder Ort, Mond und Export."
+    },
+    "fr-FR": {
+      "name": "Sunlit Pro",
+      "description": "Toute date, tout lieu, la Lune et l'export."
+    },
+    "it": {
+      "name": "Sunlit Pro",
+      "description": "Qualsiasi data e luogo, Luna, esportazione."
+    },
+    "es-ES": {
+      "name": "Sunlit Pro",
+      "description": "Cualquier fecha y lugar, Luna y exportar."
+    },
+    "es-MX": {
+      "name": "Sunlit Pro",
+      "description": "Cualquier fecha y lugar, Luna y exportar."
+    },
+    "nl-NL": {
+      "name": "Sunlit Pro",
+      "description": "Elke datum, elke plek, maan en export."
+    },
+    "pl": {
+      "name": "Sunlit Pro",
+      "description": "Dowolna data i miejsce, Księżyc, eksport."
+    },
+    "ja": {
+      "name": "Sunlit Pro",
+      "description": "すべての日付と場所、月、書き出しを解放。"
+    },
+    "pt-BR": {
+      "name": "Sunlit Pro",
+      "description": "Qualquer data e lugar, Lua e exportação."
+    }
+  }
+}

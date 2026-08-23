@@ -1,0 +1,30 @@
+{
+  "identifier" : "SUNLIT-LOCAL",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "SUNLITPRO01",
+      "localizations" : [
+        {
+          "description" : "Any date, any place, moon and Milky Way",
+          "displayName" : "Sunlit Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.levinschwab.sunlit.pro",
+      "referenceName" : "Sunlit Pro",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

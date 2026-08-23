@@ -284,6 +284,11 @@ checkEqual("field substring", index.search("field", limit: 10).first?.name ?? ""
 
 // The limit is honoured and a query that folds to nothing returns nothing.
 checkEqual("limit one", index.search("s", limit: 1).count, 1)
+// A caller asking for everything gets everything.
+let everything = index.search("a", limit: Int.max)
+checkTrue("an unbounded limit still returns results", everything.count > 0)
+checkEqual("an unbounded limit matches a generous one",
+           everything.count, index.search("a", limit: 100).count)
 checkEqual("limit zero", index.search("s", limit: 0).count, 0)
 checkEqual("empty query", index.search("", limit: 10).count, 0)
 checkEqual("blank query", index.search("   ", limit: 10).count, 0)
@@ -407,19 +412,26 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
     // be reporting the cost of an empty for loop as proof of a fast search.
     var searchSink = 0
     for query in queries {
-        // One warm pass so the measurement is not dominated by a cold cache.
-        searchSink += cities.search(query, limit: 25).count
-        let rounds = 20
-        let started = ProcessInfo.processInfo.systemUptime
-        for _ in 0..<rounds { searchSink += cities.search(query, limit: 25).count }
-        let elapsed = (ProcessInfo.processInfo.systemUptime - started) / Double(rounds) * 1000.0
-        if elapsed > worstMilliseconds {
-            worstMilliseconds = elapsed
+        // Each query is timed in five batches and the fastest batch is kept.
+        // Search is a deterministic scan, so every millisecond above the
+        // fastest batch belongs to something else that was running on the
+        // machine. Taking a mean here would measure the build server's load
+        // rather than this code.
+        var best = Double.infinity
+        for _ in 0..<5 {
+            let rounds = 20
+            let started = ProcessInfo.processInfo.systemUptime
+            for _ in 0..<rounds { searchSink += cities.search(query, limit: 25).count }
+            let elapsed = (ProcessInfo.processInfo.systemUptime - started) / Double(rounds) * 1000.0
+            if elapsed < best { best = elapsed }
+        }
+        if best > worstMilliseconds {
+            worstMilliseconds = best
             worstQuery = query
         }
     }
-    checkTrue("the timed searches actually ran", searchSink > 21 * queries.count)
-    print(String(format: "       search over %d cities, worst of %d queries: %.3f ms on \"%@\"",
+    checkTrue("the timed searches actually ran", searchSink >= 100 * queries.count)
+    print(String(format: "       search over %d cities, slowest of %d queries: %.3f ms on \"%@\"",
                  cities.count, queries.count, worstMilliseconds, worstQuery))
     // The frame budget is 16 ms. Anything close to it would drop a frame while
     // the keyboard is also drawing, so the assertion is set well inside it.
@@ -427,11 +439,15 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
     checkTrue("search is well inside the frame budget", worstMilliseconds < 4.0)
 
     var nearestSink = 0
-    let startedNearest = ProcessInfo.processInfo.systemUptime
-    for _ in 0..<20 {
-        nearestSink += cities.nearest(latitude: 48.1372, longitude: 11.5755)?.population ?? 0
+    var nearestMilliseconds = Double.infinity
+    for _ in 0..<5 {
+        let startedNearest = ProcessInfo.processInfo.systemUptime
+        for _ in 0..<20 {
+            nearestSink += cities.nearest(latitude: 48.1372, longitude: 11.5755)?.population ?? 0
+        }
+        let elapsed = (ProcessInfo.processInfo.systemUptime - startedNearest) / 20.0 * 1000.0
+        if elapsed < nearestMilliseconds { nearestMilliseconds = elapsed }
     }
-    let nearestMilliseconds = (ProcessInfo.processInfo.systemUptime - startedNearest) / 20.0 * 1000.0
     checkTrue("the timed nearest lookups actually ran", nearestSink > 0)
     print(String(format: "       nearest over %d cities: %.3f ms", cities.count, nearestMilliseconds))
     checkTrue("nearest stays inside the frame budget", nearestMilliseconds < 16.0)

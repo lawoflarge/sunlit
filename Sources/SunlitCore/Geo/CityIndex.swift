@@ -400,7 +400,11 @@ public struct CityIndex: Sendable {
                 let cityLatitude = Double(CityIndex.readInt32Raw(base, offset)) * 1e-5
                 let cityLongitude = Double(CityIndex.readInt32Raw(base, offset + 4)) * 1e-5
                 var deltaLongitude = cityLongitude - longitude
-                // wrap removed by mutation test
+                if deltaLongitude > 180.0 {
+                    deltaLongitude -= 360.0
+                } else if deltaLongitude < -180.0 {
+                    deltaLongitude += 360.0
+                }
                 let x = deltaLongitude * cosLatitude
                 let y = cityLatitude - latitude
                 let distance = x * x + y * y

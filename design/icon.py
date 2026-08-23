@@ -4,6 +4,13 @@ Sunlit app icon: a sun arc over a horizon line, on the Adaptive Sky gradient.
 
 Renders design/icon-1024.png and mirrors it into design/AppIcon.appiconset/.
 
+That appiconset is not yet reachable from the build. project.yml sets
+ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon, but the repo contains no .xcassets
+catalog, so actool never sees this directory and the app compiles with no icon,
+which fails App Store validation. Installing it, by making the app target carry
+an Assets.xcassets that holds a copy of this AppIcon.appiconset, belongs to the
+target that owns Sources/Sunlit and project.yml, not to this script.
+
 Composition, in one sentence: a bold light warm arc springs from the horizon on
 the left, crests above centre, and lands on the horizon on the right, with the
 sun as a filled amber disc riding the arc at 45 degrees of elevation on the
@@ -20,9 +27,11 @@ Three decisions worth keeping:
   silhouette would lose its dome, which is the thing that survives 29 points.
 
   A clear sky gap is knocked out of the arc around the disc. Amber on a light
-  warm tone is only about 1.5:1 in luminance and no light warm tone reaches 3:1
-  against #FFB020, so the disc is separated from the arc by hue and by that gap
-  rather than by brightness. silhouette-test.py measures all three.
+  warm tone is only about 1.5:1 in luminance and nothing lighter than #FFB020
+  reaches 3:1 against it, so the disc is separated from the arc by hue and by
+  that gap rather than by brightness. silhouette-test.py has a pass rule for
+  each of the three, gap included, so shrinking sun_gap to nothing fails the
+  test rather than passing it quietly.
 
 Every dimension in PARAMS is a fraction of the canvas side, so the icon renders
 identically at any size. The render is deterministic: two runs produce the same
@@ -88,7 +97,7 @@ PARAMS = {
     "sun_t": 0.25,
     "sun_r": 0.0980,
     "sun_color": "#FFB020",
-    "sun_gap": 0.0320,
+    "sun_gap": 0.0260,
 
     # Subtle warm halo. Drawn under the arc so it never closes the gap.
     "halo_color": "#FFCE6A",
@@ -279,7 +288,9 @@ def write_appiconset(png_path):
 def main():
     ap = argparse.ArgumentParser(description="Render the Sunlit app icon.")
     ap.add_argument("--size", type=int, default=PARAMS["size"])
-    ap.add_argument("--out", default=None)
+    ap.add_argument("--out", default=None,
+                    help="write somewhere other than design/icon-<size>.png. "
+                         "A run with --out never touches the shipped appiconset.")
     args = ap.parse_args()
 
     p = dict(PARAMS, size=args.size)
@@ -298,7 +309,10 @@ def main():
     print("wrote %s  %dx%d  %s  %d bytes"
           % (out_path, w, h, mode, os.path.getsize(out_path)))
 
-    if args.size == 1024:
+    # Only the canonical 1024 render is mirrored into the appiconset. A run with
+    # --out is a preview or an experiment, and mirroring it would silently
+    # replace the shipped asset with whatever was being tried out.
+    if args.size == 1024 and args.out is None:
         print("wrote %s" % write_appiconset(out_path))
 
 

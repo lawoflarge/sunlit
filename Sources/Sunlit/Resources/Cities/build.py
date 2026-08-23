@@ -371,6 +371,9 @@ def main():
     with os.fdopen(handle, "wb") as sink:
         sink.write(blob)
     os.replace(temporary, arguments.output)
+    # mkstemp creates the file 0600. The resource is checked in and read by
+    # every build, so give it the mode the rest of the tree has.
+    os.chmod(arguments.output, 0o644)
     sys.stderr.write("wrote %s\n" % arguments.output)
     return 0
 

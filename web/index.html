@@ -18,13 +18,13 @@
 <meta name="twitter:title" content="Sunlit: Sun &amp; Moon Tracker for iPhone">
 <meta name="twitter:description" content="Sun, moon and Milky Way, computed on the device for any date and any place. Free to install, with one optional purchase.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%230B1024'/%3E%3Cpath%20d='M12%2045a20%2020%200%200%201%2040%200'%20fill='none'%20stroke='%23FFB020'%20stroke-width='3.2'%20stroke-linecap='round'/%3E%3Cpath%20d='M8%2045h48'%20stroke='%238FB8FF'%20stroke-width='3.2'%20stroke-linecap='round'%20opacity='.75'/%3E%3Ccircle%20cx='32'%20cy='25'%20r='7'%20fill='%23FFB020'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head"><div class="wrap">
-  <a class="brand" href="/">
+  <a class="brand" href="./">
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
       <rect width="64" height="64" rx="14" fill="#0B1024"/>
       <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
@@ -34,16 +34,16 @@
     <b>Sunlit</b>
   </a>
   <nav>
-    <a href="/" aria-current="page">Overview</a>
-    <a href="/support.html">Support</a>
-    <a href="/privacy.html">Privacy</a>
+    <a class="home" href="./" aria-current="page">Overview</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
   </nav>
 </div></header>
 
 <main id="main">
 
 <section class="hero"><div class="wrap">
-  <p class="eyebrow">Sun, moon and Milky Way, for iPhone</p>
+  <p class="eyebrow">Sun, moon and Milky Way</p>
   <h1>Know where the sun will be, before you get there.</h1>
   <p class="lead">Sunlit works out the position of the sun, the moon and the galactic
     centre of the Milky Way for any date and any place on earth. Every figure is
@@ -56,9 +56,10 @@
     <div><div class="k">One purchase</div><div class="v">9.99 EUR</div></div>
     <div><div class="k">Languages</div><div class="v">Ten</div></div>
   </div>
-  <!-- When the App Store record is live, paste the listing link here, for example:
-       <p><a class="cta" href="https://apps.apple.com/app/idXXXXXXXXXX">Download on the App Store</a></p>
-       Do not publish a link before the app id exists. -->
+  <!-- Maintainer note. There is deliberately no App Store button on this page yet,
+       because the app id does not exist and a dead link under a purchase claim has
+       cost this portfolio a rejection before. Once the record is live, add one
+       paragraph here with a link to the real listing url. -->
 
   <figure>
     <div class="panel">
@@ -70,12 +71,12 @@
           the horizon.</desc>
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#101736"/>
-            <stop offset=".20" stop-color="#23214A"/>
-            <stop offset=".42" stop-color="#4A2B5A"/>
-            <stop offset=".64" stop-color="#8A4149"/>
-            <stop offset=".84" stop-color="#D4762C"/>
-            <stop offset="1" stop-color="#FFB020"/>
+            <stop offset="0" stop-color="#0B1230"/>
+            <stop offset=".20" stop-color="#1B1C44"/>
+            <stop offset=".42" stop-color="#3C2450"/>
+            <stop offset=".64" stop-color="#733A46"/>
+            <stop offset=".84" stop-color="#B2652A"/>
+            <stop offset="1" stop-color="#E09221"/>
           </linearGradient>
           <radialGradient id="glow">
             <stop offset="0" stop-color="#FFE3A8" stop-opacity=".9"/>
@@ -87,7 +88,8 @@
 
         <rect width="720" height="460" fill="#070B18"/>
         <rect width="720" height="330" fill="url(#sky)"/>
-        <rect x="0" y="300.5" width="720" height="49.1" fill="#FFB020" opacity=".14"/>
+        <rect x="0" y="0" width="720" height="430" fill="#070B18" opacity=".2"/>
+        <rect x="0" y="300.5" width="720" height="49.1" fill="#FFFFFF" opacity=".1"/>
 
         <g stroke="#FFFFFF" stroke-width="1" opacity=".12">
           <line x1="124" y1="48" x2="124" y2="430"/>
@@ -103,8 +105,10 @@
         </g>
 
         <g clip-path="url(#plot)" fill="none" stroke-linejoin="round" stroke-linecap="round">
-          <polyline points="44.0,326.2 49.3,331.6 54.7,337.3 60.0,343.2 65.3,349.4 70.7,355.8 76.0,362.5 81.3,369.3 86.7,376.3 92.0,383.5 97.3,390.9 102.7,398.5 108.0,406.2 113.3,414.0 118.7,421.9 124.0,430.0 129.3,438.2 134.7,446.5 140.0,454.8 145.3,463.2 150.7,471.7 156.0,480.3 161.3,488.9 166.7,497.5 172.0,506.1 177.3,514.7 182.7,523.3 188.0,531.9 193.3,540.4 198.7,548.9 204.0,557.3 209.3,565.6 214.7,573.7 220.0,581.7 225.3,589.5 230.7,597.1 236.0,604.3 241.3,611.3 246.7,617.9 252.0,624.0 257.3,629.7 262.7,634.8 268.0,639.3 273.3,640.0 278.7,640.0 284.0,640.0 289.3,640.0 294.7,640.0 300.0,640.0 305.3,640.0 310.7,640.0 316.0,640.0 321.3,638.2 326.7,633.5 332.0,628.3 337.3,622.5 342.7,616.2 348.0,609.5 353.3,602.4 358.7,595.0 364.0,587.4 369.3,579.5 374.7,571.4 380.0,563.2 385.3,554.8 390.7,546.4 396.0,537.8 401.3,529.2 406.7,520.6 412.0,511.9 417.3,503.2 422.7,494.5 428.0,485.8 433.3,477.2 438.7,468.6 444.0,460.0 449.3,451.5 454.7,443.1 460.0,434.7 465.3,426.5 470.7,418.4 476.0,410.3 481.3,402.4 486.7,394.6 492.0,387.0 497.3,379.6 502.7,372.3 508.0,365.1 513.3,358.2 518.7,351.5 524.0,345.0 529.3,338.7 534.7,332.7 540.0,326.9 545.3,321.4 550.7,316.2 556.0,311.2 561.3,306.6 566.7,302.3 572.0,298.3 577.3,294.6 582.7,291.3 588.0,288.3 593.3,285.7 598.7,283.5 604.0,281.6 609.3,280.1 614.7,279.1 620.0,278.4 625.3,278.1 630.7,278.2 636.0,278.7 641.3,279.6 646.7,280.9 652.0,282.5 657.3,284.6 662.7,287.0 668.0,289.8 673.3,293.0 678.7,296.5 684.0,300.4" stroke="#8FB8FF" stroke-width="2" opacity=".92"/>
-          <polyline points="44.0,449.0 49.3,451.6 54.7,453.8 60.0,455.5 65.3,456.6 70.7,457.3 76.0,457.4 81.3,457.1 86.7,456.2 92.0,454.8 97.3,453.0 102.7,450.6 108.0,447.8 113.3,444.5 118.7,440.7 124.0,436.5 129.3,432.0 134.7,427.0 140.0,421.6 145.3,415.9 150.7,409.9 156.0,403.5 161.3,396.9 166.7,390.0 172.0,382.8 177.3,375.4 182.7,367.8 188.0,360.0 193.3,352.0 198.7,343.8 204.0,335.5 209.3,327.1 214.7,318.5 220.0,309.9 225.3,301.1 230.7,292.3 236.0,283.4 241.3,274.5 246.7,265.6 252.0,256.6 257.3,247.7 262.7,238.8 268.0,229.9 273.3,221.0 278.7,212.3 284.0,203.6 289.3,195.0 294.7,186.6 300.0,178.3 305.3,170.2 310.7,162.3 316.0,154.6 321.3,147.2 326.7,140.1 332.0,133.3 337.3,126.9 342.7,120.9 348.0,115.3 353.3,110.1 358.7,105.5 364.0,101.5 369.3,98.0 374.7,95.1 380.0,92.9 385.3,91.3 390.7,90.5 396.0,90.3 401.3,90.9 406.7,92.1 412.0,94.0 417.3,96.6 422.7,99.8 428.0,103.6 433.3,107.9 438.7,112.8 444.0,118.2 449.3,124.0 454.7,130.3 460.0,136.9 465.3,143.9 470.7,151.2 476.0,158.7 481.3,166.6 486.7,174.6 492.0,182.8 497.3,191.2 502.7,199.7 508.0,208.3 513.3,217.1 518.7,225.9 524.0,234.8 529.3,243.7 534.7,252.7 540.0,261.6 545.3,270.6 550.7,279.6 556.0,288.5 561.3,297.3 566.7,306.2 572.0,314.9 577.3,323.5 582.7,332.1 588.0,340.5 593.3,348.7 598.7,356.8 604.0,364.8 609.3,372.5 614.7,380.1 620.0,387.4 625.3,394.5 630.7,401.3 636.0,407.8 641.3,414.1 646.7,420.0 652.0,425.6 657.3,430.8 662.7,435.6 668.0,440.0 673.3,444.0 678.7,447.6 684.0,450.7" stroke="#FFB020" stroke-width="2.6"/>
+          <polyline points="44.0,326.2 49.3,331.6 54.7,337.3 60.0,343.2 65.3,349.4 70.7,355.8 76.0,362.5 81.3,369.3 86.7,376.3 92.0,383.5 97.3,390.9 102.7,398.5 108.0,406.2 113.3,414.0 118.7,421.9 124.0,430.0 129.3,438.2 134.7,446.5 140.0,454.8 145.3,463.2 150.7,471.7 156.0,480.3 161.3,488.9 166.7,497.5 172.0,506.1 177.3,514.7 182.7,523.3 188.0,531.9 193.3,540.4 198.7,548.9 204.0,557.3 209.3,565.6 214.7,573.7 220.0,581.7 225.3,589.5 230.7,597.1 236.0,604.3 241.3,611.3 246.7,617.9 252.0,624.0 257.3,629.7 262.7,634.8 268.0,639.3 273.3,640.0 278.7,640.0 284.0,640.0 289.3,640.0 294.7,640.0 300.0,640.0 305.3,640.0 310.7,640.0 316.0,640.0 321.3,638.2 326.7,633.5 332.0,628.3 337.3,622.5 342.7,616.2 348.0,609.5 353.3,602.4 358.7,595.0 364.0,587.4 369.3,579.5 374.7,571.4 380.0,563.2 385.3,554.8 390.7,546.4 396.0,537.8 401.3,529.2 406.7,520.6 412.0,511.9 417.3,503.2 422.7,494.5 428.0,485.8 433.3,477.2 438.7,468.6 444.0,460.0 449.3,451.5 454.7,443.1 460.0,434.7 465.3,426.5 470.7,418.4 476.0,410.3 481.3,402.4 486.7,394.6 492.0,387.0 497.3,379.6 502.7,372.3 508.0,365.1 513.3,358.2 518.7,351.5 524.0,345.0 529.3,338.7 534.7,332.7 540.0,326.9 545.3,321.4 550.7,316.2 556.0,311.2 561.3,306.6 566.7,302.3 572.0,298.3 577.3,294.6 582.7,291.3 588.0,288.3 593.3,285.7 598.7,283.5 604.0,281.6 609.3,280.1 614.7,279.1 620.0,278.4 625.3,278.1 630.7,278.2 636.0,278.7 641.3,279.6 646.7,280.9 652.0,282.5 657.3,284.6 662.7,287.0 668.0,289.8 673.3,293.0 678.7,296.5 684.0,300.4" stroke="#070B18" stroke-width="6" opacity=".42"/>
+          <polyline points="44.0,449.0 49.3,451.6 54.7,453.8 60.0,455.5 65.3,456.6 70.7,457.3 76.0,457.4 81.3,457.1 86.7,456.2 92.0,454.8 97.3,453.0 102.7,450.6 108.0,447.8 113.3,444.5 118.7,440.7 124.0,436.5 129.3,432.0 134.7,427.0 140.0,421.6 145.3,415.9 150.7,409.9 156.0,403.5 161.3,396.9 166.7,390.0 172.0,382.8 177.3,375.4 182.7,367.8 188.0,360.0 193.3,352.0 198.7,343.8 204.0,335.5 209.3,327.1 214.7,318.5 220.0,309.9 225.3,301.1 230.7,292.3 236.0,283.4 241.3,274.5 246.7,265.6 252.0,256.6 257.3,247.7 262.7,238.8 268.0,229.9 273.3,221.0 278.7,212.3 284.0,203.6 289.3,195.0 294.7,186.6 300.0,178.3 305.3,170.2 310.7,162.3 316.0,154.6 321.3,147.2 326.7,140.1 332.0,133.3 337.3,126.9 342.7,120.9 348.0,115.3 353.3,110.1 358.7,105.5 364.0,101.5 369.3,98.0 374.7,95.1 380.0,92.9 385.3,91.3 390.7,90.5 396.0,90.3 401.3,90.9 406.7,92.1 412.0,94.0 417.3,96.6 422.7,99.8 428.0,103.6 433.3,107.9 438.7,112.8 444.0,118.2 449.3,124.0 454.7,130.3 460.0,136.9 465.3,143.9 470.7,151.2 476.0,158.7 481.3,166.6 486.7,174.6 492.0,182.8 497.3,191.2 502.7,199.7 508.0,208.3 513.3,217.1 518.7,225.9 524.0,234.8 529.3,243.7 534.7,252.7 540.0,261.6 545.3,270.6 550.7,279.6 556.0,288.5 561.3,297.3 566.7,306.2 572.0,314.9 577.3,323.5 582.7,332.1 588.0,340.5 593.3,348.7 598.7,356.8 604.0,364.8 609.3,372.5 614.7,380.1 620.0,387.4 625.3,394.5 630.7,401.3 636.0,407.8 641.3,414.1 646.7,420.0 652.0,425.6 657.3,430.8 662.7,435.6 668.0,440.0 673.3,444.0 678.7,447.6 684.0,450.7" stroke="#070B18" stroke-width="6.5" opacity=".42"/>
+          <polyline points="44.0,326.2 49.3,331.6 54.7,337.3 60.0,343.2 65.3,349.4 70.7,355.8 76.0,362.5 81.3,369.3 86.7,376.3 92.0,383.5 97.3,390.9 102.7,398.5 108.0,406.2 113.3,414.0 118.7,421.9 124.0,430.0 129.3,438.2 134.7,446.5 140.0,454.8 145.3,463.2 150.7,471.7 156.0,480.3 161.3,488.9 166.7,497.5 172.0,506.1 177.3,514.7 182.7,523.3 188.0,531.9 193.3,540.4 198.7,548.9 204.0,557.3 209.3,565.6 214.7,573.7 220.0,581.7 225.3,589.5 230.7,597.1 236.0,604.3 241.3,611.3 246.7,617.9 252.0,624.0 257.3,629.7 262.7,634.8 268.0,639.3 273.3,640.0 278.7,640.0 284.0,640.0 289.3,640.0 294.7,640.0 300.0,640.0 305.3,640.0 310.7,640.0 316.0,640.0 321.3,638.2 326.7,633.5 332.0,628.3 337.3,622.5 342.7,616.2 348.0,609.5 353.3,602.4 358.7,595.0 364.0,587.4 369.3,579.5 374.7,571.4 380.0,563.2 385.3,554.8 390.7,546.4 396.0,537.8 401.3,529.2 406.7,520.6 412.0,511.9 417.3,503.2 422.7,494.5 428.0,485.8 433.3,477.2 438.7,468.6 444.0,460.0 449.3,451.5 454.7,443.1 460.0,434.7 465.3,426.5 470.7,418.4 476.0,410.3 481.3,402.4 486.7,394.6 492.0,387.0 497.3,379.6 502.7,372.3 508.0,365.1 513.3,358.2 518.7,351.5 524.0,345.0 529.3,338.7 534.7,332.7 540.0,326.9 545.3,321.4 550.7,316.2 556.0,311.2 561.3,306.6 566.7,302.3 572.0,298.3 577.3,294.6 582.7,291.3 588.0,288.3 593.3,285.7 598.7,283.5 604.0,281.6 609.3,280.1 614.7,279.1 620.0,278.4 625.3,278.1 630.7,278.2 636.0,278.7 641.3,279.6 646.7,280.9 652.0,282.5 657.3,284.6 662.7,287.0 668.0,289.8 673.3,293.0 678.7,296.5 684.0,300.4" stroke="#8FB8FF" stroke-width="2.2"/>
+          <polyline points="44.0,449.0 49.3,451.6 54.7,453.8 60.0,455.5 65.3,456.6 70.7,457.3 76.0,457.4 81.3,457.1 86.7,456.2 92.0,454.8 97.3,453.0 102.7,450.6 108.0,447.8 113.3,444.5 118.7,440.7 124.0,436.5 129.3,432.0 134.7,427.0 140.0,421.6 145.3,415.9 150.7,409.9 156.0,403.5 161.3,396.9 166.7,390.0 172.0,382.8 177.3,375.4 182.7,367.8 188.0,360.0 193.3,352.0 198.7,343.8 204.0,335.5 209.3,327.1 214.7,318.5 220.0,309.9 225.3,301.1 230.7,292.3 236.0,283.4 241.3,274.5 246.7,265.6 252.0,256.6 257.3,247.7 262.7,238.8 268.0,229.9 273.3,221.0 278.7,212.3 284.0,203.6 289.3,195.0 294.7,186.6 300.0,178.3 305.3,170.2 310.7,162.3 316.0,154.6 321.3,147.2 326.7,140.1 332.0,133.3 337.3,126.9 342.7,120.9 348.0,115.3 353.3,110.1 358.7,105.5 364.0,101.5 369.3,98.0 374.7,95.1 380.0,92.9 385.3,91.3 390.7,90.5 396.0,90.3 401.3,90.9 406.7,92.1 412.0,94.0 417.3,96.6 422.7,99.8 428.0,103.6 433.3,107.9 438.7,112.8 444.0,118.2 449.3,124.0 454.7,130.3 460.0,136.9 465.3,143.9 470.7,151.2 476.0,158.7 481.3,166.6 486.7,174.6 492.0,182.8 497.3,191.2 502.7,199.7 508.0,208.3 513.3,217.1 518.7,225.9 524.0,234.8 529.3,243.7 534.7,252.7 540.0,261.6 545.3,270.6 550.7,279.6 556.0,288.5 561.3,297.3 566.7,306.2 572.0,314.9 577.3,323.5 582.7,332.1 588.0,340.5 593.3,348.7 598.7,356.8 604.0,364.8 609.3,372.5 614.7,380.1 620.0,387.4 625.3,394.5 630.7,401.3 636.0,407.8 641.3,414.1 646.7,420.0 652.0,425.6 657.3,430.8 662.7,435.6 668.0,440.0 673.3,444.0 678.7,447.6 684.0,450.7" stroke="#FFB020" stroke-width="2.8"/>
         </g>
 
         <rect x="0" y="330" width="720" height="100" fill="#070B18" opacity=".55"/>
@@ -118,16 +122,16 @@
         <line x1="0" y1="430" x2="720" y2="430" stroke="#FFFFFF" stroke-width="1" opacity=".18"/>
         <line x1="577.3" y1="70" x2="577.3" y2="430" stroke="#FFFFFF" stroke-width="1" opacity=".34" stroke-dasharray="3 4"/>
 
-        <circle cx="577.3" cy="294.6" r="8" fill="#8FB8FF"/>
+        <circle cx="577.3" cy="294.6" r="8" fill="#8FB8FF" stroke="#070B18" stroke-width="2" stroke-opacity=".45"/>
         <circle cx="577.3" cy="323.5" r="30" fill="url(#glow)"/>
-        <circle cx="577.3" cy="323.5" r="9" fill="#FFB020"/>
+        <circle cx="577.3" cy="323.5" r="9" fill="#FFB020" stroke="#070B18" stroke-width="2" stroke-opacity=".35"/>
 
         <g class="chrome">
           <g stroke-linecap="round">
             <line x1="60" y1="30" x2="84" y2="30" stroke="#FFB020" stroke-width="2.6"/>
             <line x1="128" y1="30" x2="152" y2="30" stroke="#8FB8FF" stroke-width="2"/>
           </g>
-          <rect x="212" y="23" width="14" height="14" fill="#FFB020" opacity=".34"/>
+          <rect x="212" y="23" width="14" height="14" fill="#FFFFFF" opacity=".22"/>
           <g fill="#FFFFFF" opacity=".78">
             <text x="90" y="34">Sun</text>
             <text x="158" y="34">Moon</text>
@@ -171,10 +175,10 @@
 
   <div class="rail" style="margin-top:14px">
     <div><div class="v num">03:43</div><div class="k">First light</div></div>
-    <div><div class="v num">05:39</div><div class="k">Golden hour</div></div>
     <div><div class="v num">06:02</div><div class="k">Sunrise</div></div>
+    <div><div class="v num">06:49</div><div class="k">Golden hour ends</div></div>
     <div><div class="v num">13:09</div><div class="k">Solar noon</div></div>
-    <div><div class="v num">19:28</div><div class="k">Golden hour</div></div>
+    <div><div class="v num">19:28</div><div class="k">Golden hour begins</div></div>
     <div><div class="v num">20:15</div><div class="k">Sunset</div></div>
     <div><div class="v num">22:33</div><div class="k">Last light</div></div>
   </div>
@@ -375,7 +379,7 @@
         switch on. Where a connection is available, Sunlit can search Apple Maps as well.</p>
       <p class="small">The embedded city list is derived from GeoNames and is used under
         the Creative Commons Attribution 4.0 licence. The credit is repeated in the app
-        and on the <a href="/privacy.html#geonames">privacy page</a>.</p>
+        and on the <a href="privacy.html#geonames">privacy page</a>.</p>
     </div>
     <div class="card">
       <h3>Or drop a pin anywhere</h3>
@@ -383,9 +387,16 @@
         is exact; the time zone of a bare coordinate needs a lookup, and if there is no
         connection Sunlit tells you it has fallen back to the time zone of your device
         rather than guessing quietly.</p>
-      <p class="small">Widgets and event notifications are computed locally too, and the
-        widget timelines refresh at event boundaries rather than on a fixed clock.</p>
+      <p class="small">Dates work the same way. Move to any day, past or future, and
+        every view recomputes for that instant, the background included.</p>
     </div>
+  </div>
+  <div class="note" style="margin-top:26px;max-width:46em">
+    <p><strong>Widgets.</strong> A small widget with the next event and its countdown, a
+      medium one with the arc of the day and the position of the sun on it, a circular
+      lock screen countdown to golden hour, and a rectangular one with sunrise, sunset
+      and the phase of the moon. Each computes its own figures on the device and refreshes
+      at event boundaries rather than on a fixed clock. Widgets are part of Sunlit Pro.</p>
   </div>
 </div></section>
 
@@ -441,7 +452,7 @@
       no third party software development kits. Your saved places, your measured horizons
       and your settings stay in the app's own storage on your iPhone. Location and camera
       are used on the device and are never transmitted by Sunlit.</p>
-    <p><a href="/privacy.html">Read the full privacy policy</a></p>
+    <p><a href="privacy.html">Read the full privacy policy</a></p>
   </div>
   <hr class="rule">
   <div style="margin-top:36px">
@@ -462,9 +473,9 @@
 <footer class="site-foot"><div class="wrap">
   <span>Sunlit &middot; Levin David Schwab</span>
   <nav>
-    <a href="/">Overview</a>
-    <a href="/support.html">Support</a>
-    <a href="/privacy.html">Privacy</a>
+    <a href="./">Overview</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
     <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
   </nav>
 </div></footer>

@@ -35,6 +35,11 @@ targets:
           - "**/*.storekit"
       - path: Sources/Sunlit/Features/Paywall/Sunlit.storekit
         buildPhase: none
+      # The offline city list. Named explicitly rather than swept up by the
+      # source path above, because the build script asserts it is in the bundle
+      # and a resource that arrives by accident can leave the same way.
+      - path: Sources/Sunlit/Resources/Cities/cities.bin
+        buildPhase: resources
     dependencies:
       - target: SunlitCore
       - target: SunlitWidgets

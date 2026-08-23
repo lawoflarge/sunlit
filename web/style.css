@@ -146,7 +146,7 @@ hr.rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 }
 .panel svg { display: block; width: 100%; height: auto; }
 .panel svg text { font-family: inherit; font-variant-numeric: tabular-nums; }
-.panel .chrome text { font-size: 13px; }
+.panel .chrome text { font-size: 11px; }
 @media (max-width: 660px) { .panel .chrome { display: none; } }
 
 figure { margin: 0; }
@@ -286,4 +286,10 @@ td.n { white-space: nowrap; }
 .langs li {
   font-size: 15px; color: var(--ink-2); background: var(--panel);
   border: 1px solid var(--rule); border-radius: 999px; padding: 8px 15px;
+}
+
+/* At phone width the brand already links home, so the first nav item goes. */
+@media (max-width: 480px) {
+  .site-head nav a.home { display: none; }
+  .brand b { font-size: 17px; }
 }
