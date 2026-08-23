@@ -26,26 +26,58 @@ LANGUAGES = ["de", "fr", "it", "es", "es-MX", "nl", "pl", "ja", "pt-BR"]
 # source, so they carry \(name) instead. Converting them here, positionally
 # against the English, is what keeps a translator's reordering intact: the first
 # placeholder in the English becomes %1$@ wherever it lands in the translation.
-SWIFT_PLACEHOLDER = re.compile(r"\\\(([A-Za-z0-9_.]+)\)")
+# Not a regex: a Swift interpolation may contain its own parentheses, as in
+# \(format.number(value, fraction: 0)), and a regex that stops at the first
+# closing bracket cuts it in half. Three keys in this catalogue do exactly that,
+# and the first version of this converter silently left them unconverted.
+def swift_spans(text):
+    """Yield (start, end, inner) for every \(...) with balanced brackets."""
+    spans, i = [], 0
+    while True:
+        i = text.find("\\(", i)
+        if i < 0:
+            return spans
+        depth, j = 0, i + 1
+        while j < len(text):
+            if text[j] == "(":
+                depth += 1
+            elif text[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    spans.append((i, j + 1, text[i + 2:j]))
+                    break
+            j += 1
+        else:
+            return spans
+        i = j + 1
 FORMAT_PLACEHOLDER = re.compile(r"%(?:\d+\$)?[@a-zA-Z]")
 
 
 def swift_placeholder_order(text):
-    return SWIFT_PLACEHOLDER.findall(text)
+    return [inner for _, _, inner in swift_spans(text)]
 
 
-def to_format_string(translated, english_names):
-    """Rewrite \(name) into %N$@ using the English order as the numbering."""
-    if not english_names:
+def to_format_string(translated, english_expressions):
+    """Rewrite each \(expression) into %N$@, numbered by the English order.
+
+    Numbered rather than bare %@ so a translator's reordering survives: Polish
+    and Japanese both put the two halves of "%@ of %@" the other way round.
+    """
+    if not english_expressions:
         return translated
-
-    def replace(match):
-        name = match.group(1)
-        if name not in english_names:
-            return match.group(0)
-        return "%%%d$@" % (english_names.index(name) + 1)
-
-    return SWIFT_PLACEHOLDER.sub(replace, translated)
+    out, last = [], 0
+    for start, end, inner in swift_spans(translated):
+        out.append(translated[last:start])
+        if inner in english_expressions:
+            out.append("%%%d$@" % (english_expressions.index(inner) + 1))
+        else:
+            # An expression the English does not have is a translator error and
+            # is left in place so the check below reports it rather than the
+            # converter hiding it.
+            out.append(translated[start:end])
+        last = end
+    out.append(translated[last:])
+    return "".join(out)
 
 
 def main():
@@ -86,7 +118,7 @@ def main():
             if wanted != got:
                 problems.append(
                     f"{code}: {key!r} needs {wanted} placeholders, has {got}: {rewritten!r}")
-            if SWIFT_PLACEHOLDER.search(rewritten):
+            if swift_spans(rewritten):
                 problems.append(
                     f"{code}: {key!r} still carries a Swift interpolation: {rewritten!r}")
             if re.search(r"[–—]", value):

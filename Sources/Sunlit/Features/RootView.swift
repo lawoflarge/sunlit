@@ -61,6 +61,12 @@ struct RootView: View {
             case "ar": tab = .ar
             case "map": tab = .map
             case "data": tab = .data
+            case "paywall":
+                // The In-App Purchase review screenshot has to show the purchase
+                // as the reviewer meets it, and a tap on a lock note is not
+                // reproducible across ten languages and two device sizes.
+                tab = .sky
+                showingPaywall = true
             default: break
             }
         }
