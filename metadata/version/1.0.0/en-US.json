@@ -3,6 +3,5 @@
   "keywords": "sunrise,sunset,compass,azimuth,shadow,twilight,ephemeris,eclipse,solstice,milky,way,photo,astro",
   "marketingUrl": "https://sunlit-app.vercel.app",
   "promotionalText": "Point your iPhone at the sky and see where the sun and the moon will be at any hour of any day. Today at your location is free, in all four views.",
-  "supportUrl": "https://sunlit-app.vercel.app/support",
-  "whatsNew": "First release.\n\nSunlit computes the sun, the moon and the centre of the Milky Way on your iPhone, for any date and any place, with no account and no connection.\n\nFour views: Sky, AR, Map and Data. Today, at your current location, is free in all four and stays free."
+  "supportUrl": "https://sunlit-app.vercel.app/support"
 }

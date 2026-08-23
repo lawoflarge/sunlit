@@ -1,0 +1,6430 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "accuracy.calibrate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calibration needed"
+          }
+        }
+      }
+    },
+    "accuracy.uncertainty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heading accuracy, plus or minus \\(amount)"
+          }
+        }
+      }
+    },
+    "ar.accuracy.calibrate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The compass needs calibrating. Move the phone in a figure of eight, and stand clear of metal, magnets and car dashboards."
+          }
+        }
+      }
+    },
+    "ar.accuracy.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The figure at the top of the frame is the heading accuracy the device reports. The positions themselves are computed, not measured, and are accurate to far better than the compass can be aimed."
+          }
+        }
+      }
+    },
+    "ar.aim": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frame centre"
+          }
+        }
+      }
+    },
+    "ar.aim.altitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frame centre altitude"
+          }
+        }
+      }
+    },
+    "ar.aim.value": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(azimuth)° az, \\(altitude)° alt"
+          }
+        }
+      }
+    },
+    "ar.camera.allow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the camera"
+          }
+        }
+      }
+    },
+    "ar.camera.denied": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera access is off, so the paths are drawn over the sky colour instead of over your view. Everything else on this screen still works."
+          }
+        }
+      }
+    },
+    "ar.camera.restricted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The camera is restricted on this device, so the paths are drawn over the sky colour instead. Everything else on this screen still works."
+          }
+        }
+      }
+    },
+    "ar.camera.settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        }
+      }
+    },
+    "ar.camera.unavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no camera here, so the paths are drawn over the sky colour instead. Everything else on this screen still works."
+          }
+        }
+      }
+    },
+    "ar.camera.undetermined": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit can draw these paths over your real view. The image stays on your device and is never recorded or sent anywhere."
+          }
+        }
+      }
+    },
+    "ar.cardinal.east": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E"
+          }
+        }
+      }
+    },
+    "ar.cardinal.north": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N"
+          }
+        }
+      }
+    },
+    "ar.cardinal.south": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S"
+          }
+        }
+      }
+    },
+    "ar.cardinal.west": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W"
+          }
+        }
+      }
+    },
+    "ar.heading.unavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No compass"
+          }
+        }
+      }
+    },
+    "ar.heading.unavailable.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No heading available. The overlay cannot be aimed."
+          }
+        }
+      }
+    },
+    "ar.layer.annual": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solstices and equinoxes"
+          }
+        }
+      }
+    },
+    "ar.layer.axLocked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked"
+          }
+        }
+      }
+    },
+    "ar.layer.axOff": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hidden"
+          }
+        }
+      }
+    },
+    "ar.layer.axOn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shown"
+          }
+        }
+      }
+    },
+    "ar.layer.horizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline"
+          }
+        }
+      }
+    },
+    "ar.layer.milkyWay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Milky Way"
+          }
+        }
+      }
+    },
+    "ar.layer.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon path"
+          }
+        }
+      }
+    },
+    "ar.layer.sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun path"
+          }
+        }
+      }
+    },
+    "ar.layers.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overlay"
+          }
+        }
+      }
+    },
+    "ar.locked.value": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked"
+          }
+        }
+      }
+    },
+    "ar.milkyWay.notDark": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Milky Way is drawn once the sun is more than eighteen degrees below the horizon. It is not dark enough at the selected time."
+          }
+        }
+      }
+    },
+    "ar.moon.altitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon altitude"
+          }
+        }
+      }
+    },
+    "ar.moon.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon position"
+          }
+        }
+      }
+    },
+    "ar.moon.azimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon azimuth"
+          }
+        }
+      }
+    },
+    "ar.moon.lit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon lit"
+          }
+        }
+      }
+    },
+    "ar.moon.locked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon is part of Sunlit Pro: its path over your view, its phase, and its rise and set with parallax."
+          }
+        }
+      }
+    },
+    "ar.moon.lockedSelection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever. Another day or another place is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "ar.optics.assumed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No camera is reporting its lens here, so the overlay is drawn at an assumed field of view."
+          }
+        }
+      }
+    },
+    "ar.selection.locked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever. This screen is showing another day or another place, so the figures and the overlay are dimmed until Sunlit Pro is unlocked."
+          }
+        }
+      }
+    },
+    "ar.skyline.measured": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The dashed line is the skyline swept at this place."
+          }
+        }
+      }
+    },
+    "ar.sun.altitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun altitude"
+          }
+        }
+      }
+    },
+    "ar.sun.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun position"
+          }
+        }
+      }
+    },
+    "ar.sun.azimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun azimuth"
+          }
+        }
+      }
+    },
+    "ar.sweep.clear": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start over"
+          }
+        }
+      }
+    },
+    "ar.sweep.clear.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discard the readings taken so far"
+          }
+        }
+      }
+    },
+    "ar.sweep.explanation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aim the centre of the frame at the top of whatever blocks your view, then hold Sweep and turn on the spot. The sky is divided into thirty six sectors of ten degrees and each one fills as you reach it."
+          }
+        }
+      }
+    },
+    "ar.sweep.locked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweeping your skyline is part of Sunlit Pro. It gives you the sunrise and sunset your own surroundings actually produce, and the periods when the sun is up but behind them."
+          }
+        }
+      }
+    },
+    "ar.sweep.record": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold to sweep"
+          }
+        }
+      }
+    },
+    "ar.sweep.record.axHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aim the centre of the frame at the skyline, then hold this button and turn on the spot. One activation takes a single reading, which is how the sweep is done with VoiceOver running"
+          }
+        }
+      }
+    },
+    "ar.sweep.record.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweep the skyline"
+          }
+        }
+      }
+    },
+    "ar.sweep.record.axLocked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked"
+          }
+        }
+      }
+    },
+    "ar.sweep.record.axUncalibrated": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unavailable until the compass is calibrated"
+          }
+        }
+      }
+    },
+    "ar.sweep.recording": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweeping"
+          }
+        }
+      }
+    },
+    "ar.sweep.replaces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saving replaces the skyline stored for this place."
+          }
+        }
+      }
+    },
+    "ar.sweep.save": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save to place"
+          }
+        }
+      }
+    },
+    "ar.sweep.save.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save the swept skyline to this place"
+          }
+        }
+      }
+    },
+    "ar.sweep.sectors": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sectors swept"
+          }
+        }
+      }
+    },
+    "ar.sweep.sectorsValue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(done) of \\(total)"
+          }
+        }
+      }
+    },
+    "ar.sweep.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline sweep"
+          }
+        }
+      }
+    },
+    "ar.unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See what Sunlit Pro adds"
+          }
+        }
+      }
+    },
+    "ar.unlock.axLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See what Sunlit Pro adds"
+          }
+        }
+      }
+    },
+    "credits.deltaT": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delta T"
+          }
+        }
+      }
+    },
+    "credits.eclipses": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclipses"
+          }
+        }
+      }
+    },
+    "credits.geonames.licence": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Commons Attribution 4.0"
+          }
+        }
+      }
+    },
+    "credits.geonames.site": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "geonames.org"
+          }
+        }
+      }
+    },
+    "credits.irradiance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Irradiance model"
+          }
+        }
+      }
+    },
+    "credits.methods": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How the positions are computed"
+          }
+        }
+      }
+    },
+    "credits.methods.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every figure in Sunlit is computed on your device from published algorithms. No server is ever asked for a sun, moon or sky figure, and nothing about you is collected or sent. Two things do use the network, both of them Apple's and neither of them a calculation: the map tiles in the Map view, and the time zone of a pin you drop somewhere new."
+          }
+        }
+      }
+    },
+    "credits.milkyWay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Milky Way"
+          }
+        }
+      }
+    },
+    "credits.models": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is modelled, not measured"
+          }
+        }
+      }
+    },
+    "credits.models.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The UV index and the irradiance figures are clear sky models. They say what the sky would deliver with no cloud, no haze and no pollution, from your latitude, the date and the sun's height. They are not measurements, Sunlit has no sensor for either, and real weather can put them far off."
+          }
+        }
+      }
+    },
+    "credits.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon"
+          }
+        }
+      }
+    },
+    "credits.nutation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutation and obliquity"
+          }
+        }
+      }
+    },
+    "credits.places": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Places"
+          }
+        }
+      }
+    },
+    "credits.places.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The offline city list is the GeoNames cities15000 extract: every populated place above fifteen thousand people, with its coordinate, elevation and time zone. It is used under the Creative Commons Attribution 4.0 licence, and it is stored in the app so that search works with no network."
+          }
+        }
+      }
+    },
+    "credits.refraction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refraction"
+          }
+        }
+      }
+    },
+    "credits.sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun"
+          }
+        }
+      }
+    },
+    "credits.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data and methods"
+          }
+        }
+      }
+    },
+    "credits.trueNorth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True north"
+          }
+        }
+      }
+    },
+    "credits.trueNorth.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The AR view takes its direction from the device's true north reference frame, computed by iOS from the compass, the gyroscope and your position. Sunlit does not correct it further, and it shows the current uncertainty on screen instead of hiding it."
+          }
+        }
+      }
+    },
+    "credits.uv": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index model"
+          }
+        }
+      }
+    },
+    "data.annual.belowHorizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where the curve runs under the horizon line the sun does not rise at all on that date."
+          }
+        }
+      }
+    },
+    "data.annual.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The highest the sun reaches on each date of the year at this place. The four light uprights are the equinoxes and the solstices. The heavier one is the date you have selected, which is a fifth upright on all but those four dates."
+          }
+        }
+      }
+    },
+    "data.annual.decemberSolstice": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "December solstice"
+          }
+        }
+      }
+    },
+    "data.annual.juneSolstice": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "June solstice"
+          }
+        }
+      }
+    },
+    "data.annual.marchEquinox": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "March equinox"
+          }
+        }
+      }
+    },
+    "data.annual.septemberEquinox": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "September equinox"
+          }
+        }
+      }
+    },
+    "data.annual.spread": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Range across the year"
+          }
+        }
+      }
+    },
+    "data.annual.spreadCaption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The difference between the highest and the lowest the midday sun gets here. Outside the tropics it is about forty seven degrees, twice the tilt of the earth. Inside them it is less, because the noon sun passes overhead twice a year and turns back."
+          }
+        }
+      }
+    },
+    "data.annual.thisDate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This date"
+          }
+        }
+      }
+    },
+    "data.annual.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun across the year"
+          }
+        }
+      }
+    },
+    "data.card.dayLength": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day length"
+          }
+        }
+      }
+    },
+    "data.card.footer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computed on device by Sunlit. UV index is a clear sky model."
+          }
+        }
+      }
+    },
+    "data.card.maximumAltitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum altitude"
+          }
+        }
+      }
+    },
+    "data.card.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon lit"
+          }
+        }
+      }
+    },
+    "data.card.noon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar noon"
+          }
+        }
+      }
+    },
+    "data.card.polarDay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun never sets"
+          }
+        }
+      }
+    },
+    "data.card.polarNight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun never rises"
+          }
+        }
+      }
+    },
+    "data.card.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "data.card.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "data.card.uv": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index"
+          }
+        }
+      }
+    },
+    "data.context.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(day). All times in \\(zoneName)."
+          }
+        }
+      }
+    },
+    "data.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "data.eclipse.alreadyUnderWay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun rises here with the eclipse already in progress, so there is no first contact to see."
+          }
+        }
+      }
+    },
+    "data.eclipse.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The next solar eclipse visible from this place, and the next lunar eclipse wherever it falls, searched over the coming five years. A lunar eclipse happens at the same instant everywhere on Earth, so one is listed even when the moon is below the horizon here. All times are local to this place."
+          }
+        }
+      }
+    },
+    "data.eclipse.firstContact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First contact"
+          }
+        }
+      }
+    },
+    "data.eclipse.lastContact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last contact"
+          }
+        }
+      }
+    },
+    "data.eclipse.lowSun": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun is close to the horizon then, so you will need a clear view in that direction."
+          }
+        }
+      }
+    },
+    "data.eclipse.lunar.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
+          }
+        }
+      }
+    },
+    "data.eclipse.lunar.partial": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partial"
+          }
+        }
+      }
+    },
+    "data.eclipse.lunar.penumbral": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penumbral"
+          }
+        }
+      }
+    },
+    "data.eclipse.lunar.total": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        }
+      }
+    },
+    "data.eclipse.magnitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Magnitude"
+          }
+        }
+      }
+    },
+    "data.eclipse.magnitudeCaption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How much of the sun's diameter the moon covers at maximum, as a share of that diameter. It passes one when the moon's disc is the larger of the two."
+          }
+        }
+      }
+    },
+    "data.eclipse.maximum": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum"
+          }
+        }
+      }
+    },
+    "data.eclipse.moonAltitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon altitude at maximum"
+          }
+        }
+      }
+    },
+    "data.eclipse.moonBelowHorizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon is below the horizon here at maximum, so this eclipse happens while it is out of sight from this place. The contact times are the same everywhere on Earth; only whether you can see them changes."
+          }
+        }
+      }
+    },
+    "data.eclipse.nextLunar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next lunar eclipse"
+          }
+        }
+      }
+    },
+    "data.eclipse.nextSolar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next solar eclipse"
+          }
+        }
+      }
+    },
+    "data.eclipse.noLunar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No lunar eclipse falls anywhere in the next five years."
+          }
+        }
+      }
+    },
+    "data.eclipse.noMaximum": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No part of this eclipse happens while the sun is above the horizon here."
+          }
+        }
+      }
+    },
+    "data.eclipse.noSolar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No solar eclipse is visible from this place in the next five years."
+          }
+        }
+      }
+    },
+    "data.eclipse.obscuration": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obscuration"
+          }
+        }
+      }
+    },
+    "data.eclipse.obscurationCaption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fraction of the sun's area covered at maximum. Never larger than the magnitude, because a bite taken out of the edge of a disc removes less of its area than of its width."
+          }
+        }
+      }
+    },
+    "data.eclipse.partialBegin": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umbra begins"
+          }
+        }
+      }
+    },
+    "data.eclipse.partialEnd": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umbra ends"
+          }
+        }
+      }
+    },
+    "data.eclipse.penumbralBegin": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penumbra begins"
+          }
+        }
+      }
+    },
+    "data.eclipse.penumbralEnd": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penumbra ends"
+          }
+        }
+      }
+    },
+    "data.eclipse.penumbralMagnitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penumbral magnitude"
+          }
+        }
+      }
+    },
+    "data.eclipse.phaseAbsent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This eclipse does not reach that phase."
+          }
+        }
+      }
+    },
+    "data.eclipse.solar.annular": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annular"
+          }
+        }
+      }
+    },
+    "data.eclipse.solar.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None visible"
+          }
+        }
+      }
+    },
+    "data.eclipse.solar.partial": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partial"
+          }
+        }
+      }
+    },
+    "data.eclipse.solar.total": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        }
+      }
+    },
+    "data.eclipse.sunAltitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun altitude at maximum"
+          }
+        }
+      }
+    },
+    "data.eclipse.sunSetFirst": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun sets here before the discs part, so there is no last contact to see."
+          }
+        }
+      }
+    },
+    "data.eclipse.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclipses"
+          }
+        }
+      }
+    },
+    "data.eclipse.totalBegin": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totality begins"
+          }
+        }
+      }
+    },
+    "data.eclipse.totalEnd": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totality ends"
+          }
+        }
+      }
+    },
+    "data.eclipse.umbralCaption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How much of the moon's diameter is inside the dark shadow at maximum, as a share of that diameter. Above one the whole moon is inside it. Below zero the moon misses the umbra altogether."
+          }
+        }
+      }
+    },
+    "data.eclipse.umbralMagnitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umbral magnitude"
+          }
+        }
+      }
+    },
+    "data.eclipse.waiting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The next eclipses will be searched for shortly."
+          }
+        }
+      }
+    },
+    "data.export.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A spreadsheet of every figure on this screen, and a picture of the day to send on."
+          }
+        }
+      }
+    },
+    "data.export.csvDetail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One row per figure, with a header row, the unit it is expressed in, and a note wherever a value is absent that says why."
+          }
+        }
+      }
+    },
+    "data.export.csvHeading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spreadsheet"
+          }
+        }
+      }
+    },
+    "data.export.failed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file could not be written on this device."
+          }
+        }
+      }
+    },
+    "data.export.imageDetail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day's headline figures on the sky colour of its own solar noon."
+          }
+        }
+      }
+    },
+    "data.export.imageHeading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Picture"
+          }
+        }
+      }
+    },
+    "data.export.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export this day"
+          }
+        }
+      }
+    },
+    "data.export.preparing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparing the file"
+          }
+        }
+      }
+    },
+    "data.export.shareCSV": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share the spreadsheet"
+          }
+        }
+      }
+    },
+    "data.export.shareImage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share the picture"
+          }
+        }
+      }
+    },
+    "data.export.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export"
+          }
+        }
+      }
+    },
+    "data.export.zoneExplanation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every time in both files is written for \\(name), with its offset from Universal Time attached. The spreadsheet is in English with ISO 8601 timestamps and a full stop as the decimal separator, so that anyone can open it."
+          }
+        }
+      }
+    },
+    "data.export.zoneHeading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times and format"
+          }
+        }
+      }
+    },
+    "data.footer.offline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every figure here is computed on this device from the selected place and date. Nothing on this screen needs a network."
+          }
+        }
+      }
+    },
+    "data.format.degrees": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(figure) degrees"
+          }
+        }
+      }
+    },
+    "data.format.longer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(magnitude) longer"
+          }
+        }
+      }
+    },
+    "data.format.range": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(from) to \\(to)"
+          }
+        }
+      }
+    },
+    "data.format.shorter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(magnitude) shorter"
+          }
+        }
+      }
+    },
+    "data.format.unchanged": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unchanged"
+          }
+        }
+      }
+    },
+    "data.golden.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden is the sun between four degrees below and six degrees above the horizon. Blue is between six and four degrees below it. Neither is an hour."
+          }
+        }
+      }
+    },
+    "data.golden.eveningBlue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evening blue hour"
+          }
+        }
+      }
+    },
+    "data.golden.eveningGolden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evening golden hour"
+          }
+        }
+      }
+    },
+    "data.golden.lasts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasts \\(format.span(seconds))"
+          }
+        }
+      }
+    },
+    "data.golden.morningBlue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morning blue hour"
+          }
+        }
+      }
+    },
+    "data.golden.morningGolden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morning golden hour"
+          }
+        }
+      }
+    },
+    "data.golden.noCrossing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not cross this band on this side of solar noon."
+          }
+        }
+      }
+    },
+    "data.golden.staysAbove": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays above this band all day here, so there is no window."
+          }
+        }
+      }
+    },
+    "data.golden.staysBelow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays below this band all day here, so there is no window."
+          }
+        }
+      }
+    },
+    "data.golden.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden and blue hour"
+          }
+        }
+      }
+    },
+    "data.loading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computing the day"
+          }
+        }
+      }
+    },
+    "data.lock.annualPaths": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun's path across the whole year is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.date": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever. Another date is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.eclipses": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclipses with local contact times are part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.export": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export to a spreadsheet or an image is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.generic": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.milkyWay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Milky Way window and its quality are part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moonrise, phase, illumination and distance are part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.place": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever. Another place is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.lock.terrain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The skyline you sweep and the periods it blocks the sun are part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "data.milkyWay.best": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best moment"
+          }
+        }
+      }
+    },
+    "data.milkyWay.bestAltitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altitude then"
+          }
+        }
+      }
+    },
+    "data.milkyWay.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The galactic centre above ten degrees, the sun below eighteen degrees, and no bright moon up. For the night that begins on this date."
+          }
+        }
+      }
+    },
+    "data.milkyWay.highestCaption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The highest the galactic centre reached at any point in the night, whether or not the sky was dark then."
+          }
+        }
+      }
+    },
+    "data.milkyWay.highestTonight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Highest in the night"
+          }
+        }
+      }
+    },
+    "data.milkyWay.lasts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasts \\(duration)"
+          }
+        }
+      }
+    },
+    "data.milkyWay.limit.belowHorizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The galactic centre never rises ten degrees above the horizon from this place on this night. It climbs highest from around twenty nine degrees south, where it passes overhead, and sits lower from anywhere further north or further south of that."
+          }
+        }
+      }
+    },
+    "data.milkyWay.limit.moonlight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A bright moon is above the horizon through every dark hour of this night. Wait for a thinner moon."
+          }
+        }
+      }
+    },
+    "data.milkyWay.limit.season": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The galactic centre is high, and the night is dark, but never at the same time. This is the wrong half of the year at this latitude."
+          }
+        }
+      }
+    },
+    "data.milkyWay.limit.twilight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun never sinks eighteen degrees below the horizon on this night, so the sky never becomes astronomically dark. This is the high latitude summer, whichever hemisphere you are in."
+          }
+        }
+      }
+    },
+    "data.milkyWay.limit.unknown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no window on the galactic centre on this night."
+          }
+        }
+      }
+    },
+    "data.milkyWay.quality": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quality"
+          }
+        }
+      }
+    },
+    "data.milkyWay.quality.excellent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excellent"
+          }
+        }
+      }
+    },
+    "data.milkyWay.quality.fair": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fair"
+          }
+        }
+      }
+    },
+    "data.milkyWay.quality.good": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good"
+          }
+        }
+      }
+    },
+    "data.milkyWay.quality.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No window"
+          }
+        }
+      }
+    },
+    "data.milkyWay.quality.poor": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poor"
+          }
+        }
+      }
+    },
+    "data.milkyWay.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Milky Way"
+          }
+        }
+      }
+    },
+    "data.milkyWay.window": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window"
+          }
+        }
+      }
+    },
+    "data.model.clearSky": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index and irradiance are clear sky models, not measurements. They assume a cloudless atmosphere."
+          }
+        }
+      }
+    },
+    "data.model.clearSkyShort": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear sky model, not a measurement"
+          }
+        }
+      }
+    },
+    "data.moon.alwaysDown": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon stays below the horizon all day here."
+          }
+        }
+      }
+    },
+    "data.moon.alwaysUp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon stays above the horizon all day here."
+          }
+        }
+      }
+    },
+    "data.moon.beyondSearch": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None within forty days"
+          }
+        }
+      }
+    },
+    "data.moon.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phase, illumination and distance at local noon. Rise and set account for the moon's parallax, which makes it sit almost a degree lower than it would seen from the centre of the earth, so moonrise falls later than a flat calculation gives."
+          }
+        }
+      }
+    },
+    "data.moon.distance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance"
+          }
+        }
+      }
+    },
+    "data.moon.distanceSpoken": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(distanceFigure) kilometres"
+          }
+        }
+      }
+    },
+    "data.moon.firstQuarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First quarter"
+          }
+        }
+      }
+    },
+    "data.moon.full": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full moon"
+          }
+        }
+      }
+    },
+    "data.moon.illumination": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon lit"
+          }
+        }
+      }
+    },
+    "data.moon.lastQuarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last quarter"
+          }
+        }
+      }
+    },
+    "data.moon.moonrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moonrise"
+          }
+        }
+      }
+    },
+    "data.moon.moonset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moonset"
+          }
+        }
+      }
+    },
+    "data.moon.new": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New moon"
+          }
+        }
+      }
+    },
+    "data.moon.nextFull": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next full moon"
+          }
+        }
+      }
+    },
+    "data.moon.nextNew": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next new moon"
+          }
+        }
+      }
+    },
+    "data.moon.noRiseToday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon does not rise on this date. It rises about fifty minutes later each day, so roughly once a month a date has no moonrise in it at all."
+          }
+        }
+      }
+    },
+    "data.moon.noSetToday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon does not set on this date. It sets about fifty minutes later each day, so roughly once a month a date has no moonset in it at all."
+          }
+        }
+      }
+    },
+    "data.moon.phase": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phase"
+          }
+        }
+      }
+    },
+    "data.moon.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon"
+          }
+        }
+      }
+    },
+    "data.moon.waningCrescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waning crescent"
+          }
+        }
+      }
+    },
+    "data.moon.waningGibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waning gibbous"
+          }
+        }
+      }
+    },
+    "data.moon.waxingCrescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waxing crescent"
+          }
+        }
+      }
+    },
+    "data.moon.waxingGibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waxing gibbous"
+          }
+        }
+      }
+    },
+    "data.sun.change": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change from yesterday"
+          }
+        }
+      }
+    },
+    "data.sun.dayLength": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day length"
+          }
+        }
+      }
+    },
+    "data.sun.irradianceSpoken": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(format.number(day.peak.irradiance.global, fraction: 0)) watts per square metre"
+          }
+        }
+      }
+    },
+    "data.sun.maximumAltitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum altitude"
+          }
+        }
+      }
+    },
+    "data.sun.noAzimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no event to take an azimuth from on this date."
+          }
+        }
+      }
+    },
+    "data.sun.noSunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not cross the horizon upward on this date."
+          }
+        }
+      }
+    },
+    "data.sun.noSunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not cross the horizon downward on this date."
+          }
+        }
+      }
+    },
+    "data.sun.noTransit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not cross the meridian above the horizon on this date."
+          }
+        }
+      }
+    },
+    "data.sun.peakIrradiance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Irradiance at solar noon"
+          }
+        }
+      }
+    },
+    "data.sun.peakUV": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index at solar noon"
+          }
+        }
+      }
+    },
+    "data.sun.polarDay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays above the horizon all day here, so there is no sunrise and no sunset on this date."
+          }
+        }
+      }
+    },
+    "data.sun.polarNight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays below the horizon all day here, so there is no sunrise and no sunset on this date."
+          }
+        }
+      }
+    },
+    "data.sun.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "data.sun.sunriseAzimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise azimuth"
+          }
+        }
+      }
+    },
+    "data.sun.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "data.sun.sunsetAzimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset azimuth"
+          }
+        }
+      }
+    },
+    "data.sun.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun"
+          }
+        }
+      }
+    },
+    "data.sun.transit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar noon"
+          }
+        }
+      }
+    },
+    "data.sun.transitAzimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar noon azimuth"
+          }
+        }
+      }
+    },
+    "data.terrain.blocked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun blocked"
+          }
+        }
+      }
+    },
+    "data.terrain.blockedFor": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behind the skyline for \\(duration)"
+          }
+        }
+      }
+    },
+    "data.terrain.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compared against the skyline you swept here, not against a flat horizon."
+          }
+        }
+      }
+    },
+    "data.terrain.earlier": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(magnitude) earlier than a flat horizon"
+          }
+        }
+      }
+    },
+    "data.terrain.later": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(magnitude) later than a flat horizon"
+          }
+        }
+      }
+    },
+    "data.terrain.neverClears": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not clear your skyline at all on this date."
+          }
+        }
+      }
+    },
+    "data.terrain.noDifference": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The same as a flat horizon"
+          }
+        }
+      }
+    },
+    "data.terrain.noFlatEvent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no flat horizon event on this date to compare against."
+          }
+        }
+      }
+    },
+    "data.terrain.noObstruction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your skyline does not block the sun at any point on this date."
+          }
+        }
+      }
+    },
+    "data.terrain.notMeasured": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No skyline has been swept for this place yet. Sweep one in the AR view and this table fills in with the times your own surroundings block the sun."
+          }
+        }
+      }
+    },
+    "data.terrain.sunriseDifference": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise difference"
+          }
+        }
+      }
+    },
+    "data.terrain.sunriseFlat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise on a flat horizon"
+          }
+        }
+      }
+    },
+    "data.terrain.sunriseOverSkyline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise over your skyline"
+          }
+        }
+      }
+    },
+    "data.terrain.sunsetDifference": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset difference"
+          }
+        }
+      }
+    },
+    "data.terrain.sunsetFlat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset on a flat horizon"
+          }
+        }
+      }
+    },
+    "data.terrain.sunsetOverSkyline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset behind your skyline"
+          }
+        }
+      }
+    },
+    "data.terrain.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline"
+          }
+        }
+      }
+    },
+    "data.twilight.astronomical.neverDark": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not sink eighteen degrees below the horizon on this date, so the night never becomes astronomically dark."
+          }
+        }
+      }
+    },
+    "data.twilight.astronomical.neverLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays more than eighteen degrees below the horizon all day here. It is astronomically dark throughout."
+          }
+        }
+      }
+    },
+    "data.twilight.astronomicalDawn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Astronomical dawn"
+          }
+        }
+      }
+    },
+    "data.twilight.astronomicalDusk": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Astronomical dusk"
+          }
+        }
+      }
+    },
+    "data.twilight.caption": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Civil at six degrees, nautical at twelve, astronomical at eighteen degrees below the horizon."
+          }
+        }
+      }
+    },
+    "data.twilight.civil.neverDark": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not sink six degrees below the horizon on this date, so civil twilight lasts all night."
+          }
+        }
+      }
+    },
+    "data.twilight.civil.neverLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays more than six degrees below the horizon all day here, so civil twilight does not begin."
+          }
+        }
+      }
+    },
+    "data.twilight.civilDawn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Civil dawn"
+          }
+        }
+      }
+    },
+    "data.twilight.civilDusk": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Civil dusk"
+          }
+        }
+      }
+    },
+    "data.twilight.nautical.neverDark": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not sink twelve degrees below the horizon on this date, so nautical twilight lasts all night."
+          }
+        }
+      }
+    },
+    "data.twilight.nautical.neverLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays more than twelve degrees below the horizon all day here, so nautical twilight does not begin."
+          }
+        }
+      }
+    },
+    "data.twilight.nauticalDawn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nautical dawn"
+          }
+        }
+      }
+    },
+    "data.twilight.nauticalDusk": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nautical dusk"
+          }
+        }
+      }
+    },
+    "data.twilight.noCrossing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not cross this boundary on this side of the day."
+          }
+        }
+      }
+    },
+    "data.twilight.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twilight"
+          }
+        }
+      }
+    },
+    "data.unit.kilometres": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "km"
+          }
+        }
+      }
+    },
+    "data.unit.wattsPerSquareMetre": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W/m²"
+          }
+        }
+      }
+    },
+    "data.unlock.button": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See what Sunlit Pro adds"
+          }
+        }
+      }
+    },
+    "data.uv.extreme": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extreme"
+          }
+        }
+      }
+    },
+    "data.uv.high": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High"
+          }
+        }
+      }
+    },
+    "data.uv.low": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Low"
+          }
+        }
+      }
+    },
+    "data.uv.moderate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moderate"
+          }
+        }
+      }
+    },
+    "data.uv.veryHigh": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Very high"
+          }
+        }
+      }
+    },
+    "date.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show this day"
+          }
+        }
+      }
+    },
+    "date.confirm.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applies this day to all four views."
+          }
+        }
+      }
+    },
+    "date.free": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free"
+          }
+        }
+      }
+    },
+    "date.gate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever, in all four views. Any other day is part of Sunlit Pro. The calendar stays open either way, so you can see what you would be looking at."
+          }
+        }
+      }
+    },
+    "date.locked.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked. Opens Sunlit Pro."
+          }
+        }
+      }
+    },
+    "date.picker": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day"
+          }
+        }
+      }
+    },
+    "date.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date"
+          }
+        }
+      }
+    },
+    "date.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to today"
+          }
+        }
+      }
+    },
+    "date.zone": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Days run on the clock of \\(state.place.name), not on your own."
+          }
+        }
+      }
+    },
+    "header.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        }
+      }
+    },
+    "horizon.degrees": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(heightFigure) degrees"
+          }
+        }
+      }
+    },
+    "horizon.explain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The apparent height of whatever stands in each direction, in degrees. Zero is an open sea horizon. A hilltop looking down at the sea takes a value below zero."
+          }
+        }
+      }
+    },
+    "horizon.gate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The table is here to read. Changing it, and the true sunrise and obstruction times it produces, are part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "horizon.reset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear the whole table"
+          }
+        }
+      }
+    },
+    "horizon.sector": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline height at azimuth \\(azimuthFigure) degrees"
+          }
+        }
+      }
+    },
+    "horizon.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline"
+          }
+        }
+      }
+    },
+    "map.computing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computing the day"
+          }
+        }
+      }
+    },
+    "map.coordinate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coordinates"
+          }
+        }
+      }
+    },
+    "map.currentLocation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current location"
+          }
+        }
+      }
+    },
+    "map.locationRefused": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit has no access to your position, so it cannot put the pin there. You can grant it in Settings. Choosing a place by hand instead is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "map.locked.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon's rise and set directions are part of Sunlit Pro. They are drawn faintly above so you can see what they add."
+          }
+        }
+      }
+    },
+    "map.locked.place": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scouting a place other than where you are is part of Sunlit Pro. The pin you tapped is marked on the map."
+          }
+        }
+      }
+    },
+    "map.map.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double tap to move the pin here. The figures below give every direction in degrees."
+          }
+        }
+      }
+    },
+    "map.map.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Map around \\(state.place.name)"
+          }
+        }
+      }
+    },
+    "map.networkNotice": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple serves the map tiles over the network. Every azimuth, time and length here is worked out on your device and needs no connection. The one thing looked up over the network is a dropped pin's own time zone, and the note at the top of this panel says when that lookup has not answered."
+          }
+        }
+      }
+    },
+    "map.noMoonEvent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon neither rises nor sets on this day here, so it is either above the horizon for the whole day or below it for the whole day. Both events run about fifty minutes later each day, so a calendar day can fall between one pair of them and the next."
+          }
+        }
+      }
+    },
+    "map.pin.chosen": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chosen place"
+          }
+        }
+      }
+    },
+    "map.pin.current": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your position"
+          }
+        }
+      }
+    },
+    "map.pin.proposed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place you tapped, locked"
+          }
+        }
+      }
+    },
+    "map.pinName": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pin \\(coordinateText)"
+          }
+        }
+      }
+    },
+    "map.polarDay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays above the horizon all day here, so there is no sunrise or sunset to point at."
+          }
+        }
+      }
+    },
+    "map.polarNight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays below the horizon all day here, so there is no sunrise or sunset to point at."
+          }
+        }
+      }
+    },
+    "map.ray.lockedRowValue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked. Part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "map.ray.lockedValue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked. Part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "map.ray.moonrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moonrise"
+          }
+        }
+      }
+    },
+    "map.ray.moonset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moonset"
+          }
+        }
+      }
+    },
+    "map.ray.sunAtNoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun at local noon"
+          }
+        }
+      }
+    },
+    "map.ray.sunNow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun now"
+          }
+        }
+      }
+    },
+    "map.ray.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "map.ray.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "map.ray.unlockButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(name). Unlock with Sunlit Pro."
+          }
+        }
+      }
+    },
+    "map.section.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon rays"
+          }
+        }
+      }
+    },
+    "map.section.place": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place"
+          }
+        }
+      }
+    },
+    "map.section.shadow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow"
+          }
+        }
+      }
+    },
+    "map.section.sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun rays"
+          }
+        }
+      }
+    },
+    "map.shadow.bearing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow azimuth"
+          }
+        }
+      }
+    },
+    "map.shadow.clamped": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The shadow runs further than the drawn line, which stops at \\(limit). The length above is the whole of it."
+          }
+        }
+      }
+    },
+    "map.shadow.fit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fit shadow on map"
+          }
+        }
+      }
+    },
+    "map.shadow.height": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Object height"
+          }
+        }
+      }
+    },
+    "map.shadow.length": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow length"
+          }
+        }
+      }
+    },
+    "map.shadow.levelGround": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exact geometry on level ground. The map does not know what the shadow falls on, or what stands in its way."
+          }
+        }
+      }
+    },
+    "map.shadow.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun is below the horizon at this instant, so there is no shadow to draw."
+          }
+        }
+      }
+    },
+    "map.shadow.tip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow tip"
+          }
+        }
+      }
+    },
+    "map.spokenBearing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "azimuth \\(figure) degrees"
+          }
+        }
+      }
+    },
+    "map.sun.altitudeAt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At \\(clock), altitude \\(value) degrees"
+          }
+        }
+      }
+    },
+    "map.sun.altitudeNow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altitude \\(value) degrees"
+          }
+        }
+      }
+    },
+    "map.tapHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap the map to move the pin. Press and hold to drop one and centre on it. Every other view follows the pin."
+          }
+        }
+      }
+    },
+    "map.unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock"
+          }
+        }
+      }
+    },
+    "map.unlockPro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See what Sunlit Pro adds"
+          }
+        }
+      }
+    },
+    "map.useCurrentLocation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use current location"
+          }
+        }
+      }
+    },
+    "map.zone.device": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times shown in your device time zone, \\(zoneName). This pin's own time zone needs a network lookup, so it has not been confirmed."
+          }
+        }
+      }
+    },
+    "map.zone.place": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times shown in \\(zoneName)."
+          }
+        }
+      }
+    },
+    "map.zone.resolving": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looking up this pin's time zone."
+          }
+        }
+      }
+    },
+    "notification.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(SunlitSettings.timeString(date, timeZone: zone)) in \\(place.name)"
+          }
+        }
+      }
+    },
+    "notification.fullMoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full moon"
+          }
+        }
+      }
+    },
+    "notification.golden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour"
+          }
+        }
+      }
+    },
+    "notification.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "notification.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "paywall.action.restore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore purchase"
+          }
+        }
+      }
+    },
+    "paywall.action.unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock everything"
+          }
+        }
+      }
+    },
+    "paywall.capability.annualPaths.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "June solstice, December solstice and equinox paths drawn as reference, plus the year's altitude curve."
+          }
+        }
+      }
+    },
+    "paywall.capability.annualPaths.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annual paths"
+          }
+        }
+      }
+    },
+    "paywall.capability.anyDate.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scout a shoot months ahead, or read back a day from years ago."
+          }
+        }
+      }
+    },
+    "paywall.capability.anyDate.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any date, past or future"
+          }
+        }
+      }
+    },
+    "paywall.capability.eclipses.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar and lunar, with contact times, magnitude and obscuration as seen from where you are."
+          }
+        }
+      }
+    },
+    "paywall.capability.eclipses.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclipses"
+          }
+        }
+      }
+    },
+    "paywall.capability.export.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take the day's tabulation with you as a spreadsheet or as an image."
+          }
+        }
+      }
+    },
+    "paywall.capability.export.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export"
+          }
+        }
+      }
+    },
+    "paywall.capability.milkyWay.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The galactic centre, the galactic plane, and a real visibility window that names what is limiting it."
+          }
+        }
+      }
+    },
+    "paywall.capability.milkyWay.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Milky Way"
+          }
+        }
+      }
+    },
+    "paywall.capability.moon.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phase, illuminated fraction, distance, rise and set, its path in every view, and the phase calendar."
+          }
+        }
+      }
+    },
+    "paywall.capability.moon.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon"
+          }
+        }
+      }
+    },
+    "paywall.capability.notifications.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alerts for sun and moon events, scheduled on your device."
+          }
+        }
+      }
+    },
+    "paywall.capability.notifications.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event notifications"
+          }
+        }
+      }
+    },
+    "paywall.capability.savedPlaces.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search more than thirty thousand cities offline, drop a pin anywhere, and keep the places you work at."
+          }
+        }
+      }
+    },
+    "paywall.capability.savedPlaces.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any place, and saved places"
+          }
+        }
+      }
+    },
+    "paywall.capability.terrain.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweep your skyline with the camera, then get sunrise and sunset over that skyline and every period the sun is behind it."
+          }
+        }
+      }
+    },
+    "paywall.capability.terrain.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline"
+          }
+        }
+      }
+    },
+    "paywall.capability.widgets.detail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home screen and lock screen: the next event, the day's arc, the golden hour countdown, and sunrise, sunset and moon phase together."
+          }
+        }
+      }
+    },
+    "paywall.capability.widgets.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets"
+          }
+        }
+      }
+    },
+    "paywall.close": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "paywall.free.compass": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The compass and the sun path in the camera view"
+          }
+        }
+      }
+    },
+    "paywall.free.goldenBlue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour and blue hour, morning and evening"
+          }
+        }
+      }
+    },
+    "paywall.free.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free, forever"
+          }
+        }
+      }
+    },
+    "paywall.free.noonLength": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar noon, day length, and how much it changed since yesterday"
+          }
+        }
+      }
+    },
+    "paywall.free.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No account, no advertising, nothing collected. This is not a trial and it does not expire."
+          }
+        }
+      }
+    },
+    "paywall.free.offline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every figure computed on your device, no account, no tracking"
+          }
+        }
+      }
+    },
+    "paywall.free.position": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where the sun is now: azimuth and altitude, live"
+          }
+        }
+      }
+    },
+    "paywall.free.shadow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow length and direction"
+          }
+        }
+      }
+    },
+    "paywall.free.sunriseSunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise and sunset, with their directions"
+          }
+        }
+      }
+    },
+    "paywall.free.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location, in all four views"
+          }
+        }
+      }
+    },
+    "paywall.free.twilight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Civil, nautical and astronomical twilight"
+          }
+        }
+      }
+    },
+    "paywall.free.uv": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index and solar irradiance for today"
+          }
+        }
+      }
+    },
+    "paywall.free.uv.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear sky models, not measurements. Sunlit says so wherever they appear."
+          }
+        }
+      }
+    },
+    "paywall.intro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit is free to install and free to use. Here is exactly what that means, and what the one purchase adds."
+          }
+        }
+      }
+    },
+    "paywall.legal.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Payment is taken by the App Store when you confirm the purchase."
+          }
+        }
+      }
+    },
+    "paywall.legal.privacy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy policy"
+          }
+        }
+      }
+    },
+    "paywall.legal.terms": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terms of use"
+          }
+        }
+      }
+    },
+    "paywall.owned.continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        }
+      }
+    },
+    "paywall.owned.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlocked"
+          }
+        }
+      }
+    },
+    "paywall.owned.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit Pro is active on this Apple Account. Thank you."
+          }
+        }
+      }
+    },
+    "paywall.price.loading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading the price"
+          }
+        }
+      }
+    },
+    "paywall.price.retry": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        }
+      }
+    },
+    "paywall.price.terms": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One time purchase. Nothing renews, and there is nothing to cancel. It stays unlocked on every device signed in to the same Apple Account."
+          }
+        }
+      }
+    },
+    "paywall.pro.heading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What the purchase adds"
+          }
+        }
+      }
+    },
+    "paywall.pro.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything below works offline too."
+          }
+        }
+      }
+    },
+    "paywall.purchase.busy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Working"
+          }
+        }
+      }
+    },
+    "paywall.restore.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If you bought Sunlit Pro before, restore it here. Restoring may ask you to sign in to your Apple Account."
+          }
+        }
+      }
+    },
+    "paywall.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit Pro"
+          }
+        }
+      }
+    },
+    "places.currentLocation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current location"
+          }
+        }
+      }
+    },
+    "places.forget": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forget this place"
+          }
+        }
+      }
+    },
+    "places.gate.saved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever, in all four views. You can open any other place from here, but its figures stay locked, and so does keeping a place so it is waiting next time. Both are part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "places.here": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Here"
+          }
+        }
+      }
+    },
+    "places.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type a name. The list holds every city above fifteen thousand people and needs no network. Accents are optional, so koln finds Köln."
+          }
+        }
+      }
+    },
+    "places.keep": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep this place"
+          }
+        }
+      }
+    },
+    "places.keep.locked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keeping places is part of Sunlit Pro"
+          }
+        }
+      }
+    },
+    "places.loading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opening the offline city list"
+          }
+        }
+      }
+    },
+    "places.localTime": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local time \\(time)"
+          }
+        }
+      }
+    },
+    "places.located": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Following your position"
+          }
+        }
+      }
+    },
+    "places.locating": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locating"
+          }
+        }
+      }
+    },
+    "places.locationAsk": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to let Sunlit use your position"
+          }
+        }
+      }
+    },
+    "places.locationRefused": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Location is off, so Sunlit cannot follow you"
+          }
+        }
+      }
+    },
+    "places.noResults": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing found. Many places are listed under their English name, so try that spelling."
+          }
+        }
+      }
+    },
+    "places.openSystemSettings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the system settings to allow location"
+          }
+        }
+      }
+    },
+    "places.results": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cities"
+          }
+        }
+      }
+    },
+    "places.saved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved"
+          }
+        }
+      }
+    },
+    "places.search.clear": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear the search"
+          }
+        }
+      }
+    },
+    "places.search.prompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search a city"
+          }
+        }
+      }
+    },
+    "places.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place"
+          }
+        }
+      }
+    },
+    "places.unavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The offline city list could not be read on this device. Current location still works."
+          }
+        }
+      }
+    },
+    "pro.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit Pro"
+          }
+        }
+      }
+    },
+    "pro.unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See what Sunlit Pro adds"
+          }
+        }
+      }
+    },
+    "settings.about": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About"
+          }
+        }
+      }
+    },
+    "settings.acknowledgements": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data and methods"
+          }
+        }
+      }
+    },
+    "settings.horizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skyline"
+          }
+        }
+      }
+    },
+    "settings.horizon.clear": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear"
+          }
+        }
+      }
+    },
+    "settings.horizon.gate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A skyline you have swept moves your sunrise and sunset to the times you actually see, and lists the periods the sun is up but behind something. Reading the table is free. Changing it is part of Sunlit Pro."
+          }
+        }
+      }
+    },
+    "settings.horizon.measured": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(profile.measuredSectorCount) of 36 sectors swept at \\(state.place.name)."
+          }
+        }
+      }
+    },
+    "settings.horizon.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No skyline has been swept at \\(state.place.name), so Sunlit assumes a flat horizon."
+          }
+        }
+      }
+    },
+    "settings.horizon.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View the table"
+          }
+        }
+      }
+    },
+    "settings.notifications": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications"
+          }
+        }
+      }
+    },
+    "settings.notifications.count": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting: \\(scheduledCount)"
+          }
+        }
+      }
+    },
+    "settings.notifications.gate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event notifications are part of Sunlit Pro. They are computed on your device and nothing about your times or your place leaves it."
+          }
+        }
+      }
+    },
+    "settings.notifications.horizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled for the next \\(horizonDays) days at \\(state.place.name), from the same figures the app shows. Open Sunlit now and then to extend them."
+          }
+        }
+      }
+    },
+    "settings.notifications.refused": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are switched off for Sunlit in the system settings, so nothing will arrive until they are switched back on. Everything else keeps working."
+          }
+        }
+      }
+    },
+    "settings.notify.fullMoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full moon"
+          }
+        }
+      }
+    },
+    "settings.notify.golden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour"
+          }
+        }
+      }
+    },
+    "settings.notify.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "settings.notify.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "settings.offline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every figure in Sunlit is computed on this device. Nothing about you is collected and nothing is sent. Every calculation works in aeroplane mode; only Apple's map tiles and the time zone of a newly dropped pin need a connection."
+          }
+        }
+      }
+    },
+    "settings.openSystemSettings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the system settings"
+          }
+        }
+      }
+    },
+    "settings.privacy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        }
+      }
+    },
+    "settings.purchase": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase"
+          }
+        }
+      }
+    },
+    "settings.purchase.free": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at your current location is free forever, in all four views. One purchase adds every other date and place, the moon, the Milky Way, annual paths, a swept skyline, eclipses, widgets, notifications and export."
+          }
+        }
+      }
+    },
+    "settings.purchase.owned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit Pro is active on this Apple Account. Everything is unlocked."
+          }
+        }
+      }
+    },
+    "settings.restore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore purchase"
+          }
+        }
+      }
+    },
+    "settings.support": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support"
+          }
+        }
+      }
+    },
+    "settings.time": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clock"
+          }
+        }
+      }
+    },
+    "settings.time.example": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now at \\(state.place.name): \\(clock)"
+          }
+        }
+      }
+    },
+    "settings.time.system": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        }
+      }
+    },
+    "settings.time.twelve": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12 hour"
+          }
+        }
+      }
+    },
+    "settings.time.twentyFour": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 hour"
+          }
+        }
+      }
+    },
+    "settings.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        }
+      }
+    },
+    "settings.units": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Units"
+          }
+        }
+      }
+    },
+    "settings.units.imperial": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperial"
+          }
+        }
+      }
+    },
+    "settings.units.metric": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metric"
+          }
+        }
+      }
+    },
+    "settings.units.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow length and elevation. Angles stay in degrees."
+          }
+        }
+      }
+    },
+    "settings.version": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version \\(version), build \\(build)"
+          }
+        }
+      }
+    },
+    "sheet.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "sky.arc.noon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noon"
+          }
+        }
+      }
+    },
+    "sky.event.absent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Does not occur on this day"
+          }
+        }
+      }
+    },
+    "sky.event.firstLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First light"
+          }
+        }
+      }
+    },
+    "sky.event.goldenHour": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour"
+          }
+        }
+      }
+    },
+    "sky.event.lastLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last light"
+          }
+        }
+      }
+    },
+    "sky.event.range": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(start) to \\(end)"
+          }
+        }
+      }
+    },
+    "sky.event.solarNoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar noon"
+          }
+        }
+      }
+    },
+    "sky.event.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "sky.event.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "sky.events.polarDay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not set on this day"
+          }
+        }
+      }
+    },
+    "sky.events.polarNight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not rise on this day"
+          }
+        }
+      }
+    },
+    "sky.events.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day's light"
+          }
+        }
+      }
+    },
+    "sky.events.working": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computing the day"
+          }
+        }
+      }
+    },
+    "sky.legend.golden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour"
+          }
+        }
+      }
+    },
+    "sky.legend.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon"
+          }
+        }
+      }
+    },
+    "sky.legend.sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun"
+          }
+        }
+      }
+    },
+    "sky.lock.milkyWay": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Milky Way windows are part of Sunlit Pro"
+          }
+        }
+      }
+    },
+    "sky.lock.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moon path and phase are part of Sunlit Pro"
+          }
+        }
+      }
+    },
+    "sky.lock.selection": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This place and date are part of Sunlit Pro"
+          }
+        }
+      }
+    },
+    "sky.lock.unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock"
+          }
+        }
+      }
+    },
+    "sky.lock.unlockSpoken": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double tap to see what Sunlit Pro includes"
+          }
+        }
+      }
+    },
+    "sky.metric.altitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altitude"
+          }
+        }
+      }
+    },
+    "sky.metric.azimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azimuth"
+          }
+        }
+      }
+    },
+    "sky.metric.irradiance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Irradiance"
+          }
+        }
+      }
+    },
+    "sky.metric.shadow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shadow length"
+          }
+        }
+      }
+    },
+    "sky.metric.shadowNone": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
+          }
+        }
+      }
+    },
+    "sky.metric.shadowUnit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "times the height"
+          }
+        }
+      }
+    },
+    "sky.metric.uv": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index"
+          }
+        }
+      }
+    },
+    "sky.milkyWay.limit.belowHorizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The galactic centre stays too low here on this night"
+          }
+        }
+      }
+    },
+    "sky.milkyWay.limit.moonlight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moonlight covers every dark hour of this night"
+          }
+        }
+      }
+    },
+    "sky.milkyWay.limit.season": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A dark sky and a high centre never coincide on this night"
+          }
+        }
+      }
+    },
+    "sky.milkyWay.limit.twilight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The night never gets fully dark here at this time of year"
+          }
+        }
+      }
+    },
+    "sky.milkyWay.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Milky Way"
+          }
+        }
+      }
+    },
+    "sky.model.clearSky": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UV index and irradiance are a clear sky model, not a measurement"
+          }
+        }
+      }
+    },
+    "sky.moon.illuminated": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(phase), \\(illumination) lit"
+          }
+        }
+      }
+    },
+    "sky.moon.neither": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No moonrise or moonset on this day"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.firstQuarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First quarter"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.full": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full moon"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.lastQuarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last quarter"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.new": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New moon"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.waningCrescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waning crescent"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.waningGibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waning gibbous"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.waxingCrescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waxing crescent"
+          }
+        }
+      }
+    },
+    "sky.moon.phase.waxingGibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waxing gibbous"
+          }
+        }
+      }
+    },
+    "sky.moon.riseAndSet": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rises \\(rise), sets \\(set)"
+          }
+        }
+      }
+    },
+    "sky.moon.riseOnly": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rises \\(rise), no moonset on this day"
+          }
+        }
+      }
+    },
+    "sky.moon.setOnly": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sets \\(set), no moonrise on this day"
+          }
+        }
+      }
+    },
+    "sky.moon.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon"
+          }
+        }
+      }
+    },
+    "sky.scrubber.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swipe up or down to move through the day"
+          }
+        }
+      }
+    },
+    "sky.scrubber.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time"
+          }
+        }
+      }
+    },
+    "sky.scrubber.live": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live"
+          }
+        }
+      }
+    },
+    "sky.scrubber.liveSpoken": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Showing the current time"
+          }
+        }
+      }
+    },
+    "sky.scrubber.now": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now"
+          }
+        }
+      }
+    },
+    "sky.scrubber.nowSpoken": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return to today at the current time"
+          }
+        }
+      }
+    },
+    "store.error.load": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The price could not be loaded. Check your connection and try again."
+          }
+        }
+      }
+    },
+    "store.error.notOffered": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This purchase is not offered on this account or in this region."
+          }
+        }
+      }
+    },
+    "store.error.unknownResult": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The App Store returned a result Sunlit does not recognise."
+          }
+        }
+      }
+    },
+    "store.result.cancelled": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelled. Nothing was charged."
+          }
+        }
+      }
+    },
+    "store.result.failed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase did not complete. \\(reason)"
+          }
+        }
+      }
+    },
+    "store.result.nothingToRestore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No purchase was found on this Apple Account."
+          }
+        }
+      }
+    },
+    "store.result.pending": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for approval. Sunlit unlocks by itself as soon as the purchase is approved, even if you close the app."
+          }
+        }
+      }
+    },
+    "store.result.productUnavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase is not available right now."
+          }
+        }
+      }
+    },
+    "store.result.purchased": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlocked. Everything is available now."
+          }
+        }
+      }
+    },
+    "store.result.restored": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restored. Everything is available again."
+          }
+        }
+      }
+    },
+    "store.result.unverified": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The App Store could not verify this purchase, so nothing was unlocked. Try Restore purchase, and contact Apple if you were charged."
+          }
+        }
+      }
+    },
+    "tab.ar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR"
+          }
+        }
+      }
+    },
+    "tab.data": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
+          }
+        }
+      }
+    },
+    "tab.map": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Map"
+          }
+        }
+      }
+    },
+    "tab.sky": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sky"
+          }
+        }
+      }
+    },
+    "widget.dayArc.accessibility.altitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun altitude \\(figure) degrees"
+          }
+        }
+      }
+    },
+    "widget.dayArc.accessibility.azimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun azimuth \\(figure) degrees"
+          }
+        }
+      }
+    },
+    "widget.dayArc.accessibility.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(name) at \\(clock), in \\(ahead)"
+          }
+        }
+      }
+    },
+    "widget.dayArc.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day's arc with the sun in its real position."
+          }
+        }
+      }
+    },
+    "widget.dayArc.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day Arc"
+          }
+        }
+      }
+    },
+    "widget.digest.accessibility.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moon \\(phase), \\(lit) lit"
+          }
+        }
+      }
+    },
+    "widget.digest.accessibility.sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise \\(riseTime), sunset \\(setTime)"
+          }
+        }
+      }
+    },
+    "widget.digest.accessibility.sunriseOnly": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise \\(riseTime). \\(noSunset)"
+          }
+        }
+      }
+    },
+    "widget.digest.accessibility.sunsetOnly": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(noSunrise). Sunset \\(setTime)"
+          }
+        }
+      }
+    },
+    "widget.digest.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise, sunset, and tonight's moon phase."
+          }
+        }
+      }
+    },
+    "widget.digest.moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(entry.moonPhaseText) \\(entry.moonIlluminationText)"
+          }
+        }
+      }
+    },
+    "widget.digest.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sun and Moon"
+          }
+        }
+      }
+    },
+    "widget.event.firstLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First light"
+          }
+        }
+      }
+    },
+    "widget.event.goldenHourEnd": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour ends"
+          }
+        }
+      }
+    },
+    "widget.event.goldenHourStart": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour"
+          }
+        }
+      }
+    },
+    "widget.event.lastLight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last light"
+          }
+        }
+      }
+    },
+    "widget.event.solarNoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solar noon"
+          }
+        }
+      }
+    },
+    "widget.event.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "widget.event.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "widget.goldenRing.accessibility.underway": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour now, until \\(end)"
+          }
+        }
+      }
+    },
+    "widget.goldenRing.accessibility.waiting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden hour begins at \\(start)"
+          }
+        }
+      }
+    },
+    "widget.goldenRing.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A ring counting down to the golden hour, then through it."
+          }
+        }
+      }
+    },
+    "widget.goldenRing.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None today"
+          }
+        }
+      }
+    },
+    "widget.goldenRing.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden Hour"
+          }
+        }
+      }
+    },
+    "widget.label.altitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alt"
+          }
+        }
+      }
+    },
+    "widget.label.azimuth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az"
+          }
+        }
+      }
+    },
+    "widget.label.place": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place"
+          }
+        }
+      }
+    },
+    "widget.label.sunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunrise"
+          }
+        }
+      }
+    },
+    "widget.label.sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        }
+      }
+    },
+    "widget.locked.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets are part of the one purchase."
+          }
+        }
+      }
+    },
+    "widget.locked.short": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit"
+          }
+        }
+      }
+    },
+    "widget.locked.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock in Sunlit"
+          }
+        }
+      }
+    },
+    "widget.moon.firstQuarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First quarter"
+          }
+        }
+      }
+    },
+    "widget.moon.fullMoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full moon"
+          }
+        }
+      }
+    },
+    "widget.moon.lastQuarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last quarter"
+          }
+        }
+      }
+    },
+    "widget.moon.newMoon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New moon"
+          }
+        }
+      }
+    },
+    "widget.moon.waningCrescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waning crescent"
+          }
+        }
+      }
+    },
+    "widget.moon.waningGibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waning gibbous"
+          }
+        }
+      }
+    },
+    "widget.moon.waxingCrescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waxing crescent"
+          }
+        }
+      }
+    },
+    "widget.moon.waxingGibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waxing gibbous"
+          }
+        }
+      }
+    },
+    "widget.nextEvent.accessibility.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next sun event at \\(entry.placeName)"
+          }
+        }
+      }
+    },
+    "widget.nextEvent.accessibility.value": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\\(name) at \\(clock), in \\(ahead)"
+          }
+        }
+      }
+    },
+    "widget.nextEvent.description": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The next sun event at your place, counting down."
+          }
+        }
+      }
+    },
+    "widget.nextEvent.none": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No event ahead"
+          }
+        }
+      }
+    },
+    "widget.nextEvent.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next Event"
+          }
+        }
+      }
+    },
+    "widget.polar.day": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays up all day"
+          }
+        }
+      }
+    },
+    "widget.polar.night": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun stays down all day"
+          }
+        }
+      }
+    },
+    "widget.setup.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a place in the app and this widget follows it."
+          }
+        }
+      }
+    },
+    "widget.setup.short": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open app"
+          }
+        }
+      }
+    },
+    "widget.setup.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Sunlit"
+          }
+        }
+      }
+    },
+    "widget.sun.neither": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No sunrise or sunset today"
+          }
+        }
+      }
+    },
+    "widget.sun.noSunrise": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not rise today"
+          }
+        }
+      }
+    },
+    "widget.sun.noSunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sun does not set today"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

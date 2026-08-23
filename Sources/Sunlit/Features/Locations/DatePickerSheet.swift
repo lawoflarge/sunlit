@@ -251,7 +251,7 @@ struct DatePickerSheet: View {
     private var gateReason: String {
         String(
             localized: "date.gate",
-            defaultValue: "Today costs nothing, at your current location, in all four views. Any other day is part of Sunlit Pro. The calendar stays open either way, so you can see what you would be looking at.",
+            defaultValue: "Today at your current location is free forever, in all four views. Any other day is part of Sunlit Pro. The calendar stays open either way, so you can see what you would be looking at.",
             comment: "Explains why another day cannot be confirmed without the purchase"
         )
     }

@@ -246,8 +246,8 @@ private enum EclipseStrings {
     static var caption: String {
         String(
             localized: "data.eclipse.caption",
-            defaultValue: "The next of each kind visible from this place, searched over the coming five years. All times are local to this place.",
-            comment: "Scope of the eclipse search")
+            defaultValue: "The next solar eclipse visible from this place, and the next lunar eclipse wherever it falls, searched over the coming five years. A lunar eclipse happens at the same instant everywhere on Earth, so one is listed even when the moon is below the horizon here. All times are local to this place.",
+            comment: "Scope of the eclipse search. The solar search is filtered by visibility from this place; the lunar search is not")
     }
     static var searching: String {
         String(
@@ -262,22 +262,22 @@ private enum EclipseStrings {
         String(localized: "data.eclipse.nextLunar", defaultValue: "Next lunar eclipse", comment: "Row label")
     }
     static var firstContact: String {
-        String(localized: "data.eclipse.firstContact", defaultValue: "First contact", comment: "The moon's limb first touches the sun's")
+        String(localized: "data.eclipse.firstContact", defaultValue: "First contact", comment: "Solar eclipses only. The moon's limb first touches the sun's")
     }
     static var maximum: String {
         String(localized: "data.eclipse.maximum", defaultValue: "Maximum", comment: "Greatest phase of the eclipse as seen from here")
     }
     static var lastContact: String {
-        String(localized: "data.eclipse.lastContact", defaultValue: "Last contact", comment: "The discs part")
+        String(localized: "data.eclipse.lastContact", defaultValue: "Last contact", comment: "Solar eclipses only. The discs part")
     }
     static var magnitude: String {
-        String(localized: "data.eclipse.magnitude", defaultValue: "Magnitude", comment: "Fraction of the sun's diameter covered")
+        String(localized: "data.eclipse.magnitude", defaultValue: "Magnitude", comment: "Solar eclipses only. The lunar card has its own umbral and penumbral magnitude rows")
     }
     static var magnitudeCaption: String {
         String(
             localized: "data.eclipse.magnitudeCaption",
-            defaultValue: "Fraction of the sun's diameter covered at maximum.",
-            comment: "What eclipse magnitude means")
+            defaultValue: "How much of the sun's diameter the moon covers at maximum, as a share of that diameter. It passes one when the moon's disc is the larger of the two.",
+            comment: "What solar eclipse magnitude means. This row is rendered for solar eclipses only")
     }
     static var obscuration: String {
         String(localized: "data.eclipse.obscuration", defaultValue: "Obscuration", comment: "Fraction of the sun's area covered")
@@ -313,25 +313,25 @@ private enum EclipseStrings {
         String(
             localized: "data.eclipse.noMaximum",
             defaultValue: "No part of this eclipse happens while the sun is above the horizon here.",
-            comment: "Nothing of the eclipse is visible from this place")
+            comment: "Guard for a missing maximum. The solar search only returns eclipses with a maximum above the horizon here, so a reader should not see this")
     }
     static var noSolar: String {
         String(
             localized: "data.eclipse.noSolar",
             defaultValue: "No solar eclipse is visible from this place in the next five years.",
-            comment: "The five year search found nothing")
+            comment: "The five year solar search found nothing. The solar search is filtered by visibility from this place")
     }
     static var noLunar: String {
         String(
             localized: "data.eclipse.noLunar",
-            defaultValue: "No lunar eclipse falls in the next five years.",
-            comment: "The five year search found nothing")
+            defaultValue: "No lunar eclipse falls anywhere in the next five years.",
+            comment: "The five year lunar search found nothing. The lunar search is worldwide, unlike the solar one")
     }
     static var penumbralBegin: String {
         String(localized: "data.eclipse.penumbralBegin", defaultValue: "Penumbra begins", comment: "Lunar eclipse contact P1")
     }
     static var partialBegin: String {
-        String(localized: "data.eclipse.partialBegin", defaultValue: "Umbra begins", comment: "Lunar eclipse contact U1")
+        String(localized: "data.eclipse.partialBegin", defaultValue: "Umbra begins", comment: "Lunar eclipse contact U1, the moon's leading limb enters the umbra. This row is rendered for lunar eclipses only; a solar eclipse uses First contact instead")
     }
     static var totalBegin: String {
         String(localized: "data.eclipse.totalBegin", defaultValue: "Totality begins", comment: "Lunar eclipse contact U2")
@@ -340,7 +340,7 @@ private enum EclipseStrings {
         String(localized: "data.eclipse.totalEnd", defaultValue: "Totality ends", comment: "Lunar eclipse contact U3")
     }
     static var partialEnd: String {
-        String(localized: "data.eclipse.partialEnd", defaultValue: "Umbra ends", comment: "Lunar eclipse contact U4")
+        String(localized: "data.eclipse.partialEnd", defaultValue: "Umbra ends", comment: "Lunar eclipse contact U4, the moon's trailing limb leaves the umbra. This row is rendered for lunar eclipses only; a solar eclipse uses Last contact instead")
     }
     static var penumbralEnd: String {
         String(localized: "data.eclipse.penumbralEnd", defaultValue: "Penumbra ends", comment: "Lunar eclipse contact P4")
@@ -351,7 +351,7 @@ private enum EclipseStrings {
     static var umbralCaption: String {
         String(
             localized: "data.eclipse.umbralCaption",
-            defaultValue: "Fraction of the moon's diameter inside the dark shadow at maximum. Below zero the moon misses the umbra altogether.",
+            defaultValue: "How much of the moon's diameter is inside the dark shadow at maximum, as a share of that diameter. Above one the whole moon is inside it. Below zero the moon misses the umbra altogether.",
             comment: "What umbral magnitude means")
     }
     static var penumbralMagnitude: String {

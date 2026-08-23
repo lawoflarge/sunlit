@@ -505,14 +505,14 @@ enum SkyStrings {
     }
 
     static var shadow: String {
-        String(localized: "sky.metric.shadow", defaultValue: "Shadow", comment: "Shadow length as a ratio of height")
+        String(localized: "sky.metric.shadow", defaultValue: "Shadow length", comment: "The same quantity as map.shadow.length, expressed here as a multiple of the object's height rather than as a distance")
     }
 
     static var shadowUnit: String {
         String(
             localized: "sky.metric.shadowUnit",
-            defaultValue: "x height",
-            comment: "Unit of the shadow ratio, as in 2.4 times the object's height")
+            defaultValue: "times the height",
+            comment: "Unit of the shadow ratio, as in 2.4 times the height. A multiple of the object's own height, not a distance, so it takes no metric or imperial unit")
     }
 
     static var shadowNone: String {
@@ -595,8 +595,8 @@ enum SkyStrings {
     static var absent: String {
         String(
             localized: "sky.event.absent",
-            defaultValue: "Does not occur today",
-            comment: "Shown for an event that does not happen on this day at this place")
+            defaultValue: "Does not occur on this day",
+            comment: "Shown for an event that does not happen on this day at this place. This screen can show any date, so it does not say today")
     }
 
     static func range(_ start: String, _ end: String) -> String {
@@ -630,18 +630,18 @@ enum SkyStrings {
         case let (rise?, nil):
             return lit + "\n" + String(
                 localized: "sky.moon.riseOnly",
-                defaultValue: "Rises \(rise), no moonset today",
-                comment: "The moon rises but does not set on this calendar day")
+                defaultValue: "Rises \(rise), no moonset on this day",
+                comment: "The moon rises but does not set on this calendar day. This screen can show any date, so it does not say today")
         case let (nil, set?):
             return lit + "\n" + String(
                 localized: "sky.moon.setOnly",
-                defaultValue: "Sets \(set), no moonrise today",
-                comment: "The moon sets but does not rise on this calendar day")
+                defaultValue: "Sets \(set), no moonrise on this day",
+                comment: "The moon sets but does not rise on this calendar day. This screen can show any date, so it does not say today")
         default:
             return lit + "\n" + String(
                 localized: "sky.moon.neither",
-                defaultValue: "No moonrise or moonset today",
-                comment: "Neither event falls on this calendar day")
+                defaultValue: "No moonrise or moonset on this day",
+                comment: "Neither event falls on this calendar day. This screen can show any date, so it does not say today")
         }
     }
 
@@ -675,7 +675,7 @@ enum SkyStrings {
         case .galacticCentreBelowHorizon:
             return String(
                 localized: "sky.milkyWay.limit.belowHorizon",
-                defaultValue: "The galactic centre stays too low here tonight",
+                defaultValue: "The galactic centre stays too low here on this night",
                 comment: "Why there is no Milky Way window")
         case .twilight:
             return String(
@@ -685,12 +685,12 @@ enum SkyStrings {
         case .moonlight:
             return String(
                 localized: "sky.milkyWay.limit.moonlight",
-                defaultValue: "Moonlight covers every dark hour tonight",
+                defaultValue: "Moonlight covers every dark hour of this night",
                 comment: "Why there is no Milky Way window")
         case .season:
             return String(
                 localized: "sky.milkyWay.limit.season",
-                defaultValue: "A dark sky and a high centre never coincide tonight",
+                defaultValue: "A dark sky and a high centre never coincide on this night",
                 comment: "Why there is no Milky Way window")
         }
     }

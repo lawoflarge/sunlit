@@ -174,17 +174,17 @@ struct TwilightSection: View {
             case .astronomical:
                 return String(
                     localized: "data.twilight.astronomical.neverLight",
-                    defaultValue: "The sun stays more than eighteen degrees below the horizon for the whole date. It is astronomically dark throughout.",
+                    defaultValue: "The sun stays more than eighteen degrees below the horizon all day here. It is astronomically dark throughout.",
                     comment: "Deep polar night, the astronomical boundary is never reached from below")
             case .nautical:
                 return String(
                     localized: "data.twilight.nautical.neverLight",
-                    defaultValue: "The sun stays more than twelve degrees below the horizon for the whole date, so nautical twilight does not begin.",
+                    defaultValue: "The sun stays more than twelve degrees below the horizon all day here, so nautical twilight does not begin.",
                     comment: "Polar night, the nautical boundary is never reached from below")
             case .civil:
                 return String(
                     localized: "data.twilight.civil.neverLight",
-                    defaultValue: "The sun stays more than six degrees below the horizon for the whole date, so civil twilight does not begin.",
+                    defaultValue: "The sun stays more than six degrees below the horizon all day here, so civil twilight does not begin.",
                     comment: "Polar night, the civil boundary is never reached from below")
             }
         }
@@ -340,12 +340,20 @@ struct ObstructionSection: View {
                 DataRow(
                     label: TerrainStrings.blocked,
                     value: format.range(entry.element.start, entry.element.end),
-                    caption: String(
-                        localized: "data.terrain.blockedFor",
-                        defaultValue: "Behind the skyline for \(format.span((entry.element.end.value - entry.element.start.value) * 86400))",
-                        comment: "How long one obstruction period lasts"))
+                    caption: blockedCaption(from: entry.element.start, to: entry.element.end))
             }
         }
+    }
+
+    /// The duration is formatted before the sentence is built, so the catalogue
+    /// carries a named placeholder rather than an arithmetic expression no
+    /// translator can read or reorder.
+    private func blockedCaption(from start: JulianDay, to end: JulianDay) -> String {
+        let duration = format.span((end.value - start.value) * 86400)
+        return String(
+            localized: "data.terrain.blockedFor",
+            defaultValue: "Behind the skyline for \(duration)",
+            comment: "How long one period behind the skyline lasts")
     }
 
     @ViewBuilder
@@ -414,7 +422,7 @@ private enum SunStrings {
         String(localized: "data.sun.sunriseAzimuth", defaultValue: "Sunrise azimuth", comment: "Compass bearing of the sunrise point")
     }
     static var transitAzimuth: String {
-        String(localized: "data.sun.transitAzimuth", defaultValue: "Transit azimuth", comment: "Compass bearing at solar noon")
+        String(localized: "data.sun.transitAzimuth", defaultValue: "Solar noon azimuth", comment: "Azimuth of the sun at solar noon. Solar noon is the app's one name for the culmination")
     }
     static var sunsetAzimuth: String {
         String(localized: "data.sun.sunsetAzimuth", defaultValue: "Sunset azimuth", comment: "Compass bearing of the sunset point")
@@ -435,18 +443,18 @@ private enum SunStrings {
         String(localized: "data.sun.peakIrradiance", defaultValue: "Irradiance at solar noon", comment: "Modelled global horizontal irradiance")
     }
     static var wattsPerSquareMetre: String {
-        String(localized: "data.unit.wattsPerSquareMetre", defaultValue: "W/m2", comment: "Unit of irradiance")
+        String(localized: "data.unit.wattsPerSquareMetre", defaultValue: "W/m²", comment: "Unit of irradiance, watts per square metre, with a superscript two")
     }
     static var polarDay: String {
         String(
             localized: "data.sun.polarDay",
-            defaultValue: "The sun stays above the horizon for the whole date. There is no sunrise and no sunset here today.",
+            defaultValue: "The sun stays above the horizon all day here, so there is no sunrise and no sunset on this date.",
             comment: "Midnight sun")
     }
     static var polarNight: String {
         String(
             localized: "data.sun.polarNight",
-            defaultValue: "The sun stays below the horizon for the whole date. There is no sunrise and no sunset here today.",
+            defaultValue: "The sun stays below the horizon all day here, so there is no sunrise and no sunset on this date.",
             comment: "Polar night")
     }
     static var noSunrise: String {
@@ -470,8 +478,8 @@ private enum SunStrings {
     static var noAzimuth: String {
         String(
             localized: "data.sun.noAzimuth",
-            defaultValue: "There is no event to take a bearing from on this date.",
-            comment: "An azimuth is missing because its event is missing")
+            defaultValue: "There is no event to take an azimuth from on this date.",
+            comment: "An azimuth is missing because its event is missing. Azimuth is the app's one word for a horizontal direction in degrees")
     }
 }
 
@@ -536,13 +544,13 @@ private enum GoldenStrings {
     static var staysAbove: String {
         String(
             localized: "data.golden.staysAbove",
-            defaultValue: "The sun stays above this band for the whole date, so there is no window.",
+            defaultValue: "The sun stays above this band all day here, so there is no window.",
             comment: "The sun never descends into the band")
     }
     static var staysBelow: String {
         String(
             localized: "data.golden.staysBelow",
-            defaultValue: "The sun stays below this band for the whole date, so there is no window.",
+            defaultValue: "The sun stays below this band all day here, so there is no window.",
             comment: "The sun never rises into the band")
     }
     static var noCrossing: String {
@@ -555,31 +563,31 @@ private enum GoldenStrings {
 
 private enum TerrainStrings {
     static var title: String {
-        String(localized: "data.terrain.title", defaultValue: "Your skyline", comment: "Section title for measured horizon results")
+        String(localized: "data.terrain.title", defaultValue: "Skyline", comment: "Section title for the results of the swept skyline. Skyline is the app's one name for the measured horizon profile")
     }
     static var caption: String {
         String(
             localized: "data.terrain.caption",
-            defaultValue: "Measured against the horizon you swept here, not a flat one.",
-            comment: "Explains that this section uses the measured horizon profile")
+            defaultValue: "Compared against the skyline you swept here, not against a flat horizon.",
+            comment: "Explains that this section uses the swept skyline rather than the ideal flat horizon")
     }
     static var notMeasured: String {
         String(
             localized: "data.terrain.notMeasured",
-            defaultValue: "No skyline has been measured for this place yet. Sweep the horizon in the AR view and this table fills in with the times your own surroundings block the sun.",
-            comment: "There is no horizon profile for this place")
+            defaultValue: "No skyline has been swept for this place yet. Sweep one in the AR view and this table fills in with the times your own surroundings block the sun.",
+            comment: "There is no skyline for this place yet")
     }
     static var sunriseOverSkyline: String {
-        String(localized: "data.terrain.sunriseOverSkyline", defaultValue: "Sunrise over your skyline", comment: "Sunrise against the measured horizon")
+        String(localized: "data.terrain.sunriseOverSkyline", defaultValue: "Sunrise over your skyline", comment: "Sunrise against the swept skyline. Over here, and behind in the sunset row, is deliberate: the sun climbs out from behind the skyline at dawn and disappears behind it at dusk")
     }
     static var sunsetOverSkyline: String {
-        String(localized: "data.terrain.sunsetOverSkyline", defaultValue: "Sunset behind your skyline", comment: "Sunset against the measured horizon")
+        String(localized: "data.terrain.sunsetOverSkyline", defaultValue: "Sunset behind your skyline", comment: "Sunset against the swept skyline. Behind here, and over in the sunrise row, is deliberate: the sun climbs out from behind the skyline at dawn and disappears behind it at dusk")
     }
     static var sunriseFlat: String {
-        String(localized: "data.terrain.sunriseFlat", defaultValue: "Sunrise on a flat horizon", comment: "Sunrise ignoring terrain")
+        String(localized: "data.terrain.sunriseFlat", defaultValue: "Sunrise on a flat horizon", comment: "Sunrise ignoring the skyline. Horizon here is the ideal flat one, never the swept skyline")
     }
     static var sunsetFlat: String {
-        String(localized: "data.terrain.sunsetFlat", defaultValue: "Sunset on a flat horizon", comment: "Sunset ignoring terrain")
+        String(localized: "data.terrain.sunsetFlat", defaultValue: "Sunset on a flat horizon", comment: "Sunset ignoring the skyline. Horizon here is the ideal flat one, never the swept skyline")
     }
     static var sunriseDifference: String {
         String(localized: "data.terrain.sunriseDifference", defaultValue: "Sunrise difference", comment: "Measured minus flat sunrise")

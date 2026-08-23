@@ -161,7 +161,7 @@ struct AcknowledgementsView: View {
     private var trueNorthSource: String {
         String(
             localized: "credits.trueNorth.detail",
-            defaultValue: "The AR view takes its bearing from the device's true north reference frame, computed by iOS from the compass, the gyroscope and your position. Sunlit does not correct it further, and it shows the current uncertainty on screen instead of hiding it.",
+            defaultValue: "The AR view takes its direction from the device's true north reference frame, computed by iOS from the compass, the gyroscope and your position. Sunlit does not correct it further, and it shows the current uncertainty on screen instead of hiding it.",
             comment: "Explains where the compass bearing comes from")
     }
 

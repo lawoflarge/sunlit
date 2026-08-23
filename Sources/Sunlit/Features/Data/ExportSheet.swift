@@ -492,7 +492,7 @@ private enum ExportStrings {
     static var csvDetail: String {
         String(
             localized: "data.export.csvDetail",
-            defaultValue: "One row per figure, with a header row, the unit it is measured in, and a note wherever a value is absent that says why.",
+            defaultValue: "One row per figure, with a header row, the unit it is expressed in, and a note wherever a value is absent that says why.",
             comment: "What the CSV contains")
     }
     static var imageHeading: String {
@@ -532,7 +532,7 @@ private enum ExportStrings {
         String(localized: "data.card.dayLength", defaultValue: "Day length", comment: "Label on the exported picture")
     }
     static var cardMaximumAltitude: String {
-        String(localized: "data.card.maximumAltitude", defaultValue: "Sun at noon", comment: "Label on the exported picture")
+        String(localized: "data.card.maximumAltitude", defaultValue: "Maximum altitude", comment: "Label on the exported picture. The same quantity as data.sun.maximumAltitude in the Data view, and named the same way")
     }
     static var cardMoon: String {
         String(localized: "data.card.moon", defaultValue: "Moon lit", comment: "Label on the exported picture")

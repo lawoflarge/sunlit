@@ -111,10 +111,11 @@ enum MapFormat {
     }
 
     static func spokenBearing(_ degrees: Double) -> String {
-        String(
+        let figure = bearingDigits(degrees)
+        return String(
             localized: "map.spokenBearing",
-            defaultValue: "bearing \(bearingDigits(degrees)) degrees",
-            comment: "Spoken form of a compass bearing, as in bearing 118 degrees")
+            defaultValue: "azimuth \(figure) degrees",
+            comment: "Spoken form of a horizontal direction, as in azimuth 118 degrees. Azimuth is the app's one word for this quantity, in the Data and AR views too")
     }
 
     /// A coordinate as a pair of signed degrees, for naming a dropped pin.
@@ -393,7 +394,7 @@ struct RayEndLabel: View {
             return String(
                 localized: "map.ray.lockedValue",
                 defaultValue: "Locked. Part of Sunlit Pro.",
-                comment: "Spoken instead of a figure the reader has not bought")
+                comment: "Spoken instead of the figure on a ray label drawn over the map. Deliberately the same sentence as map.ray.lockedRowValue, which is the panel row below; translate both identically")
         }
         guard let time = ray.time else { return MapFormat.spokenBearing(ray.bearing) }
         return MapFormat.time(time, in: timeZone) + ", " + MapFormat.spokenBearing(ray.bearing)
@@ -511,7 +512,7 @@ struct SkyRayRow: View {
             return String(
                 localized: "map.ray.lockedRowValue",
                 defaultValue: "Locked. Part of Sunlit Pro.",
-                comment: "Spoken value of a readout row the reader has not bought")
+                comment: "Spoken value of a locked readout row in the panel. Deliberately the same sentence as map.ray.lockedValue, which is the label drawn over the map; translate both identically")
         }
         var parts: [String] = []
         if let subtitle { parts.append(subtitle) }
@@ -521,9 +522,13 @@ struct SkyRayRow: View {
     }
 
     private var spokenLockLabel: String {
-        String(
+        // Two sentences, so the interpolated row name never has to take an
+        // article that agrees with it. Sunrise, Moonrise and Sun now all differ
+        // in gender and number once the app leaves English.
+        let name = ray.title
+        return String(
             localized: "map.ray.unlockButton",
-            defaultValue: "Unlock \(ray.title) with Sunlit Pro",
-            comment: "Accessibility label of the unlock button on a locked readout row")
+            defaultValue: "\(name). Unlock with Sunlit Pro.",
+            comment: "Accessibility label of the unlock button on a locked readout row. The placeholder is the row name, such as Sunrise or Moonrise")
     }
 }

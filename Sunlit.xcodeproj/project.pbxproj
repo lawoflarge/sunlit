@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0027441B33C2EC3FD7A9A31B /* CoreReachabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AC8883BBE3B72D0C4439F /* CoreReachabilityTests.swift */; };
 		0038022101E8D1876DC1C568 /* SkyMoment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DD80BFBA548D8D34C03A5 /* SkyMoment.swift */; };
 		01A4EDAF88E04647447CE7A8 /* HorizonProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12DE1EDACBAB9C9B2236F57 /* HorizonProfile.swift */; };
 		03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		7E7A273532DEA2A1DB380AE9 /* SolarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B7B1AF71EC183D8DA31AA1 /* SolarDay.swift */; };
 		7F1DBD586F8AF42985382788 /* EventRail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC667D9A3AECE1C7F031E3D5 /* EventRail.swift */; };
 		84AF9502F7CC27F1E0687C89 /* DayArcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77F612EAC5194C02755A13C /* DayArcWidget.swift */; };
+		868B76C7338A84B1CBA05398 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F224EB00700AFD5B1E87F4C1 /* Localizable.xcstrings */; };
 		8DAADC231EAF37D736DBE352 /* RiseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E211FF73E18277C68427A /* RiseSet.swift */; };
 		9075A1F6256CD855FD23A902 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2F0608EC7BD80C73343F2 /* SettingsView.swift */; };
 		916F1D98B2DA3C56429C9000 /* TimeScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB91317E1A10F5B41F595C /* TimeScrubber.swift */; };
@@ -182,6 +184,7 @@
 		4010ED7160C0CB4CEB81AD73 /* ExportSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSheet.swift; sourceTree = "<group>"; };
 		4279BE4A901621EEE93E2D85 /* SavedPlacesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPlacesStore.swift; sourceTree = "<group>"; };
 		44AEF0CF6C2D3DF31812725D /* DesignPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPreview.swift; sourceTree = "<group>"; };
+		4B0AC8883BBE3B72D0C4439F /* CoreReachabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreReachabilityTests.swift; sourceTree = "<group>"; };
 		4B23E69860AC602F8A12BA74 /* CityIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityIndex.swift; sourceTree = "<group>"; };
 		4C7116B4785F8E33B45AE3D6 /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
 		550FC459345CF1BF0A76A8E4 /* WidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProvider.swift; sourceTree = "<group>"; };
@@ -236,6 +239,7 @@
 		EA8E211FF73E18277C68427A /* RiseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiseSet.swift; sourceTree = "<group>"; };
 		EC667D9A3AECE1C7F031E3D5 /* EventRail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRail.swift; sourceTree = "<group>"; };
 		EF633DC91C30474261B98115 /* ShadowProjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowProjection.swift; sourceTree = "<group>"; };
+		F224EB00700AFD5B1E87F4C1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F5B7B1AF71EC183D8DA31AA1 /* SolarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarDay.swift; sourceTree = "<group>"; };
 		F5F77C8904807D109ECD5D71 /* SunlitCoreTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SunlitCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6BE7D8E36D7E14CB09BD461 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 			children = (
 				79F66075586BD3552536FACA /* Cities */,
 				262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */,
+				F224EB00700AFD5B1E87F4C1 /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 		F19E2F2944C2C05D11028EAC /* SunlitCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				4B0AC8883BBE3B72D0C4439F /* CoreReachabilityTests.swift */,
 			);
 			path = SunlitCoreTests;
 			sourceTree = "<group>";
@@ -735,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */,
+				868B76C7338A84B1CBA05398 /* Localizable.xcstrings in Resources */,
 				1FF2A007E491AEC4D19D5E66 /* cities.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,6 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0027441B33C2EC3FD7A9A31B /* CoreReachabilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

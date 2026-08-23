@@ -108,21 +108,13 @@ struct DayArcWidgetView: View {
                 readout(
                     label: altitudeLabel,
                     value: entry.altitudeText + "\u{00B0}",
-                    spoken: String(
-                        localized: "widget.dayArc.accessibility.altitude",
-                        defaultValue: "Sun altitude \(entry.altitudeText) degrees",
-                        comment: "VoiceOver value for the sun altitude readout in the medium widget"
-                    )
+                    spoken: spokenAltitude
                 )
 
                 readout(
                     label: azimuthLabel,
                     value: entry.azimuthText + "\u{00B0}",
-                    spoken: String(
-                        localized: "widget.dayArc.accessibility.azimuth",
-                        defaultValue: "Sun azimuth \(entry.azimuthText) degrees",
-                        comment: "VoiceOver value for the sun azimuth readout in the medium widget"
-                    )
+                    spoken: spokenAzimuth
                 )
             }
         }
@@ -234,18 +226,46 @@ struct DayArcWidgetView: View {
                     .widgetFigureStyle(.footnote)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel(Text(event.kind.localisedName))
-            .accessibilityValue(Text(
-                String(
-                    localized: "widget.dayArc.accessibility.next",
-                    defaultValue: "at \(entry.timeText(event.date)), in \(entry.aheadText(event.date))",
-                    comment: "VoiceOver value for the next event readout in the medium widget"
-                )
-            ))
+            .accessibilityLabel(Text(spokenNextEvent(event)))
         }
     }
 
     // MARK: Strings
+
+    /// One whole sentence, with the event name inside it.
+    ///
+    /// It used to be an accessibility value beginning "at ...", appended by
+    /// VoiceOver to a label that lived outside the catalogue. A translator could
+    /// see neither the joint nor the word order across it, and no language that
+    /// puts the time before the event could be written at all.
+    private func spokenNextEvent(_ event: SunEvent) -> String {
+        let name = event.kind.localisedName
+        let clock = entry.timeText(event.date)
+        let ahead = entry.aheadText(event.date)
+        return String(
+            localized: "widget.dayArc.accessibility.next",
+            defaultValue: "\(name) at \(clock), in \(ahead)",
+            comment: "VoiceOver reading of the next event readout in the medium widget: event name, clock time, and how long until it"
+        )
+    }
+
+    private var spokenAltitude: String {
+        let figure = entry.altitudeText
+        return String(
+            localized: "widget.dayArc.accessibility.altitude",
+            defaultValue: "Sun altitude \(figure) degrees",
+            comment: "VoiceOver value for the sun altitude readout in the medium widget"
+        )
+    }
+
+    private var spokenAzimuth: String {
+        let figure = entry.azimuthText
+        return String(
+            localized: "widget.dayArc.accessibility.azimuth",
+            defaultValue: "Sun azimuth \(figure) degrees",
+            comment: "VoiceOver value for the sun azimuth readout in the medium widget"
+        )
+    }
 
     private var placeLabel: String {
         String(localized: "widget.label.place", defaultValue: "Place",

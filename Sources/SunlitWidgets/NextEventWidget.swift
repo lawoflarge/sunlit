@@ -166,9 +166,14 @@ struct NextEventWidgetView: View {
         guard let event = entry.nextEvent else {
             return entry.polarExplanation ?? nextEventFallbackLabel
         }
+        // Formatted first, into named placeholders, so the catalogue carries
+        // readable values rather than Swift calls.
+        let name = event.kind.localisedName
+        let clock = entry.timeText(event.date)
+        let ahead = entry.aheadText(event.date)
         return String(
             localized: "widget.nextEvent.accessibility.value",
-            defaultValue: "\(event.kind.localisedName) at \(entry.timeText(event.date)), in \(entry.aheadText(event.date))",
+            defaultValue: "\(name) at \(clock), in \(ahead)",
             comment: "VoiceOver value for the small next event widget: event name, clock time, and how long until it"
         )
     }

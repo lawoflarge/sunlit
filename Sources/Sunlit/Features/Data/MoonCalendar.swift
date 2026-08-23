@@ -22,6 +22,12 @@ struct MoonSection: View {
     private var format: DataFormat { day.format }
     private var phase: MoonPosition.Phase { report.moonPhaseAtNoon }
 
+    /// Formatted once, so the visible figure and the spoken one cannot drift and
+    /// the catalogue carries a named placeholder rather than a Swift call.
+    private var distanceFigure: String {
+        format.number(day.noon.moonDistance, fraction: 0)
+    }
+
     var body: some View {
         DataSection(title: MoonStrings.title, caption: MoonStrings.caption, lock: lock) {
             rise
@@ -47,12 +53,12 @@ struct MoonSection: View {
 
             DataRow(
                 label: MoonStrings.distance,
-                value: format.number(day.noon.moonDistance, fraction: 0),
+                value: distanceFigure,
                 unit: MoonStrings.kilometres,
                 spoken: String(
                     localized: "data.moon.distanceSpoken",
-                    defaultValue: "\(format.number(day.noon.moonDistance, fraction: 0)) kilometres",
-                    comment: "Spoken form of the topocentric lunar distance"))
+                    defaultValue: "\(distanceFigure) kilometres",
+                    comment: "Spoken form of the lunar distance. Always kilometres: the units setting governs shadow length and elevation only, and the visible unit beside this figure is km in both systems"))
 
             HairlineDivider()
 
@@ -363,6 +369,17 @@ struct MilkyWaySection: View {
     private var visibility: MilkyWay.Visibility { day.milkyWay }
     private var format: DataFormat { day.format }
 
+    /// The duration is formatted before the sentence is built, so the catalogue
+    /// carries a named placeholder rather than an arithmetic expression no
+    /// translator can read or reorder.
+    private func windowLength(_ window: (start: JulianDay, end: JulianDay)) -> String {
+        let duration = format.span((window.end.value - window.start.value) * 86400)
+        return String(
+            localized: "data.milkyWay.lasts",
+            defaultValue: "Lasts \(duration)",
+            comment: "How long the Milky Way window runs for")
+    }
+
     var body: some View {
         DataSection(title: MilkyWayStrings.title, caption: MilkyWayStrings.caption, lock: lock) {
             if let window = visibility.window {
@@ -370,10 +387,7 @@ struct MilkyWaySection: View {
                     label: MilkyWayStrings.window,
                     value: format.range(window.start, window.end),
                     accent: SkyColors.milkyWay,
-                    caption: String(
-                        localized: "data.milkyWay.lasts",
-                        defaultValue: "Lasts \(format.span((window.end.value - window.start.value) * 86400))",
-                        comment: "How long the Milky Way window runs for"))
+                    caption: windowLength(window))
 
                 DataRow(
                     label: MilkyWayStrings.quality,
@@ -418,17 +432,17 @@ struct MilkyWaySection: View {
         case .galacticCentreBelowHorizon:
             return String(
                 localized: "data.milkyWay.limit.belowHorizon",
-                defaultValue: "The galactic centre never rises ten degrees above the horizon from this place tonight. It climbs highest from around twenty nine degrees south, where it passes overhead, and sits lower from anywhere further north or further south of that.",
+                defaultValue: "The galactic centre never rises ten degrees above the horizon from this place on this night. It climbs highest from around twenty nine degrees south, where it passes overhead, and sits lower from anywhere further north or further south of that.",
                 comment: "Why there is no Milky Way window")
         case .twilight:
             return String(
                 localized: "data.milkyWay.limit.twilight",
-                defaultValue: "The sun never sinks eighteen degrees below the horizon tonight, so the sky never becomes astronomically dark. This is the high latitude summer, whichever hemisphere you are in.",
+                defaultValue: "The sun never sinks eighteen degrees below the horizon on this night, so the sky never becomes astronomically dark. This is the high latitude summer, whichever hemisphere you are in.",
                 comment: "Why there is no Milky Way window")
         case .moonlight:
             return String(
                 localized: "data.milkyWay.limit.moonlight",
-                defaultValue: "A bright moon is above the horizon through every dark hour tonight. Wait for a thinner moon.",
+                defaultValue: "A bright moon is above the horizon through every dark hour of this night. Wait for a thinner moon.",
                 comment: "Why there is no Milky Way window")
         case .season:
             return String(
@@ -438,7 +452,7 @@ struct MilkyWaySection: View {
         case .none:
             return String(
                 localized: "data.milkyWay.limit.unknown",
-                defaultValue: "There is no window on the galactic centre tonight.",
+                defaultValue: "There is no window on the galactic centre on this night.",
                 comment: "There is no window and the core named no single cause")
         }
     }
@@ -454,7 +468,7 @@ private enum MoonStrings {
         String(
             localized: "data.moon.caption",
             defaultValue: "Phase, illumination and distance at local noon. Rise and set account for the moon's parallax, which makes it sit almost a degree lower than it would seen from the centre of the earth, so moonrise falls later than a flat calculation gives.",
-            comment: "What instant the moon figures refer to")
+            comment: "What instant the moon figures refer to. Local noon here is twelve on the clock at this place, not solar noon")
     }
     static var moonrise: String {
         String(localized: "data.moon.moonrise", defaultValue: "Moonrise", comment: "Moon crosses the horizon upward")
@@ -466,7 +480,7 @@ private enum MoonStrings {
         String(localized: "data.moon.phase", defaultValue: "Phase", comment: "Named lunar phase")
     }
     static var illumination: String {
-        String(localized: "data.moon.illumination", defaultValue: "Illuminated", comment: "Fraction of the disc that is lit")
+        String(localized: "data.moon.illumination", defaultValue: "Moon lit", comment: "Fraction of the disc that is lit. Moon lit is the app's one name for this quantity, used on the Sky card and in the AR view too")
     }
     static var distance: String {
         String(localized: "data.moon.distance", defaultValue: "Distance", comment: "Topocentric distance to the moon")
@@ -483,19 +497,19 @@ private enum MoonStrings {
     static var beyondSearch: String {
         String(
             localized: "data.moon.beyondSearch",
-            defaultValue: "Not within forty days",
-            comment: "The syzygy search window found nothing, which should not happen for the moon")
+            defaultValue: "None within forty days",
+            comment: "Value of the next new moon or next full moon row when the forty day search found nothing. A synodic month is about twenty nine and a half days, so this is a guard rather than a case a reader should ever see")
     }
     static var alwaysUp: String {
         String(
             localized: "data.moon.alwaysUp",
-            defaultValue: "The moon stays above the horizon for the whole date.",
+            defaultValue: "The moon stays above the horizon all day here.",
             comment: "Circumpolar moon")
     }
     static var alwaysDown: String {
         String(
             localized: "data.moon.alwaysDown",
-            defaultValue: "The moon stays below the horizon for the whole date.",
+            defaultValue: "The moon stays below the horizon all day here.",
             comment: "The moon never rises here today")
     }
     static var noRiseToday: String {
@@ -535,7 +549,7 @@ private enum MilkyWayStrings {
         String(localized: "data.milkyWay.bestAltitude", defaultValue: "Altitude then", comment: "Altitude of the galactic centre at the best moment")
     }
     static var highestTonight: String {
-        String(localized: "data.milkyWay.highestTonight", defaultValue: "Highest tonight", comment: "The best the galactic centre managed even though there was no window")
+        String(localized: "data.milkyWay.highestTonight", defaultValue: "Highest in the night", comment: "The best the galactic centre managed even though there was no window. The Data view can show any date, so the label names the night rather than saying tonight")
     }
     static var highestCaption: String {
         String(

@@ -106,16 +106,20 @@ struct GoldenHourRingView: View {
 
     private var spokenValue: String {
         guard let window = entry.goldenWindow else { return noWindowLabel }
+        // Formatted first, into named placeholders, so the catalogue carries a
+        // clock reading rather than a Swift call.
         if window.isUnderway(at: entry.date) {
+            let end = entry.timeText(window.end)
             return String(
                 localized: "widget.goldenRing.accessibility.underway",
-                defaultValue: "Golden hour now, until \(entry.timeText(window.end))",
+                defaultValue: "Golden hour now, until \(end)",
                 comment: "VoiceOver value for the golden hour ring while the golden hour is running"
             )
         }
+        let start = entry.timeText(window.start)
         return String(
             localized: "widget.goldenRing.accessibility.waiting",
-            defaultValue: "Golden hour begins at \(entry.timeText(window.start))",
+            defaultValue: "Golden hour begins at \(start)",
             comment: "VoiceOver value for the golden hour ring before the golden hour starts"
         )
     }
@@ -324,29 +328,39 @@ struct SkyDigestView: View {
     }
 
     private var spokenValue: String {
+        // Every figure is formatted before the sentence is built, so the
+        // catalogue carries named placeholders rather than Swift calls.
+        let phase = entry.moonPhaseText
+        let lit = entry.moonIlluminationText
         let moon = String(
             localized: "widget.digest.accessibility.moon",
-            defaultValue: "Moon \(entry.moonPhaseText), \(entry.moonIlluminationText) lit",
+            defaultValue: "Moon \(phase), \(lit) lit",
             comment: "VoiceOver value for the moon part of the rectangular widget"
         )
         let sun: String
         switch (entry.sunrise, entry.sunset) {
         case let (sunrise?, sunset?):
+            let riseTime = entry.timeText(sunrise)
+            let setTime = entry.timeText(sunset)
             sun = String(
                 localized: "widget.digest.accessibility.sun",
-                defaultValue: "Sunrise \(entry.timeText(sunrise)), sunset \(entry.timeText(sunset))",
+                defaultValue: "Sunrise \(riseTime), sunset \(setTime)",
                 comment: "VoiceOver value for the sunrise and sunset part of the rectangular widget"
             )
         case let (sunrise?, nil):
+            let riseTime = entry.timeText(sunrise)
+            let noSunset = entry.sunsetAbsenceText
             sun = String(
                 localized: "widget.digest.accessibility.sunriseOnly",
-                defaultValue: "Sunrise \(entry.timeText(sunrise)). \(entry.sunsetAbsenceText)",
+                defaultValue: "Sunrise \(riseTime). \(noSunset)",
                 comment: "VoiceOver value on a day with a sunrise and no sunset"
             )
         case let (nil, sunset?):
+            let noSunrise = entry.sunriseAbsenceText
+            let setTime = entry.timeText(sunset)
             sun = String(
                 localized: "widget.digest.accessibility.sunsetOnly",
-                defaultValue: "\(entry.sunriseAbsenceText). Sunset \(entry.timeText(sunset))",
+                defaultValue: "\(noSunrise). Sunset \(setTime)",
                 comment: "VoiceOver value on a day with no sunrise and a sunset"
             )
         case (nil, nil):

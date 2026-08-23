@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 // MARK: - Shared rules
@@ -260,10 +261,18 @@ public struct AccuracyChip: View {
     }
 
     private var spokenLabel: String {
+        // The number and its unit are formatted together by Foundation, which is
+        // what makes "1 degree" come out singular and "12 degrees" plural, here
+        // and in every other language. Written into the sentence as the bare
+        // word degrees it read "plus or minus 1 degrees".
+        let amount = Measurement(value: degrees, unit: UnitAngle.degrees)
+            .formatted(.measurement(
+                width: .wide,
+                numberFormatStyle: .number.precision(.fractionLength(0))))
         let uncertainty = String(
             localized: "accuracy.uncertainty",
-            defaultValue: "Heading accuracy, plus or minus \(figure) degrees",
-            comment: "Spoken form of the heading uncertainty chip in the AR view"
+            defaultValue: "Heading accuracy, plus or minus \(amount)",
+            comment: "Spoken form of the heading accuracy chip in the AR view. The placeholder is an angle with its unit already in it, such as 3 degrees"
         )
         guard isPoor else { return uncertainty }
         let calibrate = String(

@@ -69,19 +69,16 @@ struct ShadowProjection {
 
 enum ShadowFormat {
 
-    /// Lengths are formatted through `MeasurementFormatter`, so a reader in a
-    /// storefront that uses feet and miles gets feet and miles without this file
-    /// knowing anything about it.
-    private static let lengths: MeasurementFormatter = {
-        let formatter = MeasurementFormatter()
-        formatter.unitOptions = .naturalScale
-        formatter.unitStyle = .medium
-        formatter.numberFormatter.maximumFractionDigits = 1
-        return formatter
-    }()
-
+    /// Lengths go through the Settings helper, not through a formatter of this
+    /// file's own.
+    ///
+    /// They used to use MeasurementFormatter with naturalScale, which follows
+    /// the LOCALE. That meant the Metric and Imperial control in Settings, and
+    /// the note under it promising it governs shadow length, changed nothing at
+    /// all: a shipped switch wired to no behaviour, which is the same class of
+    /// defect as a paid promise with no caller.
     static func length(_ metres: Double) -> String {
-        lengths.string(from: Measurement(value: metres, unit: UnitLength.meters))
+        SunlitSettings.lengthString(metres: metres)
     }
 }
 
@@ -251,8 +248,8 @@ struct ShadowHeightControl: View {
 
     private var bearingLabel: String {
         String(
-            localized: "map.shadow.bearing", defaultValue: "Shadow bearing",
-            comment: "Label of the readout giving the direction the shadow points")
+            localized: "map.shadow.bearing", defaultValue: "Shadow azimuth",
+            comment: "Label of the readout giving the direction the shadow points. Azimuth is the app's one word for a horizontal direction in degrees")
     }
 
     private var groundCaption: String {
@@ -263,10 +260,14 @@ struct ShadowHeightControl: View {
     }
 
     private var clampedCaption: String {
-        String(
+        // The clamp is a fixed metric constant, so the figure is formatted the
+        // same way as the length readout above rather than written into the
+        // sentence as kilometres.
+        let limit = ShadowFormat.length(ShadowProjection.maximumDrawnMetres)
+        return String(
             localized: "map.shadow.clamped",
-            defaultValue: "The shadow runs further than the drawn line, which stops at 50 km. The length above is the whole of it.",
-            comment: "Caption shown when the shadow is longer than the line drawn for it")
+            defaultValue: "The shadow runs further than the drawn line, which stops at \(limit). The length above is the whole of it.",
+            comment: "Caption shown when the shadow is longer than the line drawn for it. The placeholder is a formatted distance, so it carries its own unit")
     }
 
     private var fitLabel: String {

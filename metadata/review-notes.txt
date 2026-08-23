@@ -7,7 +7,7 @@ NO ACCOUNT, NO NETWORK NEEDED TO TEST
 Every astronomical and solar number in this app is computed locally by SunlitCore.
 No API is called at runtime for any of them. Put the phone in aeroplane mode and
 every calculation, curve and table still works, including the offline city search
-over roughly 25,000 embedded entries. The only two things that use a network are
+over 34,106 embedded entries. The only two things that use a network are
 the Apple Maps tile layer in the Map view and MapKit place search, exactly as in
 any map application. The rays, the day path and the shadow drawn on top of the map
 are computed locally and appear with or without a connection.
@@ -19,7 +19,7 @@ order:
    the real solar altitude at the selected instant. Drag the time scrubber below
    the arc and the whole screen moves through the day.
 2. AR. Second tab. Live camera with the sun and moon paths, hour marks, and the
-   summer solstice, winter solstice and equinox reference curves. See the camera
+   June solstice, December solstice and equinox reference curves. See the camera
    note below.
 3. Map. Third tab. Sunrise and sunset direction rays from the pin, the moon rays,
    the day path over the terrain, and a shadow projection whose object height is
@@ -36,7 +36,7 @@ The AR view is the only feature that uses the camera, and it asks only when that
 tab is first opened. NSCameraUsageDescription is localised in all ten languages.
 If permission is refused, or granted and later revoked in Settings, the AR view
 does not fail and does not block: it drops the camera layer and draws the same sun
-path, moon path, hour marks and solstice and equinox reference curves over the
+path, moon path, hour marks and the solstice and equinox reference curves over the
 app's own sky gradient instead. Nothing else in the app needs the camera.
 
 Location permission is requested so the current place can be used. A place can

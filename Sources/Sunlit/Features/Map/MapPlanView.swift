@@ -383,7 +383,7 @@ struct MapPlanView: View {
         guard !state.isToday else { return SkyRay.Kind.sunNow.title }
         return String(
             localized: "map.ray.sunAtNoon", defaultValue: "Sun at local noon",
-            comment: "Label of the sun direction ray on a selected day that is not today")
+            comment: "Label of the sun direction ray on a selected day that is not today. Local noon is twelve on the clock at this place, deliberately not the same instant as Solar noon elsewhere in the app, which is the sun's culmination")
     }
 
     private var pinCoordinate: CLLocationCoordinate2D {
@@ -467,9 +467,12 @@ struct MapPlanView: View {
         proposedPin = nil
         suppressRecentre = !shouldRecentre
 
+        // Formatted first, so the catalogue carries a named placeholder rather
+        // than a Swift call a translator can neither read nor reorder.
+        let coordinateText = MapFormat.coordinate(coordinate)
         let name = String(
             localized: "map.pinName",
-            defaultValue: "Pin \(MapFormat.coordinate(coordinate))",
+            defaultValue: "Pin \(coordinateText)",
             comment: "Name given to a pin dropped on the map, followed by its coordinates")
         state.place = Place(
             name: name,
@@ -536,8 +539,8 @@ struct MapPlanView: View {
     private func adoptCurrentLocation() {
         let name = String(
             localized: "map.currentLocation",
-            defaultValue: "Current Location",
-            comment: "Name of the place that is the device's own position")
+            defaultValue: "Current location",
+            comment: "Name of the place that is the device's own position. Sentence case, the same as places.currentLocation")
         guard var place = location.currentPlace(named: name) else { return }
         place.isCurrentLocation = true
         awaitingLocationFix = false
@@ -601,8 +604,8 @@ struct MapPlanView: View {
     }
 
     private var computingLabel: String {
-        String(localized: "map.computing", defaultValue: "Working out the day",
-               comment: "Shown while the day's events are still being computed")
+        String(localized: "map.computing", defaultValue: "Computing the day",
+               comment: "Shown while the day's events are still being computed. The same wording as data.loading and sky.events.working, which are the same wait")
     }
 
     private var tapHint: String {
@@ -613,16 +616,23 @@ struct MapPlanView: View {
     }
 
     private var placeZoneNotice: String {
-        String(
+        // The localised zone name, not the raw IANA identifier. The Data view
+        // already names zones this way, and "Europe/Berlin" beside it reads as
+        // debug output in every language.
+        let zoneName = placeTimeZone.localizedName(for: .generic, locale: .current)
+            ?? state.place.timeZoneIdentifier
+        return String(
             localized: "map.zone.place",
-            defaultValue: "Times shown in \(state.place.timeZoneIdentifier).",
+            defaultValue: "Times shown in \(zoneName).",
             comment: "States which time zone the times on this screen are expressed in")
     }
 
     private var deviceZoneNotice: String {
-        String(
+        let zoneName = TimeZone.current.localizedName(for: .generic, locale: .current)
+            ?? TimeZone.current.identifier
+        return String(
             localized: "map.zone.device",
-            defaultValue: "Times shown in your device time zone, \(TimeZone.current.identifier). This pin's own time zone needs a network lookup, so it has not been confirmed.",
+            defaultValue: "Times shown in your device time zone, \(zoneName). This pin's own time zone needs a network lookup, so it has not been confirmed.",
             comment: "Warns that the times are in the device zone because the pin's zone is unknown")
     }
 
@@ -636,14 +646,14 @@ struct MapPlanView: View {
     private var locationRefusedNote: String {
         String(
             localized: "map.locationRefused",
-            defaultValue: "Sunlit has no access to your position, so it cannot put the pin there. You can grant it in Settings, or tap the map to choose a place by hand.",
-            comment: "Shown when location permission has been denied and the current location button cannot work")
+            defaultValue: "Sunlit has no access to your position, so it cannot put the pin there. You can grant it in Settings. Choosing a place by hand instead is part of Sunlit Pro.",
+            comment: "Shown when location permission has been denied and the current location button cannot work. Moving the pin by hand needs the purchase, so the recovery path has to say so")
     }
 
     private var networkNotice: String {
         String(
             localized: "map.networkNotice",
-            defaultValue: "Apple serves the map tiles over the network. Every bearing, time and length here is worked out on your device and needs no connection. The one thing looked up over the network is a dropped pin's own time zone, and the note at the top of this panel says when that lookup has not answered.",
+            defaultValue: "Apple serves the map tiles over the network. Every azimuth, time and length here is worked out on your device and needs no connection. The one thing looked up over the network is a dropped pin's own time zone, and the note at the top of this panel says when that lookup has not answered.",
             comment: "States that the map tiles come from the network while the figures do not")
     }
 
@@ -664,8 +674,8 @@ struct MapPlanView: View {
     private var noMoonEventNote: String {
         String(
             localized: "map.noMoonEvent",
-            defaultValue: "The moon neither rises nor sets on this day here. It rises about fifty minutes later each day, so about once a month a calendar day has no moonrise in it at all.",
-            comment: "Shown when the day contains no moonrise and no moonset")
+            defaultValue: "The moon neither rises nor sets on this day here, so it is either above the horizon for the whole day or below it for the whole day. Both events run about fifty minutes later each day, so a calendar day can fall between one pair of them and the next.",
+            comment: "Shown when the day contains no moonrise and no moonset. The explanation has to account for both missing events, not only the missing rise")
     }
 
     private var moonLockMessage: String {
@@ -791,7 +801,7 @@ struct LockCard: View {
     }
 
     private var unlockLabel: String {
-        String(localized: "map.unlockPro", defaultValue: "What Sunlit Pro adds",
-               comment: "Button that opens the explanation of the one purchase")
+        String(localized: "map.unlockPro", defaultValue: "See what Sunlit Pro adds",
+               comment: "Button that opens the purchase screen. The app uses this one wording everywhere the purchase screen is opened")
     }
 }

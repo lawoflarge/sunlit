@@ -63,18 +63,33 @@ enum SunlitSettings {
         }
     }
 
-    /// A length, in the chosen system. Used for shadows.
+    /// A length, in the chosen system, at a scale a person would use.
+    ///
+    /// Scaling matters as much as the system does. A fifty kilometre shadow cap
+    /// rendered with `.asProvided` in imperial reads "164042 ft", which is a
+    /// true number nobody can hold. Metres become kilometres past a thousand,
+    /// feet become miles past one mile, and nothing else changes.
     static func lengthString(metres: Double, fractionDigits: Int = 1) -> String {
         let measurement = Measurement(value: metres, unit: UnitLength.meters)
-        let converted = units == .metric ? measurement : measurement.converted(to: .feet)
-        return converted.formatted(
+        let scaled: Measurement<UnitLength>
+        switch units {
+        case .metric:
+            scaled = metres >= 1000
+                ? measurement.converted(to: .kilometers)
+                : measurement
+        case .imperial:
+            let feet = measurement.converted(to: .feet)
+            scaled = feet.value >= 5280
+                ? measurement.converted(to: .miles)
+                : feet
+        }
+        return scaled.formatted(
             .measurement(
                 width: .abbreviated,
                 usage: .asProvided,
                 numberFormatStyle: .number.precision(.fractionLength(fractionDigits))))
     }
 
-    /// An elevation above sea level, in the chosen system.
     static func elevationString(metres: Double) -> String {
         lengthString(metres: metres, fractionDigits: 0)
     }
@@ -288,6 +303,11 @@ struct SettingsView: View {
 
     @State private var authorisation: UNAuthorizationStatus = .notDetermined
     @State private var scheduledCount: Int?
+
+    /// Named here so the catalogue carries "\(horizonDays)" rather than the
+    /// fully qualified Swift symbol, which a translator can neither read nor
+    /// check.
+    private var horizonDays: Int { SunlitEventNotifications.horizonDays }
     @State private var restoreMessage: String?
     @State private var showingHorizon = false
     @State private var showingAcknowledgements = false
@@ -415,12 +435,20 @@ struct SettingsView: View {
             .frame(minHeight: SunlitLayout.minimumTouchTarget)
             .accessibilityLabel(Text(timeLabel))
 
-            Text(String(localized: "settings.time.example",
-                        defaultValue: "Now at \(state.place.name): \(SunlitSettings.timeString(Date(), timeZone: TimeZone(identifier: state.place.timeZoneIdentifier) ?? .current))",
-                        comment: "Shows the chosen clock format using the selected place"))
+            Text(exampleTime)
                 .font(SunlitType.caption)
                 .fixedSize(horizontal: false, vertical: true)
         }
+    }
+
+    /// The clock example, with the time formatted before the sentence is built
+    /// so the catalogue carries a named placeholder rather than a Swift call.
+    private var exampleTime: String {
+        let zone = TimeZone(identifier: state.place.timeZoneIdentifier) ?? .current
+        let clock = SunlitSettings.timeString(Date(), timeZone: zone)
+        return String(localized: "settings.time.example",
+                      defaultValue: "Now at \(state.place.name): \(clock)",
+                      comment: "Shows the chosen clock format using the selected place")
     }
 
     private var timeLabel: String {
@@ -438,8 +466,8 @@ struct SettingsView: View {
 
         VStack(alignment: .leading, spacing: 10) {
             Text(String(localized: "settings.horizon",
-                        defaultValue: "Horizon",
-                        comment: "Heading of the measured skyline section"))
+                        defaultValue: "Skyline",
+                        comment: "Heading of the swept skyline section. Skyline is the app's one name for the measured horizon profile; horizon is reserved for the ideal flat horizon it is compared against"))
                 .sunlitLabel()
 
             Text(horizonStatus(profile))
@@ -490,7 +518,7 @@ struct SettingsView: View {
             if !allowed {
                 ProLockNote(reason: String(
                     localized: "settings.horizon.gate",
-                    defaultValue: "A measured skyline moves your sunrise and sunset to the times you actually see, and lists the periods the sun is up but behind something. Reading the table is free. Changing it is part of Sunlit Pro.",
+                    defaultValue: "A skyline you have swept moves your sunrise and sunset to the times you actually see, and lists the periods the sun is up but behind something. Reading the table is free. Changing it is part of Sunlit Pro.",
                     comment: "Explains that editing the horizon profile is a paid capability"))
             }
         }
@@ -500,13 +528,13 @@ struct SettingsView: View {
         guard let profile, profile.isMeasured else {
             return String(
                 localized: "settings.horizon.none",
-                defaultValue: "No skyline has been measured at \(state.place.name), so Sunlit assumes a flat horizon.",
-                comment: "Shown when the current place has no measured horizon profile")
+                defaultValue: "No skyline has been swept at \(state.place.name), so Sunlit assumes a flat horizon.",
+                comment: "Shown when the current place has no swept skyline")
         }
         return String(
             localized: "settings.horizon.measured",
-            defaultValue: "\(profile.measuredSectorCount) of 36 directions measured at \(state.place.name).",
-            comment: "Shown when the current place has a measured horizon profile")
+            defaultValue: "\(profile.measuredSectorCount) of 36 sectors swept at \(state.place.name).",
+            comment: "Shown when the current place has a swept skyline. A sector is one of the thirty six ten degree slices of the horizon")
     }
 
     private var horizonOpenTitle: String {
@@ -562,15 +590,15 @@ struct SettingsView: View {
                 permissionNote
                 Text(String(
                     localized: "settings.notifications.horizon",
-                    defaultValue: "Scheduled for the next \(SunlitEventNotifications.horizonDays) days at \(state.place.name), from the same figures the app shows. Open Sunlit now and then to extend them.",
+                    defaultValue: "Scheduled for the next \(horizonDays) days at \(state.place.name), from the same figures the app shows. Open Sunlit now and then to extend them.",
                     comment: "States how far ahead notifications are scheduled and why"))
                     .font(SunlitType.caption)
                     .fixedSize(horizontal: false, vertical: true)
                 if let scheduledCount {
                     Text(String(
                         localized: "settings.notifications.count",
-                        defaultValue: "\(scheduledCount) waiting",
-                        comment: "How many notifications are currently scheduled"))
+                        defaultValue: "Waiting: \(scheduledCount)",
+                        comment: "How many notifications are currently scheduled. A label and a count, not a number followed by a noun, so no language has to agree the noun with the number"))
                         .font(SunlitType.caption)
                 }
             } else {
@@ -724,7 +752,7 @@ struct SettingsView: View {
     private var purchaseFreeText: String {
         String(
             localized: "settings.purchase.free",
-            defaultValue: "Today at your current location is free forever, in all four views. One purchase adds every other date and place, the moon, the Milky Way, annual paths, a measured skyline, eclipses, widgets, notifications and export.",
+            defaultValue: "Today at your current location is free forever, in all four views. One purchase adds every other date and place, the moon, the Milky Way, annual paths, a swept skyline, eclipses, widgets, notifications and export.",
             comment: "States what the free tier covers and what the purchase adds")
     }
 
@@ -741,7 +769,7 @@ struct SettingsView: View {
     /// then write straight to `ProGate`. Three things were wrong with that, and
     /// all three are the reason the store track owns a service at all. It never
     /// wrote the entitlement into the shared app group, so a restore unlocked
-    /// the app and left every widget locked. It reported a cancelled Apple ID
+    /// the app and left every widget locked. It reported a cancelled Apple Account
     /// sign in, which `try?` swallowed, as "no purchase was found", which is a
     /// different sentence about a different situation. And it wrote `false` on
     /// any empty read, so a restore that went wrong could take the app away from
@@ -932,6 +960,19 @@ struct HorizonProfileEditor: View {
                 sectors[index] = newValue
                 apply()
             })
+        // Formatted once, into named placeholders, so the catalogue carries
+        // "\(azimuthFigure) degrees" rather than a Swift expression a
+        // translator can neither read nor reorder.
+        let azimuthFigure = azimuth.formatted(.number.precision(.fractionLength(0)))
+        let heightFigure = binding.wrappedValue.formatted(.number.precision(.fractionLength(1)))
+        let spokenSectorLabel = String(
+            localized: "horizon.sector",
+            defaultValue: "Skyline height at azimuth \(azimuthFigure) degrees",
+            comment: "Spoken label of one skyline sector row")
+        let spokenSectorValue = String(
+            localized: "horizon.degrees",
+            defaultValue: "\(heightFigure) degrees",
+            comment: "Spoken value of one skyline sector row")
 
         return Stepper(value: binding, in: -20...80, step: 0.5) {
             HStack(spacing: 12) {
@@ -945,14 +986,8 @@ struct HorizonProfileEditor: View {
             }
         }
         .frame(minHeight: SunlitLayout.minimumTouchTarget)
-        .accessibilityLabel(Text(String(
-            localized: "horizon.sector",
-            defaultValue: "Skyline height at bearing \(azimuth.formatted(.number.precision(.fractionLength(0)))) degrees",
-            comment: "Spoken label of one horizon sector row")))
-        .accessibilityValue(Text(String(
-            localized: "horizon.degrees",
-            defaultValue: "\(binding.wrappedValue.formatted(.number.precision(.fractionLength(1)))) degrees",
-            comment: "Spoken value of one horizon sector row")))
+        .accessibilityLabel(Text(spokenSectorLabel))
+        .accessibilityValue(Text(spokenSectorValue))
     }
 
     /// Commits the table, or clears it when there is nothing in it.
@@ -961,7 +996,7 @@ struct HorizonProfileEditor: View {
     /// handed over whole is data however it was produced. That is right for a
     /// filled table and wrong for an empty one: without the guard below, one tap
     /// on a stepper and back again leaves thirty six zeros stored as a
-    /// measurement, Settings reports "36 of 36 directions measured", and the
+    /// measurement, Settings reports "36 of 36 sectors swept", and the
     /// Data view offers a difference between the flat sunrise and the measured
     /// sunrise that is zero minutes because no sweep ever happened. An all zero
     /// table is the flat assumption, which is exactly what no profile means.

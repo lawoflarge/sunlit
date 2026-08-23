@@ -73,7 +73,7 @@ struct SunlitDismissButton: View {
         String(
             localized: "sheet.done",
             defaultValue: "Done",
-            comment: "Button that closes a sheet"
+            comment: "Closes the place and date sheets. Deliberately the same word as data.done, which closes the export sheet; translate both identically"
         )
     }
 
@@ -110,7 +110,7 @@ struct ProUnlockButton: View {
         String(
             localized: "pro.unlock",
             defaultValue: "See what Sunlit Pro adds",
-            comment: "Button that opens the purchase screen"
+            comment: "Button that opens the purchase screen. The app uses this one wording everywhere the purchase screen is opened"
         )
     }
 
@@ -700,8 +700,8 @@ struct PlacePickerView: View {
     private var savedPlacesReason: String {
         String(
             localized: "places.gate.saved",
-            defaultValue: "Today at your current location is the free app, in all four views. You can open any other place here and see what Sunlit would show you there, and keeping one so it is waiting next time is part of Sunlit Pro.",
-            comment: "Explains that the free tier is today at the current location, and that other places can still be opened"
+            defaultValue: "Today at your current location is free forever, in all four views. You can open any other place from here, but its figures stay locked, and so does keeping a place so it is waiting next time. Both are part of Sunlit Pro.",
+            comment: "Explains that the free tier is today at the current location: another place can be opened, but every view shows it locked until the purchase"
         )
     }
 

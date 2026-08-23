@@ -433,24 +433,24 @@ struct ARView: View {
 
             ARLayerToggle(
                 title: String(
-                    localized: "ar.layer.sun", defaultValue: "Sun path today",
-                    comment: "Name of the sun path layer"),
+                    localized: "ar.layer.sun", defaultValue: "Sun path",
+                    comment: "Name of the sun path layer. This screen draws the selected date, which is not always today, so the name carries no date"),
                 tint: SkyColors.sun,
                 isOn: showSun, isLocked: false,
                 toggle: { showSun.toggle() }, unlock: {})
 
             ARLayerToggle(
                 title: String(
-                    localized: "ar.layer.moon", defaultValue: "Moon path today",
-                    comment: "Name of the moon path layer"),
+                    localized: "ar.layer.moon", defaultValue: "Moon path",
+                    comment: "Name of the moon path layer. This screen draws the selected date, which is not always today, so the name carries no date"),
                 tint: SkyColors.moon,
                 isOn: showMoon, isLocked: !state.pro.allows(.moon),
                 toggle: { showMoon.toggle() }, unlock: { showingPaywall = true })
 
             ARLayerToggle(
                 title: String(
-                    localized: "ar.layer.annual", defaultValue: "Solstices and equinox",
-                    comment: "Name of the reference paths layer"),
+                    localized: "ar.layer.annual", defaultValue: "Solstices and equinoxes",
+                    comment: "Name of the reference paths layer. Hemisphere neutral, like the June and December solstice names in the Data view"),
                 tint: SkyPalette.instrumentLine(solarAltitude: scene.solarAltitude),
                 isOn: showAnnualPaths, isLocked: !state.pro.allows(.annualPaths),
                 toggle: { showAnnualPaths.toggle() }, unlock: { showingPaywall = true })
@@ -465,8 +465,8 @@ struct ARView: View {
 
             ARLayerToggle(
                 title: String(
-                    localized: "ar.layer.horizon", defaultValue: "Horizon",
-                    comment: "Name of the horizon line layer"),
+                    localized: "ar.layer.horizon", defaultValue: "Skyline",
+                    comment: "Name of the layer that draws the swept skyline. Skyline is the app's one name for the measured horizon profile"),
                 tint: SkyPalette.instrumentLine(solarAltitude: scene.solarAltitude),
                 isOn: showHorizon, isLocked: false,
                 toggle: { showHorizon.toggle() }, unlock: {})
@@ -501,8 +501,8 @@ struct ARView: View {
             if scene.hasMeasuredHorizon {
                 Text(String(
                     localized: "ar.skyline.measured",
-                    defaultValue: "The dashed line is the skyline measured at this place.",
-                    comment: "Explains the dashed curve drawn from a measured horizon profile"))
+                    defaultValue: "The dashed line is the skyline swept at this place.",
+                    comment: "Explains the dashed curve drawn from a swept skyline"))
                     .font(SunlitType.caption)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -518,7 +518,7 @@ struct ARView: View {
         }
         return String(
             localized: "ar.accuracy.note",
-            defaultValue: "The figure at the top of the frame is the compass uncertainty the device reports. The positions themselves are computed, not measured, and are accurate to far better than the compass can be aimed.",
+            defaultValue: "The figure at the top of the frame is the heading accuracy the device reports. The positions themselves are computed, not measured, and are accurate to far better than the compass can be aimed.",
             comment: "Explains what the heading uncertainty chip means")
     }
 
@@ -641,8 +641,8 @@ struct ARView: View {
         let altitude = degrees(aim.altitude)
         return String(
             localized: "ar.aim.value",
-            defaultValue: "\(azimuth)\u{00B0} az, \(altitude)\u{00B0} alt",
-            comment: "The bearing and altitude the centre of the camera frame points at")
+            defaultValue: "\(azimuth)° az, \(altitude)° alt",
+            comment: "The azimuth and altitude the frame centre points at. The degree sign is the character itself; az and alt are the usual abbreviations")
     }
 
     private var lockedSpoken: String {

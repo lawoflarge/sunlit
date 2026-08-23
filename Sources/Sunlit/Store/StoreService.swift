@@ -73,7 +73,7 @@ final class StoreService {
             case .nothingToRestore:
                 return String(
                     localized: "store.result.nothingToRestore",
-                    defaultValue: "No purchase was found on this Apple ID.",
+                    defaultValue: "No purchase was found on this Apple Account.",
                     comment: "Shown after a restore that found nothing")
             case .cancelled:
                 return String(
@@ -277,7 +277,8 @@ final class StoreService {
 
     // MARK: Restore
 
-    /// Restores through `AppStore.sync()`, which asks for the Apple ID password.
+    /// Restores through `AppStore.sync()`, which may ask the reader to sign in to
+    /// their Apple Account.
     /// That is why it is a button the user presses and never something the app
     /// does by itself: entitlements already arrive through
     /// `currentEntitlements` at launch without any prompt.
@@ -300,7 +301,7 @@ final class StoreService {
 
     // MARK: Entitlement
 
-    /// Reads what this Apple ID currently owns.
+    /// Reads what this Apple Account currently owns.
     ///
     /// This works with no network: StoreKit keeps the signed transactions on the
     /// device, which is what makes an offline app with a purchase possible at

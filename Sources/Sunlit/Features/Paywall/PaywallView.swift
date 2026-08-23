@@ -283,7 +283,7 @@ struct PaywallView: View {
 
             Text(String(
                 localized: "paywall.price.terms",
-                defaultValue: "One time purchase. Nothing renews, and there is nothing to cancel. It stays unlocked on every device signed in to the same Apple ID.",
+                defaultValue: "One time purchase. Nothing renews, and there is nothing to cancel. It stays unlocked on every device signed in to the same Apple Account.",
                 comment: "Caption under the purchase button"))
                 .font(SunlitType.caption)
         }
@@ -298,7 +298,7 @@ struct PaywallView: View {
                     comment: "Heading shown when the purchase is already owned"),
                 note: String(
                     localized: "paywall.owned.note",
-                    defaultValue: "Sunlit Pro is active on this Apple ID. Thank you.",
+                    defaultValue: "Sunlit Pro is active on this Apple Account. Thank you.",
                     comment: "Caption shown when the purchase is already owned"))
 
             PaywallSecondaryButton(
@@ -319,7 +319,7 @@ struct PaywallView: View {
                 title: String(
                     localized: "paywall.action.restore",
                     defaultValue: "Restore purchase",
-                    comment: "Restores a purchase made previously on this Apple ID"),
+                    comment: "Restores a purchase made previously on this Apple Account"),
                 isBusy: store?.isRestoring ?? false
             ) {
                 Task { await store?.restore() }
@@ -327,7 +327,7 @@ struct PaywallView: View {
 
             Text(String(
                 localized: "paywall.restore.note",
-                defaultValue: "If you bought Sunlit Pro before, restore it here. Restoring asks for your Apple ID password.",
+                defaultValue: "If you bought Sunlit Pro before, restore it here. Restoring may ask you to sign in to your Apple Account.",
                 comment: "Caption under the restore button"))
                 .font(SunlitType.caption)
         }
@@ -580,8 +580,8 @@ private extension ProCapability {
         case .terrain:
             return String(
                 localized: "paywall.capability.terrain.title",
-                defaultValue: "Your measured horizon",
-                comment: "Paid capability")
+                defaultValue: "Skyline",
+                comment: "Paid capability. Skyline is the app's one name for the horizon profile swept with the camera")
         case .eclipses:
             return String(
                 localized: "paywall.capability.eclipses.title",
@@ -615,7 +615,7 @@ private extension ProCapability {
         case .savedPlaces:
             return String(
                 localized: "paywall.capability.savedPlaces.detail",
-                defaultValue: "Search over 30,000 cities offline, drop a pin anywhere, and keep the places you work at.",
+                defaultValue: "Search more than thirty thousand cities offline, drop a pin anywhere, and keep the places you work at.",
                 comment: "Paid capability detail")
         case .moon:
             return String(
@@ -630,7 +630,7 @@ private extension ProCapability {
         case .annualPaths:
             return String(
                 localized: "paywall.capability.annualPaths.detail",
-                defaultValue: "Summer solstice, winter solstice and equinox paths drawn as reference, plus the year's altitude curve.",
+                defaultValue: "June solstice, December solstice and equinox paths drawn as reference, plus the year's altitude curve.",
                 comment: "Paid capability detail")
         case .terrain:
             return String(
@@ -645,7 +645,7 @@ private extension ProCapability {
         case .widgets:
             return String(
                 localized: "paywall.capability.widgets.detail",
-                defaultValue: "Home screen and lock screen: the next event, the day's arc, and the golden hour countdown.",
+                defaultValue: "Home screen and lock screen: the next event, the day's arc, the golden hour countdown, and sunrise, sunset and moon phase together.",
                 comment: "Paid capability detail")
         case .notifications:
             return String(

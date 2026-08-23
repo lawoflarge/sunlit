@@ -3,6 +3,5 @@
   "keywords": "日の入り,方位角,コンパス,影,薄明,マジックアワー,ブルーアワー,月齢,満月,天の川,日食,月食,撮影,星空,日当たり,冬至,夏至,登山,紫外線,天体観測,南中,日没,月の出,星景,ロケハン,日射量",
   "marketingUrl": "https://sunlit-app.vercel.app",
   "promotionalText": "iPhoneを空にかざすだけで、どの日のどの時刻に太陽と月がどこにあるかが分かります。今日、いまいる場所については、4つのビューすべてがずっと無料です。",
-  "supportUrl": "https://sunlit-app.vercel.app/support",
-  "whatsNew": "最初のリリースです。\n\nSunlitは太陽、月、天の川の中心をiPhoneの中だけで計算します。任意の日付と任意の場所に対応し、アカウントも通信も必要ありません。\n\nビューは4つ、空、AR、マップ、データ。今日、いまいる場所については4つとも無料で、これからも無料のままです。"
+  "supportUrl": "https://sunlit-app.vercel.app/support"
 }

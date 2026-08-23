@@ -187,7 +187,7 @@ struct DataView: View {
 
     // MARK: Gates
 
-    /// Today at the current location is free, in full. Anything else is the
+    /// Today at the current location is free forever. Anything else is the
     /// purchase, and the whole screen says so rather than emptying out.
     private var selectionLock: DataLock? {
         if state.selectionIsFree { return nil }
@@ -341,7 +341,7 @@ struct DataFormat: Sendable {
         return String(
             localized: "data.format.degrees",
             defaultValue: "\(figure) degrees",
-            comment: "Spoken form of an angle in degrees")
+            comment: "Spoken form of an angle in degrees. The figure always carries one decimal place, so the plural is correct for every value it can take")
     }
 
     func percent(_ fraction: Double, digits: Int = 0) -> String {
@@ -368,12 +368,12 @@ enum DataLock: Equatable {
         case .selectionDate:
             return String(
                 localized: "data.lock.date",
-                defaultValue: "Today at your current location is free, in full. Another date is part of Sunlit Pro.",
+                defaultValue: "Today at your current location is free forever. Another date is part of Sunlit Pro.",
                 comment: "Shown under a greyed section when a past or future date is selected")
         case .selectionPlace:
             return String(
                 localized: "data.lock.place",
-                defaultValue: "Today at your current location is free, in full. Another place is part of Sunlit Pro.",
+                defaultValue: "Today at your current location is free forever. Another place is part of Sunlit Pro.",
                 comment: "Shown under a greyed section when a place other than the device location is selected")
         case .capability(let capability):
             switch capability {
@@ -395,7 +395,7 @@ enum DataLock: Equatable {
             case .terrain:
                 return String(
                     localized: "data.lock.terrain",
-                    defaultValue: "The measured skyline and the periods it blocks the sun are part of Sunlit Pro.",
+                    defaultValue: "The skyline you sweep and the periods it blocks the sun are part of Sunlit Pro.",
                     comment: "Why the obstruction section is greyed")
             case .annualPaths:
                 return String(
@@ -728,8 +728,8 @@ enum DataStrings {
     static var unlockButton: String {
         String(
             localized: "data.unlock.button",
-            defaultValue: "See Sunlit Pro",
-            comment: "Button under a greyed section that opens the purchase")
+            defaultValue: "See what Sunlit Pro adds",
+            comment: "Button under a greyed section that opens the purchase screen. The app uses this one wording everywhere the purchase screen is opened")
     }
 
     static var computing: String {
@@ -761,7 +761,7 @@ enum DataStrings {
     }
 
     static var done: String {
-        String(localized: "data.done", defaultValue: "Done", comment: "Dismisses a sheet")
+        String(localized: "data.done", defaultValue: "Done", comment: "Closes the export sheet. Deliberately the same word as sheet.done, which closes the place and date sheets; translate both identically")
     }
 
     /// Stands in for a figure that has not been computed because the section is

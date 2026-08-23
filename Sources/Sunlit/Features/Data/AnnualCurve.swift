@@ -453,8 +453,8 @@ private enum AnnualStrings {
     static var caption: String {
         String(
             localized: "data.annual.caption",
-            defaultValue: "The highest the sun reaches on each date of the year at this place. The four uprights are the equinoxes and the solstices; the heavier one is the date you have selected.",
-            comment: "What the annual curve shows")
+            defaultValue: "The highest the sun reaches on each date of the year at this place. The four light uprights are the equinoxes and the solstices. The heavier one is the date you have selected, which is a fifth upright on all but those four dates.",
+            comment: "What the annual curve shows. The selected date is always drawn as its own heavier upright, so there are five unless it falls on a marked date")
     }
     static var thisDate: String {
         String(localized: "data.annual.thisDate", defaultValue: "This date", comment: "Maximum solar altitude on the selected date")

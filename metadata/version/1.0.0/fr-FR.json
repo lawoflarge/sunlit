@@ -3,6 +3,5 @@
   "keywords": "lever,coucher,boussole,azimut,ombre,crépuscule,éclipse,voie,lactée,éphémérides,photo,solstice,phase",
   "marketingUrl": "https://sunlit-app.vercel.app",
   "promotionalText": "Levez l'iPhone vers le ciel et voyez où seront le soleil et la lune à n'importe quelle heure. Aujourd'hui, là où vous êtes, c'est gratuit dans les quatre vues.",
-  "supportUrl": "https://sunlit-app.vercel.app/support",
-  "whatsNew": "Première version.\n\nSunlit calcule le soleil, la lune et le centre de la Voie lactée sur votre iPhone, pour n'importe quelle date et n'importe quel lieu, sans compte et sans connexion.\n\nQuatre vues: Ciel, AR, Carte et Données. Aujourd'hui, là où vous êtes, est gratuit dans les quatre et le reste."
+  "supportUrl": "https://sunlit-app.vercel.app/support"
 }

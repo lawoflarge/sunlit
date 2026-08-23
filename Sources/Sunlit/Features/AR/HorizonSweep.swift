@@ -117,7 +117,7 @@ struct HorizonSweepSection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
                 Text(String(
-                    localized: "ar.sweep.title", defaultValue: "Horizon sweep",
+                    localized: "ar.sweep.title", defaultValue: "Skyline sweep",
                     comment: "Heading of the section that traces the skyline with the camera"))
                     .font(SunlitType.title)
                 if !isUnlocked {
@@ -141,7 +141,7 @@ struct HorizonSweepSection: View {
                 } label: {
                     Text(String(
                         localized: "ar.sweep.save", defaultValue: "Save to place",
-                        comment: "Button that stores the traced skyline on the selected place"))
+                        comment: "Button that stores the swept skyline on the selected place"))
                         .font(SunlitType.body)
                         .frame(maxWidth: .infinity)
                         .sunlitTouchTarget()
@@ -150,8 +150,8 @@ struct HorizonSweepSection: View {
                 .disabled(!isUnlocked || !sweep.hasAnyReading)
                 .accessibilityLabel(Text(String(
                     localized: "ar.sweep.save.axLabel",
-                    defaultValue: "Save the traced skyline to this place",
-                    comment: "Accessibility label of the save button in the horizon sweep")))
+                    defaultValue: "Save the swept skyline to this place",
+                    comment: "Accessibility label of the save button in the skyline sweep")))
 
                 Button {
                     sweep.reset()
@@ -168,7 +168,7 @@ struct HorizonSweepSection: View {
                 .accessibilityLabel(Text(String(
                     localized: "ar.sweep.clear.axLabel",
                     defaultValue: "Discard the readings taken so far",
-                    comment: "Accessibility label of the start over button in the horizon sweep")))
+                    comment: "Accessibility label of the start over button in the skyline sweep")))
             }
 
             Text(String(
@@ -182,8 +182,8 @@ struct HorizonSweepSection: View {
                 ARUnlockRow(
                     message: String(
                         localized: "ar.sweep.locked",
-                        defaultValue: "A measured skyline is part of Sunlit Pro. It gives you the sunrise and sunset your own horizon actually produces, and the periods when the sun is up but behind it.",
-                        comment: "Explanation shown when the horizon sweep is locked"),
+                        defaultValue: "Sweeping your skyline is part of Sunlit Pro. It gives you the sunrise and sunset your own surroundings actually produce, and the periods when the sun is up but behind them.",
+                        comment: "Explanation shown when the skyline sweep is locked"),
                     action: onUnlockRequested)
             }
         }
@@ -199,22 +199,22 @@ struct HorizonSweepSection: View {
     private var explanation: String {
         String(
             localized: "ar.sweep.explanation",
-            defaultValue: "Aim the centre of the frame at the top of whatever blocks your view, then hold Record and turn on the spot. The sky is divided into thirty six sectors of ten degrees and each one fills as you reach it.",
-            comment: "Instructions for tracing the skyline with the camera")
+            defaultValue: "Aim the centre of the frame at the top of whatever blocks your view, then hold Sweep and turn on the spot. The sky is divided into thirty six sectors of ten degrees and each one fills as you reach it.",
+            comment: "Instructions for sweeping the skyline with the camera. Sweep names the button below")
     }
 
     private var progressRow: some View {
         MetricGroup {
             MetricReadout(
                 label: String(
-                    localized: "ar.sweep.sectors", defaultValue: "Sectors traced",
-                    comment: "Label of the count of horizon sectors that carry a reading"),
+                    localized: "ar.sweep.sectors", defaultValue: "Sectors swept",
+                    comment: "Label of the count of skyline sectors that carry a reading"),
                 value: sectorsValue,
                 valueFont: SunlitType.metric)
             MetricReadout(
                 label: String(
-                    localized: "ar.aim.altitude", defaultValue: "Aim altitude",
-                    comment: "Label of the altitude the centre of the camera frame points at"),
+                    localized: "ar.aim.altitude", defaultValue: "Frame centre altitude",
+                    comment: "Label of the altitude the centre of the camera frame points at. Frame centre is the app's one name for that reference point"),
                 value: aim.altitude.formatted(.number.precision(.fractionLength(1))),
                 unit: "\u{00B0}",
                 valueFont: SunlitType.metric)
@@ -273,23 +273,23 @@ struct HorizonSweepSection: View {
         .disabled(!canRecord)
         .accessibilityLabel(Text(String(
             localized: "ar.sweep.record.axLabel",
-            defaultValue: "Record the skyline",
-            comment: "Accessibility label of the sweep record button")))
+            defaultValue: "Sweep the skyline",
+            comment: "Accessibility label of the sweep button")))
         .accessibilityValue(Text(recordAccessibilityValue))
         .accessibilityHint(Text(String(
             localized: "ar.sweep.record.axHint",
-            defaultValue: "Aim the centre of the frame at the skyline and activate once for each direction",
-            comment: "Accessibility hint of the sweep record button")))
+            defaultValue: "Aim the centre of the frame at the skyline, then hold this button and turn on the spot. One activation takes a single reading, which is how the sweep is done with VoiceOver running",
+            comment: "Accessibility hint of the sweep button. Holding records continuously; a single activation, which is what VoiceOver sends, takes one reading")))
     }
 
     private var recordLabel: String {
         sweep.isRecording
             ? String(
-                localized: "ar.sweep.recording", defaultValue: "Recording",
+                localized: "ar.sweep.recording", defaultValue: "Sweeping",
                 comment: "State of the sweep button while a reading is being taken")
             : String(
-                localized: "ar.sweep.record", defaultValue: "Hold to record",
-                comment: "Sweep button that records the skyline while it is held")
+                localized: "ar.sweep.record", defaultValue: "Hold to sweep",
+                comment: "Button that takes skyline readings while it is held. Not record: the camera image is never recorded, and ar.camera.undetermined says so on the same screen")
     }
 
     /// One reading, for a tap and for a VoiceOver activation.
@@ -374,15 +374,15 @@ struct ARUnlockRow: View {
                         .imageScale(.small)
                         .accessibilityHidden(true)
                     Text(String(
-                        localized: "ar.unlock", defaultValue: "See what Pro unlocks",
-                        comment: "Button that opens the purchase screen from a locked feature"))
+                        localized: "ar.unlock", defaultValue: "See what Sunlit Pro adds",
+                        comment: "Button that opens the purchase screen. The app uses this one wording everywhere the purchase screen is opened"))
                         .font(SunlitType.body)
                 }
                 .sunlitTouchTarget()
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text(String(
-                localized: "ar.unlock.axLabel", defaultValue: "See what Sunlit Pro unlocks",
+                localized: "ar.unlock.axLabel", defaultValue: "See what Sunlit Pro adds",
                 comment: "Accessibility label of the button that opens the purchase screen")))
         }
         .accessibilityElement(children: .contain)
