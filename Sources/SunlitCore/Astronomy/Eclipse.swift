@@ -60,6 +60,16 @@ import Foundation
 /// eighteen seconds of time at the rate the Moon moves, which is the size of
 /// everything in the tables above.
 ///
+/// ## Cost
+///
+/// Finding the next solar eclipse at a place over a five year window takes
+/// about 150 milliseconds. Almost all of that is the syzygy search, which walks
+/// the window in one day steps: a solar eclipse can only happen at new moon and
+/// a lunar one only at full moon, so twelve candidates a year are examined
+/// instead of half a million minutes, and of those twelve about two survive the
+/// geocentric stage and earn the local work. This is a background computation
+/// and not part of the day report the design budgets at 30 milliseconds.
+///
 /// ## What this module will not do
 ///
 /// The classification of a central eclipse as total or annular is decided on a

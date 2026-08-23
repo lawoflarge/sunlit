@@ -75,7 +75,17 @@ public enum Irradiance {
             return Estimate(global: 0, direct: 0, diffuse: 0, airMass: mass, isClearSkyModel: true)
         }
 
-        let global = 1098.0 * cosZenith * exp(-0.059 / cosZenith) * altitudeFactor(elevationMetres)
+        // Haurwitz fitted a whole year of pyranometer records with one curve, so
+        // its 1098 already carries the MEAN earth-sun distance and the published
+        // form responds to the orbit not at all. The inverse square factor puts
+        // the 3.4 percent annual swing back. Leaving it out is not neutral: the
+        // clearness index below would then be the only thing that saw the
+        // distance, and the Erbs split would move the direct beam the wrong way,
+        // making it strongest in July when the earth is furthest from the sun.
+        let distanceFactor = 1.0 / (earthSunDistanceAU * earthSunDistanceAU)
+        let global = 1098.0 * cosZenith * exp(-0.059 / cosZenith)
+            * altitudeFactor(elevationMetres)
+            * distanceFactor
 
         // Erbs correlates the diffuse fraction against the clearness index, the
         // ratio of what reached the ground to what arrived at the top of the

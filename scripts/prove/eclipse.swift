@@ -557,7 +557,16 @@ checkTrue("two solar eclipses in 2017, got \(solar2017.count)", solar2017.count 
 checkTrue("the February 2017 eclipse is annular",
           solar2017.first(where: { $0.greatestEclipse.calendarDate.month == 2 })?.kind == .annular)
 
+// Cost. Nothing in the design document budgets eclipse search, but a five year
+// hunt is the worst thing the interface will ask for and the number belongs on
+// the record rather than in someone's head.
+let started = Date()
+_ = Eclipse.nextSolar(after: JulianDay.from(year: 2026, month: 1, day: 1.0),
+                      place: berlin, searchYears: 5)
+let elapsed = Date().timeIntervalSince(started)
+
 print("")
+print(String(format: "nextSolar over five years at one place: %.0f ms", elapsed * 1000))
 print(String(format: "worst greatest eclipse error, solar: %.1f s", worstGlobalTime))
 print(String(format: "worst contact error, solar local:   %.1f s", worstSolarContact))
 print(String(format: "worst maximum error, solar local:   %.1f s", worstSolarMaximum))

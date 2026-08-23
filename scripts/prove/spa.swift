@@ -62,12 +62,25 @@ check("apparent sidereal time nu",  r.apparentSiderealTime,      318.51191,     
 check("H equals nu plus longitude minus alpha",
       Angle.normalized(r.apparentSiderealTime + place.longitude - r.geocentricRightAscension),
       r.hourAngle, 1e-12)
-check("geocentric right ascension", r.geocentricRightAscension,  202.22741,       1e-4)
+check("geocentric right ascension", r.geocentricRightAscension,  202.2274078,     1e-6)
 check("geocentric declination",     r.geocentricDeclination,     -9.31434,        1e-4)
-check("observer hour angle H",      r.hourAngle,                 11.105900,       1e-4)
-check("topocentric right ascension", r.topocentricRightAscension, 202.22704,      1e-4)
+// The report prints H = 11.105900. That row is STALE: NREL corrected five
+// VSOP87 coefficients on 07-NOV-2006 and refreshed L, R, Theta and lambda in
+// the January 2008 table, but not this one. Reverting those five coefficients
+// in NREL's own spa.c makes it print 11.1059002947, which is the 2003 number.
+// With the corrected tables the value is 11.105902, which pvlib-python and
+// sunposition.py both produce independently, and which the report's own
+// identity H = nu + longitude - alpha confirms.
+check("observer hour angle H",      r.hourAngle,                 11.105902,       2e-6)
+check("topocentric right ascension", r.topocentricRightAscension, 202.22704,      2e-5)
 check("topocentric declination",    r.topocentricDeclination,    -9.316179,       1e-5)
-check("topocentric hour angle",     r.topocentricHourAngle,      11.10629,        1e-4)
+// The report prints H' = 11.10629 in BOTH the June 2003 and January 2008
+// editions, and it is reproducible from neither set of coefficients: the 2008
+// tables give 11.1062705, the 2003 tables 11.1062688, and both round to
+// 11.10627. It also fails the report's own identity H' = H - delta_alpha.
+// pvlib-python hardcodes 11.10627 in its test suite, having silently corrected
+// the same row. This is an error in the published table, not in the algorithm.
+check("topocentric hour angle",     r.topocentricHourAngle,      11.10627,        1e-5)
 check("elevation without refraction", r.elevationWithoutRefraction, 39.872046,    1e-5)
 check("refraction correction",      r.refractionCorrection,      0.016332,        1e-5)
 check("topocentric elevation e",    r.elevation,                 39.888378,       1e-5)
