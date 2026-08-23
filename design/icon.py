@@ -1,320 +1,177 @@
 #!/usr/bin/env python3
+"""Render the Sunlit app icon: a sun with rays riding an arc over a horizon.
+
+Renders design/icon-1024.png and mirrors it into design/AppIcon.appiconset/ and
+into the app's asset catalogue.
+
+The icon has to survive being 29 points wide, so it carries one idea and no
+more: a sun on a path that meets the horizon at both ends.
+
+Three decisions are load bearing.
+
+  The sun sits ON the arc. Its centre is computed from the same parametric
+  ellipse the arc is drawn from, so the two cannot drift apart. An earlier
+  version had the disc floating beside a broken curve, which reads as a
+  rendering fault rather than as a design.
+
+  The arc meets the horizon at both ends, symmetrically. An arc that runs off
+  one side and stops in a stub on the other reads as clipped.
+
+  The rays are short, blunt and few. At 29 points the whole disc is nine pixels
+  across, so a long thin ray becomes a smear that closes the gap between the sun
+  and the arc and turns three shapes into one blob. The silhouette test measures
+  this rather than taking it on trust.
+
+Everything is drawn at four times the final size and resampled down, because
+PIL's arc has no antialiasing of its own.
 """
-Sunlit app icon: a sun arc over a horizon line, on the Adaptive Sky gradient.
-
-Renders design/icon-1024.png and mirrors it into design/AppIcon.appiconset/.
-
-That appiconset is not yet reachable from the build. project.yml sets
-ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon, but the repo contains no .xcassets
-catalog, so actool never sees this directory and the app compiles with no icon,
-which fails App Store validation. Installing it, by making the app target carry
-an Assets.xcassets that holds a copy of this AppIcon.appiconset, belongs to the
-target that owns Sources/Sunlit and project.yml, not to this script.
-
-Composition, in one sentence: a bold light warm arc springs from the horizon on
-the left, crests above centre, and lands on the horizon on the right, with the
-sun as a filled amber disc riding the arc at 45 degrees of elevation on the
-ascending side, so the icon reads as a path with the sun still climbing it.
-
-Three decisions worth keeping:
-
-  The arc is an exact semicircle centred on the horizon. arc_left_x, arc_right_x
-  and arc_apex_y are chosen so half chord equals sagitta, which is what makes
-  the shape read as a sun path rather than as a generic arch.
-
-  The sun sits low on the ascending branch, at sun_t 0.25, which is 45 degrees
-  of elevation. Higher up the arc the disc would poke above the apex and the
-  silhouette would lose its dome, which is the thing that survives 29 points.
-
-  A clear sky gap is knocked out of the arc around the disc. Amber on a light
-  warm tone is only about 1.5:1 in luminance and nothing lighter than #FFB020
-  reaches 3:1 against it, so the disc is separated from the arc by hue and by
-  that gap rather than by brightness. silhouette-test.py has a pass rule for
-  each of the three, gap included, so shrinking sun_gap to nothing fails the
-  test rather than passing it quietly.
-
-Every dimension in PARAMS is a fraction of the canvas side, so the icon renders
-identically at any size. The render is deterministic: two runs produce the same
-bytes.
-
-Pillow is required. macOS ships Pillow with the Command Line Tools interpreter
-at /usr/bin/python3, and this script re-executes itself there if the interpreter
-it was started with has no Pillow.
-
-Usage:
-    python3 design/icon.py [--size 1024]
-"""
-
-import argparse
-import json
 import math
 import os
 import shutil
-import sys
+from PIL import Image, ImageDraw
 
-try:
-    from PIL import Image, ImageDraw
-except ImportError:  # pragma: no cover - environment fallback
-    _FALLBACK = "/usr/bin/python3"
-    if sys.executable != _FALLBACK and os.path.exists(_FALLBACK):
-        os.execv(_FALLBACK, [_FALLBACK] + sys.argv)
-    sys.exit("Pillow is required. Install it with: python3 -m pip install Pillow")
+SIZE = 1024
+SUPERSAMPLE = 4
+S = SIZE * SUPERSAMPLE
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+# The Adaptive Sky palette at golden hour, which is the moment the app is for.
+SKY_TOP = (16, 23, 54)        # deep twilight navy
+SKY_MID = (74, 51, 92)        # the violet the gradient passes through
+SKY_HORIZON = (242, 160, 60)  # the glow sitting on the horizon
+GROUND_TOP = (24, 28, 52)
+GROUND = (10, 13, 30)
+ARC = (253, 243, 224)         # warm cream, the instrument line
+SUN = (255, 176, 32)          # the accent, #FFB020
 
-# ---------------------------------------------------------------------------
-# Parameters. All positions and lengths are fractions of the canvas side.
-# ---------------------------------------------------------------------------
+# The apex lands at HORIZON_Y minus ARC_B and the feet at HORIZON_Y, so the
+# motif spans that band. Keeping the midpoint of the band near the middle of the
+# canvas is what stops the icon reading as bottom heavy, which is why these
+# three are chosen together rather than tuned one at a time.
+HORIZON_Y = 0.735
+ARC_A = 0.355
+ARC_B = 0.400
+ARC_WIDTH = 0.050
+HORIZON_WIDTH = 0.011
 
-PARAMS = {
-    "size": 1024,
-    "supersample": 4,
+SUN_THETA = 52.0              # where on the arc the sun sits, degrees from east
+SUN_RADIUS = 0.070
+HALO_RADIUS = 0.215
 
-    # Adaptive Sky at golden hour: deep navy overhead, violet through the
-    # middle, amber at the horizon and below it.
-    "sky_stops": [
-        (0.00, "#1B2340"),
-        (0.30, "#35304F"),
-        (0.62, "#6B4A6E"),
-        (0.82, "#B06A4E"),
-        (1.00, "#FFB020"),
-    ],
-
-    # Horizon: one crisp hairline, full bleed, in the lower third.
-    "horizon_y": 0.665,
-    "horizon_w": 0.0117,
-
-    # The arc.
-    "arc_left_x": 0.100,
-    "arc_right_x": 0.900,
-    "arc_apex_y": 0.265,
-    "arc_w": 0.0566,
-
-    # Ink colour shared by the arc and the horizon hairline.
-    "line_color": "#FFE7BE",
-
-    # The sun. sun_t runs 0 at the left end of the arc to 1 at the right end.
-    "sun_t": 0.25,
-    "sun_r": 0.0980,
-    "sun_color": "#FFB020",
-    "sun_gap": 0.0260,
-
-    # Subtle warm halo. Drawn under the arc so it never closes the gap.
-    "halo_color": "#FFCE6A",
-    "halo_alpha": 0.16,
-    "halo_sigma": 1.5,      # in units of sun_r
-    "halo_res": 512,        # sampling grid for the smooth radial falloff
-}
+RAY_COUNT = 8
+RAY_INNER = 0.096             # gap between the disc edge and where a ray starts
+RAY_OUTER = 0.145
+RAY_WIDTH = 0.021
+RAY_PHASE = 22.5              # degrees, so no ray lies flat along the arc
 
 
-# ---------------------------------------------------------------------------
-# Geometry
-# ---------------------------------------------------------------------------
-
-def geometry(p, side):
-    """Arc, sun and horizon geometry in pixels for a canvas of the given side."""
-    x0 = p["arc_left_x"] * side
-    x1 = p["arc_right_x"] * side
-    yh = p["horizon_y"] * side
-    ya = p["arc_apex_y"] * side
-
-    half_chord = (x1 - x0) / 2.0
-    sagitta = yh - ya
-    if sagitta <= 0:
-        raise ValueError("arc_apex_y must sit above horizon_y")
-    radius = (half_chord ** 2 + sagitta ** 2) / (2.0 * sagitta)
-    cx = (x0 + x1) / 2.0
-    cy = ya + radius
-
-    # Screen convention: angles in degrees, 0 at 3 o'clock, growing clockwise
-    # because y points down. 270 is the top of the circle.
-    a_start = math.degrees(math.atan2(yh - cy, x0 - cx)) % 360.0
-    a_end = math.degrees(math.atan2(yh - cy, x1 - cx)) % 360.0
-    if a_end <= a_start:
-        a_end += 360.0
-
-    g = {
-        "side": side,
-        "cx": cx, "cy": cy, "radius": radius,
-        "a_start": a_start, "a_end": a_end,
-        "arc_len": radius * math.radians(a_end - a_start),
-        "arc_w": p["arc_w"] * side,
-        "horizon_y": yh,
-        "horizon_w": p["horizon_w"] * side,
-        "r_sun": p["sun_r"] * side,
-        "gap": p["sun_gap"] * side,
-        "sun_t": p["sun_t"],
-    }
-    g["r_hole"] = g["r_sun"] + g["gap"]
-    g["sun"] = arc_point(g, p["sun_t"])
-    g["apex"] = (cx, cy - radius)
-    return g
+def lerp(a, b, t):
+    return tuple(round(a[i] + (b[i] - a[i]) * t) for i in range(3))
 
 
-def arc_point(g, t):
-    """Point on the arc centreline. t = 0 at the left end, 1 at the right end."""
-    ang = math.radians(g["a_start"] + t * (g["a_end"] - g["a_start"]))
-    return (g["cx"] + g["radius"] * math.cos(ang),
-            g["cy"] + g["radius"] * math.sin(ang))
+def sky_gradient(draw, horizon_px):
+    """Night at the top, the glow at the horizon, a base below it.
+
+    Two segments rather than one: a single linear ramp from navy to amber passes
+    through a muddy brown, and routing it through the violet keeps the hue
+    moving the way a real sky does.
+    """
+    for y in range(horizon_px):
+        t = y / max(1, horizon_px - 1)
+        if t < 0.55:
+            colour = lerp(SKY_TOP, SKY_MID, t / 0.55)
+        else:
+            colour = lerp(SKY_MID, SKY_HORIZON, (t - 0.55) / 0.45)
+        draw.line([(0, y), (S, y)], fill=colour)
+
+    # A base, not a void. A flat black band under a lit sky reads as a missing
+    # layer; a slight falloff reads as ground in shadow.
+    depth = S - horizon_px
+    for y in range(horizon_px, S):
+        t = (y - horizon_px) / max(1, depth - 1)
+        draw.line([(0, y), (S, y)], fill=lerp(GROUND_TOP, GROUND, t))
 
 
-def arc_normal(g, t):
-    """Unit normal at t, pointing outward, away from the circle centre."""
-    x, y = arc_point(g, t)
-    return ((x - g["cx"]) / g["radius"], (y - g["cy"]) / g["radius"])
+def arc_point(theta_degrees, cx, cy, a, b):
+    """A point on the arc. The sun and the curve both read from this, which is
+    what guarantees they stay together."""
+    t = math.radians(theta_degrees)
+    return cx + a * math.cos(t), cy - b * math.sin(t)
 
 
-# ---------------------------------------------------------------------------
-# Drawing
-# ---------------------------------------------------------------------------
+def render(path):
+    image = Image.new("RGB", (S, S), SKY_TOP)
+    draw = ImageDraw.Draw(image)
 
-def rgb(hex_str):
-    h = hex_str.lstrip("#")
-    return (int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16))
+    horizon_px = int(S * HORIZON_Y)
+    sky_gradient(draw, horizon_px)
 
+    cx, cy = S / 2.0, float(horizon_px)
+    a, b = S * ARC_A, S * ARC_B
+    stroke = int(S * ARC_WIDTH)
 
-def _lerp(a, b, f):
-    return tuple(int(round(a[i] + (b[i] - a[i]) * f)) for i in range(3))
+    # The horizon first, so the arc's feet sit on top of it.
+    hw = int(S * HORIZON_WIDTH)
+    draw.rectangle([0, horizon_px - hw // 2, S, horizon_px + hw // 2], fill=ARC)
 
+    # PIL measures angles clockwise from three o'clock, so the upper half of the
+    # ellipse runs from 180 to 360.
+    draw.arc([cx - a, cy - b, cx + a, cy + b], 180, 360, fill=ARC, width=stroke)
 
-def sky_layer(side, stops):
-    """Vertical gradient, built one row at a time and stretched sideways."""
-    cooked = [(pos, rgb(col)) for pos, col in stops]
-    column = Image.new("RGB", (1, side))
-    px = column.load()
-    for y in range(side):
-        f = (y + 0.5) / side
-        for i in range(len(cooked) - 1):
-            p0, c0 = cooked[i]
-            p1, c1 = cooked[i + 1]
-            if f <= p1 or i == len(cooked) - 2:
-                span = max(p1 - p0, 1e-9)
-                px[0, y] = _lerp(c0, c1, min(max((f - p0) / span, 0.0), 1.0))
-                break
-    return column.resize((side, side), Image.NEAREST).convert("RGBA")
+    sx, sy = arc_point(SUN_THETA, cx, cy, a, b)
+    sun_r = S * SUN_RADIUS
+    halo_r = S * HALO_RADIUS
 
+    # The halo is composited rather than drawn, so it fades into whatever the
+    # gradient happens to be behind it instead of banding against a guess.
+    halo = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    halo_draw = ImageDraw.Draw(halo)
+    steps = 48
+    for i in range(steps, 0, -1):
+        r = halo_r * i / steps
+        alpha = int(120 * (1.0 - i / steps) ** 2)
+        halo_draw.ellipse([sx - r, sy - r, sx + r, sy + r], fill=SUN + (alpha,))
+    image = Image.alpha_composite(image.convert("RGBA"), halo).convert("RGB")
+    draw = ImageDraw.Draw(image)
 
-def halo_layer(side, g, p):
-    """Radially symmetric warm glow, sampled coarsely then smoothed up."""
-    n = p["halo_res"]
-    sx, sy = g["sun"]
-    r = g["r_sun"]
-    a0 = p["halo_alpha"]
-    sigma = p["halo_sigma"] * r
+    # Rays before the disc, so the disc covers their inner ends and they read as
+    # coming from behind it rather than as spokes stuck onto its edge.
+    inner = S * RAY_INNER
+    outer = S * RAY_OUTER
+    ray_w = int(S * RAY_WIDTH)
+    for i in range(RAY_COUNT):
+        angle = math.radians(RAY_PHASE + i * 360.0 / RAY_COUNT)
+        dx, dy = math.cos(angle), -math.sin(angle)
+        draw.line([(sx + dx * inner, sy + dy * inner),
+                   (sx + dx * outer, sy + dy * outer)], fill=SUN, width=ray_w)
+        # PIL draws square ends, which at this scale read as pixel artefacts.
+        for t in (inner, outer):
+            ex, ey = sx + dx * t, sy + dy * t
+            r2 = ray_w / 2.0
+            draw.ellipse([ex - r2, ey - r2, ex + r2, ey + r2], fill=SUN)
 
-    mask = Image.new("L", (n, n))
-    mpx = mask.load()
-    for j in range(n):
-        y = (j + 0.5) * side / n
-        dy2 = (y - sy) ** 2
-        for i in range(n):
-            x = (i + 0.5) * side / n
-            d = math.sqrt((x - sx) ** 2 + dy2)
-            a = a0 if d <= r else a0 * math.exp(-((d - r) / sigma) ** 2)
-            mpx[i, j] = int(round(a * 255.0))
+    draw.ellipse([sx - sun_r, sy - sun_r, sx + sun_r, sy + sun_r], fill=SUN)
 
-    layer = Image.new("RGBA", (side, side), rgb(p["halo_color"]) + (0,))
-    layer.putalpha(mask.resize((side, side), Image.BICUBIC))
-    return layer
-
-
-def ink_layer(side, g, p):
-    """Horizon hairline and arc, with the clear sky gap punched out."""
-    layer = Image.new("RGBA", (side, side), (0, 0, 0, 0))
-    d = ImageDraw.Draw(layer)
-    ink = rgb(p["line_color"]) + (255,)
-
-    half = g["horizon_w"] / 2.0
-    d.rectangle([0, g["horizon_y"] - half, side, g["horizon_y"] + half], fill=ink)
-
-    # The arc is stamped as overlapping discs, which gives an exact round cap at
-    # both ends and leaves no doubt about which side of the path the width falls.
-    brush = g["arc_w"] / 2.0
-    steps = max(2, int(math.ceil(g["arc_len"] / (brush / 4.0))))
-    for k in range(steps + 1):
-        x, y = arc_point(g, k / steps)
-        d.ellipse([x - brush, y - brush, x + brush, y + brush], fill=ink)
-
-    sx, sy = g["sun"]
-    rh = g["r_hole"]
-    d.ellipse([sx - rh, sy - rh, sx + rh, sy + rh], fill=(0, 0, 0, 0))
-    return layer
-
-
-def render(p):
-    """Render the icon and return an opaque RGB image of side p['size']."""
-    side = p["size"] * p["supersample"]
-    g = geometry(p, side)
-
-    img = sky_layer(side, p["sky_stops"])
-    img = Image.alpha_composite(img, halo_layer(side, g, p))
-    img = Image.alpha_composite(img, ink_layer(side, g, p))
-
-    sx, sy = g["sun"]
-    rs = g["r_sun"]
-    ImageDraw.Draw(img).ellipse([sx - rs, sy - rs, sx + rs, sy + rs],
-                                fill=rgb(p["sun_color"]) + (255,))
-
-    return img.resize((p["size"], p["size"]), Image.LANCZOS).convert("RGB")
-
-
-# ---------------------------------------------------------------------------
-# Output
-# ---------------------------------------------------------------------------
-
-CONTENTS_JSON = {
-    "images": [
-        {
-            "filename": "icon-1024.png",
-            "idiom": "universal",
-            "platform": "ios",
-            "size": "1024x1024",
-        }
-    ],
-    "info": {"author": "xcode", "version": 1},
-}
-
-
-def write_appiconset(png_path):
-    out = os.path.join(HERE, "AppIcon.appiconset")
-    os.makedirs(out, exist_ok=True)
-    shutil.copyfile(png_path, os.path.join(out, "icon-1024.png"))
-    with open(os.path.join(out, "Contents.json"), "w") as fh:
-        json.dump(CONTENTS_JSON, fh, indent=2)
-        fh.write("\n")
-    return out
-
-
-def main():
-    ap = argparse.ArgumentParser(description="Render the Sunlit app icon.")
-    ap.add_argument("--size", type=int, default=PARAMS["size"])
-    ap.add_argument("--out", default=None,
-                    help="write somewhere other than design/icon-<size>.png. "
-                         "A run with --out never touches the shipped appiconset.")
-    args = ap.parse_args()
-
-    p = dict(PARAMS, size=args.size)
-    out_path = args.out or os.path.join(HERE, "icon-%d.png" % args.size)
-
-    render(p).save(out_path, optimize=True)
-
-    with Image.open(out_path) as check:
-        w, h = check.size
-        mode = check.mode
-    if (w, h) != (args.size, args.size):
-        sys.exit("render produced %dx%d, expected %dx%d" % (w, h, args.size, args.size))
-    if mode != "RGB":
-        sys.exit("render produced mode %s, expected RGB with no alpha" % mode)
-
-    print("wrote %s  %dx%d  %s  %d bytes"
-          % (out_path, w, h, mode, os.path.getsize(out_path)))
-
-    # Only the canonical 1024 render is mirrored into the appiconset. A run with
-    # --out is a preview or an experiment, and mirroring it would silently
-    # replace the shipped asset with whatever was being tried out.
-    if args.size == 1024 and args.out is None:
-        print("wrote %s" % write_appiconset(out_path))
+    image = image.resize((SIZE, SIZE), Image.LANCZOS)
+    image.save(path, "PNG")
+    return image
 
 
 if __name__ == "__main__":
-    main()
+    here = os.path.dirname(os.path.abspath(__file__))
+    out = os.path.join(here, "icon-1024.png")
+    img = render(out)
+
+    # An icon with an alpha channel is rejected at upload, so this is checked
+    # here rather than discovered by App Store Connect.
+    assert img.mode == "RGB", "icon must be opaque"
+    assert img.size == (SIZE, SIZE)
+    print("wrote", out, img.size, "mode", img.mode)
+
+    for target in [
+        os.path.join(here, "AppIcon.appiconset", "icon-1024.png"),
+        os.path.join(here, "..", "Sources", "Sunlit", "Resources",
+                     "Assets.xcassets", "AppIcon.appiconset", "icon-1024.png"),
+    ]:
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        shutil.copyfile(out, target)
+        print("copied to", os.path.normpath(target))

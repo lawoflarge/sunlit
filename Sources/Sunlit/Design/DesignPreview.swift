@@ -97,7 +97,7 @@ struct DesignSystemGallery: View {
             Text(verbatim: "\(audit.worstRatio.formatted(.number.precision(.fractionLength(3)))) to 1 "
                 + "at \(audit.solarAltitude.formatted(.number.precision(.fractionLength(2))))°, "
                 + "floor \(audit.required.formatted(.number.precision(.fractionLength(1)))), "
-                + "ceiling 4.583")
+                + "isoluminant ceiling 4.583 before quantisation")
                 .font(SunlitType.metricSmall)
         }
         .foregroundStyle(SkyColors.onWarning)

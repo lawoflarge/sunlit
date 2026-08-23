@@ -2,12 +2,18 @@ import SwiftUI
 
 // MARK: - Shared rules
 
+public enum SunlitLayout {
+    /// The HIG minimum. Deliberately not a `ScaledMetric`: 44 points is 44 points at
+    /// every text size, because it describes a fingertip and not a glyph.
+    public static let minimumTouchTarget: CGFloat = 44
+}
+
 public extension View {
     /// Guarantees a 44 by 44 point hit area.
     ///
     /// Apply it outermost, after any `scaleEffect`, because the rule is about the area a
     /// finger can actually land on and a scale applied afterwards shrinks it again.
-    func sunlitTouchTarget(minimum: CGFloat = 44) -> some View {
+    func sunlitTouchTarget(minimum: CGFloat = SunlitLayout.minimumTouchTarget) -> some View {
         frame(minWidth: minimum, minHeight: minimum)
             .contentShape(Rectangle())
     }
@@ -158,7 +164,7 @@ public struct EventChip: View {
         .overlay {
             Capsule(style: .continuous)
                 .strokeBorder(
-                    SkyPalette.instrumentLine(solarAltitude: solarAltitude),
+                    SkyPalette.componentBorder(solarAltitude: solarAltitude),
                     lineWidth: 1 / displayScale
                 )
         }
@@ -242,7 +248,7 @@ public struct AccuracyChip: View {
             if !isPoor {
                 Capsule(style: .continuous)
                     .strokeBorder(
-                        SkyPalette.instrumentLine(solarAltitude: solarAltitude),
+                        SkyPalette.componentBorder(solarAltitude: solarAltitude),
                         lineWidth: 1 / displayScale
                     )
             }
@@ -347,8 +353,22 @@ public struct ArcTrack: View {
                 ArcTrackShape().path(in: rect)
                     .stroke(line, lineWidth: hairline)
 
+                // The accent is a hue signal, not a luminance one. Measured against the
+                // sky it crosses, #FFB020 bottoms out at 1.00 to 1: from about four
+                // degrees of solar altitude upward the travelled arc and the sky behind
+                // it are the same brightness, so in greyscale, under Color Filters, or
+                // to a reader who works from luminance, the stroke is simply not there.
+                // The ink underlay is what makes it a mark rather than a hue. It is
+                // drawn first and wider, so the accent keeps its colour and gains an
+                // edge that the audited foreground guarantees at 4.55 to 1.
                 ArcTrackShape.path(in: rect, from: 0, to: fraction)
-                    .stroke(tint, lineWidth: hairline * 2)
+                    .stroke(
+                        SkyPalette.foreground(solarAltitude: solarAltitude),
+                        style: StrokeStyle(lineWidth: hairline * 4, lineCap: .round)
+                    )
+
+                ArcTrackShape.path(in: rect, from: 0, to: fraction)
+                    .stroke(tint, style: StrokeStyle(lineWidth: hairline * 2, lineCap: .round))
 
                 Circle()
                     .fill(tint)

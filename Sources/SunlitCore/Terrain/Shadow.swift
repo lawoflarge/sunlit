@@ -21,9 +21,25 @@ public enum Shadow {
 
     /// The shadow of an upright object of `objectHeight`.
     ///
+    /// - Parameters:
+    ///   - objectHeight: the object's height, in any unit.
+    ///   - solarAltitude: the sun's *apparent* altitude in degrees, meaning the
+    ///     refracted one, `SolarPositionSPA.Result.elevation` rather than
+    ///     `elevationWithoutRefraction`. The shadow follows the ray as it
+    ///     arrives, not the geometric direction of the sun, and near the
+    ///     horizon the two differ by half a degree, which is the difference
+    ///     between a shadow of a hundred times the height and no shadow at all.
+    ///   - solarAzimuth: the sun's bearing, degrees from north toward east.
+    ///
     /// Returns nil when the sun is at or below the horizon. The shadow there is
     /// not long, it is unbounded, and an app that prints a number for it prints
     /// a lie.
+    ///
+    /// This is exact geometry on level ground, not a model. It says nothing
+    /// about whether anything is standing where the shadow would fall, and it
+    /// does not know about the measured skyline: a shadow computed for an
+    /// instant inside an `obstructionPeriods` stretch is a shadow the observer
+    /// will not see, because the sun is behind a ridge.
     public static func cast(
         objectHeight: Double,
         solarAltitude: Double,
@@ -46,23 +62,52 @@ public enum Shadow {
     /// horizon time to well inside a second rather than to just inside one.
     private static let precisionSeconds = 0.25
 
-    /// The altitude the sun's centre must reach for its upper limb to clear the
-    /// skyline along a bearing.
+    /// The refraction Bennett's formula gives for the sun's centre when its
+    /// upper limb sits on a flat horizon. Subtracting it below is what makes
+    /// the flat case land on `sunriseAltitude` to the bit.
+    private static let refractionAtFlatHorizon = Refraction.trueFromApparent(
+        apparentAltitude: -Refraction.solarSemidiameterAtOneAU)
+
+    /// The true altitude the sun's centre must reach for its upper limb to
+    /// appear over the skyline along a bearing.
     ///
-    /// The profile is an offset applied to the standard target, not a
-    /// replacement for it. Two reasons. The -0.8333 degrees already accounts for
-    /// the sun's semidiameter and for refraction, and both still apply behind a
-    /// ridge. And the app shows the difference between the flat time and the
-    /// measured time, so a flat profile has to reproduce the flat time exactly
-    /// rather than nearly, which only an offset does. Carrying the horizontal
-    /// refraction up to a raised skyline overstates it by about half a degree at
-    /// twenty degrees of elevation, which is well inside the error of a hand
-    /// swept profile.
+    /// The profile holds the *apparent* altitude of the skyline, so the upper
+    /// limb appears there when the sun's apparent centre sits one semidiameter
+    /// lower, and the true altitude the solver works in is that less the
+    /// atmospheric refraction at that apparent altitude.
+    ///
+    /// Refraction is not a constant, and this is where a plausible shortcut
+    /// goes wrong. Adding the profile to the flat -0.8333 degrees carries the
+    /// horizon's 34 arcminutes of refraction up the ridge with it. The Nautical
+    /// Almanac altitude correction tables give 2.7 arcminutes at an apparent
+    /// altitude of twenty degrees, not 34, so that shortcut places the sun
+    /// roughly half a degree too low and reports local sunrise behind a twenty
+    /// degree ridge about two minutes late. The difference between the flat
+    /// time and the measured time is the number this whole layer exists to
+    /// show, so two minutes of it is not a rounding error.
+    ///
+    /// The result is anchored rather than absolute: what is subtracted is the
+    /// *change* in refraction between the horizon and the skyline, so a flat
+    /// profile reproduces `sunriseAltitude` exactly and the published sunrise
+    /// the rest of the app shows stays the published sunrise. The constant that
+    /// anchoring keeps is the gap between the conventional rounded 34
+    /// arcminutes and what a refraction formula actually returns just below the
+    /// horizon, about four arcminutes, and it is the same at every skyline
+    /// height.
     private static func skylineTarget(
         _ profile: HorizonProfile,
         azimuth: Double
     ) -> Double {
-        Refraction.sunriseAltitude + profile.altitude(atAzimuth: azimuth)
+        let skyline = profile.altitude(atAzimuth: azimuth)
+        // Bennett's formula turns around below about -1.7 degrees apparent and
+        // returns *less* refraction the lower the body, which would make a
+        // deeply depressed horizon behave like a raised one. `trueFromApparent`
+        // guards it at -1 degree by returning zero, and zero is the one answer
+        // that is certainly wrong down there, so hold the refraction at the
+        // lowest altitude the formula is still trusted for.
+        let centre = Swift.max(skyline - Refraction.solarSemidiameterAtOneAU, -1.0)
+        let refraction = Refraction.trueFromApparent(apparentAltitude: centre)
+        return Refraction.sunriseAltitude + skyline - (refraction - refractionAtFlatHorizon)
     }
 
     /// A one entry memo for the ephemeris.
@@ -110,6 +155,16 @@ public enum Shadow {
     ///
     /// Nil when the sun never clears the skyline that day, which is the honest
     /// answer for a courtyard in winter as much as for a polar night.
+    ///
+    /// The ephemeris behind this is good to a second, and the answer is not.
+    /// It is only as good as the profile: the sun climbs at roughly a quarter
+    /// of a degree per minute at the equator and far more slowly further north,
+    /// so a sector that is a degree out moves this time by minutes. A profile
+    /// swept by hand with a phone is worth about a degree, and the interface
+    /// must not present the result as though it were the published sunrise,
+    /// which is a definition rather than a measurement of anywhere. When
+    /// `profile.isMeasured` is false this returns the ordinary published
+    /// sunrise and nothing has been measured at all.
     public static func localSunrise(
         date: JulianDay,
         place: Coordinates.Geographic,
@@ -119,6 +174,8 @@ public enum Shadow {
     }
 
     /// Sunset behind the measured skyline rather than behind a flat horizon.
+    ///
+    /// Carries the same dependence on the profile that `localSunrise` does.
     public static func localSunset(
         date: JulianDay,
         place: Coordinates.Geographic,
@@ -130,6 +187,10 @@ public enum Shadow {
     /// The stretches of the day in which the sun is above the flat horizon and
     /// still behind the measured skyline: the shade a flat horizon calculation
     /// misses entirely.
+    ///
+    /// An empty result from a profile that was never swept means nothing was
+    /// looked for, not that nothing is there. `profile.isMeasured` is what
+    /// tells those apart, and the interface owes the reader that distinction.
     ///
     /// - Parameters:
     ///   - date: the start of the twenty four hour window to examine, normally

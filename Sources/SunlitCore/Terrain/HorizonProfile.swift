@@ -9,9 +9,10 @@ import Foundation
 /// between two bearings the observer actually looked at is the only
 /// interpolation that means anything.
 ///
-/// Altitudes are apparent, which is what a camera and an eye both see, and
-/// positive above the astronomical horizon. Zero everywhere is an unobstructed
-/// sea horizon.
+/// Altitudes are apparent, which is what a camera and an eye both see, so they
+/// already carry atmospheric refraction and every consumer has to treat them
+/// that way. Zero everywhere is an unobstructed sea horizon seen from sea
+/// level; a summit sees the sea horizon below zero.
 public struct HorizonProfile: Equatable, Sendable, Codable {
 
     public static let sectorCount = 36
@@ -21,6 +22,17 @@ public struct HorizonProfile: Equatable, Sendable, Codable {
     /// first.
     public private(set) var sectors: [Double]
 
+    /// Which sectors carry an observation rather than the default value.
+    ///
+    /// Without this a sweep could never record a skyline below the astronomical
+    /// horizon. `record` keeps the higher of the stored value and the new
+    /// reading, the stored value starts at zero, and the sea horizon seen from
+    /// a summit or a clifftop is negative, so every such reading would be
+    /// discarded. That is the case the terrain layer helps most, because it is
+    /// the one where sunrise comes earlier rather than later, and flooring it
+    /// at zero deletes it without saying so.
+    private var observed: [Bool]
+
     /// Returns nil rather than trapping on a wrong count.
     ///
     /// Profiles arrive from a file written by an older version of the app and
@@ -29,15 +41,28 @@ public struct HorizonProfile: Equatable, Sendable, Codable {
     public init?(sectors: [Double]) {
         guard sectors.count == HorizonProfile.sectorCount else { return nil }
         self.sectors = sectors
+        // A table handed over whole is data however it was produced, so every
+        // sector counts as observed and a later `record` adds to it rather than
+        // overwriting it as a first reading.
+        self.observed = Array(repeating: true, count: HorizonProfile.sectorCount)
     }
 
-    private init(unchecked sectors: [Double]) {
+    private init(unchecked sectors: [Double], observed: [Bool]) {
         self.sectors = sectors
+        self.observed = observed
     }
 
-    /// An unobstructed horizon: zero degrees in every direction.
+    /// The horizon assumed when nothing has been measured: zero degrees in
+    /// every direction, with no sector observed.
+    ///
+    /// This is an assumption, not a measurement, and `isMeasured` is false for
+    /// it. A local sunrise computed against this profile is the ordinary
+    /// published sunrise, so an interface that shows the difference between the
+    /// flat time and the measured time must not show zero minutes here. Zero
+    /// would claim a sweep that never happened.
     public static let flat = HorizonProfile(
-        unchecked: Array(repeating: 0, count: HorizonProfile.sectorCount))
+        unchecked: Array(repeating: 0, count: HorizonProfile.sectorCount),
+        observed: Array(repeating: false, count: HorizonProfile.sectorCount))
 
     /// The apparent horizon altitude along a bearing, linearly interpolated
     /// between the two nearest sector centres.
@@ -62,14 +87,16 @@ public struct HorizonProfile: Equatable, Sendable, Codable {
     }
 
     /// Records one skyline observation into the sector whose centre is nearest
-    /// the given bearing, keeping the highest altitude that sector has seen.
+    /// the given bearing.
     ///
-    /// Highest rather than latest: a camera sweep crosses a building twice, and
-    /// the pass that catches the sky beside its edge must not undo the pass that
-    /// caught its roof.
+    /// The first reading on a bearing is taken as given. Later readings only
+    /// raise the sector, because a camera sweep crosses a building twice and
+    /// the pass that catches the sky beside its edge must not undo the pass
+    /// that caught its roof.
     public mutating func record(azimuth: Double, altitude: Double) {
         let index = HorizonProfile.sectorIndex(forAzimuth: azimuth)
-        sectors[index] = Swift.max(sectors[index], altitude)
+        sectors[index] = observed[index] ? Swift.max(sectors[index], altitude) : altitude
+        observed[index] = true
     }
 
     /// The sector whose centre is nearest a bearing.
@@ -80,18 +107,33 @@ public struct HorizonProfile: Equatable, Sendable, Codable {
         return Int(scaled) % sectorCount
     }
 
+    /// True when at least one sector carries an observation.
+    ///
+    /// The interface needs this to tell a swept horizon from the flat one it
+    /// assumes by default, because the two produce the same numbers and only
+    /// one of them is a measurement.
+    public var isMeasured: Bool { observed.contains(true) }
+
+    /// How many of the thirty six sectors carry an observation. A sweep that
+    /// covered a third of the sky is worth being explicit about.
+    public var measuredSectorCount: Int { observed.reduce(0) { $1 ? $0 + 1 : $0 } }
+
     /// True when no sector is raised above the astronomical horizon.
     ///
     /// A tolerance rather than an equality test, because a swept profile carries
     /// values that are a rounding error away from zero and the caller is asking
     /// whether there is any terrain worth reporting, not whether the bits match.
+    ///
+    /// This says nothing about whether the profile was measured. A swept sea
+    /// horizon and the default assumption are both flat; `isMeasured` is what
+    /// separates them.
     public var isFlat: Bool {
         sectors.allSatisfy { Swift.abs($0) < 1e-9 }
     }
 
     // MARK: Codable
 
-    private enum CodingKeys: String, CodingKey { case sectors }
+    private enum CodingKeys: String, CodingKey { case sectors, observed }
 
     /// Validates on the way in. A decoded profile with the wrong number of
     /// sectors would index out of bounds on the first altitude query, far from
@@ -99,10 +141,21 @@ public struct HorizonProfile: Equatable, Sendable, Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let values = try container.decode([Double].self, forKey: .sectors)
-        guard let profile = HorizonProfile(sectors: values) else {
+        guard var profile = HorizonProfile(sectors: values) else {
             throw DecodingError.dataCorruptedError(
                 forKey: .sectors, in: container,
                 debugDescription: "a horizon profile has exactly \(HorizonProfile.sectorCount) sectors, found \(values.count)")
+        }
+        // A payload written before the observation mask existed carries only
+        // altitudes. Somebody saved that profile, so it is a measurement, and
+        // the fully observed default the initialiser already applied is right.
+        if let mask = try container.decodeIfPresent([Bool].self, forKey: .observed) {
+            guard mask.count == HorizonProfile.sectorCount else {
+                throw DecodingError.dataCorruptedError(
+                    forKey: .observed, in: container,
+                    debugDescription: "an observation mask has exactly \(HorizonProfile.sectorCount) entries, found \(mask.count)")
+            }
+            profile.observed = mask
         }
         self = profile
     }

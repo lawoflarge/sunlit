@@ -13,8 +13,11 @@ accuracy, timeliness or completeness.
 
     Data source: GeoNames, https://www.geonames.org, CC BY 4.0
 
-That attribution is a licence obligation. It appears in Settings inside the
-app, in the repository README, and on the website. It is not to be dropped.
+That attribution is a licence obligation and is owed in three places: in
+Settings inside the app, in the repository README, and on the website. As of
+this writing the website carries it and the other two do not exist yet: this
+repository has no README and Sources/Sunlit/Features/Settings is still empty.
+Neither may ship without it.
 
 Usage
 =====
@@ -75,9 +78,9 @@ Sources/SunlitCore/Geo/CityIndex.swift, which reads it.
       u8    length, with bit 7 set when this is the last key of a city
       ...   the key, ASCII, at most 127 bytes
     A city carries one key when its GeoNames `name` and `asciiname` fold to
-    the same thing, and two when they differ. Koeln stores "koln" from
-    "Koeln" folded and "koeln" from the ASCII name, so both spellings find
-    it.
+    the same thing, and two when they differ. Köln stores "koln", folded from
+    the name, and "koeln", folded from the ASCII name "Koeln", so both
+    spellings find it. 390 of the 34,106 cities carry two keys.
 
 Search key folding
 ==================
@@ -97,11 +100,21 @@ here.
 
 What is deliberately not indexed
 ================================
-Exonyms. The GeoNames `alternatenames` column carries them, but it carries
-them without language tags and mixed with transliteration noise, and
-indexing every Latin-script entry measures 3.25 MB, past the 3 MB budget for
-this resource. Searching runs against the local name and the ASCII name
-only. "Muenchen" and "Munchen" find Munich; "Munich" does not.
+The `alternatenames` column. It is where GeoNames keeps every other spelling
+of a place, but it keeps them without language tags and mixed with
+transliteration noise, and folding every entry in it takes the resource to
+3,245,149 bytes, past the 3 MB budget. Searching runs against the `name` and
+`asciiname` columns only.
+
+The consequence is not the one the phrase "no alternate names" suggests.
+GeoNames `name` is frequently the English exonym rather than the local
+endonym, so it is the *local* spelling that goes missing: "munich" finds
+Munich and "muenchen" does not, "gothenburg" finds Gothenburg and "goteborg"
+does not. Measured over a sample of 36 European endonyms, 21 reach nothing
+or the wrong place, among them München, Praha, Warszawa, Firenze, Venezia,
+Bruxelles, København, Moskva and Athina. The app sells in ten languages, so
+this is an open product gap, not a footnote about a file format. Closing it
+means indexing part of `alternatenames` and re-arguing the 3 MB budget.
 """
 
 import argparse

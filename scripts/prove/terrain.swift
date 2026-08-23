@@ -140,20 +140,21 @@ checkTrue("a short payload fails to decode", shortPayload)
 
 // 3. Machinery for the terrain checks.
 //
-//    `obstructed` below restates the definition of obstruction from the design
-//    document in the driver, deliberately not calling into `Shadow`, so that the
-//    intervals `Shadow` reports are checked against the words they came from and
-//    not against the code that produced them.
+//    An earlier version of this file kept its own copy of the obstruction
+//    formula and presented the copy as an independent authority. It was not:
+//    the copy and the module said the same thing by construction, so every
+//    check that leaned on it could only ever confirm that the module agreed
+//    with itself. The copy is gone. `countObstructedSeconds` now walks the
+//    module's own public predicate, and it is honest about what that proves: it
+//    proves the intervals `obstructionPeriods` assembles agree with the
+//    instant by instant predicate, and nothing whatever about whether the
+//    predicate's threshold is the right one. Section 12 is what tests the
+//    threshold, against published refraction values.
 
-func skylineTarget(_ profile: HorizonProfile, _ azimuth: Double) -> Double {
-    Refraction.sunriseAltitude + profile.altitude(atAzimuth: azimuth)
-}
 func obstructed(_ jd: JulianDay, _ place: Coordinates.Geographic, _ profile: HorizonProfile) -> Bool {
-    let sun = SolarPositionSPA.evaluate(julianDay: jd, place: place)
-    let altitude = sun.elevationWithoutRefraction
-    return altitude > Refraction.sunriseAltitude && altitude < skylineTarget(profile, sun.azimuth)
+    Shadow.isObstructed(jd, place: place, profile: profile)
 }
-/// Walks the whole day in five second steps and totals the time the definition
+/// Walks the whole day in five second steps and totals the time the predicate
 /// calls obstructed. Counting cannot get a boundary subtly wrong the way a
 /// solver can.
 func countObstructedSeconds(_ day: JulianDay, _ place: Coordinates.Geographic, _ profile: HorizonProfile) -> Double {
@@ -274,10 +275,13 @@ checkTrue("the delayed sunrise happens on the flat top of the wall, azimuth \(at
           atWalledRise.azimuth > 92 && atWalledRise.azimuth < 118)
 checkTrue("the sun is near twenty degrees up, not near zero, got \(atWalledRise.elevationWithoutRefraction)",
           abs(atWalledRise.elevationWithoutRefraction - 20.0) < 1.0)
-// Precisely: the upper limb sits on the skyline, so the centre is the wall's
-// height less the same 0.8333 degrees that defines a flat sunrise.
-check("the sun's centre is at the wall height less the standard depression",
-      atWalledRise.elevationWithoutRefraction, 20.0 + Refraction.sunriseAltitude, 0.01)
+// The centre sits a little below the wall's top, because what appears over the
+// wall is the upper limb. How far below is a published quantity and is settled
+// in section 12; here it is only bounded, so that a solver that stopped at the
+// flat horizon or overshot the wall entirely is caught.
+checkTrue("the sun's centre sits just below the top of the wall, got \(atWalledRise.elevationWithoutRefraction)",
+          atWalledRise.elevationWithoutRefraction < 20.0
+              && atWalledRise.elevationWithoutRefraction > 19.0)
 
 // An eastern wall cannot touch the evening.
 let walledSet = Shadow.localSunset(date: atlanticDay, place: atlantic, profile: eastWall)
@@ -349,14 +353,27 @@ if let period = spikePeriods.first {
     print(String(format: "  spike: shade from %.1f min after sunrise, ending %.1f min before sunset", fromRise, toSet))
     checkTrue("the shade begins well after sunrise, \(fromRise) min", fromRise > 30)
     checkTrue("the shade ends well before sunset, \(toSet) min", toSet > 30)
-    // Both boundaries are crossings of the spike, so at each the sun sits on the
-    // skyline to within the quarter second the solver brackets to.
+    // Both boundaries are crossings of the spike rather than of the flat
+    // horizon, so at each the shade begins or ends within a second, and the sun
+    // is a long way up the sky while it happens. Stated as a flip in the
+    // predicate rather than as a comparison against a restated threshold: a
+    // boundary is a boundary because the answer changes across it.
+    checkTrue("the shade has not begun a second before it begins",
+              !obstructed(period.start.adding(seconds: -1), berlin, spike))
+    checkTrue("the shade has begun a second after it begins",
+              obstructed(period.start.adding(seconds: 1), berlin, spike))
+    checkTrue("the shade has not ended a second before it ends",
+              obstructed(period.end.adding(seconds: -1), berlin, spike))
+    checkTrue("the shade has ended a second after it ends",
+              !obstructed(period.end.adding(seconds: 1), berlin, spike))
     for (name, edge) in [("start", period.start), ("end", period.end)] {
         let sun = SolarPositionSPA.evaluate(julianDay: edge, place: berlin)
-        check("at the \(name) of the shade the sun is on the skyline",
-              sun.elevationWithoutRefraction, skylineTarget(spike, sun.azimuth), 0.02)
         checkTrue("at the \(name) of the shade the sun is high above the flat horizon, \(sun.elevationWithoutRefraction)",
                   sun.elevationWithoutRefraction > 10)
+        // Nothing on this profile is taller than the spike, so whatever is
+        // hiding the sun at a boundary cannot be hiding it from above 45.
+        checkTrue("at the \(name) of the shade the sun is below the spike, \(sun.elevationWithoutRefraction)",
+                  sun.elevationWithoutRefraction < 45.0)
     }
 }
 let countedSpike = countObstructedSeconds(berlinDay, berlin, spike)
@@ -455,6 +472,154 @@ for height in [2.0, 5.0, 10.0, 15.0, 20.0] {
     checkTrue("a \(height) degree skyline shades morning and evening, got \(periods.count) stretches",
               periods.count == 2)
 }
+
+// 12. The skyline target against published refraction values.
+//
+//     This is the check the module had no equivalent of, and it is the one that
+//     caught the module being wrong. A sector holds the apparent altitude of the
+//     ridge, so the sun's upper limb appears over it when the sun's apparent
+//     centre sits one semidiameter lower, and the true altitude the solver works
+//     in is that less the atmospheric refraction at that apparent altitude.
+//     Refraction is not a constant, and the module used to behave as though it
+//     were, adding the ridge to the flat -0.8333 degrees and so carrying the
+//     horizon's 34 arcminutes all the way up the ridge with it.
+//
+//     Published values, in arcminutes against apparent altitude, from the
+//     Nautical Almanac altitude correction tables, thenauticalalmanac.com,
+//     Increments_and_Corrections/Altitude_Correction_Tables.pdf, fetched
+//     23 August 2026:
+//
+//       apparent altitude   6.0   10.0   20.0   30.0   45.0
+//       refraction          8.5    5.4    2.7    1.7    1.0
+//
+//     Wikipedia's atmospheric refraction article, fetched the same day, gives
+//     the same shape from an independent source, 5.3 arcminutes at ten degrees
+//     and 35.4 at the horizon, and states the conventional decomposition of the
+//     standard sunrise altitude as 34 arcminutes of refraction plus 16 of solar
+//     semidiameter.
+//
+//     Nothing below reads the module's target formula. It reads the sun's true
+//     altitude at the instant the public API calls local sunrise over a uniform
+//     skyline, which is the target made observable, and asks how that altitude
+//     moves as the skyline is raised. Between two heights it must move by the
+//     change in height less the change in published refraction. That difference
+//     cancels every convention the model may be anchored to and leaves only the
+//     physics. The old model moved by the change in height alone, missing by 3.1
+//     arcminutes over the first pair and 0.7 over the last.
+
+let semidiameter = 0.26667
+// Skyline heights chosen so the sun's apparent centre lands exactly on a
+// tabulated row, which keeps interpolation out of the reference value.
+let publishedRefraction: [(skyline: Double, arcminutes: Double)] = [
+    (6.0 + semidiameter, 8.5),
+    (10.0 + semidiameter, 5.4),
+    (20.0 + semidiameter, 2.7),
+    (30.0 + semidiameter, 1.7),
+    (45.0 + semidiameter, 1.0),
+]
+
+func trueAltitudeAtLocalSunrise(_ skyline: Double) -> Double {
+    let profile = HorizonProfile(sectors: Array(repeating: skyline, count: 36))!
+    guard let rise = Shadow.localSunrise(date: atlanticDay, place: atlantic, profile: profile) else { return .nan }
+    return SolarPositionSPA.evaluate(julianDay: rise, place: atlantic).elevationWithoutRefraction
+}
+
+var targets: [Double] = []
+for row in publishedRefraction {
+    let target = trueAltitudeAtLocalSunrise(row.skyline)
+    checkTrue("a uniform skyline of \(row.skyline) degrees still has a sunrise at the equator in October", !target.isNaN)
+    targets.append(target)
+}
+
+// The solver brackets to a quarter second and the sun climbs about a quarter of
+// an arcminute per second here, so each endpoint carries a few hundredths of an
+// arcminute. A quarter of an arcminute of tolerance leaves room for that and
+// still rejects the old model by a factor of three at its smallest error.
+for index in 1..<publishedRefraction.count {
+    let low = publishedRefraction[index - 1]
+    let high = publishedRefraction[index]
+    let expected = (high.skyline - low.skyline) - (high.arcminutes - low.arcminutes) / 60.0
+    let got = targets[index] - targets[index - 1]
+    print(String(format: "  skyline %5.2f to %5.2f: target moves %8.5f deg, published %8.5f deg, off by %5.2f arcmin",
+                 low.skyline, high.skyline, got, expected, abs(got - expected) * 60))
+    check("published refraction between skylines of \(low.skyline) and \(high.skyline) degrees",
+          got, expected, 0.25 / 60.0)
+}
+
+// The absolute level, which the differences above deliberately cancel. The one
+// convention this model keeps is the conventional 34 arcminutes at the horizon,
+// a rounded standard rather than what any refraction formula returns just below
+// the horizon. That rounding is carried unchanged up the ridge, so the gap to
+// the published physics must be a small constant, the same at every height, and
+// never the half degree that applying the horizon's refraction at twenty
+// degrees would cost.
+var gaps: [Double] = []
+for (index, row) in publishedRefraction.enumerated() {
+    let published = row.skyline - semidiameter - row.arcminutes / 60.0
+    gaps.append((targets[index] - published) * 60.0)
+}
+print(String(format: "  gap to published physics, arcminutes: %@",
+             gaps.map { String(format: "%.2f", $0) }.joined(separator: ", ")))
+for (index, row) in publishedRefraction.enumerated() {
+    checkTrue("the target at a skyline of \(row.skyline) degrees sits within ten arcminutes of published refraction, gap \(gaps[index])",
+              abs(gaps[index]) < 10.0)
+}
+checkTrue("the gap is one constant rather than a drift, spread \(gaps.max()! - gaps.min()!) arcmin",
+          gaps.max()! - gaps.min()! < 0.25)
+
+// 13. The sweep, which is the only way a profile gets filled from the camera.
+//
+//     A sweep that keeps the maximum against a profile that starts at zero can
+//     never record a skyline below the astronomical horizon, and the sea horizon
+//     seen from a summit is exactly that. Section 9 above proves the solver
+//     handles a depressed horizon; this proves the capture path can produce one.
+//     The Nautical Almanac dip table, on the same fetched sheet, gives the size
+//     of the case: an eye height of 20 metres puts the sea horizon 7.9
+//     arcminutes down, and 48 metres puts it 12.2 arcminutes down, so a cliff
+//     path or a summit is a real profile with negative sectors in it.
+
+var summitSweep = HorizonProfile.flat
+checkTrue("a profile that has never been swept is not a measurement", !summitSweep.isMeasured)
+check("and no sector of it is measured", Double(summitSweep.measuredSectorCount), 0.0, 0.0)
+summitSweep.record(azimuth: 180, altitude: -1.5)
+check("a sweep records a horizon below the astronomical one", summitSweep.altitude(atAzimuth: 180), -1.5, 0.0)
+checkTrue("and the profile is now a measurement", summitSweep.isMeasured)
+check("of exactly one sector", Double(summitSweep.measuredSectorCount), 1.0, 0.0)
+summitSweep.record(azimuth: 180, altitude: -2.0)
+check("a later lower reading does not deepen it", summitSweep.altitude(atAzimuth: 180), -1.5, 0.0)
+summitSweep.record(azimuth: 180, altitude: -1.0)
+check("a later higher reading raises it", summitSweep.altitude(atAzimuth: 180), -1.0, 0.0)
+check("the untouched sectors are still zero", summitSweep.altitude(atAzimuth: 0), 0.0, 0.0)
+
+// The distinction the interface has to carry: two profiles that produce
+// identical numbers, one of them a measurement and one of them an assumption.
+let sweptSeaHorizon = HorizonProfile(sectors: Array(repeating: 0.0, count: 36))!
+checkTrue("the assumed flat horizon is flat", HorizonProfile.flat.isFlat)
+checkTrue("a swept sea horizon is flat too", sweptSeaHorizon.isFlat)
+checkTrue("but only one of them is a measurement",
+          !HorizonProfile.flat.isMeasured && sweptSeaHorizon.isMeasured)
+checkTrue("and they compute the same sunrise",
+          abs(Shadow.localSunrise(date: atlanticDay, place: atlantic, profile: sweptSeaHorizon)!.value
+              - Shadow.localSunrise(date: atlanticDay, place: atlantic, profile: .flat)!.value) * 86400 < 0.5)
+
+// The observation mask survives being saved, and a file written before it
+// existed still loads, as a measurement, because somebody saved it.
+let sweptCoded = try! JSONEncoder().encode(summitSweep)
+let sweptDecoded = try! JSONDecoder().decode(HorizonProfile.self, from: sweptCoded)
+checkTrue("a partly swept profile round trips", sweptDecoded == summitSweep)
+check("and keeps its measured count", Double(sweptDecoded.measuredSectorCount), 1.0, 0.0)
+let legacyPayload = "{\"sectors\":[" + Array(repeating: "0", count: 36).joined(separator: ",") + "]}"
+let legacyProfile = try! JSONDecoder().decode(HorizonProfile.self, from: Data(legacyPayload.utf8))
+checkTrue("a payload written without the mask loads as a measurement", legacyProfile.isMeasured)
+check("of every sector", Double(legacyProfile.measuredSectorCount), 36.0, 0.0)
+var badMask = false
+do {
+    _ = try JSONDecoder().decode(
+        HorizonProfile.self,
+        from: Data(("{\"sectors\":[" + Array(repeating: "0", count: 36).joined(separator: ",")
+                    + "],\"observed\":[true,false]}").utf8))
+} catch { badMask = true }
+checkTrue("a mask of the wrong length fails to decode", badMask)
 
 if failures == 0 { print("terrain: all \(checks) checks passed") }
 else { print("terrain: \(failures) FAILURES of \(checks)"); exit(1) }

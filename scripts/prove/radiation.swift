@@ -336,19 +336,45 @@ do {
 // MARK: - Air mass against Kasten and Young [K]
 
 do {
-    // The 1989 paper reports that its recomputed horizon air mass agrees with
-    // three earlier independent tables: 38.16 (Link and Neuzil), 38.10 (Snider
-    // and Goldman) and 38.11 (Treve), and that its approximation formula sits
-    // within 0.5 percent of the recomputed table everywhere.
-    let horizon = Irradiance.airMass(solarAltitude: 0)
-    checkWithin("air mass at the horizon against the published tables", horizon, 38.11, percent: 1.0)
-    checkTrue("air mass at the horizon is finite and near 38, got \(horizon)",
-              horizon > 37 && horizon < 39)
+    // Table II of the paper, the relative optical air mass m(gamma) computed by
+    // stepwise analytic integration through the ISO Standard Atmosphere. These
+    // are the numbers the approximation formula was fitted TO, so they are the
+    // reference the formula has to answer to. The paper states its maximum
+    // relative error against this table is below 0.5 percent, and its own r
+    // column peaks at 0.432 percent at the horizon.
+    let kastenYoungTable: [(elevation: Double, mass: Double)] = [
+        (0.0, 38.0868), (1.0, 26.2595), (2.0, 19.4308), (3.0, 15.1633),
+        (4.0, 12.3174), (5.0, 10.3164), (6.0, 8.8475), (7.0, 7.7307),
+        (8.0, 6.8568), (9.0, 6.1565), (10.0, 5.5841), (11.0, 5.1081),
+        (12.0, 4.7067), (13.0, 4.3640), (14.0, 4.0682), (15.0, 3.8105),
+        (16.0, 3.5841), (17.0, 3.3838), (18.0, 3.2054), (19.0, 3.0455),
+        (20.0, 2.9016), (21.0, 2.7713), (22.0, 2.6529), (23.0, 2.5449),
+        (24.0, 2.4460), (25.0, 2.3552), (26.0, 2.2714), (27.0, 2.1941),
+        (28.0, 2.1224), (29.0, 2.0558), (30.0, 1.9939), (35.0, 1.7398),
+        (40.0, 1.5535), (45.0, 1.4128), (50.0, 1.3045), (55.0, 1.2202),
+        (60.0, 1.1543), (65.0, 1.1031), (70.0, 1.0640), (75.0, 1.0352),
+        (80.0, 1.0154), (85.0, 1.0038), (90.0, 1.0000)
+    ]
+    var worstAirMassError = 0.0, worstAirMassElevation = 0.0
+    for row in kastenYoungTable {
+        let m = Irradiance.airMass(solarAltitude: row.elevation)
+        checkWithin("air mass at \(row.elevation) degrees against Table II", m, row.mass, percent: 0.5)
+        let error = abs(m / row.mass - 1) * 100
+        if error > worstAirMassError { worstAirMassError = error; worstAirMassElevation = row.elevation }
+    }
+    print(String(format: "  air mass: worst deviation from Kasten and Young Table II is %.3f%% at %.0f degrees",
+                 worstAirMassError, worstAirMassElevation))
 
-    // The relative air mass is 1 at the zenith by definition.
-    check("air mass at the zenith", Irradiance.airMass(solarAltitude: 90), 1.0, 0.001)
-    // The brief's target, and the standard tabulated value.
-    check("air mass at 30 degrees elevation", Irradiance.airMass(solarAltitude: 30), 2.0, 0.01)
+    // The three earlier independent tables the paper quotes for the horizon:
+    // 38.16 (Link and Neuzil), 38.10 (Snider and Goldman) and 38.11 (Treve).
+    let horizon = Irradiance.airMass(solarAltitude: 0)
+    checkWithin("air mass at the horizon against Link and Neuzil", horizon, 38.16, percent: 1.0)
+    checkWithin("air mass at the horizon against Snider and Goldman", horizon, 38.10, percent: 1.0)
+    checkWithin("air mass at the horizon against Treve", horizon, 38.11, percent: 1.0)
+    // The value Kasten 1965 published and this paper corrects. Reproducing it
+    // would mean the old constants had been used.
+    checkTrue("air mass at the horizon is not the superseded 36.2648, got \(horizon)",
+              abs(horizon - 36.2648) > 1.0)
 
     // Above 30 degrees the path is nearly a flat slab, so the air mass must
     // track the secant to a fraction of a percent. This is an analytic

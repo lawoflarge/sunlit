@@ -202,6 +202,16 @@ let synthetic: [SyntheticCity] = [
     SyntheticCity(name: "York", asciiName: "York", countryCode: "GB",
                   latitude: 53.95763, longitude: -1.08271, elevation: 17,
                   population: 156_135, timeZone: "Europe/London"),
+    // Two keys where the query is a substring of the first and a prefix of the
+    // second, with a smaller city that matches as a prefix outright. This is the
+    // shape that decides whether a city is classed by its best key or by its
+    // first matching one; the real resource has eleven cities in it.
+    SyntheticCity(name: "Donostia / San Sebastián", asciiName: "San Sebastian",
+                  countryCode: "ES", latitude: 43.31283, longitude: -1.97499,
+                  elevation: 12, population: 185_357, timeZone: "Europe/Madrid"),
+    SyntheticCity(name: "San Sebastián de los Reyes", asciiName: "San Sebastian de los Reyes",
+                  countryCode: "ES", latitude: 40.54746, longitude: -3.62612,
+                  elevation: 700, population: 75_912, timeZone: "Europe/Madrid"),
 ]
 
 guard let index = try? CityIndex(data: encodeSynthetic(synthetic)) else {
@@ -282,6 +292,23 @@ checkTrue("york first is the smaller city", yorks[0].population < yorks[1].popul
 // Reading it the other way round: "field" only ever matches inside a name.
 checkEqual("field substring", index.search("field", limit: 10).first?.name ?? "", "Springfield")
 
+// A city is classed by the best of its keys. "san sebastian" sits inside the
+// first key of Donostia / San Sebastián and starts its second, so it is a prefix
+// hit and outranks the smaller town whose only key it also starts. Deciding on
+// the first key that matched would put the larger city into the substring class
+// and, with a short list, off the end of it.
+let sebastians = index.search("san sebastian", limit: 10)
+checkEqual("san sebastian result count", sebastians.count, 2)
+checkEqual("san sebastian best key wins", sebastians[0].name, "Donostia / San Sebastián")
+checkEqual("san sebastian runner up", sebastians[1].name, "San Sebastián de los Reyes")
+checkEqual("san sebastian survives a one-row list",
+           index.search("san sebastian", limit: 1).first?.name ?? "", "Donostia / San Sebastián")
+// The other key still works on its own, and still only yields the city once.
+checkEqual("donostia by its first key",
+           index.search("donostia", limit: 10).first?.name ?? "", "Donostia / San Sebastián")
+checkEqual("donostia appears once",
+           index.search("donostia", limit: 10).count, 1)
+
 // The limit is honoured and a query that folds to nothing returns nothing.
 checkEqual("limit one", index.search("s", limit: 1).count, 1)
 // A caller asking for everything gets everything.
@@ -352,6 +379,39 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
     checkEqual("resource Sao Paulo with the tilde",
                cities.search("São Paulo", limit: 5).first?.name ?? "", "São Paulo")
 
+    // Zürich carries two keys, "zurich" from the name and "zuerich" from the
+    // ASCII name, so all three spellings a German keyboard produces arrive at
+    // the same city.
+    let zurich = cities.search("zurich", limit: 5)
+    checkEqual("resource zurich first name", zurich.first?.name ?? "", "Zürich")
+    checkEqual("resource zurich first country", zurich.first?.countryCode ?? "", "CH")
+    checkEqual("resource zurich time zone",
+               zurich.first?.timeZoneIdentifier ?? "", "Europe/Zurich")
+    checkEqual("resource zuerich spelled out",
+               cities.search("zuerich", limit: 5).first?.name ?? "", "Zürich")
+    checkEqual("resource Zürich typed with the umlaut",
+               cities.search("Zürich", limit: 5).first?.name ?? "", "Zürich")
+
+    // A city whose script the fold cannot represent at all is reached by the
+    // ASCII name GeoNames carries for it. Without this the whole Japanese,
+    // Chinese and Korean half of the database would be unreachable and no test
+    // over European names would notice.
+    checkEqual("resource tokyo", cities.search("tokyo", limit: 5).first?.name ?? "", "Tokyo")
+    checkEqual("resource tokyo time zone",
+               cities.search("tokyo", limit: 5).first?.timeZoneIdentifier ?? "", "Asia/Tokyo")
+    checkEqual("resource osaka", cities.search("osaka", limit: 5).first?.name ?? "", "Osaka")
+    checkEqual("resource kyoto", cities.search("kyoto", limit: 5).first?.name ?? "", "Kyoto")
+    checkEqual("resource shanghai",
+               cities.search("shanghai", limit: 5).first?.name ?? "", "Shanghai")
+    checkEqual("resource shanghai country",
+               cities.search("shanghai", limit: 5).first?.countryCode ?? "", "CN")
+    checkEqual("resource beijing", cities.search("beijing", limit: 5).first?.name ?? "", "Beijing")
+    // Xi'an is stored with a typographic apostrophe. The fold deletes it on both
+    // sides, so the ASCII spelling with no apostrophe still reaches it.
+    checkEqual("resource xian without the apostrophe",
+               cities.search("xian", limit: 5).first?.name ?? "", "Xi’an")
+    checkEqual("resource seoul", cities.search("seoul", limit: 5).first?.name ?? "", "Seoul")
+
     // Ranking, measured rather than assumed: the results of a broad query come
     // back in population order.
     let broad = cities.search("san", limit: 20)
@@ -375,6 +435,23 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
                   realYorks[newYorkPosition - 1].population < realYorks[newYorkPosition].population)
     }
 
+    // The class a two-key city lands in is decided by the best of its keys, not
+    // by the first one that happens to match. GeoNames writes San Sebastián as
+    // "Donostia / San Sebastián" with the ASCII name "San Sebastian", so the
+    // query is a substring of the first key and a prefix of the second. Stopping
+    // at the first match put the city, 185,357 people, into the substring class
+    // behind San Sebastián de los Reyes at 75,912, San Sebastián de Mariquita at
+    // 33,340, San Sebastián at 29,167 and San Sebastián el Grande at 28,138 —
+    // and off the end of a five-row list entirely. Eleven cities in the
+    // committed resource are in that shape.
+    let sebastian = cities.search("san sebastian", limit: 25)
+    checkEqual("resource san sebastian first", sebastian.first?.name ?? "",
+               "Donostia / San Sebastián")
+    checkTrue("resource san sebastian survives a short list",
+              cities.search("san sebastian", limit: 5).first?.name == "Donostia / San Sebastián")
+    checkTrue("resource san sebastian is the most populous of its hits",
+              sebastian.allSatisfy { $0.population <= (sebastian.first?.population ?? 0) })
+
     // Elevation is carried, not dropped. Mexico City sits above 2200 m, and the
     // clear-sky UV and irradiance models read that elevation.
     if let mexico = cities.search("mexico city", limit: 3).first {
@@ -384,6 +461,47 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
     } else {
         fail("resource did not find Mexico City")
     }
+
+    // The Python folder and the Swift folder, checked against each other over
+    // every name in the file rather than over a handful of chosen ones. Each
+    // display name is folded here and has to come out equal to one of the keys
+    // build.py wrote for that city. A single character on which the two
+    // implementations disagreed — one Unicode category treated differently, one
+    // letter missing from a transliteration table — would silently cost every
+    // city spelled with it, and the fifteen hand-picked fold cases above would
+    // not see it. 34,106 names, under a second.
+    let raw = [UInt8](blob)
+    func readWord(_ offset: Int) -> Int {
+        Int(UInt32(raw[offset]) | (UInt32(raw[offset + 1]) << 8)
+            | (UInt32(raw[offset + 2]) << 16) | (UInt32(raw[offset + 3]) << 24))
+    }
+    var storedKeys: [[String]] = Array(repeating: [], count: cities.count)
+    var keyCursor = readWord(36)
+    let keyFinish = keyCursor + readWord(40)
+    var whichCity = 0
+    while keyCursor < keyFinish && whichCity < cities.count {
+        let header = raw[keyCursor]
+        let length = Int(header & 0x7F)
+        storedKeys[whichCity].append(
+            String(decoding: raw[(keyCursor + 1)..<(keyCursor + 1 + length)], as: UTF8.self))
+        if header & 0x80 != 0 { whichCity += 1 }
+        keyCursor = keyCursor + 1 + length
+    }
+    checkEqual("the key blob walk lands on the city count", whichCity, cities.count)
+    var foldMismatches = 0
+    var firstMismatch = ""
+    for position in 0..<cities.count {
+        let folded = CityIndex.foldedSearchKey(cities.city(at: position).name)
+        if !storedKeys[position].contains(folded) {
+            foldMismatches += 1
+            if firstMismatch.isEmpty {
+                firstMismatch = "\(cities.city(at: position).name) folded to \(folded), "
+                    + "build.py wrote \(storedKeys[position])"
+            }
+        }
+    }
+    checkEqual("Swift folding matches build.py on every name in the file, \(firstMismatch)",
+               foldMismatches, 0)
 
     // Three known coordinates, one per hemisphere pairing.
     let nearMunich = cities.nearest(latitude: 48.1372, longitude: 11.5755)
@@ -399,12 +517,29 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
     checkEqual("nearest to Manhattan country", nearNewYork?.countryCode ?? "", "US")
 
     // Timing. Search runs on every keystroke, so it has to finish inside a
-    // frame. The queries below are chosen to be expensive: each one leaves the
-    // prefix class short of the limit, which forces the substring scan across
-    // the whole key blob, and most of them start with a common letter so the
-    // inner comparison is entered often.
+    // frame.
+    //
+    // The query set matters more than the stopwatch does. An earlier version of
+    // this driver timed "a", "e", "s", "an", "er", "new", "san" and "sao" and
+    // described them as expensive because they "leave the prefix class short of
+    // the limit". They do the opposite. Counted against the committed resource,
+    // "a" has 2193 prefix matches, "s" has 3725, "e" has 778, "san" has 745:
+    // eight of the sixteen fill the limit of 25 within the first few thousand
+    // keys and leave the walk early. They measured 0.007 to 0.074 ms, the
+    // cheapest queries in the set, and the driver was calling them the worst
+    // case.
+    //
+    // A query is expensive when it (a) never fills the prefix class, so the walk
+    // runs to the end of the key blob, and (b) begins with a byte that is common
+    // in the blob, so the inner comparison is entered on many of its 313,904
+    // bytes. 'a' occurs 45,956 times, 'n' 23,067, 'e' 22,792. The last six
+    // entries below are that shape, "annaa" being an ordinary typing slip rather
+    // than a contrivance. Measured side by side on one machine: worst of the old
+    // set 0.390 ms on "koln", worst of the six added 0.696 ms on "a q", so the
+    // set that was there understated the worst case by roughly a factor of two.
     let queries = ["a", "an", "ang", "ari", "berg", "e", "er", "eri", "ington",
-                   "koln", "new", "s", "san", "sao", "ville", "zzzzz"]
+                   "koln", "new", "s", "san", "sao", "ville", "zzzzz",
+                   "aqx", "annaa", "aan", "a q", "nqz", "eqx"]
     var worstQuery = ""
     var worstMilliseconds = 0.0
     // Every result is counted into a sink that is asserted on below. Without it
@@ -417,9 +552,13 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
         // fastest batch belongs to something else that was running on the
         // machine. Taking a mean here would measure the build server's load
         // rather than this code.
+        // Eleven batches rather than five, at half the rounds each, so the total
+        // work is unchanged and the minimum has twice as many samples to be the
+        // minimum of. On a loaded build machine the five-batch minimum for the
+        // expensive queries wandered between 1.4 and 4.2 ms; this narrows it.
         var best = Double.infinity
-        for _ in 0..<5 {
-            let rounds = 20
+        for _ in 0..<11 {
+            let rounds = 10
             let started = ProcessInfo.processInfo.systemUptime
             for _ in 0..<rounds { searchSink += cities.search(query, limit: 25).count }
             let elapsed = (ProcessInfo.processInfo.systemUptime - started) / Double(rounds) * 1000.0
@@ -433,10 +572,16 @@ if let blob = try? Data(contentsOf: URL(fileURLWithPath: resourcePath)) {
     checkTrue("the timed searches actually ran", searchSink >= 100 * queries.count)
     print(String(format: "       search over %d cities, slowest of %d queries: %.3f ms on \"%@\"",
                  cities.count, queries.count, worstMilliseconds, worstQuery))
-    // The frame budget is 16 ms. Anything close to it would drop a frame while
-    // the keyboard is also drawing, so the assertion is set well inside it.
+    // The frame budget is 16 ms, and that is the hard line.
     checkTrue("search stays inside the frame budget", worstMilliseconds < 16.0)
-    checkTrue("search is well inside the frame budget", worstMilliseconds < 4.0)
+    // The second line is half a frame. The worst query measures 0.696 ms here,
+    // so there is a factor of eleven in hand against the frame budget and a
+    // factor of eleven again against this line. The line is not tighter because
+    // the number it guards is a wall clock on a shared build machine: with the
+    // old five-batch minimum the same query was seen at 4.2 ms during a load
+    // spike, which the old 4 ms assertion would have failed. Tighten it if you
+    // ever run this somewhere quiet.
+    checkTrue("search is well inside the frame budget", worstMilliseconds < 8.0)
 
     var nearestSink = 0
     var nearestMilliseconds = Double.infinity

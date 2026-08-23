@@ -13,8 +13,12 @@ import Foundation
 //
 //     Data source: GeoNames, https://www.geonames.org, CC BY 4.0
 //
-// That attribution is a licence obligation. It appears in Settings inside the
-// app, in the repository README, and on the website. It is not to be dropped.
+// That attribution is a licence obligation and is owed in three places: in
+// Settings inside the app, in the repository README, and on the website. As of
+// this writing the website carries it (web/index.html, web/privacy.html and
+// web/support.html) and the other two do not exist yet: there is no README in
+// this repository and Sources/Sunlit/Features/Settings is still empty. Neither
+// may ship without it, and `CityIndex.attribution` below is the string to use.
 //
 // The resource is produced by Sources/Sunlit/Resources/Cities/build.py and is
 // committed to the repository, because the app has to build with no network
@@ -70,14 +74,26 @@ import Foundation
 //       u8    length, with bit 7 set when this is the last key of a city
 //       ...   the key, ASCII, at most 127 bytes
 //     A city carries one key when its GeoNames `name` and `asciiname` fold to
-//     the same thing, and two when they differ. Koeln stores "koln" from
-//     "Koeln" folded and "koeln" from the ASCII name, so both spellings find
-//     it.
+//     the same thing, and two when they differ. Köln stores "koln", folded from
+//     the name, and "koeln", folded from the ASCII name "Koeln", so both
+//     spellings find it. 390 of the 34,106 cities carry two keys.
 //
-// Not indexed: exonyms. The GeoNames alternate name column carries them, but
-// without language tags and mixed with transliteration noise, and indexing
-// every Latin-script entry measures 3.25 MB, past the budget for this
-// resource. Search runs against the local name and the ASCII name only.
+// Not indexed: the `alternatenames` column. It is where GeoNames keeps every
+// other spelling of a place, but it keeps them without language tags and mixed
+// with transliteration noise, and folding every entry in it measures 3,245,149
+// bytes for the resource, past the 3 MB budget. Search runs against the `name`
+// and `asciiname` columns only.
+//
+// The consequence is bigger than the phrase "no alternate names" suggests, and
+// it is not the consequence one would guess. GeoNames `name` is frequently the
+// English exonym rather than the local endonym, so it is the *local* spelling
+// that is missing: "munich" finds Munich and "muenchen" does not, "gothenburg"
+// finds Gothenburg and "goteborg" does not. Measured over a sample of 36
+// European endonyms, 21 of them reach nothing or the wrong place, among them
+// München, Praha, Warszawa, Firenze, Venezia, Bruxelles, København, Moskva and
+// Athina. The app sells in ten languages, so this is a known product gap and
+// not merely a note on the file format. Closing it means indexing part of
+// `alternatenames` and re-arguing the 3 MB budget.
 
 /// One populated place, as stored in the embedded database.
 public struct City: Equatable, Hashable, Sendable {
@@ -288,11 +304,16 @@ public struct CityIndex: Sendable {
     /// Cities whose folded name starts with, or contains, the folded query.
     ///
     /// The query is folded exactly as the stored keys were, so the match is
-    /// case insensitive and diacritic insensitive: "koln" finds Koeln and "sao"
-    /// finds Sao Paulo. Names that begin with the query come first, names that
-    /// merely contain it come after, and within each of those two classes the
-    /// order is population descending. That order is free, because the records
-    /// are already stored in population order and the walk visits them in it.
+    /// case insensitive and diacritic insensitive: "koln" finds Köln, "sao"
+    /// finds São Paulo, "zurich" finds Zürich. Names that begin with the query
+    /// come first, names that merely contain it come after, and within each of
+    /// those two classes the order is population descending. That order is
+    /// free, because the records are already stored in population order and the
+    /// walk visits them in it.
+    ///
+    /// A city carrying two keys is placed by the best of them: it is a prefix
+    /// hit if either key starts with the query, even when the other key only
+    /// contains it.
     ///
     /// An empty query, or one that folds away to nothing, returns no results.
     public func search(_ query: String, limit: Int = 25) -> [City] {
@@ -315,13 +336,19 @@ public struct CityIndex: Sendable {
                 var cursor = keyOffset
                 let end = keyOffset + keyLength
                 var cityIndex = 0
-                // A city can carry two keys. Once one of them has matched, the
-                // rest are skipped so the city appears once. A city whose first
-                // key matches as a substring while a later key would have
-                // matched as a prefix is therefore ranked one class low. With
-                // keys drawn from a name and its ASCII spelling that case does
-                // not arise, and it would cost a hit's rank, never the hit.
-                var cityAlreadyMatched = false
+                // A city can carry two keys, and the class it lands in is
+                // decided only once every one of them has been looked at.
+                // Stopping at the first key that matched would rank a city one
+                // class low whenever an earlier key contains the query and a
+                // later key starts with it, and those two keys are not exotic:
+                // GeoNames writes San Sebastian as "Donostia / San Sebastián"
+                // with the ASCII name "San Sebastian", so the query "san
+                // sebastian" is a substring of the first key and a prefix of
+                // the second. Eleven cities in the committed resource are in
+                // that shape, and the largest of them, 185,357 people, was
+                // ranked behind towns of 75,912, 33,340, 29,167 and 28,138.
+                var cityMatchedPrefix = false
+                var cityMatchedSubstring = false
 
                 walk: while cursor < end {
                     let header = base[cursor]
@@ -330,7 +357,7 @@ public struct CityIndex: Sendable {
                     let start = cursor + 1
                     cursor = start + length
 
-                    if !cityAlreadyMatched && length >= needleCount {
+                    if !cityMatchedPrefix && length >= needleCount {
                         var isPrefix = true
                         var i = 0
                         while i < needleCount {
@@ -338,10 +365,8 @@ public struct CityIndex: Sendable {
                             i += 1
                         }
                         if isPrefix {
-                            prefixHits.append(cityIndex)
-                            cityAlreadyMatched = true
-                            if prefixHits.count == limit { break walk }
-                        } else if substringHits.count < limit {
+                            cityMatchedPrefix = true
+                        } else if !cityMatchedSubstring && substringHits.count < limit {
                             let lastStart = length - needleCount
                             var position = 1
                             scan: while position <= lastStart {
@@ -356,8 +381,7 @@ public struct CityIndex: Sendable {
                                         j += 1
                                     }
                                     if equal {
-                                        substringHits.append(cityIndex)
-                                        cityAlreadyMatched = true
+                                        cityMatchedSubstring = true
                                         break scan
                                     }
                                 }
@@ -367,8 +391,15 @@ public struct CityIndex: Sendable {
                     }
 
                     if isLastKey {
+                        if cityMatchedPrefix {
+                            prefixHits.append(cityIndex)
+                            if prefixHits.count == limit { break walk }
+                        } else if cityMatchedSubstring {
+                            substringHits.append(cityIndex)
+                        }
                         cityIndex += 1
-                        cityAlreadyMatched = false
+                        cityMatchedPrefix = false
+                        cityMatchedSubstring = false
                     }
                 }
             }

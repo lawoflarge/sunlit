@@ -88,6 +88,40 @@ let tromsoDecember = Place(name: "Tromso 2026-12-21",
                            geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
                            year: 2026, month: 12, day: 21, offsetHours: 1)
 
+// Two days on which one threshold is crossed downward twice inside the same
+// local day, so that the previous evening's event and this evening's event both
+// fall in it. USNO prints the second crossing on a continuation row under the
+// same day number, which is how these two were found. They are here because
+// they are the only configuration that can tell "the last crossing of the day"
+// apart from "the first", and every other case in this file is blind to it.
+let tromsoJuly = Place(name: "Tromso 2026-07-27",
+                       geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
+                       year: 2026, month: 7, day: 27, offsetHours: 2)
+let berlinAugust = Place(name: "Berlin 2026-08-02",
+                         geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
+                         year: 2026, month: 8, day: 2, offsetHours: 2)
+// The mirror case, a threshold crossed upward twice. It needs a day that begins
+// on the rising side of solar midnight, which means solar noon before twelve,
+// which Berlin has only when the twenty four hour window is the UT day rather
+// than the CEST one. `Twilight.phases` is defined on a window and not on a
+// civil time zone, and USNO tabulates exactly this window at tz zero, so the
+// two are answering the same question.
+let berlinMayUT = Place(name: "Berlin 2026-05-13 UT day",
+                        geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
+                        year: 2026, month: 5, day: 13, offsetHours: 0)
+// A day whose own astronomical dusk falls after it ends, so the only such
+// crossing inside it is the previous evening's, two minutes before the padded
+// solve window would have reached the next one.
+let berlinAugustFirst = Place(name: "Berlin 2026-08-01",
+                              geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
+                              year: 2026, month: 8, day: 1, offsetHours: 2)
+// A night on which the sun dips out of the golden band and back in before
+// dawn, so the morning has two spells of golden light and only the later one
+// leads into the day.
+let tromsoAugust = Place(name: "Tromso 2026-08-08",
+                         geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
+                         year: 2026, month: 8, day: 8, offsetHours: 2)
+
 /// Published local clock times for one place and day. nil means the authority
 /// reported that the event did not occur, printed as //// for a twilight limit
 /// that is never crossed and as **** or ---- for a sun that never sets or never
@@ -107,6 +141,12 @@ struct Published {
     /// midnight of the previous local day, which is a different instant from
     /// the one this day contains, so it is not a reference for this day.
     let nadir: String?
+    /// False on a day whose thresholds are not all crossed on the same descent.
+    /// Berlin on 2026-08-01 ends astronomical twilight at 00:08, which is the
+    /// previous evening's crossing landing inside this day, while this
+    /// evening's falls at 00:02 of the next one and is therefore not this day's
+    /// event. The dusk chain then reads out of order and is meant to.
+    let duskIsOneEvening: Bool
     /// MET Norway disc centre elevation at solar noon, in degrees. Its noon and
     /// midnight values mirror each other exactly across the two solstices,
     /// which refraction would not do, so these are geometric altitudes and are
@@ -171,7 +211,7 @@ func verify(_ place: Place, _ reference: Published) {
         ("civil dusk", phases.civilDusk),
         ("nautical dusk", phases.nauticalDusk),
         ("astronomical dusk", phases.astronomicalDusk)]
-    for sequence in [dawnSequence, duskSequence] {
+    for sequence in reference.duskIsOneEvening ? [dawnSequence, duskSequence] : [dawnSequence] {
         let present = sequence.compactMap { entry in entry.1.map { (entry.0, $0) } }
         for i in 1..<max(present.count, 1) {
             checkTrue("\(place.name): \(present[i - 1].0) must precede \(present[i].0)",
@@ -180,9 +220,36 @@ func verify(_ place: Place, _ reference: Published) {
         checks += present.isEmpty ? 1 : 0
     }
 
+    // Nothing outside the local day may be reported as an event of it. The
+    // solve deliberately reaches an hour past each end, so this is the only
+    // check standing between that padding and a dusk from the wrong evening.
+    for (label, instant) in [("astronomical dawn", phases.astronomicalDawn),
+                             ("nautical dawn", phases.nauticalDawn),
+                             ("civil dawn", phases.civilDawn),
+                             ("sunrise", phases.sunrise),
+                             ("solar noon", phases.solarNoon),
+                             ("sunset", phases.sunset),
+                             ("civil dusk", phases.civilDusk),
+                             ("nautical dusk", phases.nauticalDusk),
+                             ("astronomical dusk", phases.astronomicalDusk),
+                             ("solar midnight", phases.nadir)] {
+        guard let instant else { continue }
+        checkTrue("\(place.name) \(label) at \(place.clock(instant)) lies inside the local day",
+                  instant >= place.localMidnight && instant < place.localMidnight.adding(days: 1))
+    }
+
     // Day length is the time above the sunrise altitude, so it must agree with
     // sunset minus sunrise whenever the day contains both.
-    if let sunrise = phases.sunrise, let sunset = phases.sunset, sunrise < sunset {
+    // Only where the sun was below the horizon when the day began. Tromso on
+    // 2026-07-27 has the sun still up at local midnight, setting at 00:13,
+    // rising again at 01:29 and setting again at 23:59, and there the
+    // difference of the two named times is thirteen minutes short of the
+    // daylight the day actually held.
+    let belowAtMidnight = SolarPositionSPA.evaluate(
+        julianDay: place.localMidnight, place: place.geographic)
+        .elevationWithoutRefraction < Refraction.sunriseAltitude
+    if let sunrise = phases.sunrise, let sunset = phases.sunset,
+       sunrise < sunset, belowAtMidnight {
         check("\(place.name) day length equals sunset minus sunrise",
               phases.dayLength, (sunset.value - sunrise.value) * 86400.0, 1.0)
     }
@@ -213,36 +280,79 @@ func verify(_ place: Place, _ reference: Published) {
 verify(berlinJune, Published(
     astronomicalDawn: nil, nauticalDawn: "0229", civilDawn: "0353", sunrise: "0443",
     solarNoon: "1308", sunset: "2133", civilDusk: "2224", nauticalDusk: "2347",
-    astronomicalDusk: nil, nadir: "0108", noonElevation: 60.92))
+    astronomicalDusk: nil, nadir: "0108", duskIsOneEvening: true, noonElevation: 60.92))
 
 verify(berlinDecember, Published(
     astronomicalDawn: "0607", nauticalDawn: "0649", civilDawn: "0733", sunrise: "0815",
     solarNoon: "1204", sunset: "1554", civilDusk: "1636", nauticalDusk: "1720",
-    astronomicalDusk: "1802", nadir: "0004", noonElevation: 14.04))
+    astronomicalDusk: "1802", nadir: "0004", duskIsOneEvening: true, noonElevation: 14.04))
 
 verify(quito, Published(
     astronomicalDawn: "0509", nauticalDawn: "0533", civilDawn: "0557", sunrise: "0618",
     solarNoon: "1221", sunset: "1825", civilDusk: "1845", nauticalDusk: "1909",
-    astronomicalDusk: "1933", nadir: "0021", noonElevation: 89.78))
+    astronomicalDusk: "1933", nadir: "0021", duskIsOneEvening: true, noonElevation: 89.78))
 
 verify(sydney, Published(
     astronomicalDawn: "0422", nauticalDawn: "0451", civilDawn: "0520", sunrise: "0545",
     solarNoon: "1148", sunset: "1751", civilDusk: "1816", nauticalDusk: "1845",
-    astronomicalDusk: "1915", nadir: nil, noonElevation: 55.77))
+    astronomicalDusk: "1915", nadir: nil, duskIsOneEvening: true, noonElevation: 55.77))
 
 // Midnight sun. USNO prints **** for the sun and //// for all three twilight
 // limits, MET Norway returns null for sunrise and sunset.
 verify(tromsoJune, Published(
     astronomicalDawn: nil, nauticalDawn: nil, civilDawn: nil, sunrise: nil,
     solarNoon: "1246", sunset: nil, civilDusk: nil, nauticalDusk: nil,
-    astronomicalDusk: nil, nadir: "0045", noonElevation: 43.79))
+    astronomicalDusk: nil, nadir: "0045", duskIsOneEvening: true, noonElevation: 43.79))
 
 // Polar night. USNO prints ---- for the sun but real times for all three
 // twilights, because the sun climbs to -3 degrees at midday.
 verify(tromsoDecember, Published(
     astronomicalDawn: "0628", nauticalDawn: "0747", civilDawn: "0931", sunrise: nil,
     solarNoon: "1142", sunset: nil, civilDusk: "1353", nauticalDusk: "1538",
-    astronomicalDusk: "1656", nadir: nil, noonElevation: -3.09))
+    astronomicalDusk: "1656", nadir: nil, duskIsOneEvening: true, noonElevation: -3.09))
+
+// Sunset crossed twice. USNO one day API for 2026-07-27 at Tromso lists Set
+// 00:13, Rise 01:29, Upper Transit 12:51, Set 23:59, and MET Norway gives the
+// same rise and set with solar midnight at 00:50 and the disc centre 1.09
+// degrees below the horizon. The named sunset must be the later of the two.
+verify(tromsoJuly, Published(
+    astronomicalDawn: nil, nauticalDawn: nil, civilDawn: nil, sunrise: "0129",
+    solarNoon: "1251", sunset: "2359", civilDusk: nil, nauticalDusk: nil,
+    astronomicalDusk: nil, nadir: "0050", duskIsOneEvening: true, noonElevation: 39.5))
+
+// Astronomical dusk crossed twice, at a middling latitude: USNO gives begin
+// 02:24, end 00:02 and end 23:57 for 2026-08-02 at Berlin.
+verify(berlinAugust, Published(
+    astronomicalDawn: "0224", nauticalDawn: "0349", civilDawn: "0446", sunrise: "0528",
+    solarNoon: "1313", sunset: "2057", civilDusk: "2138", nauticalDusk: "2235",
+    astronomicalDusk: "2357", nadir: "0112", duskIsOneEvening: true, noonElevation: 55.17))
+
+// Astronomical dawn crossed twice: USNO gives Begin 00:02, End 22:10 and a
+// second Begin at 23:55, because the sun is below -18 degrees for only the
+// hour and three quarters between 22:10 and 23:55. The named dawn is the first,
+// which is the one belonging to this day's morning.
+verify(berlinMayUT, Published(
+    astronomicalDawn: "0002", nauticalDawn: "0133", civilDawn: "0231", sunrise: "0314",
+    solarNoon: "1103", sunset: "1853", civilDusk: "1936", nauticalDusk: "2034",
+    astronomicalDusk: "2210", nadir: nil, duskIsOneEvening: true, noonElevation: 55.93))
+
+verify(berlinAugustFirst, Published(
+    astronomicalDawn: "0218", nauticalDawn: "0346", civilDawn: "0444", sunrise: "0526",
+    solarNoon: "1313", sunset: "2058", civilDusk: "2140", nauticalDusk: "2237",
+    astronomicalDusk: "0008", nadir: "0112", duskIsOneEvening: false, noonElevation: 55.42))
+
+// Daylight on that Tromso day is the thirteen minutes before the first sunset
+// plus the twenty two and a half hours between the sunrise and the second
+// sunset. Every one of those four instants is published, so this measures the
+// occupied duration against the sources and not against a subtraction.
+let tromsoJulyPhases = Twilight.phases(date: tromsoJuly.localMidnight, place: tromsoJuly.geographic)
+let expectedTromsoJulyDaylight =
+    (tromsoJuly.at("0013").value - tromsoJuly.localMidnight.value) * 86400.0
+    + (tromsoJuly.at("2359").value - tromsoJuly.at("0129").value) * 86400.0
+check("Tromso 2026-07-27 daylight spans both intervals",
+      tromsoJulyPhases.dayLength, expectedTromsoJulyDaylight, 150.0)
+checkTrue("Tromso 2026-07-27 is neither polar day nor polar night",
+          !tromsoJulyPhases.polarDay && !tromsoJulyPhases.polarNight)
 
 // The polar flags themselves.
 let tromsoJunePhases = Twilight.phases(date: tromsoJune.localMidnight, place: tromsoJune.geographic)
@@ -318,7 +428,7 @@ func minutes(_ window: GoldenHour.Window) -> Double {
     (window.end.value - window.start.value) * 1440.0
 }
 
-for place in [berlinJune, berlinDecember, quito, sydney, tromsoDecember] {
+for place in [berlinJune, berlinDecember, quito, sydney, tromsoDecember, berlinAugust] {
     let golden = GoldenHour.golden(date: place.localMidnight, place: place.geographic)
     let blue = GoldenHour.blue(date: place.localMidnight, place: place.geographic)
     guard let goldenMorning = golden.morning, let goldenEvening = golden.evening,
@@ -416,8 +526,43 @@ if let morning = tromsoDecemberGolden.morning, let evening = tromsoDecemberGolde
     checks += 1
 }
 
+// MET Norway publishes the Tromso solar midnight on 2026-08-08 at 00:49 with
+// the disc centre 4.15 degrees down, and on 2026-08-07 at 3.87 degrees down.
+// The golden band stops at 4 degrees down, so 2026-08-08 is the first night of
+// the year on which the sun leaves the band and returns before dawn, and the
+// morning therefore holds two spells of golden light rather than one.
+let tromsoAugustMidnight = elevation(tromsoAugust, tromsoAugust.at("0049"))
+check("Tromso 2026-08-08 solar midnight elevation", tromsoAugustMidnight, -4.15, 0.05)
+checkTrue("Tromso 2026-08-08 solar midnight is below the golden band",
+          !GoldenHour.isWithinGolden(solarAltitude: tromsoAugustMidnight))
+let tromsoAugustEve = Place(name: "Tromso 2026-08-07",
+                            geographic: tromsoAugust.geographic,
+                            year: 2026, month: 8, day: 7, offsetHours: 2)
+let tromsoAugustEveMidnight = elevation(tromsoAugustEve, tromsoAugustEve.at("0050"))
+check("Tromso 2026-08-07 solar midnight elevation", tromsoAugustEveMidnight, -3.87, 0.05)
+checkTrue("Tromso 2026-08-07 solar midnight is still inside the golden band",
+          GoldenHour.isWithinGolden(solarAltitude: tromsoAugustEveMidnight))
+
+// The morning window must be the spell that leads into the day, so it ends on
+// the upper band edge on the way up. The spell before solar midnight ends on
+// the lower edge on the way down, which is what picking the wrong one looks
+// like.
+let tromsoAugustGolden = GoldenHour.golden(date: tromsoAugust.localMidnight,
+                                           place: tromsoAugust.geographic)
+if let morning = tromsoAugustGolden.morning {
+    check("Tromso 2026-08-08 morning golden starts on the lower band edge",
+          elevation(tromsoAugust, morning.start), GoldenHour.goldenLowerAltitude, 0.02)
+    check("Tromso 2026-08-08 morning golden ends on the upper band edge",
+          elevation(tromsoAugust, morning.end), GoldenHour.goldenUpperAltitude, 0.02)
+    checkTrue("Tromso 2026-08-08 morning golden starts after solar midnight",
+              morning.start > tromsoAugust.at("0049"))
+} else {
+    fail("Tromso 2026-08-08 must have a morning golden window")
+    checks += 1
+}
+
 // The windows must never claim light the band predicate denies.
-for place in [berlinJune, quito, sydney, tromsoJune, tromsoDecember] {
+for place in [berlinJune, quito, sydney, tromsoJune, tromsoDecember, tromsoJuly, berlinAugust, tromsoAugust] {
     let golden = GoldenHour.golden(date: place.localMidnight, place: place.geographic)
     let blue = GoldenHour.blue(date: place.localMidnight, place: place.geographic)
     for (label, window, inside) in [

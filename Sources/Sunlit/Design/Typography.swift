@@ -40,8 +40,9 @@ public extension View {
     ///
     /// Hierarchy here comes from size, weight, and tracking, never from opacity. The
     /// contrast floor has no headroom at the ink crossover, so a label at even 0.9
-    /// opacity drops to 4.27 to 1 and breaks the guarantee. No text in this system
-    /// carries a fade. `SkyContrast.worstContrast(inkOpacity:solarAltitude:)` will say so.
+    /// opacity drops to 4.26 to 1 and breaks the guarantee; 0.75 gives 3.63. No text in
+    /// this system carries a fade.
+    /// `SkyContrast.worstContrast(inkOpacity:solarAltitude:)` will say so.
     ///
     /// Uppercasing is visual only: every component that uses this also carries an
     /// explicit accessibility label built from the original string, so VoiceOver never

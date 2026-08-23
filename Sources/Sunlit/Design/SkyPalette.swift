@@ -132,16 +132,21 @@ extension LinearRGB {
 /// continuously from the solar altitude at the selected instant and place.
 ///
 /// The one non obvious constraint is legibility. A light foreground reaches only
-/// 4.12 to 1 against the full day palette, so the ink has to flip from light to dark
-/// somewhere. Because the gradient is continuous, at the altitude where it flips both
-/// inks must clear 4.5 to 1 at once, which is only possible where the gradient is
-/// close to isoluminant. Solving that balance gives a ceiling of 4.5826 to 1 for any
-/// continuous sky carrying a single ink, reached with pure white, pure black, and a
-/// sky luminance of 0.1791 at the flip. The `dusk` anchor below is placed exactly
-/// there, at the boundary between blue hour and golden hour, and it is isoluminant on
-/// purpose: its two stops differ in hue, not in brightness. `SkyContrast.audit()`
-/// proves the result over the whole domain. Move these constants and that proof moves
-/// with them, so run the audit after any change.
+/// 1.60 to 1 against the brightest band of the full day palette, so the ink has to flip
+/// from light to dark somewhere. Because the gradient is continuous, at the altitude
+/// where it flips both inks must clear 4.5 to 1 at once, which is only possible where
+/// the gradient is close to isoluminant. Solving that balance gives an ideal ceiling of
+/// 4.5826 to 1 for any continuous sky carrying a single ink, reached with pure white,
+/// pure black, and a sky luminance of 0.1791 at the flip. The `dusk` anchor below is
+/// placed exactly there, at the boundary between blue hour and golden hour, and it is
+/// isoluminant on purpose: its two stops differ in hue, not in brightness.
+///
+/// The ideal ceiling is not what the panel shows. Once the stops are quantised to 8 bits
+/// and the renderer interpolates between them, the measured worst case is 4.5500 to 1,
+/// at solar altitude -4.01 with the light ink. That is the real number, and it leaves
+/// 0.05 of headroom over the 4.5 floor. `SkyContrast.audit()` measures it over the whole
+/// domain and `SkyPaletteContrastTests` fails the build if it ever drops. Move these
+/// constants and that proof moves with them, so run the audit after any change.
 public struct SkyPalette {
     private struct Anchor {
         let altitude: Double
@@ -162,10 +167,29 @@ public struct SkyPalette {
         Anchor(altitude: 0, top: LinearRGB(hex: 0xAC6E91), bottom: LinearRGB(hex: 0xE9956F)),
         // Golden.
         Anchor(altitude: 6, top: LinearRGB(hex: 0xCD7B5F), bottom: LinearRGB(hex: 0xF6BC4F)),
-        // Haze. This anchor exists to route the hue path. A straight run from amber to
-        // sky blue passes just off the neutral axis on the green side and turns the
-        // horizon band a pale sage. Landing on a near neutral first keeps it clean.
-        Anchor(altitude: 14, top: LinearRGB(hex: 0x868498), bottom: LinearRGB(hex: 0xBEC9D4)),
+        // Haze. This anchor routes the hue path from golden to day. Amber and sky blue
+        // sit almost opposite each other in Oklab, so a run between them passes close to
+        // the neutral axis and, on the green side, turns the horizon band a pale sage.
+        //
+        // The anchor that used to sit here, #868498 to #BEC9D4, was itself near neutral.
+        // Along its own two columns the least chromatic point fell to 0.0036, worse than
+        // the 0.0188 a direct amber to blue run with no anchor reaches: it swapped a
+        // slightly green grey for a deader one. These values sit off the neutral axis on
+        // the blue side and lift that figure to 0.0349, while holding the Oklab lightness
+        // of the pair they replaced so the contrast proof does not move. Worst case over
+        // 6 to 30 degrees is 5.1021 to 1, against 5.0972 before.
+        //
+        // What this does NOT fix, and no choice of anchor colour can: between about 10
+        // and 19 degrees the top of the sky is still cool while the horizon is still
+        // warm, so the vertical mix between the two columns crosses the neutral axis and
+        // one of the nine emitted stops goes grey. Measured over every stop, the least
+        // chromatic point is 0.0017 here, against 0.0009 for the old anchor and 0.0037
+        // with no anchor at all. Removing the anchor scores better on that one number and
+        // worse on the horizon, which is why it stays. Killing the crossing outright
+        // needs both columns held on the same side of the hue circle through the
+        // handover, which is a palette redesign and an owner decision, not a repair.
+        // `SkyPaletteContrastTests.testTheDaytimeRunDoesNotGetGreyerThanItIs` pins it.
+        Anchor(altitude: 14, top: LinearRGB(hex: 0x7684B7), bottom: LinearRGB(hex: 0x8BD4EC)),
         // Full day. Fixed by the design spec.
         Anchor(altitude: 30, top: LinearRGB(hex: 0x2E7FD4), bottom: LinearRGB(hex: 0x9FD3F5))
     ]
@@ -220,9 +244,29 @@ public struct SkyPalette {
     }
 
     /// The instrument line: the same ink at 55 percent, for rules and inactive tracks.
-    /// Separators and guides only. Anything carrying meaning uses the full ink.
+    ///
+    /// Separators and guides only, and that restriction is not stylistic. Measured against
+    /// the sky it sits on this reaches only 2.48 to 1 at its worst, at the ink crossover.
+    /// WCAG 1.4.11 exempts a purely decorative rule, so a `HairlineDivider` may use it,
+    /// but the visible boundary of a control may not: use `componentBorder` there.
+    public static let instrumentLineOpacity: Double = 0.55
+
     public static func instrumentLine(solarAltitude: Double) -> Color {
-        foreground(solarAltitude: solarAltitude).opacity(0.55)
+        foreground(solarAltitude: solarAltitude).opacity(instrumentLineOpacity)
+    }
+
+    /// The stroke for the visible boundary of a control, such as a chip capsule.
+    ///
+    /// WCAG 1.4.11 asks for 3 to 1 between a user interface component's boundary and
+    /// what is adjacent to it. The instrument line at 55 percent does not reach that:
+    /// it bottoms out at 2.48 to 1 at the ink crossover and 2.86 to 1 in full day. The
+    /// lowest opacity that clears 3 to 1 on every sky is 0.65; this sits at 0.70, which
+    /// measures 3.40 to 1 at its worst. `SkyContrast.worstComponentBorderContrast()`
+    /// is the sweep that says so.
+    public static let componentBorderOpacity: Double = 0.70
+
+    public static func componentBorder(solarAltitude: Double) -> Color {
+        foreground(solarAltitude: solarAltitude).opacity(componentBorderOpacity)
     }
 
     // MARK: Internals
@@ -303,11 +347,23 @@ public enum SkyContrast {
             .map { $0.relativeLuminance }
     }
 
+    /// How finely the span between two emitted stops is sampled.
+    ///
+    /// This was 6, and 6 is not enough. Along a straight line in gamma encoded
+    /// components, relative luminance is a sum of convex functions of an affine
+    /// parameter, so it is convex: the interior of a span can sit *below* both of its
+    /// endpoints. That interior dip is exactly the case a coarse sample steps over.
+    /// Measured at the binding altitude of -4.01, six subdivisions reported 4.5586 to 1
+    /// where the true value is 4.5500 to 1, an overstatement of 0.0086 against total
+    /// headroom of 0.05. Eight subdivisions already converge to the exact value there;
+    /// 32 is the margin, and costs nothing a sweep notices.
+    public static let blendSubdivisions = 32
+
     /// Every colour the sky actually paints at this instant, already quantised to 8 bits.
     public static func paintedColours(solarAltitude: Double, moonIllumination: Double) -> [LinearRGB] {
         let stops = SkyPalette.skyColours(solarAltitude: solarAltitude, moonIllumination: moonIllumination)
         var result = stops.map { $0.quantised }
-        let subdivisions = 6
+        let subdivisions = blendSubdivisions
         for index in 0..<(stops.count - 1) {
             let a = stops[index], b = stops[index + 1]
             let ea = a.encodedComponents, eb = b.encodedComponents
@@ -331,18 +387,58 @@ public enum SkyContrast {
     }
 
     /// The worst contrast the foreground reaches anywhere on this sky.
+    ///
+    /// The ink comes from `SkyPalette.ink` rather than from a second copy of the
+    /// crossover comparison, so the audit cannot drift away from what the app draws.
     public static func worstContrast(solarAltitude: Double, moonIllumination: Double = 0) -> Double {
-        let ink = solarAltitude < SkyPalette.inkCrossoverAltitude ? 1.0 : 0.0
+        let ink = SkyPalette.ink(solarAltitude: solarAltitude).relativeLuminance
         return paintedLuminances(solarAltitude: solarAltitude, moonIllumination: moonIllumination)
             .reduce(Double.infinity) { min($0, ratio(ink, $1)) }
+    }
+
+    /// The worst contrast a `SkyPalette.componentBorder` stroke reaches against the sky
+    /// on either side of it, swept over the whole domain. WCAG 1.4.11 wants 3 to 1.
+    public static func worstComponentBorderContrast(
+        step: Double = 1,
+        illuminationSteps: Int = 3
+    ) -> (ratio: Double, solarAltitude: Double) {
+        worstOverlayContrast(
+            opacity: SkyPalette.componentBorderOpacity,
+            step: step,
+            illuminationSteps: illuminationSteps
+        )
+    }
+
+    /// The worst contrast any ink at `opacity` reaches against the sky under it.
+    public static func worstOverlayContrast(
+        opacity: Double,
+        step: Double = 1,
+        illuminationSteps: Int = 3
+    ) -> (ratio: Double, solarAltitude: Double) {
+        var worst = (ratio: Double.infinity, solarAltitude: 0.0)
+        for altitude in sweptAltitudes(step: step, fineAroundCrossover: false) {
+            for index in 0..<max(illuminationSteps, 1) {
+                let illumination = illuminationSteps <= 1 ? 0 : Double(index) / Double(illuminationSteps - 1)
+                let value = worstContrast(
+                    inkOpacity: opacity,
+                    solarAltitude: altitude,
+                    moonIllumination: illumination
+                )
+                if value < worst.ratio { worst = (value, altitude) }
+            }
+        }
+        return worst
     }
 
     /// The worst contrast a foreground at this opacity would reach on this sky.
     ///
     /// Provided as a guard rail. The floor leaves nothing spare at the ink crossover, so
-    /// anything under full opacity fails there: at 0.9 the ratio is already 4.27 to 1, at
-    /// 0.75 it is 3.67 to 1. Fade nothing that has to be read. Rules, inactive tracks, and
-    /// other marks that carry no reading may use `SkyPalette.instrumentLine`.
+    /// anything under full opacity fails there. Measured: 0.95 gives 4.40 to 1, 0.90
+    /// gives 4.26, 0.75 gives 3.63, and the instrument line at 0.55 gives 2.67. Fade
+    /// nothing that has to be read. Rules and other marks that carry no reading may use
+    /// `SkyPalette.instrumentLine`; the boundary of a control uses
+    /// `SkyPalette.componentBorder`, which is the lightest stroke that still clears the
+    /// 3 to 1 that WCAG 1.4.11 asks of it.
     public static func worstContrast(
         inkOpacity: Double,
         solarAltitude: Double,
@@ -363,23 +459,32 @@ public enum SkyContrast {
         public var passes: Bool { worstRatio >= required }
     }
 
-    /// Sweeps solar altitude and moon illumination and returns the worst case found.
-    /// The sweep is deliberately dense around the ink crossover, because that is where
-    /// the minimum lives and a coarse step walks straight over it.
-    public static func audit(required: Double = 4.5, step: Double = 0.25, illuminationSteps: Int = 5) -> Audit {
+    /// The altitudes a sweep visits: the whole domain at `step`, and, for the contrast
+    /// audit, a dense band either side of the ink crossover, because that is where the
+    /// minimum lives and a coarse step walks straight over it.
+    ///
+    /// A non positive `step` would spin forever, so it is clamped rather than trusted.
+    static func sweptAltitudes(step: Double, fineAroundCrossover: Bool) -> [Double] {
+        let stride = step > 0 ? step : 1
         var altitudes: [Double] = []
         var altitude = -90.0
         while altitude <= 90 {
             altitudes.append(altitude)
-            altitude += step
+            altitude += stride
         }
+        guard fineAroundCrossover else { return altitudes }
         let crossover = SkyPalette.inkCrossoverAltitude
         var fine = crossover - 1
         while fine <= crossover + 1 {
             altitudes.append(fine)
             fine += 0.005
         }
+        return altitudes
+    }
 
+    /// Sweeps solar altitude and moon illumination and returns the worst case found.
+    public static func audit(required: Double = 4.5, step: Double = 0.25, illuminationSteps: Int = 5) -> Audit {
+        let altitudes = sweptAltitudes(step: step, fineAroundCrossover: true)
         var worst = Audit(worstRatio: .infinity, solarAltitude: 0, moonIllumination: 0, required: required)
         for altitude in altitudes {
             for index in 0..<max(illuminationSteps, 1) {

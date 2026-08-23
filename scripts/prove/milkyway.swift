@@ -357,6 +357,144 @@ for edge in [darkWindow.start.adding(seconds: -900), darkWindow.end.adding(secon
 }
 
 // ---------------------------------------------------------------------------
+// 6a. A moon that is up but dim costs a grade.
+//
+// On 17 August 2026 at the same place the centre reaches the same 31 degrees as
+// on the new moon night above, and the moon inside the window is under three
+// tenths lit, so the window is allowed to stand. The sky is still not properly
+// dark, and the grade has to say so. Same site, same peak altitude, one step
+// apart: the only difference is the moon.
+// ---------------------------------------------------------------------------
+let dimMoonNight = utAt(year: 2026, month: 8, day: 17, localHour: 18, longitude: 0)
+let dimMoon = MilkyWay.visibility(night: dimMoonNight, place: thirtyNorth)
+if let best = dimMoon.bestMoment {
+    let atBest = conditions(best, thirtyNorth)
+    print(String(format: "  30N, 17 August 2026: peak %.2f, moon up %@, %.3f lit, grade %@",
+                 dimMoon.bestAltitude, atBest.moonUp ? "yes" : "no", atBest.lit,
+                 dimMoon.quality.rawValue))
+    checkTrue("the centre reaches the same height as on the new moon night, got \(dimMoon.bestAltitude)",
+              dimMoon.bestAltitude > 30)
+    checkTrue("the moon is above the horizon at the best moment", atBest.moonUp)
+    checkTrue("and it is dim enough to be tolerated, got \(atBest.lit)",
+              atBest.lit > 0.05 && atBest.lit < MilkyWay.tolerableMoonIllumination)
+    checkTrue("so the same peak altitude grades one step lower than under a moonless sky, got "
+              + dimMoon.quality.rawValue, dimMoon.quality == .good)
+} else {
+    checkTrue("17 August 2026 at 30N has a window", false)
+}
+
+// ---------------------------------------------------------------------------
+// 6b. A night whose window is split in two.
+//
+// The moon condition can switch off and back on inside one night: a waning moon
+// just over three tenths lit rises during the dark hours, and its illuminated
+// fraction then falls through the threshold while it is still up. A search over
+// twenty years of nights finds this every few lunations, so it is a case the
+// product will meet, not a curiosity. What the module must report is the longest
+// continuous stretch. Reporting the span from the first qualifying minute to the
+// last one would promise the moonlit gap as shooting time.
+//
+// The qualifying set here is recomputed minute by minute from the three
+// published conditions rather than taken from the module.
+// ---------------------------------------------------------------------------
+let splitNight = utAt(year: 2027, month: 7, day: 8, localHour: 12, longitude: 0)
+func qualifies(_ jd: JulianDay, _ place: Coordinates.Geographic) -> Bool {
+    let c = conditions(jd, place)
+    return c.centre > MilkyWay.minimumAltitude
+        && c.sun < MilkyWay.darkSunAltitude
+        && (!c.moonUp || c.lit < MilkyWay.tolerableMoonIllumination)
+}
+var independentRuns: [(start: Double, end: Double)] = []
+var openRun: Double? = nil
+var lastQualifying = 0.0
+for minute in 0...1440 {
+    let fraction = Double(minute) / 1440.0
+    if qualifies(splitNight.adding(days: fraction), south) {
+        if openRun == nil { openRun = fraction }
+        lastQualifying = fraction
+    } else if let o = openRun {
+        independentRuns.append((o, lastQualifying))
+        openRun = nil
+    }
+}
+if let o = openRun { independentRuns.append((o, lastQualifying)) }
+let longest = independentRuns.max(by: { ($0.end - $0.start) < ($1.end - $1.start) })
+let split = MilkyWay.visibility(night: splitNight, place: south)
+print(String(format: "  33S, 8 July 2027: %d qualifying stretches, longest %.2f h, module returns %.2f h",
+             independentRuns.count, ((longest?.end ?? 0) - (longest?.start ?? 0)) * 24,
+             split.window.map { ($0.end.value - $0.start.value) * 24 } ?? 0))
+checkTrue("the night really is split into two stretches, got \(independentRuns.count)",
+          independentRuns.count == 2)
+if let window = split.window, let longest = longest {
+    check("the reported window starts at the longest stretch",
+          (window.start.value - splitNight.value) * 24, longest.start * 24, 0.02)
+    check("the reported window ends at the longest stretch",
+          (window.end.value - splitNight.value) * 24, longest.end * 24, 0.02)
+    // The shorter stretch lies outside the window, which is the whole point:
+    // an implementation that spanned from the first qualifying minute to the
+    // last would have swallowed it and the moonlit gap with it.
+    let discarded = independentRuns.first(where: { $0.start != longest.start })
+    checkTrue("the shorter stretch is left out of the window",
+              discarded.map { $0.end < longest.start || $0.start > longest.end } ?? false)
+    checkTrue("every minute of the reported window qualifies", {
+        var allQualify = true
+        var t = window.start
+        while t.value <= window.end.value {
+            if !qualifies(t, south) { allQualify = false; break }
+            t = t.adding(seconds: 60)
+        }
+        return allQualify
+    }())
+} else {
+    checkTrue("the split night has a window", false)
+}
+
+// ---------------------------------------------------------------------------
+// 6c. The night boundary follows the place, not Greenwich.
+//
+// At longitude 175 east, local noon falls at 00:21 Universal Time. A night cut
+// at Universal noon instead would slice this observer's night down the middle
+// and hand back half of it. The window is checked against a qualifying set
+// computed here from local noon to local noon, minute by minute.
+// ---------------------------------------------------------------------------
+let wellington = Coordinates.Geographic(latitude: -41.29, longitude: 174.78)
+let newMoonJuly = JulianDay.from(year: 2026, month: 7, day: 29.0 + (14.0 + 35.0 / 60.0) / 24.0)
+    .adding(days: -29.530589 / 2)
+let wellingtonNoon: JulianDay = {
+    let offset = wellington.longitude / 360.0
+    return JulianDay((newMoonJuly.value + offset).rounded(.down) - offset)
+}()
+var wellingtonRuns: [(start: Double, end: Double)] = []
+var wellingtonOpen: Double? = nil
+var wellingtonLast = 0.0
+for minute in 0...1440 {
+    let fraction = Double(minute) / 1440.0
+    if qualifies(wellingtonNoon.adding(days: fraction), wellington) {
+        if wellingtonOpen == nil { wellingtonOpen = fraction }
+        wellingtonLast = fraction
+    } else if let o = wellingtonOpen {
+        wellingtonRuns.append((o, wellingtonLast))
+        wellingtonOpen = nil
+    }
+}
+if let o = wellingtonOpen { wellingtonRuns.append((o, wellingtonLast)) }
+let wellingtonLongest = wellingtonRuns.max(by: { ($0.end - $0.start) < ($1.end - $1.start) })
+let wellingtonVisibility = MilkyWay.visibility(night: newMoonJuly, place: wellington)
+let wellingtonHours = wellingtonVisibility.window.map { ($0.end.value - $0.start.value) * 24 } ?? 0
+print(String(format: "  Wellington, new moon of July 2026: module %.2f h, independent %.2f h",
+             wellingtonHours, ((wellingtonLongest?.end ?? 0) - (wellingtonLongest?.start ?? 0)) * 24))
+checkTrue("the local night at longitude 175 east is hours long, got \(wellingtonHours)",
+          wellingtonHours > 5)
+if let window = wellingtonVisibility.window, let longest = wellingtonLongest {
+    check("the window matches the local night computed independently, start",
+          (window.start.value - wellingtonNoon.value) * 24, longest.start * 24, 0.02)
+    check("the window matches the local night computed independently, end",
+          (window.end.value - wellingtonNoon.value) * 24, longest.end * 24, 0.02)
+} else {
+    checkTrue("Wellington has a window on a new moon night", false)
+}
+
+// ---------------------------------------------------------------------------
 // 7. Season. At 35N in late December the centre climbs to 26 degrees and the
 // night is properly dark, but the centre is up in the daytime and gone by dusk.
 // Neither the horizon, nor twilight, nor the moon is the reason.

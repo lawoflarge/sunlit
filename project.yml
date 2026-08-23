@@ -30,15 +30,26 @@ targets:
       # phase, which is how a StoreKit *test* configuration once shipped inside a
       # released binary in this portfolio. Exclude it here and add it back with no
       # build phase so the scheme can still use it for local StoreKit testing.
+      # The same sweep put Sources/Sunlit/Resources/Cities/build.py, the script
+      # that generates the city database, into the Resources build phase of the
+      # shipping app. Verified by reading the generated project, not assumed.
       - path: Sources/Sunlit
         excludes:
           - "**/*.storekit"
+          - "**/*.py"
+          - "**/__pycache__"
       - path: Sources/Sunlit/Features/Paywall/Sunlit.storekit
         buildPhase: none
       # The offline city list. Named explicitly rather than swept up by the
       # source path above, because the build script asserts it is in the bundle
       # and a resource that arrives by accident can leave the same way.
       - path: Sources/Sunlit/Resources/Cities/cities.bin
+        buildPhase: resources
+      # The asset catalogue. project.yml already names AppIcon as the icon set,
+      # but naming it is not enough: without a catalogue in the target actool
+      # never runs, the binary ships without an icon, and the upload is rejected
+      # at validation rather than at build.
+      - path: Sources/Sunlit/Resources/Assets.xcassets
         buildPhase: resources
     dependencies:
       - target: SunlitCore

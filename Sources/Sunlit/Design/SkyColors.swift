@@ -3,10 +3,20 @@ import SwiftUI
 /// The fixed colours of the instrument layer.
 ///
 /// The accents mark bodies and paths: a sun glyph, a moon track, the galactic plane.
-/// They are not text colours. Their luminance sits in the middle of the range, so on a
-/// bright sky they land near 2 to 1, well under the readable floor. Anything a reader
-/// has to read is drawn in `SkyPalette.foreground(solarAltitude:)`, which is audited.
-/// Pair an accent mark with a foreground label rather than colouring the label.
+/// They are not text colours, and they are weaker than that phrasing suggests.
+///
+/// Measured against every sky the palette can produce, the worst case for each of the
+/// three is 1.00 to 1, not the 2 to 1 this comment used to claim: sun `#FFB020` matches
+/// the sky exactly at around 26 degrees of solar altitude, moon `#8FB8FF` at 29, Milky
+/// Way `#C9A6FF` at 27. They separate by hue and by chroma, and by nothing else. In
+/// greyscale, under Color Filters, or for a reader working from luminance, an unbacked
+/// accent mark on a day sky is invisible.
+///
+/// Two rules follow. Anything a reader has to read is drawn in
+/// `SkyPalette.foreground(solarAltitude:)`, which is audited; pair an accent mark with a
+/// foreground label rather than colouring the label. And any accent mark that carries
+/// meaning on its own is given a foreground edge, the way `ArcTrack` backs its travelled
+/// arc and rings its marker, so the shape survives when the colour does not.
 public enum SkyColors {
 
     // MARK: Bodies

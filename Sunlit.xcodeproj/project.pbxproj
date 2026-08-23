@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		01A4EDAF88E04647447CE7A8 /* HorizonProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12DE1EDACBAB9C9B2236F57 /* HorizonProfile.swift */; };
+		03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */; };
 		08BC43FA0BDB3696C1E9F551 /* SunlitCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0F2A8472CFBE144837E578D1 /* DesignPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AEF0CF6C2D3DF31812725D /* DesignPreview.swift */; };
 		14F54E54C878AFC6F400099D /* SolarPositionSPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A1201581333BE76B3050C5 /* SolarPositionSPA.swift */; };
 		1FC3FE548135E45D9DA4339B /* JulianDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DF244D8C4DF849EC88C79 /* JulianDay.swift */; };
 		1FF2A007E491AEC4D19D5E66 /* cities.bin in Resources */ = {isa = PBXBuildFile; fileRef = BB0503ECFD4764F10FFE1819 /* cities.bin */; };
+		2009D92DE80323E583668ADA /* GlobalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC3AD8E4695A1AB572F727C /* GlobalHeader.swift */; };
 		35C65B69929F0570EEE9A4AC /* MoonTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194299370B1232B5766EFD2 /* MoonTables.swift */; };
 		366213731D628048BAB54C30 /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
 		486E2C2B770BE5E88F2AB730 /* SkyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B15DA6C6387D9A51967019D /* SkyColors.swift */; };
+		4D741EA0F3DD7C60F1B97C4F /* Eclipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F9083DDA13F86F16663329 /* Eclipse.swift */; };
 		50740501AB1A8F3A833D48D4 /* MoonPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6546B79A574B22429E1901B2 /* MoonPosition.swift */; };
 		56D84D1CB686B1981482F8D0 /* HeadingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5B0B8FD1A90CE7E6D38223 /* HeadingProvider.swift */; };
 		5728222F238A450665EDC0D2 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6340D80C28D2F0BCF31144 /* LocationProvider.swift */; };
 		59031773DA6EFFA456CB1C42 /* Twilight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A68CAD665AE29A713880A /* Twilight.swift */; };
+		63E7F330F2B91E1F2306BE58 /* SkyPaletteContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBC17A651A7EF90AB366BE /* SkyPaletteContrastTests.swift */; };
+		692DCF1B635E54977A72DE54 /* UVIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0E721638F4E88BF8F425E /* UVIndex.swift */; };
+		6B28AA5BE49889C624697EAC /* Irradiance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34256D28C1D38C65A64F652 /* Irradiance.swift */; };
 		73C8550D46648BFC2D0CA8ED /* SunlitWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7E324B87F0B9EF852F5850EC /* SunlitWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7DA772F5BB01149C754598E2 /* Nutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DBA9780B0FFCDBF2F3C785 /* Nutation.swift */; };
 		7E52A8567E41F93294E66CAB /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F8C9C1CB85CDE74BB48DC /* Angle.swift */; };
@@ -28,7 +34,7 @@
 		9ABC1C6596D0CE654DFF930C /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
 		9C613F3FA69F25AB847DC3AC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B977844B129BDD202687B232 /* AppState.swift */; };
 		AB3C42473975BB1A5362EDE6 /* MilkyWay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993BA0BC430FCD240F3F5015 /* MilkyWay.swift */; };
-		AE50E75EAB5D8C9F08CA816A /* build.py in Resources */ = {isa = PBXBuildFile; fileRef = 2740CA1A77BD95FEADB8E091 /* build.py */; };
+		B1719E63FD72DFFB7DF1F192 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2EFDEDA0D0B0064B5D9639 /* RootView.swift */; };
 		BA2C91D0D13E67892178D5AF /* SunlitCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D025FD063AA9857C10BC0C79 /* CityIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23E69860AC602F8A12BA74 /* CityIndex.swift */; };
 		D0B3167151155853FEC67B1F /* ProGateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E78832D3522D29AEFAAFA09 /* ProGateTests.swift */; };
@@ -38,6 +44,7 @@
 		DEC9899E86A552B5C213534F /* SkyPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA4F2BACF029E05FD23FA6 /* SkyPalette.swift */; };
 		DFF961A86B853967385C21BB /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
 		E8ADF96426F53E132690D01E /* SPATables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89994E699BB34DC63D100943 /* SPATables.swift */; };
+		EAA8E14E47734EC379ED9450 /* SunlitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */; };
 		EEB55536F4BDF2C28750AFD9 /* InstrumentComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F5C76121C4724218281D5 /* InstrumentComponents.swift */; };
 		EEF25C2B0624415C3B9F202C /* ProCapability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82561199AF20C96517D5B9E1 /* ProCapability.swift */; };
 		F1745D405DCEA189D1CDA4B5 /* Refraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12442FC29536ED6AF6B8653 /* Refraction.swift */; };
@@ -121,15 +128,18 @@
 
 /* Begin PBXFileReference section */
 		0194299370B1232B5766EFD2 /* MoonTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonTables.swift; sourceTree = "<group>"; };
+		01EBC17A651A7EF90AB366BE /* SkyPaletteContrastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyPaletteContrastTests.swift; sourceTree = "<group>"; };
 		183F8C9C1CB85CDE74BB48DC /* Angle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		1E78832D3522D29AEFAAFA09 /* ProGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProGateTests.swift; sourceTree = "<group>"; };
 		2257AECE5E03207BC16F62D0 /* Sunlit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sunlit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A1201581333BE76B3050C5 /* SolarPositionSPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPositionSPA.swift; sourceTree = "<group>"; };
-		2740CA1A77BD95FEADB8E091 /* build.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = build.py; sourceTree = "<group>"; };
+		262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44AEF0CF6C2D3DF31812725D /* DesignPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPreview.swift; sourceTree = "<group>"; };
 		4B23E69860AC602F8A12BA74 /* CityIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityIndex.swift; sourceTree = "<group>"; };
 		5630B21E105C066E818F4E8A /* SunlitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SunlitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		571323539D58A08F2C3A5172 /* DeltaT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaT.swift; sourceTree = "<group>"; };
+		5AC0E721638F4E88BF8F425E /* UVIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVIndex.swift; sourceTree = "<group>"; };
+		608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunlitApp.swift; sourceTree = "<group>"; };
 		63E245B7349FEA9E3E085EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6546B79A574B22429E1901B2 /* MoonPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPosition.swift; sourceTree = "<group>"; };
 		6F6F5C76121C4724218281D5 /* InstrumentComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentComponents.swift; sourceTree = "<group>"; };
@@ -137,14 +147,17 @@
 		7AE0867A48E3C051D164F61D /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		7BA608681E07F8DDAD79E1BA /* GoldenHour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldenHour.swift; sourceTree = "<group>"; };
 		7E324B87F0B9EF852F5850EC /* SunlitWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SunlitWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		81F9083DDA13F86F16663329 /* Eclipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eclipse.swift; sourceTree = "<group>"; };
 		82561199AF20C96517D5B9E1 /* ProCapability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProCapability.swift; sourceTree = "<group>"; };
 		82DBA9780B0FFCDBF2F3C785 /* Nutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nutation.swift; sourceTree = "<group>"; };
 		89994E699BB34DC63D100943 /* SPATables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPATables.swift; sourceTree = "<group>"; };
+		8A2EFDEDA0D0B0064B5D9639 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		993BA0BC430FCD240F3F5015 /* MilkyWay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilkyWay.swift; sourceTree = "<group>"; };
 		99E44C69F4B8598307A306BE /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		9A2DF244D8C4DF849EC88C79 /* JulianDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JulianDay.swift; sourceTree = "<group>"; };
 		9B15DA6C6387D9A51967019D /* SkyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyColors.swift; sourceTree = "<group>"; };
 		9EB60DA73F75A6AC7544534B /* ProGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProGate.swift; sourceTree = "<group>"; };
+		A34256D28C1D38C65A64F652 /* Irradiance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Irradiance.swift; sourceTree = "<group>"; };
 		B1F6FB82E4D1599095AF8FB7 /* Sunlit.storekit */ = {isa = PBXFileReference; path = Sunlit.storekit; sourceTree = "<group>"; };
 		B977844B129BDD202687B232 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BB0503ECFD4764F10FFE1819 /* cities.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = cities.bin; sourceTree = "<group>"; };
@@ -158,6 +171,7 @@
 		EA8E211FF73E18277C68427A /* RiseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiseSet.swift; sourceTree = "<group>"; };
 		F5F77C8904807D109ECD5D71 /* SunlitCoreTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SunlitCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5B0B8FD1A90CE7E6D38223 /* HeadingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingProvider.swift; sourceTree = "<group>"; };
+		FEC3AD8E4695A1AB572F727C /* GlobalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				79F66075586BD3552536FACA /* Cities */,
+				262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -253,7 +268,9 @@
 			isa = PBXGroup;
 			children = (
 				7BA608681E07F8DDAD79E1BA /* GoldenHour.swift */,
+				A34256D28C1D38C65A64F652 /* Irradiance.swift */,
 				6F8A68CAD665AE29A713880A /* Twilight.swift */,
+				5AC0E721638F4E88BF8F425E /* UVIndex.swift */,
 			);
 			path = Solar;
 			sourceTree = "<group>";
@@ -271,6 +288,8 @@
 			isa = PBXGroup;
 			children = (
 				DCF4C2A4858019CE6AEE43D2 /* Paywall */,
+				FEC3AD8E4695A1AB572F727C /* GlobalHeader.swift */,
+				8A2EFDEDA0D0B0064B5D9639 /* RootView.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -278,7 +297,6 @@
 		79F66075586BD3552536FACA /* Cities */ = {
 			isa = PBXGroup;
 			children = (
-				2740CA1A77BD95FEADB8E091 /* build.py */,
 				BB0503ECFD4764F10FFE1819 /* cities.bin */,
 			);
 			path = Cities;
@@ -325,6 +343,7 @@
 				183F8C9C1CB85CDE74BB48DC /* Angle.swift */,
 				99E44C69F4B8598307A306BE /* Coordinates.swift */,
 				571323539D58A08F2C3A5172 /* DeltaT.swift */,
+				81F9083DDA13F86F16663329 /* Eclipse.swift */,
 				9A2DF244D8C4DF849EC88C79 /* JulianDay.swift */,
 				993BA0BC430FCD240F3F5015 /* MilkyWay.swift */,
 				6546B79A574B22429E1901B2 /* MoonPosition.swift */,
@@ -365,6 +384,7 @@
 				6582C7A90456CADB44576CB0 /* Store */,
 				B977844B129BDD202687B232 /* AppState.swift */,
 				63E245B7349FEA9E3E085EFE /* Info.plist */,
+				608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */,
 			);
 			path = Sunlit;
 			sourceTree = "<group>";
@@ -373,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				1E78832D3522D29AEFAAFA09 /* ProGateTests.swift */,
+				01EBC17A651A7EF90AB366BE /* SkyPaletteContrastTests.swift */,
 			);
 			path = SunlitAppTests;
 			sourceTree = "<group>";
@@ -541,7 +562,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE50E75EAB5D8C9F08CA816A /* build.py in Resources */,
+				03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */,
 				1FF2A007E491AEC4D19D5E66 /* cities.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B3167151155853FEC67B1F /* ProGateTests.swift in Sources */,
+				63E7F330F2B91E1F2306BE58 /* SkyPaletteContrastTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,13 +599,16 @@
 			files = (
 				9C613F3FA69F25AB847DC3AC /* AppState.swift in Sources */,
 				0F2A8472CFBE144837E578D1 /* DesignPreview.swift in Sources */,
+				2009D92DE80323E583668ADA /* GlobalHeader.swift in Sources */,
 				56D84D1CB686B1981482F8D0 /* HeadingProvider.swift in Sources */,
 				EEB55536F4BDF2C28750AFD9 /* InstrumentComponents.swift in Sources */,
 				5728222F238A450665EDC0D2 /* LocationProvider.swift in Sources */,
 				EEF25C2B0624415C3B9F202C /* ProCapability.swift in Sources */,
 				DEAFEF81398495249F9022A9 /* ProGate.swift in Sources */,
+				B1719E63FD72DFFB7DF1F192 /* RootView.swift in Sources */,
 				486E2C2B770BE5E88F2AB730 /* SkyColors.swift in Sources */,
 				DEC9899E86A552B5C213534F /* SkyPalette.swift in Sources */,
+				EAA8E14E47734EC379ED9450 /* SunlitApp.swift in Sources */,
 				94EA06213E29D7C71FD5D932 /* Typography.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,8 +621,10 @@
 				D025FD063AA9857C10BC0C79 /* CityIndex.swift in Sources */,
 				D58DBC1BA3698DBA21103E36 /* Coordinates.swift in Sources */,
 				D661D94C694A19F6279726C0 /* DeltaT.swift in Sources */,
+				4D741EA0F3DD7C60F1B97C4F /* Eclipse.swift in Sources */,
 				FBA450DFB4D4387AA692481F /* GoldenHour.swift in Sources */,
 				01A4EDAF88E04647447CE7A8 /* HorizonProfile.swift in Sources */,
+				6B28AA5BE49889C624697EAC /* Irradiance.swift in Sources */,
 				1FC3FE548135E45D9DA4339B /* JulianDay.swift in Sources */,
 				AB3C42473975BB1A5362EDE6 /* MilkyWay.swift in Sources */,
 				50740501AB1A8F3A833D48D4 /* MoonPosition.swift in Sources */,
@@ -609,6 +636,7 @@
 				F88C2FEDDB37124721541809 /* Shadow.swift in Sources */,
 				14F54E54C878AFC6F400099D /* SolarPositionSPA.swift in Sources */,
 				59031773DA6EFFA456CB1C42 /* Twilight.swift in Sources */,
+				692DCF1B635E54977A72DE54 /* UVIndex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

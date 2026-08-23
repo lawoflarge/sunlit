@@ -193,7 +193,16 @@ public enum Eclipse {
     private static let astronomicalUnit = 149597870.7
 
     /// Half the Sun's apparent diameter at one astronomical unit, in degrees.
-    private static let sunSemidiameterAtOneAU = Refraction.solarSemidiameterAtOneAU
+    ///
+    /// This is 959.63 arcseconds, the value section 4.4 of the design document
+    /// names and the one the almanacs and the eclipse canons use. It is not
+    /// `Refraction.solarSemidiameterAtOneAU`, which is 960 arcseconds exactly:
+    /// that constant exists to define the -0.8333 degree horizon of a sunrise,
+    /// where a rounded figure is the convention, and borrowing it here would
+    /// put a fifth of an arcsecond of bias into every contact time. The
+    /// difference is worth about a second at each exterior contact, which is
+    /// small next to the ephemeris but is a bias rather than noise.
+    private static let sunSemidiameterAtOneAU = Angle.fromArcseconds(959.63)
 
     // MARK: Solar, public
 
