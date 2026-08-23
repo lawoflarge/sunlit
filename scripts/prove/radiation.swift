@@ -258,6 +258,44 @@ do {
     let december31 = UVIndex.climatologicalOzone(latitude: 40, dayOfYear: 365)
     let january1 = UVIndex.climatologicalOzone(latitude: 40, dayOfYear: 1)
     check("ozone table is continuous across the year end", december31, january1, 1.5)
+
+    // The seasonal PHASE, which is what an off-by-one-month calendar bug moves
+    // and which the magnitude checks above are blind to. The northern
+    // mid-latitude column peaks in late winter and early spring and bottoms in
+    // autumn; the Antarctic column bottoms in the southern spring. Both are
+    // standard descriptions of the ozone layer, not fitted numbers.
+    func extremeDay(latitude: Double, wantMaximum: Bool) -> Int {
+        var bestDay = 1
+        var best = wantMaximum ? -1.0 : 1e9
+        for day in 1...365 {
+            let o = UVIndex.climatologicalOzone(latitude: latitude, dayOfYear: day)
+            if wantMaximum ? (o > best) : (o < best) { best = o; bestDay = day }
+        }
+        return bestDay
+    }
+    let northMaximum = extremeDay(latitude: 50, wantMaximum: true)
+    let northMinimum = extremeDay(latitude: 50, wantMaximum: false)
+    let southMinimum = extremeDay(latitude: -85, wantMaximum: false)
+    checkTrue("column at 50 N peaks in February to mid April, got day \(northMaximum)",
+              northMaximum >= 30 && northMaximum <= 110)
+    checkTrue("column at 50 N bottoms in September to early November, got day \(northMinimum)",
+              northMinimum >= 240 && northMinimum <= 310)
+    checkTrue("column at 85 S bottoms in the southern spring, got day \(southMinimum)",
+              southMinimum >= 250 && southMinimum <= 310)
+
+    // Each monthly mean must land on the middle of its own month. These four
+    // days are the ones whose mid-month anchor is a whole number, and the values
+    // are the SBUV monthly zonal means named in the source note. This checks the
+    // calendar, not the magnitudes: the magnitudes were checked against TEMIS
+    // above, and a table read a month out of phase would still pass those.
+    check("15 February at the equator is the February mean",
+          UVIndex.climatologicalOzone(latitude: 0, dayOfYear: 45), 247.2, 0.05)
+    check("15 April at 50 N is the April mean",
+          UVIndex.climatologicalOzone(latitude: 50, dayOfYear: 105), 382.5, 0.05)
+    check("15 June at the south pole is the June mean",
+          UVIndex.climatologicalOzone(latitude: -90, dayOfYear: 166), 240.3, 0.05)
+    check("15 November at 30 N is the November mean",
+          UVIndex.climatologicalOzone(latitude: 30, dayOfYear: 319), 267.1, 0.05)
 }
 
 // MARK: - WHO category boundaries [W]

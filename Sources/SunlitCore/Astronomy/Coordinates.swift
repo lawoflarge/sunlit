@@ -17,7 +17,7 @@ public enum Coordinates {
     // MARK: Geographic position
 
     /// A place on the Earth.
-    public struct Geographic: Hashable, Sendable {
+    public struct Geographic: Hashable, Codable, Sendable {
         /// Degrees, positive north.
         public let latitude: Double
         /// Degrees, positive east.

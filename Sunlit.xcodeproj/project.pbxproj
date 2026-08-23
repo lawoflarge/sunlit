@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0038022101E8D1876DC1C568 /* SkyMoment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DD80BFBA548D8D34C03A5 /* SkyMoment.swift */; };
 		01A4EDAF88E04647447CE7A8 /* HorizonProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12DE1EDACBAB9C9B2236F57 /* HorizonProfile.swift */; };
 		03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */; };
 		08BC43FA0BDB3696C1E9F551 /* SunlitCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -26,10 +27,12 @@
 		63E7F330F2B91E1F2306BE58 /* SkyPaletteContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBC17A651A7EF90AB366BE /* SkyPaletteContrastTests.swift */; };
 		692DCF1B635E54977A72DE54 /* UVIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0E721638F4E88BF8F425E /* UVIndex.swift */; };
 		6B28AA5BE49889C624697EAC /* Irradiance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34256D28C1D38C65A64F652 /* Irradiance.swift */; };
+		6CCFF6D50FF31AEA8ABC38B1 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E004930F84ADD967123D99D /* Place.swift */; };
 		73C8550D46648BFC2D0CA8ED /* SunlitWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7E324B87F0B9EF852F5850EC /* SunlitWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7DA772F5BB01149C754598E2 /* Nutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DBA9780B0FFCDBF2F3C785 /* Nutation.swift */; };
 		7E52A8567E41F93294E66CAB /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F8C9C1CB85CDE74BB48DC /* Angle.swift */; };
 		8DAADC231EAF37D736DBE352 /* RiseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8E211FF73E18277C68427A /* RiseSet.swift */; };
+		945C241CB94116884F85D736 /* DayReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4145DD8BEF489487542526 /* DayReport.swift */; };
 		94EA06213E29D7C71FD5D932 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4881A83DEFD341EB824FF6B /* Typography.swift */; };
 		9ABC1C6596D0CE654DFF930C /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
 		9C613F3FA69F25AB847DC3AC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B977844B129BDD202687B232 /* AppState.swift */; };
@@ -134,11 +137,13 @@
 		2257AECE5E03207BC16F62D0 /* Sunlit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sunlit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A1201581333BE76B3050C5 /* SolarPositionSPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPositionSPA.swift; sourceTree = "<group>"; };
 		262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F4145DD8BEF489487542526 /* DayReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayReport.swift; sourceTree = "<group>"; };
 		44AEF0CF6C2D3DF31812725D /* DesignPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPreview.swift; sourceTree = "<group>"; };
 		4B23E69860AC602F8A12BA74 /* CityIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityIndex.swift; sourceTree = "<group>"; };
 		5630B21E105C066E818F4E8A /* SunlitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SunlitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		571323539D58A08F2C3A5172 /* DeltaT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaT.swift; sourceTree = "<group>"; };
 		5AC0E721638F4E88BF8F425E /* UVIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVIndex.swift; sourceTree = "<group>"; };
+		5E004930F84ADD967123D99D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunlitApp.swift; sourceTree = "<group>"; };
 		63E245B7349FEA9E3E085EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6546B79A574B22429E1901B2 /* MoonPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPosition.swift; sourceTree = "<group>"; };
@@ -163,6 +168,7 @@
 		BB0503ECFD4764F10FFE1819 /* cities.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = cities.bin; sourceTree = "<group>"; };
 		BC2A250B66830F12E4805158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BDCA4F2BACF029E05FD23FA6 /* SkyPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyPalette.swift; sourceTree = "<group>"; };
+		C32DD80BFBA548D8D34C03A5 /* SkyMoment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMoment.swift; sourceTree = "<group>"; };
 		C7847E556F4CB88F6CE00759 /* SunlitAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SunlitAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6340D80C28D2F0BCF31144 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		D12DE1EDACBAB9C9B2236F57 /* HorizonProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonProfile.swift; sourceTree = "<group>"; };
@@ -215,10 +221,21 @@
 			children = (
 				C784127AA13F72483999B4B4 /* Astronomy */,
 				0DBB999A610176D8FD79A3B9 /* Geo */,
+				115E885DDCDD4AF2E4E70360 /* Model */,
 				63CDBDB9B18BD25E36D7FC24 /* Solar */,
 				C5628786571BB05F2796238C /* Terrain */,
 			);
 			path = SunlitCore;
+			sourceTree = "<group>";
+		};
+		115E885DDCDD4AF2E4E70360 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2F4145DD8BEF489487542526 /* DayReport.swift */,
+				5E004930F84ADD967123D99D /* Place.swift */,
+				C32DD80BFBA548D8D34C03A5 /* SkyMoment.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3295F5235DC3B6BFC1AD75E9 /* Products */ = {
@@ -620,6 +637,7 @@
 				7E52A8567E41F93294E66CAB /* Angle.swift in Sources */,
 				D025FD063AA9857C10BC0C79 /* CityIndex.swift in Sources */,
 				D58DBC1BA3698DBA21103E36 /* Coordinates.swift in Sources */,
+				945C241CB94116884F85D736 /* DayReport.swift in Sources */,
 				D661D94C694A19F6279726C0 /* DeltaT.swift in Sources */,
 				4D741EA0F3DD7C60F1B97C4F /* Eclipse.swift in Sources */,
 				FBA450DFB4D4387AA692481F /* GoldenHour.swift in Sources */,
@@ -630,10 +648,12 @@
 				50740501AB1A8F3A833D48D4 /* MoonPosition.swift in Sources */,
 				35C65B69929F0570EEE9A4AC /* MoonTables.swift in Sources */,
 				7DA772F5BB01149C754598E2 /* Nutation.swift in Sources */,
+				6CCFF6D50FF31AEA8ABC38B1 /* Place.swift in Sources */,
 				F1745D405DCEA189D1CDA4B5 /* Refraction.swift in Sources */,
 				8DAADC231EAF37D736DBE352 /* RiseSet.swift in Sources */,
 				E8ADF96426F53E132690D01E /* SPATables.swift in Sources */,
 				F88C2FEDDB37124721541809 /* Shadow.swift in Sources */,
+				0038022101E8D1876DC1C568 /* SkyMoment.swift in Sources */,
 				14F54E54C878AFC6F400099D /* SolarPositionSPA.swift in Sources */,
 				59031773DA6EFFA456CB1C42 /* Twilight.swift in Sources */,
 				692DCF1B635E54977A72DE54 /* UVIndex.swift in Sources */,

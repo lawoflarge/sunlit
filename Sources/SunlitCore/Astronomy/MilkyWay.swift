@@ -149,24 +149,19 @@ public enum MilkyWay {
         var centreHighAndDarkEver = false
         var highestOverNight = -90.0
 
-        // The longest run of consecutive samples that satisfy every condition.
-        // The first and last such samples of the night would be wrong: a moon
-        // rising in the middle of the night splits the window, and reporting
-        // the hull would promise hours that are not there.
-        var runStart: JulianDay?
-        var runEnd: JulianDay?
-        var runBest: Sample?
-        var bestRun: (start: JulianDay, end: JulianDay, best: Sample)?
+        // The longest run of consecutive samples that satisfy every condition,
+        // rather than the span from the first such sample to the last. A moon
+        // that rises while its illuminated fraction is still over the threshold
+        // and then falls under it splits the night in two, which a search over
+        // twenty years of nights finds every few lunations. Reporting the span
+        // would promise the moonlit gap between the halves as shooting time.
+        var current: Run?
+        var longest: Run?
 
         func closeRun() {
-            guard let s = runStart, let e = runEnd, let b = runBest else { return }
-            let length = e.value - s.value
-            if bestRun == nil || length > (bestRun!.end.value - bestRun!.start.value) {
-                bestRun = (s, e, b)
-            }
-            runStart = nil
-            runEnd = nil
-            runBest = nil
+            defer { current = nil }
+            guard let run = current, run.length > (longest?.length ?? -1) else { return }
+            longest = run
         }
 
         for i in 0...steps {
@@ -191,13 +186,17 @@ public enum MilkyWay {
             guard !moon.ruinsTheSky else { closeRun(); continue }
 
             let sample = Sample(julianDay: jd, altitude: centre.altitude, moon: moon)
-            if runStart == nil { runStart = jd; runBest = sample }
-            runEnd = jd
-            if sample.altitude > (runBest?.altitude ?? -90) { runBest = sample }
+            if var run = current {
+                run.end = jd
+                if sample.altitude > run.best.altitude { run.best = sample }
+                current = run
+            } else {
+                current = Run(start: jd, end: jd, best: sample)
+            }
         }
         closeRun()
 
-        guard let run = bestRun else {
+        guard let run = longest else {
             let factor: LimitingFactor
             if !centreEverHigh {
                 factor = .galacticCentreBelowHorizon
@@ -248,6 +247,14 @@ public enum MilkyWay {
     }
 
     // MARK: Internals
+
+    /// One unbroken stretch of qualifying samples, and the best moment in it.
+    private struct Run {
+        let start: JulianDay
+        var end: JulianDay
+        var best: Sample
+        var length: Double { end.value - start.value }
+    }
 
     private struct Sample {
         let julianDay: JulianDay
