@@ -176,17 +176,26 @@ struct ARView: View {
         .padding(12)
     }
 
+    /// `HeadingProvider` calls a reading poor at twenty degrees or more.
+    /// `AccuracyChip` turns amber strictly above the threshold it is handed, so
+    /// the threshold here is the largest double below twenty. Without that the
+    /// chip stays calm at exactly twenty degrees while the note underneath says
+    /// the compass needs calibrating and the sweep button is disabled, and
+    /// twenty is not a hypothetical: `CLHeading.headingAccuracy` reports whole
+    /// numbers.
+    private static let calibrationThreshold = 20.0.nextDown
+
     /// The heading uncertainty, permanently on screen.
     ///
     /// Amber exactly when `HeadingProvider` says the reading needs calibrating,
-    /// which is above twenty degrees, so the colour and the sensor layer agree
-    /// on one definition rather than each carrying its own. A reading the device
-    /// declines to give at all is a different state and says so, because
-    /// "plus or minus minus one degrees" is not a measurement.
+    /// so the colour and the sensor layer agree on one definition rather than
+    /// each carrying its own. A reading the device declines to give at all is a
+    /// different state and says so, because "plus or minus minus one degrees"
+    /// is not a measurement.
     @ViewBuilder
     private var headingChip: some View {
         if heading.accuracyDegrees >= 0 {
-            AccuracyChip(degrees: heading.accuracyDegrees, poorAbove: 20)
+            AccuracyChip(degrees: heading.accuracyDegrees, poorAbove: Self.calibrationThreshold)
         } else {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -275,9 +284,18 @@ struct ARView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background {
+        // Outlined, never filled. This panel used to sit on black at forty five
+        // percent, and a plate under the ink is the one thing the adaptive sky
+        // cannot survive: above the ink crossover the ink is pure black, so the
+        // plate darkens exactly what the text has to read against. Swept over
+        // the whole altitude domain with the design system's own
+        // `SkyContrast.paintedColours`, the audited 4.55 to 1 became 2.02 to 1.
+        // This is also the panel App Review sees if it refuses the camera.
+        .overlay {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(.black.opacity(0.45))
+                .strokeBorder(
+                    SkyPalette.componentBorder(solarAltitude: scene.solarAltitude),
+                    lineWidth: 1)
         }
         .accessibilityElement(children: .contain)
     }
@@ -291,17 +309,12 @@ struct ARView: View {
 
     private var readouts: some View {
         VStack(alignment: .leading, spacing: 16) {
+            sunReadouts
+
+            // The aim is a reading off this device's own sensors at this
+            // moment, not an ephemeris for a chosen day, so it is free at every
+            // selection. Locking it would be charging for the compass.
             MetricGroup {
-                MetricReadout(
-                    label: String(
-                        localized: "ar.sun.azimuth", defaultValue: "Sun azimuth",
-                        comment: "Label of the sun's compass bearing in the camera view"),
-                    value: degrees(scene.sunNow.azimuth), unit: "\u{00B0}")
-                MetricReadout(
-                    label: String(
-                        localized: "ar.sun.altitude", defaultValue: "Sun altitude",
-                        comment: "Label of the sun's angle above the horizon in the camera view"),
-                    value: degrees(scene.sunNow.altitude), unit: "\u{00B0}")
                 MetricReadout(
                     label: String(
                         localized: "ar.aim", defaultValue: "Frame centre",
@@ -313,9 +326,42 @@ struct ARView: View {
         }
     }
 
+    /// The sun's figures, which are free only for today at the current place.
+    ///
+    /// They used to be printed at full precision whatever the header carried,
+    /// while the drawn overlay beside them was dimmed and the note underneath
+    /// said the screen was locked. Anyone who moved the date or the pin got the
+    /// paid answer for nothing, in the one view that exists to give it, and the
+    /// screen contradicted itself while doing it.
+    @ViewBuilder
+    private var sunReadouts: some View {
+        let group = MetricGroup {
+            MetricReadout(
+                label: String(
+                    localized: "ar.sun.azimuth", defaultValue: "Sun azimuth",
+                    comment: "Label of the sun's compass bearing in the camera view"),
+                value: degrees(scene.sunNow.azimuth), unit: "\u{00B0}")
+            MetricReadout(
+                label: String(
+                    localized: "ar.sun.altitude", defaultValue: "Sun altitude",
+                    comment: "Label of the sun's angle above the horizon in the camera view"),
+                value: degrees(scene.sunNow.altitude), unit: "\u{00B0}")
+        }
+
+        if state.selectionIsFree {
+            group
+        } else {
+            locked(
+                group,
+                spokenLabel: String(
+                    localized: "ar.sun.axLabel", defaultValue: "Sun position",
+                    comment: "Accessibility label of the blurred sun figures"),
+                message: selectionLockMessage)
+        }
+    }
+
     @ViewBuilder
     private var moonReadouts: some View {
-        let unlocked = state.pro.allows(.moon) && state.selectionIsFree
         let group = MetricGroup {
             MetricReadout(
                 label: String(
@@ -336,35 +382,54 @@ struct ARView: View {
                 unit: "%")
         }
 
-        if unlocked {
+        if state.pro.allows(.moon), state.selectionIsFree {
             group
         } else {
-            // Shown, not hidden. A gated feature that vanishes makes the free
-            // app look broken and gives the reader no way to judge whether the
-            // purchase is worth it. The figures are blurred rather than
-            // removed, and VoiceOver is told the state rather than being read
-            // a number the screen is deliberately obscuring.
-            VStack(alignment: .leading, spacing: 10) {
-                group
-                    .blur(radius: 5)
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(Text(String(
-                        localized: "ar.moon.axLabel", defaultValue: "Moon position",
-                        comment: "Accessibility label of the blurred moon figures")))
-                    .accessibilityValue(Text(lockedSpoken))
-                ARUnlockRow(message: moonLockMessage) { showingPaywall = true }
-            }
+            locked(
+                group,
+                spokenLabel: String(
+                    localized: "ar.moon.axLabel", defaultValue: "Moon position",
+                    comment: "Accessibility label of the blurred moon figures"),
+                message: moonLockMessage)
+        }
+    }
+
+    /// A block of figures the purchase covers.
+    ///
+    /// Shown, not hidden. A gated feature that vanishes makes the free app look
+    /// broken and gives the reader no way to judge whether the purchase is
+    /// worth it. The figures are blurred rather than removed, and VoiceOver is
+    /// told the state rather than being read a number the screen is
+    /// deliberately obscuring.
+    private func locked<Content: View>(
+        _ content: Content, spokenLabel: String, message: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            content
+                .blur(radius: 5)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text(spokenLabel))
+                .accessibilityValue(Text(lockedSpoken))
+            ARUnlockRow(message: message) { showingPaywall = true }
         }
     }
 
     // MARK: Layers
 
     private var layerControls: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(String(
-                localized: "ar.layers.title", defaultValue: "Overlay",
-                comment: "Heading of the list of things drawn over the camera image"))
+        // Not named `heading`: that is the sensor in this view's environment,
+        // and shadowing it here is how a later edit reads a string where it
+        // meant the compass.
+        let layersHeading = String(
+            localized: "ar.layers.title", defaultValue: "Overlay",
+            comment: "Heading of the list of things drawn over the camera image")
+        return VStack(alignment: .leading, spacing: 12) {
+            // `sunlitLabel` uppercases for the eye, and the design system asks
+            // every user of it to hand VoiceOver the original string rather
+            // than a run of capitals to guess at.
+            Text(layersHeading)
                 .sunlitLabel()
+                .accessibilityLabel(Text(layersHeading))
 
             ARLayerToggle(
                 title: String(
@@ -440,14 +505,6 @@ struct ARView: View {
                     comment: "Explains the dashed curve drawn from a measured horizon profile"))
                     .font(SunlitType.caption)
                     .fixedSize(horizontal: false, vertical: true)
-            }
-            if !state.selectionIsFree {
-                ARUnlockRow(
-                    message: String(
-                        localized: "ar.selection.locked",
-                        defaultValue: "Today at your current location is free forever. This screen is showing another day or another place, so the overlay is dimmed until Sunlit Pro is unlocked.",
-                        comment: "Explains why the whole overlay is dimmed"),
-                    action: { showingPaywall = true })
             }
         }
     }
@@ -592,6 +649,17 @@ struct ARView: View {
         String(
             localized: "ar.locked.value", defaultValue: "Locked",
             comment: "Spoken in place of a figure that is hidden behind the purchase")
+    }
+
+    /// Why a figure is dimmed when the header has moved off today or off the
+    /// device's own position. Carried by the sun block, which is the first
+    /// locked thing on the screen, so there is exactly one route to the
+    /// purchase for this state rather than one per affected block.
+    private var selectionLockMessage: String {
+        String(
+            localized: "ar.selection.locked",
+            defaultValue: "Today at your current location is free forever. This screen is showing another day or another place, so the figures and the overlay are dimmed until Sunlit Pro is unlocked.",
+            comment: "Explains why the figures and the drawn overlay are dimmed")
     }
 
     private var moonLockMessage: String {
