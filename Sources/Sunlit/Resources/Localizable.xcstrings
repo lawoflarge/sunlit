@@ -18,7 +18,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Heading accuracy, plus or minus \\(amount)"
+            "value": "Heading accuracy, plus or minus %@"
           }
         }
       }
@@ -73,7 +73,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(azimuth)° az, \\(altitude)° alt"
+            "value": "%@° az, %@° alt"
           }
         }
       }
@@ -623,7 +623,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(done) of \\(total)"
+            "value": "%@ of %@"
           }
         }
       }
@@ -1107,7 +1107,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(day). All times in \\(zoneName)."
+            "value": "%@. All times in %@."
           }
         }
       }
@@ -1679,7 +1679,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every time in both files is written for \\(name), with its offset from Universal Time attached. The spreadsheet is in English with ISO 8601 timestamps and a full stop as the decimal separator, so that anyone can open it."
+            "value": "Every time in both files is written for %@, with its offset from Universal Time attached. The spreadsheet is in English with ISO 8601 timestamps and a full stop as the decimal separator, so that anyone can open it."
           }
         }
       }
@@ -1712,7 +1712,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(figure) degrees"
+            "value": "%@ degrees"
           }
         }
       }
@@ -1723,7 +1723,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(magnitude) longer"
+            "value": "%@ longer"
           }
         }
       }
@@ -1734,7 +1734,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(from) to \\(to)"
+            "value": "%@ to %@"
           }
         }
       }
@@ -1745,7 +1745,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(magnitude) shorter"
+            "value": "%@ shorter"
           }
         }
       }
@@ -1800,7 +1800,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lasts \\(format.span(seconds))"
+            "value": "Lasts %@"
           }
         }
       }
@@ -2042,7 +2042,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lasts \\(duration)"
+            "value": "Lasts %@"
           }
         }
       }
@@ -2273,7 +2273,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(distanceFigure) kilometres"
+            "value": "%@ kilometres"
           }
         }
       }
@@ -2493,7 +2493,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(format.number(day.peak.irradiance.global, fraction: 0)) watts per square metre"
+            "value": "%@ watts per square metre"
           }
         }
       }
@@ -2691,7 +2691,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Behind the skyline for \\(duration)"
+            "value": "Behind the skyline for %@"
           }
         }
       }
@@ -2713,7 +2713,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(magnitude) earlier than a flat horizon"
+            "value": "%@ earlier than a flat horizon"
           }
         }
       }
@@ -2724,7 +2724,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(magnitude) later than a flat horizon"
+            "value": "%@ later than a flat horizon"
           }
         }
       }
@@ -3208,7 +3208,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Days run on the clock of \\(state.place.name), not on your own."
+            "value": "Days run on the clock of %@, not on your own."
           }
         }
       }
@@ -3230,7 +3230,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(heightFigure) degrees"
+            "value": "%@ degrees"
           }
         }
       }
@@ -3274,7 +3274,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skyline height at azimuth \\(azimuthFigure) degrees"
+            "value": "Skyline height at azimuth %@ degrees"
           }
         }
       }
@@ -3373,7 +3373,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Map around \\(state.place.name)"
+            "value": "Map around %@"
           }
         }
       }
@@ -3439,7 +3439,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pin \\(coordinateText)"
+            "value": "Pin %@"
           }
         }
       }
@@ -3560,7 +3560,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(name). Unlock with Sunlit Pro."
+            "value": "%@. Unlock with Sunlit Pro."
           }
         }
       }
@@ -3626,7 +3626,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The shadow runs further than the drawn line, which stops at \\(limit). The length above is the whole of it."
+            "value": "The shadow runs further than the drawn line, which stops at %@. The length above is the whole of it."
           }
         }
       }
@@ -3703,7 +3703,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "azimuth \\(figure) degrees"
+            "value": "azimuth %@ degrees"
           }
         }
       }
@@ -3714,7 +3714,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "At \\(clock), altitude \\(value) degrees"
+            "value": "At %@, altitude %@ degrees"
           }
         }
       }
@@ -3725,7 +3725,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Altitude \\(value) degrees"
+            "value": "Altitude %@ degrees"
           }
         }
       }
@@ -3780,7 +3780,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Times shown in your device time zone, \\(zoneName). This pin's own time zone needs a network lookup, so it has not been confirmed."
+            "value": "Times shown in your device time zone, %@. This pin's own time zone needs a network lookup, so it has not been confirmed."
           }
         }
       }
@@ -3791,7 +3791,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Times shown in \\(zoneName)."
+            "value": "Times shown in %@."
           }
         }
       }
@@ -3813,7 +3813,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(SunlitSettings.timeString(date, timeZone: zone)) in \\(place.name)"
+            "value": "%@ in %@"
           }
         }
       }
@@ -4517,7 +4517,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Local time \\(time)"
+            "value": "Local time %@"
           }
         }
       }
@@ -4737,7 +4737,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(profile.measuredSectorCount) of 36 sectors swept at \\(state.place.name)."
+            "value": "%lld of 36 sectors swept at %@."
           }
         }
       }
@@ -4748,7 +4748,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No skyline has been swept at \\(state.place.name), so Sunlit assumes a flat horizon."
+            "value": "No skyline has been swept at %@, so Sunlit assumes a flat horizon."
           }
         }
       }
@@ -4781,7 +4781,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Waiting: \\(scheduledCount)"
+            "value": "Waiting: %lld"
           }
         }
       }
@@ -4803,7 +4803,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scheduled for the next \\(horizonDays) days at \\(state.place.name), from the same figures the app shows. Open Sunlit now and then to extend them."
+            "value": "Scheduled for the next %lld days at %@, from the same figures the app shows. Open Sunlit now and then to extend them."
           }
         }
       }
@@ -4968,7 +4968,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Now at \\(state.place.name): \\(clock)"
+            "value": "Now at %@: %@"
           }
         }
       }
@@ -5067,7 +5067,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Version \\(version), build \\(build)"
+            "value": "Version %@, build %@"
           }
         }
       }
@@ -5144,7 +5144,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(start) to \\(end)"
+            "value": "%@ to %@"
           }
         }
       }
@@ -5463,7 +5463,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(phase), \\(illumination) lit"
+            "value": "%@, %@ lit"
           }
         }
       }
@@ -5573,7 +5573,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rises \\(rise), sets \\(set)"
+            "value": "Rises %@, sets %@"
           }
         }
       }
@@ -5584,7 +5584,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rises \\(rise), no moonset on this day"
+            "value": "Rises %@, no moonset on this day"
           }
         }
       }
@@ -5595,7 +5595,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sets \\(set), no moonrise on this day"
+            "value": "Sets %@, no moonrise on this day"
           }
         }
       }
@@ -5727,7 +5727,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The purchase did not complete. \\(reason)"
+            "value": "The purchase did not complete. %@"
           }
         }
       }
@@ -5848,7 +5848,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sun altitude \\(figure) degrees"
+            "value": "Sun altitude %@ degrees"
           }
         }
       }
@@ -5859,7 +5859,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sun azimuth \\(figure) degrees"
+            "value": "Sun azimuth %@ degrees"
           }
         }
       }
@@ -5870,7 +5870,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(name) at \\(clock), in \\(ahead)"
+            "value": "%@ at %@, in %@"
           }
         }
       }
@@ -5903,7 +5903,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moon \\(phase), \\(lit) lit"
+            "value": "Moon %@, %@ lit"
           }
         }
       }
@@ -5914,7 +5914,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sunrise \\(riseTime), sunset \\(setTime)"
+            "value": "Sunrise %@, sunset %@"
           }
         }
       }
@@ -5925,7 +5925,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sunrise \\(riseTime). \\(noSunset)"
+            "value": "Sunrise %@. %@"
           }
         }
       }
@@ -5936,7 +5936,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(noSunrise). Sunset \\(setTime)"
+            "value": "%@. Sunset %@"
           }
         }
       }
@@ -5958,7 +5958,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(entry.moonPhaseText) \\(entry.moonIlluminationText)"
+            "value": "%@ %@"
           }
         }
       }
@@ -6057,7 +6057,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Golden hour now, until \\(end)"
+            "value": "Golden hour now, until %@"
           }
         }
       }
@@ -6068,7 +6068,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Golden hour begins at \\(start)"
+            "value": "Golden hour begins at %@"
           }
         }
       }
@@ -6288,7 +6288,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Next sun event at \\(entry.placeName)"
+            "value": "Next sun event at %@"
           }
         }
       }
@@ -6299,7 +6299,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "\\(name) at \\(clock), in \\(ahead)"
+            "value": "%@ at %@, in %@"
           }
         }
       }
