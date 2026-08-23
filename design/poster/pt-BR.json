@@ -1,0 +1,40 @@
+{
+  "locale": "pt-BR",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Veja exatamente onde o sol estará.",
+      "subhead": "Levante o celular. A trajetória aparece."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Planeje qualquer dia, em qualquer lugar.",
+      "subhead": "Escolha a data, marque o ponto, leia a luz."
+    },
+    {
+      "shot": "data.png",
+      "headline": "A Lua e a Via Láctea também.",
+      "subhead": "Fase, nascer, pôr e o centro galáctico."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Hora dourada, hora azul e os três crepúsculos, ao segundo."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Trace seu horizonte real e veja quando o sol o ultrapassa."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Direções do nascer e do pôr do sol, desenhadas no mapa."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Eclipses com contatos locais, calculados no seu celular."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Tudo offline. Nada sobre você sai do aparelho."
+    }
+  ]
+}

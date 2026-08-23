@@ -6,6 +6,11 @@ import Foundation
 /// time scrubber does NOT rebuild it, because that would recompute several
 /// thousand ephemeris evaluations per frame; it builds a `SkyMoment` instead,
 /// which costs one.
+///
+/// The day is swept exactly once, into a `SolarDay`, and that one sweep serves
+/// the twilight phases, both light windows and the drawn sun track. Everything
+/// the home screen does not show is a method rather than a stored property, so
+/// changing the date does not pay for it.
 public struct DayReport: Sendable {
 
     public let date: JulianDay
@@ -24,23 +29,11 @@ public struct DayReport: Sendable {
     public let moonset: JulianDay?
     public let moonPhaseAtNoon: MoonPosition.Phase
 
-    /// The Milky Way window for the night that begins on this day.
-    public let milkyWay: MilkyWay.Visibility
-
-    /// Periods when the sun is up but behind the measured skyline. Empty when
-    /// the place has no measured profile, which is not the same as there being
-    /// no obstruction.
-    public let obstructionPeriods: [(start: JulianDay, end: JulianDay)]
+    /// The place has a measured skyline. Cheap to know, so it stays a property;
+    /// what the skyline does to the day is in `terrain()`.
     public let hasMeasuredHorizon: Bool
-    /// Sunrise and sunset against the measured skyline rather than a flat
-    /// horizon, when there is a profile.
-    public let terrainSunrise: JulianDay?
-    public let terrainSunset: JulianDay?
 
     public let dayLength: TimeInterval
-    /// Change in day length from the previous day, in seconds. Positive while
-    /// the days are drawing out.
-    public let dayLengthChange: TimeInterval
 
     public let maximumSolarAltitude: Double
     public let sunriseAzimuth: Double?
@@ -55,7 +48,14 @@ public struct DayReport: Sendable {
         public let moon: Coordinates.Horizontal
     }
     public let samples: [Sample]
-    public static let samplePeriodSeconds: Double = 300
+    /// Ten minutes, which is 145 points across the day. A phone screen is under
+    /// 450 points wide, so that is better than one point per three, and the
+    /// track is a smooth arc rather than something with detail to lose.
+    public static let samplePeriodSeconds: Double = 600
+
+    /// The single sweep of the sun this report was built from, kept so the
+    /// figures below can be answered later without sweeping the day again.
+    private let solarDay: SolarDay
 
     /// Computes a day.
     ///
@@ -65,61 +65,56 @@ public struct DayReport: Sendable {
         let geographic = place.geographic
         let end = date.adding(days: 1)
 
-        let phases = Twilight.phases(date: date, place: geographic)
-        let golden = GoldenHour.golden(date: date, place: geographic)
-        let blue = GoldenHour.blue(date: date, place: geographic)
+        // The one sweep. Handing it to all three solar solves is the difference
+        // between one pass over the day and six.
+        let solarDay = SolarDay(start: date, place: geographic)
+
+        let phases = Twilight.phases(date: date, place: geographic, solarDay: solarDay)
+        let golden = GoldenHour.golden(date: date, place: geographic, solarDay: solarDay)
+        let blue = GoldenHour.blue(date: date, place: geographic, solarDay: solarDay)
 
         // The moon's rise altitude depends on its parallax, which changes
         // through the day, so the target is a function of time. This is the case
         // the sampling solver exists for.
+        //
+        // Ten minute steps. The moon moves at most two and a half degrees in
+        // that time, its rise target is a single threshold rather than a band,
+        // and the crossing is still bisected to one second afterwards, so the
+        // coarser sweep changes what is bracketed and not what is reported.
         let moonOutcome = RiseSet.solve(
             start: date, end: end,
+            sampleSeconds: 600,
             altitude: { moonAltitude(at: $0, place: geographic) },
             target: { moonRiseAltitude(at: $0) })
 
         let noon = date.adding(days: 0.5)
         let noonMoment = SkyMoment.at(noon, place: place)
 
-        let profile = place.horizonProfile
-        let measured = profile?.isMeasured ?? false
-        let obstruction: [(start: JulianDay, end: JulianDay)]
-        let terrainRise: JulianDay?
-        let terrainSet: JulianDay?
-        if let profile, measured {
-            obstruction = Shadow.obstructionPeriods(date: date, place: geographic, profile: profile)
-            terrainRise = Shadow.localSunrise(date: date, place: geographic, profile: profile)
-            terrainSet = Shadow.localSunset(date: date, place: geographic, profile: profile)
-        } else {
-            obstruction = []
-            terrainRise = nil
-            terrainSet = nil
-        }
-
-        // Day length change. Computing the previous day's phases in full costs
-        // another day of samples, which is the single most expensive thing this
-        // function does, so it is worth knowing that it is deliberate: the
-        // number is one of the few figures in the app that a user checks daily.
-        let yesterday = Twilight.phases(date: date.adding(days: -1), place: geographic)
-        let change = phases.dayLength - yesterday.dayLength
-
+        // The drawing grid is every second sample of the shared sweep, so the
+        // sun half of the track is already computed and only the moon costs
+        // anything here.
+        let stride = max(1, Int((samplePeriodSeconds / solarDay.stepSeconds).rounded()))
         var samples: [Sample] = []
-        let sampleCount = Int(86400.0 / samplePeriodSeconds)
-        samples.reserveCapacity(sampleCount + 1)
-        var maximumAltitude = -90.0
-        for i in 0...sampleCount {
-            let instant = date.adding(seconds: Double(i) * samplePeriodSeconds)
-            let solar = SolarPositionSPA.evaluate(julianDay: instant, place: geographic)
-            maximumAltitude = max(maximumAltitude, solar.elevation)
+        samples.reserveCapacity(solarDay.samples.count / stride + 1)
+        for index in Swift.stride(from: 0, to: solarDay.samples.count, by: stride) {
+            let swept = solarDay.samples[index]
             samples.append(Sample(
-                instant: instant,
-                sun: solar.horizontal,
-                moon: moonHorizontal(at: instant, place: geographic)))
+                instant: swept.instant,
+                sun: Coordinates.Horizontal(
+                    azimuth: swept.azimuth, altitude: swept.apparentAltitude),
+                moon: moonHorizontal(at: swept.instant, place: geographic)))
         }
 
         func azimuth(at instant: JulianDay?) -> Double? {
             guard let instant else { return nil }
             return SolarPositionSPA.evaluate(julianDay: instant, place: geographic).azimuth
         }
+
+        // The day's greatest altitude is read at the sweep's refined transit,
+        // not off the drawing grid: a ten minute grid can miss the peak by five
+        // minutes, which at Berlin in June is a sixtieth of a degree.
+        let peak = SolarPositionSPA.evaluate(
+            julianDay: solarDay.maximum.instant, place: geographic)
 
         return DayReport(
             date: date,
@@ -130,18 +125,63 @@ public struct DayReport: Sendable {
             moonrise: moonOutcome.firstRise,
             moonset: moonOutcome.lastSet,
             moonPhaseAtNoon: noonMoment.moonPhase,
-            milkyWay: MilkyWay.visibility(night: date, place: geographic),
-            obstructionPeriods: obstruction,
-            hasMeasuredHorizon: measured,
-            terrainSunrise: terrainRise,
-            terrainSunset: terrainSet,
+            hasMeasuredHorizon: place.horizonProfile?.isMeasured ?? false,
             dayLength: phases.dayLength,
-            dayLengthChange: change,
-            maximumSolarAltitude: maximumAltitude,
+            maximumSolarAltitude: peak.elevation,
             sunriseAzimuth: azimuth(at: phases.sunrise),
             transitAzimuth: azimuth(at: phases.solarNoon),
             sunsetAzimuth: azimuth(at: phases.sunset),
-            samples: samples)
+            samples: samples,
+            solarDay: solarDay)
+    }
+
+    // MARK: Computed on demand
+    //
+    // These three used to be stored, which meant every date change paid for
+    // them whether or not anything was showing them. Between them they were
+    // most of the cost of a report: the Milky Way is its own sweep of the
+    // night, the terrain figures are three solves against the skyline, and the
+    // change in day length is a second complete day.
+
+    /// The Milky Way window for the night that begins on this day.
+    public func milkyWayVisibility() -> MilkyWay.Visibility {
+        MilkyWay.visibility(night: date, place: place.geographic)
+    }
+
+    /// What a measured skyline does to the day.
+    public struct Terrain: Sendable {
+        /// Periods when the sun is up but behind the measured skyline. Empty
+        /// when the place has no measured profile, which is not the same as
+        /// there being no obstruction.
+        public let obstructionPeriods: [(start: JulianDay, end: JulianDay)]
+        /// Sunrise and sunset against the measured skyline rather than a flat
+        /// horizon, when there is a profile.
+        public let sunrise: JulianDay?
+        public let sunset: JulianDay?
+    }
+
+    public func terrain() -> Terrain {
+        guard let profile = place.horizonProfile, profile.isMeasured else {
+            return Terrain(obstructionPeriods: [], sunrise: nil, sunset: nil)
+        }
+        let geographic = place.geographic
+        return Terrain(
+            obstructionPeriods: Shadow.obstructionPeriods(
+                date: date, place: geographic, profile: profile),
+            sunrise: Shadow.localSunrise(date: date, place: geographic, profile: profile),
+            sunset: Shadow.localSunset(date: date, place: geographic, profile: profile))
+    }
+
+    /// Change in day length from the previous day, in seconds. Positive while
+    /// the days are drawing out.
+    ///
+    /// Computing the previous day's phases in full costs another day of
+    /// samples, and it is one of the few figures in the app that a user checks
+    /// daily, so it is computed honestly rather than approximated: it is just
+    /// not computed until it is asked for.
+    public func dayLengthChange() -> TimeInterval {
+        let yesterday = Twilight.phases(date: date.adding(days: -1), place: place.geographic)
+        return phases.dayLength - yesterday.dayLength
     }
 
     // MARK: Moon helpers
@@ -149,7 +189,9 @@ public struct DayReport: Sendable {
     static func moonHorizontal(at instant: JulianDay, place: Coordinates.Geographic) -> Coordinates.Horizontal {
         let jde = instant.adding(seconds: DeltaT.seconds(julianDay: instant))
         let lunar = MoonPosition.evaluate(julianEphemerisDay: jde)
-        let nutation = Nutation.evaluate(julianEphemerisDay: jde)
+        // The nutation comes back on the lunar result. Evaluating it again here
+        // would be the same sixty three term series for the same instant.
+        let nutation = lunar.nutation
         let sidereal = Coordinates.apparentSiderealTime(
             julianDay: instant,
             nutationInLongitude: nutation.inLongitude,

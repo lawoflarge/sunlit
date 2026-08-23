@@ -22,6 +22,15 @@ struct SunlitApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .task {
+                    // Capture mode exists only in debug builds; see
+                    // Debug/CaptureHarness.swift for why that matters.
+                    #if DEBUG
+                    if let configuration = CaptureHarness.configuration() {
+                        CaptureHarness.apply(configuration, to: state)
+                    }
+                    #endif
+                }
                 .environment(state)
                 .environment(location)
                 .environment(heading)

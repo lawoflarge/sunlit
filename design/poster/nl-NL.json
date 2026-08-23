@@ -1,0 +1,40 @@
+{
+  "locale": "nl-NL",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Zie precies waar de zon zal staan.",
+      "subhead": "Houd je telefoon omhoog. De baan is er."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Plan elke dag, overal ter wereld.",
+      "subhead": "Kies een datum, zet een punt, lees het licht."
+    },
+    {
+      "shot": "data.png",
+      "headline": "Ook de maan en de Melkweg.",
+      "subhead": "Fase, opkomst, ondergang, galactisch centrum."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Gouden uur, blauw uur en alle drie de schemeringen, op de seconde."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Teken je echte horizon en zie wanneer de zon eroverheen komt."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Richtingen van opkomst en ondergang, op de kaart getekend."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Verduisteringen met lokale contacttijden, op je toestel berekend."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Alles offline. Niets over jou verlaat het toestel."
+    }
+  ]
+}

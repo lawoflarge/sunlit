@@ -56,36 +56,30 @@ public enum Twilight {
     ///     place two hours ahead of Greenwich passes 22:00 UT of the previous
     ///     calendar date.
     ///   - place: the observer.
-    public static func phases(date: JulianDay, place: Coordinates.Geographic) -> Phases {
+    ///   - solarDay: a sweep of the same day that has already been made. Pass
+    ///     nil and one is made here. `DayReport` passes the sweep it also gives
+    ///     to the golden and blue hour solves, which is the whole reason a day
+    ///     report is not six sweeps of the same day; because both routes then
+    ///     run this identical code over an identical sweep, the phases a report
+    ///     carries are bit for bit the phases this function returns on its own,
+    ///     and the model proof checks exactly that.
+    public static func phases(
+        date: JulianDay,
+        place: Coordinates.Geographic,
+        solarDay: SolarDay? = nil
+    ) -> Phases {
         let dayStart = date
         let dayEnd = date.adding(days: 1)
 
-        // The solve runs an hour past each end of the day. An event a few
-        // seconds after local midnight sits in the very first sampling bracket,
-        // where a solver given exactly one day has no earlier sample to bracket
-        // it against; the same at the far end. The events are filtered back to
-        // the day afterwards, so the padding costs samples and changes nothing
-        // else.
-        let pad = 1.0 / 24.0
-
-        // One shared cache. The four thresholds are solved over an identical
-        // grid, so the sun is evaluated once per instant rather than four times.
-        var cache: [Double: Double] = [:]
-        func trueAltitude(_ jd: JulianDay) -> Double {
-            if let hit = cache[jd.value] { return hit }
-            let value = SolarPositionSPA.evaluate(julianDay: jd, place: place)
-                .elevationWithoutRefraction
-            cache[jd.value] = value
-            return value
-        }
+        // One shared sweep. The four thresholds are bracketed against the same
+        // samples, so the sun is evaluated once per instant rather than four
+        // times, and every crossing is then placed by an exact bisection
+        // between the two samples that straddle it.
+        let day = solarDay ?? SolarDay(start: date, place: place)
 
         func crossingsInDay(at h0: Double) -> [RiseSet.Crossing] {
-            RiseSet.solve(
-                start: dayStart.adding(days: -pad),
-                end: dayEnd.adding(days: pad),
-                altitude: trueAltitude,
-                target: { _ in h0 }
-            ).crossings.filter { $0.julianDay >= dayStart && $0.julianDay < dayEnd }
+            day.crossings(target: h0)
+                .filter { $0.julianDay >= dayStart && $0.julianDay < dayEnd }
         }
 
         let sunCrossings = crossingsInDay(at: Refraction.sunriseAltitude)
@@ -96,11 +90,10 @@ public enum Twilight {
         // Transit, antitransit and the polar flags are taken over exactly the
         // local day, so solar noon and solar midnight are guaranteed to be
         // instants the day actually contains.
-        let day = RiseSet.solve(
-            start: dayStart,
-            end: dayEnd,
-            altitude: trueAltitude,
-            target: { _ in Refraction.sunriseAltitude })
+        let alwaysAbove = sunCrossings.isEmpty
+            && day.samples.allSatisfy { $0.altitude > Refraction.sunriseAltitude }
+        let alwaysBelow = sunCrossings.isEmpty
+            && day.samples.allSatisfy { $0.altitude < Refraction.sunriseAltitude }
 
         // Twilight ends at the horizon, so the first upward crossing of a
         // threshold is that threshold's dawn and the last downward crossing is
@@ -119,19 +112,19 @@ public enum Twilight {
             nauticalDawn: dawn(nautical),
             civilDawn: dawn(civil),
             sunrise: dawn(sunCrossings),
-            solarNoon: day.transit?.julianDay,
+            solarNoon: day.maximum.instant,
             sunset: dusk(sunCrossings),
             civilDusk: dusk(civil),
             nauticalDusk: dusk(nautical),
             astronomicalDusk: dusk(astronomical),
-            nadir: day.antitransit?.julianDay,
+            nadir: day.minimum.instant,
             dayLength: daylight(
                 crossings: sunCrossings,
-                startsAboveHorizon: trueAltitude(dayStart) > Refraction.sunriseAltitude,
+                startsAboveHorizon: day.samples[0].altitude > Refraction.sunriseAltitude,
                 dayStart: dayStart,
                 dayEnd: dayEnd),
-            polarDay: day.alwaysAbove,
-            polarNight: day.alwaysBelow)
+            polarDay: alwaysAbove,
+            polarNight: alwaysBelow)
     }
 
     /// Total time the sun spent above the sunrise altitude inside the day.

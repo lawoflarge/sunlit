@@ -26,6 +26,12 @@ public enum MoonPosition {
         /// Apparent angular radius of the disc as seen from the Earth's centre,
         /// degrees.
         public let semidiameter: Double
+        /// The nutation and obliquity this evaluation already had to compute,
+        /// kept rather than thrown away. A caller that needs apparent sidereal
+        /// time for the same instant, which is every caller that wants the Moon
+        /// in the sky rather than on the ecliptic, would otherwise evaluate the
+        /// sixty three term nutation series a second time for the same answer.
+        public let nutation: Nutation.Result
 
         public var equatorial: Coordinates.Equatorial {
             Coordinates.Equatorial(
@@ -141,7 +147,8 @@ public enum MoonPosition {
             parallax: parallax,
             rightAscension: equatorial.rightAscension,
             declination: equatorial.declination,
-            semidiameter: Angle.asin(radiusKilometres / distance))
+            semidiameter: Angle.asin(radiusKilometres / distance),
+            nutation: nutation)
     }
 
     /// The illuminated fraction of the disc and the phase, Meeus chapter 48.

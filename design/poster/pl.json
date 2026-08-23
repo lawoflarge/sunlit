@@ -1,0 +1,40 @@
+{
+  "locale": "pl",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Zobacz dokładnie, gdzie będzie słońce.",
+      "subhead": "Podnieś telefon. Tor jest tam."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Zaplanuj dowolny dzień, w każdym miejscu.",
+      "subhead": "Wybierz datę, wskaż punkt, odczytaj światło."
+    },
+    {
+      "shot": "data.png",
+      "headline": "Także Księżyc i Droga Mleczna.",
+      "subhead": "Faza, wschód, zachód, centrum galaktyki."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Złota godzina, niebieska godzina i trzy zmierzchy, co do sekundy."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Odrysuj swój prawdziwy horyzont i zobacz, kiedy słońce go minie."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Azymuty wschodu i zachodu, narysowane na mapie."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Zaćmienia z lokalnymi kontaktami, liczone na telefonie."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Wszystko offline. Nic o tobie nie opuszcza urządzenia."
+    }
+  ]
+}

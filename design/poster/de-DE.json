@@ -1,0 +1,40 @@
+{
+  "locale": "de-DE",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Sieh genau, wo die Sonne stehen wird.",
+      "subhead": "Handy hochhalten. Die Bahn ist da."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Plane jeden Tag, überall auf der Erde.",
+      "subhead": "Datum wählen, Ort setzen, Licht ablesen."
+    },
+    {
+      "shot": "data.png",
+      "headline": "Auch Mond und Milchstraße.",
+      "subhead": "Phase, Aufgang, Untergang, galaktisches Zentrum."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Goldene Stunde, blaue Stunde und alle drei Dämmerungen, sekundengenau."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Zeichne deine echte Skyline nach und sieh, wann die Sonne sie überwindet."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Auf- und Untergangsrichtungen, direkt auf der Karte."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Finsternisse mit lokalen Kontaktzeiten, auf dem Gerät berechnet."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Alles offline. Nichts über dich verlässt das Gerät."
+    }
+  ]
+}

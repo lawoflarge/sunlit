@@ -115,7 +115,10 @@ public enum RiseSet {
                        alwaysAbove: alwaysAbove, alwaysBelow: alwaysBelow)
     }
 
-    private static func bisect(
+    // Internal rather than private because `SolarDay` brackets on its own
+    // shared sweep and then refines with this same bisection, so that a
+    // crossing found through either route is placed by identical arithmetic.
+    static func bisect(
         low: JulianDay,
         high: JulianDay,
         precisionSeconds: Double,
@@ -144,7 +147,9 @@ public enum RiseSet {
         return JulianDay((a + b) / 2.0)
     }
 
-    private static func refineExtreme(
+    // Internal for the same reason as `bisect`: `SolarDay` refines transit and
+    // antitransit with it.
+    static func refineExtreme(
         _ samples: [(jd: JulianDay, f: Double, altitude: Double)],
         around index: Int,
         altitude: (JulianDay) -> Double

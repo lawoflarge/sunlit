@@ -31,20 +31,27 @@ public enum GoldenHour {
     /// `date` is the start of the local day expressed in Universal Time, the
     /// same convention `Twilight.phases` takes. Either window is nil when the
     /// sun did not occupy the band on that side of solar noon.
+    ///
+    /// `solarDay` is a sweep of the same day that has already been made. Pass
+    /// nil and one is made here; `DayReport` passes the one it also gives to
+    /// `Twilight.phases` and to `blue`, so the day is swept once rather than
+    /// three times.
     public static func golden(
         date: JulianDay,
-        place: Coordinates.Geographic
+        place: Coordinates.Geographic,
+        solarDay: SolarDay? = nil
     ) -> (morning: Window?, evening: Window?) {
-        windows(date: date, place: place,
+        windows(date: date, place: place, solarDay: solarDay,
                 lower: goldenLowerAltitude, upper: goldenUpperAltitude)
     }
 
     /// Blue hour on one local day, same convention as `golden`.
     public static func blue(
         date: JulianDay,
-        place: Coordinates.Geographic
+        place: Coordinates.Geographic,
+        solarDay: SolarDay? = nil
     ) -> (morning: Window?, evening: Window?) {
-        windows(date: date, place: place,
+        windows(date: date, place: place, solarDay: solarDay,
                 lower: blueLowerAltitude, upper: blueUpperAltitude)
     }
 
@@ -64,22 +71,16 @@ public enum GoldenHour {
     private static func windows(
         date: JulianDay,
         place: Coordinates.Geographic,
+        solarDay: SolarDay?,
         lower: Double,
         upper: Double
     ) -> (morning: Window?, evening: Window?) {
         let dayStart = date
         let dayEnd = date.adding(days: 1)
 
-        var cache: [Double: Double] = [:]
-        func trueAltitude(_ jd: JulianDay) -> Double {
-            if let hit = cache[jd.value] { return hit }
-            // The band edges are geometric altitudes, so the unrefracted value
-            // is the one to compare, as everywhere else in this layer.
-            let value = SolarPositionSPA.evaluate(julianDay: jd, place: place)
-                .elevationWithoutRefraction
-            cache[jd.value] = value
-            return value
-        }
+        // The band edges are geometric altitudes, so the sweep's unrefracted
+        // value is the one to compare, as everywhere else in this layer.
+        let day = solarDay ?? SolarDay(start: date, place: place)
 
         // Distance into the band, positive inside it and negative outside on
         // either side. Turning "between two altitudes" into a single signed
@@ -87,18 +88,15 @@ public enum GoldenHour {
         // the case where the sun leaves the band downward at the top rather
         // than upward, which a pair of independent threshold solves would then
         // have to reassemble.
-        func depth(_ jd: JulianDay) -> Double {
-            let altitude = trueAltitude(jd)
-            return min(altitude - lower, upper - altitude)
+        func depth(_ altitude: Double) -> Double {
+            min(altitude - lower, upper - altitude)
         }
 
-        let band = RiseSet.solve(
-            start: dayStart, end: dayEnd,
-            altitude: depth, target: { _ in 0 })
+        let bandCrossings = day.crossings(of: depth)
 
         var intervals: [(start: JulianDay, end: JulianDay)] = []
-        var open: JulianDay? = depth(dayStart) > 0 ? dayStart : nil
-        for crossing in band.crossings {
+        var open: JulianDay? = depth(day.samples[0].altitude) > 0 ? dayStart : nil
+        for crossing in bandCrossings {
             switch crossing.kind {
             case .rise:
                 if open == nil { open = crossing.julianDay }
@@ -114,12 +112,10 @@ public enum GoldenHour {
         // really does continue into the next local day.
         if let from = open { intervals.append((from, dayEnd)) }
 
-        // Solar noon divides morning from evening. This solve reads entirely
-        // from the cache the band solve just filled.
-        let sun = RiseSet.solve(
-            start: dayStart, end: dayEnd,
-            altitude: trueAltitude, target: { _ in Refraction.sunriseAltitude })
-        let noon = sun.transit?.julianDay ?? dayStart.adding(days: 0.5)
+        // Solar noon divides morning from evening. It is the sweep's own
+        // refined maximum, which is the same instant `Twilight.phases` reports
+        // as solar noon when both are given the same sweep.
+        let noon = day.maximum.instant
 
         func clipped(_ interval: (start: JulianDay, end: JulianDay),
                      from low: JulianDay, to high: JulianDay) -> Window? {

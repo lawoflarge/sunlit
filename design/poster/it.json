@@ -1,0 +1,40 @@
+{
+  "locale": "it",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Vedi dove sarà il sole, con precisione.",
+      "subhead": "Alza il telefono. Il percorso è lì."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Pianifica ogni giorno, ovunque.",
+      "subhead": "Scegli la data, il luogo, leggi la luce."
+    },
+    {
+      "shot": "data.png",
+      "headline": "Anche la Luna e la Via Lattea.",
+      "subhead": "Fase, alba, tramonto, centro galattico."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Ora d'oro, ora blu e i tre crepuscoli, al secondo."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Traccia il tuo orizzonte reale e scopri quando il sole lo supera."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Direzioni di alba e tramonto, disegnate sulla mappa."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Eclissi con i contatti locali, calcolate sul telefono."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Tutto offline. Nulla di te lascia il dispositivo."
+    }
+  ]
+}

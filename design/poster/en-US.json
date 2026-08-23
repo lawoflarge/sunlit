@@ -1,0 +1,40 @@
+{
+  "locale": "en-US",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "See exactly where the sun will be.",
+      "subhead": "Hold up your phone. The path is there."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Plan any day, anywhere on earth.",
+      "subhead": "Pick a date, drop a pin, read the light."
+    },
+    {
+      "shot": "data.png",
+      "headline": "The moon and the Milky Way, too.",
+      "subhead": "Phase, rise, set, and the galactic core."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Golden hour, blue hour and all three twilights, to the second."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Trace your real skyline and see when the sun clears it."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Sunrise and sunset bearings, drawn on the map."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Eclipses with local contact times, computed on your phone."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Everything offline. Nothing about you leaves the device."
+    }
+  ]
+}

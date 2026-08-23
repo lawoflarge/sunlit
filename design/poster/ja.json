@@ -1,0 +1,40 @@
+{
+  "locale": "ja",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "太陽の位置が、正確にわかる。",
+      "subhead": "スマホをかざせば、軌道が見える。"
+    },
+    {
+      "shot": "sky.png",
+      "headline": "どの日でも、どの場所でも。",
+      "subhead": "日付と地点を選び、光を読む。"
+    },
+    {
+      "shot": "data.png",
+      "headline": "月と天の川も。",
+      "subhead": "月齢、出、入り、そして銀河中心。"
+    },
+    {
+      "shot": "sky.png",
+      "caption": "ゴールデンアワー、ブルーアワー、三つの薄明を秒単位で。"
+    },
+    {
+      "shot": "ar.png",
+      "caption": "実際の稜線をなぞれば、太陽が越える時刻がわかる。"
+    },
+    {
+      "shot": "map.png",
+      "caption": "日の出と日の入りの方位を、地図の上に。"
+    },
+    {
+      "shot": "data.png",
+      "caption": "日食と月食の地点別接触時刻を、端末内で計算。"
+    },
+    {
+      "shot": "sky.png",
+      "caption": "すべてオフライン。あなたの情報は端末から出ません。"
+    }
+  ]
+}

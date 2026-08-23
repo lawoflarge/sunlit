@@ -1,0 +1,40 @@
+{
+  "locale": "fr-FR",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Voyez où sera le soleil, exactement.",
+      "subhead": "Levez le téléphone. La course apparaît."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Préparez n'importe quel jour, partout.",
+      "subhead": "Une date, un point, la lumière."
+    },
+    {
+      "shot": "data.png",
+      "headline": "La Lune et la Voie lactée aussi.",
+      "subhead": "Phase, lever, coucher, centre galactique."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Heure dorée, heure bleue et les trois crépuscules, à la seconde."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Relevez votre horizon réel et voyez quand le soleil le dépasse."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Azimuts de lever et de coucher, tracés sur la carte."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Éclipses avec les contacts locaux, calculées sur votre téléphone."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Tout hors ligne. Rien de vous ne quitte l'appareil."
+    }
+  ]
+}

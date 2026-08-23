@@ -1,0 +1,40 @@
+{
+  "locale": "es-ES",
+  "posters": [
+    {
+      "shot": "ar.png",
+      "headline": "Mira dónde estará el sol, exactamente.",
+      "subhead": "Levanta el móvil. Ahí está su recorrido."
+    },
+    {
+      "shot": "sky.png",
+      "headline": "Planifica cualquier día, en cualquier lugar.",
+      "subhead": "Elige fecha, marca un punto, lee la luz."
+    },
+    {
+      "shot": "data.png",
+      "headline": "También la Luna y la Vía Láctea.",
+      "subhead": "Fase, salida, puesta y centro galáctico."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Hora dorada, hora azul y los tres crepúsculos, al segundo."
+    },
+    {
+      "shot": "ar.png",
+      "caption": "Traza tu horizonte real y descubre cuándo el sol lo supera."
+    },
+    {
+      "shot": "map.png",
+      "caption": "Orientación de salida y puesta, dibujada en el mapa."
+    },
+    {
+      "shot": "data.png",
+      "caption": "Eclipses con contactos locales, calculados en tu móvil."
+    },
+    {
+      "shot": "sky.png",
+      "caption": "Todo sin conexión. Nada tuyo sale del dispositivo."
+    }
+  ]
+}
