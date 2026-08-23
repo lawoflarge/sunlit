@@ -43,7 +43,7 @@ func checkTrue(_ label: String, _ ok: Bool) {
     if !ok { fail(label) }
 }
 
-struct Place {
+struct Site {
     let name: String
     let geographic: Coordinates.Geographic
     let year: Int
@@ -69,22 +69,22 @@ struct Place {
     }
 }
 
-let berlinJune = Place(name: "Berlin 2026-06-21",
+let berlinJune = Site(name: "Berlin 2026-06-21",
                        geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
                        year: 2026, month: 6, day: 21, offsetHours: 2)
-let berlinDecember = Place(name: "Berlin 2026-12-21",
+let berlinDecember = Site(name: "Berlin 2026-12-21",
                            geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
                            year: 2026, month: 12, day: 21, offsetHours: 1)
-let quito = Place(name: "Quito 2026-03-20",
+let quito = Site(name: "Quito 2026-03-20",
                   geographic: Coordinates.Geographic(latitude: -0.1807, longitude: -78.4678),
                   year: 2026, month: 3, day: 20, offsetHours: -5)
-let sydney = Place(name: "Sydney 2026-09-22",
+let sydney = Site(name: "Sydney 2026-09-22",
                    geographic: Coordinates.Geographic(latitude: -33.8688, longitude: 151.2093),
                    year: 2026, month: 9, day: 22, offsetHours: 10)
-let tromsoJune = Place(name: "Tromso 2026-06-21",
+let tromsoJune = Site(name: "Tromso 2026-06-21",
                        geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
                        year: 2026, month: 6, day: 21, offsetHours: 2)
-let tromsoDecember = Place(name: "Tromso 2026-12-21",
+let tromsoDecember = Site(name: "Tromso 2026-12-21",
                            geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
                            year: 2026, month: 12, day: 21, offsetHours: 1)
 
@@ -94,10 +94,10 @@ let tromsoDecember = Place(name: "Tromso 2026-12-21",
 // same day number, which is how these two were found. They are here because
 // they are the only configuration that can tell "the last crossing of the day"
 // apart from "the first", and every other case in this file is blind to it.
-let tromsoJuly = Place(name: "Tromso 2026-07-27",
+let tromsoJuly = Site(name: "Tromso 2026-07-27",
                        geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
                        year: 2026, month: 7, day: 27, offsetHours: 2)
-let berlinAugust = Place(name: "Berlin 2026-08-02",
+let berlinAugust = Site(name: "Berlin 2026-08-02",
                          geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
                          year: 2026, month: 8, day: 2, offsetHours: 2)
 // The mirror case, a threshold crossed upward twice. It needs a day that begins
@@ -106,19 +106,19 @@ let berlinAugust = Place(name: "Berlin 2026-08-02",
 // than the CEST one. `Twilight.phases` is defined on a window and not on a
 // civil time zone, and USNO tabulates exactly this window at tz zero, so the
 // two are answering the same question.
-let berlinMayUT = Place(name: "Berlin 2026-05-13 UT day",
+let berlinMayUT = Site(name: "Berlin 2026-05-13 UT day",
                         geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
                         year: 2026, month: 5, day: 13, offsetHours: 0)
 // A day whose own astronomical dusk falls after it ends, so the only such
 // crossing inside it is the previous evening's, two minutes before the padded
 // solve window would have reached the next one.
-let berlinAugustFirst = Place(name: "Berlin 2026-08-01",
+let berlinAugustFirst = Site(name: "Berlin 2026-08-01",
                               geographic: Coordinates.Geographic(latitude: 52.5200, longitude: 13.4050),
                               year: 2026, month: 8, day: 1, offsetHours: 2)
 // A night on which the sun dips out of the golden band and back in before
 // dawn, so the morning has two spells of golden light and only the later one
 // leads into the day.
-let tromsoAugust = Place(name: "Tromso 2026-08-08",
+let tromsoAugust = Site(name: "Tromso 2026-08-08",
                          geographic: Coordinates.Geographic(latitude: 69.6492, longitude: 18.9553),
                          year: 2026, month: 8, day: 8, offsetHours: 2)
 
@@ -156,7 +156,7 @@ struct Published {
 
 let tolerance = 2.0 / 1440.0   // two minutes, in days
 
-func checkInstant(_ place: Place, _ label: String, _ got: JulianDay?, _ want: String?) {
+func checkInstant(_ place: Site, _ label: String, _ got: JulianDay?, _ want: String?) {
     checks += 1
     switch (got, want) {
     case (nil, nil):
@@ -173,7 +173,7 @@ func checkInstant(_ place: Place, _ label: String, _ got: JulianDay?, _ want: St
     }
 }
 
-func verify(_ place: Place, _ reference: Published) {
+func verify(_ place: Site, _ reference: Published) {
     let phases = Twilight.phases(date: place.localMidnight, place: place.geographic)
 
     checkInstant(place, "astronomical dawn", phases.astronomicalDawn, reference.astronomicalDawn)
@@ -421,7 +421,7 @@ checkTrue("blue band hands over at its upper edge", !GoldenHour.isWithinBlue(sol
 checkTrue("blue band excludes below", !GoldenHour.isWithinBlue(solarAltitude: -6.001))
 
 // Golden and blue windows.
-func elevation(_ place: Place, _ jd: JulianDay) -> Double {
+func elevation(_ place: Site, _ jd: JulianDay) -> Double {
     SolarPositionSPA.evaluate(julianDay: jd, place: place.geographic).elevationWithoutRefraction
 }
 func minutes(_ window: GoldenHour.Window) -> Double {
@@ -535,7 +535,7 @@ let tromsoAugustMidnight = elevation(tromsoAugust, tromsoAugust.at("0049"))
 check("Tromso 2026-08-08 solar midnight elevation", tromsoAugustMidnight, -4.15, 0.05)
 checkTrue("Tromso 2026-08-08 solar midnight is below the golden band",
           !GoldenHour.isWithinGolden(solarAltitude: tromsoAugustMidnight))
-let tromsoAugustEve = Place(name: "Tromso 2026-08-07",
+let tromsoAugustEve = Site(name: "Tromso 2026-08-07",
                             geographic: tromsoAugust.geographic,
                             year: 2026, month: 8, day: 7, offsetHours: 2)
 let tromsoAugustEveMidnight = elevation(tromsoAugustEve, tromsoAugustEve.at("0050"))
