@@ -62,7 +62,27 @@ final class HeadingProvider: NSObject {
         queue.maxConcurrentOperationCount = 1
     }
 
+    /// Screenshot capture only. A simulator has no magnetometer and no camera, so
+    /// the AR view honestly reports "no compass" and draws almost nothing, which
+    /// is correct on a device that cannot point but makes the store screenshot a
+    /// picture of a warning. Fixing a heading and a pitch shows the real
+    /// projection, computed by the same code, from a stated viewpoint.
+    #if DEBUG
+    func useFixedAim(heading: Double, pitch: Double, accuracy: Double = 3) {
+        stop()
+        trueHeading = heading
+        pitchDegrees = pitch
+        rollDegrees = 0
+        accuracyDegrees = accuracy
+        isFixed = true
+    }
+    private var isFixed = false
+    #endif
+
     func start() {
+        #if DEBUG
+        if isFixed { return }
+        #endif
         guard !isRunning else { return }
         guard motion.isDeviceMotionAvailable else {
             accuracyDegrees = -1

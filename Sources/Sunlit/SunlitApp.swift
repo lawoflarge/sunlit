@@ -41,6 +41,8 @@ struct SunlitApp: App {
                     #if DEBUG
                     if let configuration = CaptureHarness.configuration() {
                         CaptureHarness.apply(configuration, to: state)
+                        let sun = SkyMoment.at(JulianDay(date: state.instant), place: state.place)
+                        CaptureHarness.aim(heading, at: sun.sun.azimuth)
                     }
                     #endif
                 }

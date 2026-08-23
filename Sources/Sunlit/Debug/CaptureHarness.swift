@@ -56,6 +56,19 @@ enum CaptureHarness {
             screen: defaults.string(forKey: "SunlitCaptureScreen"))
     }
 
+    /// Points the AR view somewhere worth photographing.
+    ///
+    /// The azimuth is the sun's own, so the sun sits in the frame rather than
+    /// behind the reader, and the pitch is raised enough to show the arc.
+    static func aim(_ heading: HeadingProvider, at azimuth: Double) {
+        // The two offsets are measured, not derived. Setting heading 292.8 put
+        // the frame centre at 112.8, and pitch 24 put it at -66 altitude, so the
+        // view reads the device as held flat with the camera looking out of its
+        // back. Feeding the inverse gives a frame centred on the sun and tilted
+        // ten degrees up, which is where the arc is.
+        heading.useFixedAim(heading: azimuth - 180, pitch: 100)
+    }
+
     /// Applies the configuration to the live state.
     static func apply(_ configuration: Configuration, to state: AppState) {
         state.isCaptureMode = true
