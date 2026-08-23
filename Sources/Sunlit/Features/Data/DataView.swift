@@ -40,7 +40,10 @@ struct DataView: View {
             ScrollView {
                 // Lazy on purpose: the eclipse search and the annual sweep are
                 // started by the `task` of their own section, so a section that
-                // has never been scrolled to has never cost anything.
+                // has never been scrolled to has never cost anything. The
+                // matching obligation is that no section may be moved in or out
+                // of an `if` that changes with the date, because that destroys
+                // its state and runs its search again with an unchanged key.
                 LazyVStack(alignment: .leading, spacing: 28) {
                     DataContextRow(place: state.place, selected: state.day)
 
@@ -56,19 +59,29 @@ struct DataView: View {
                             timeZoneIdentifier: state.place.timeZoneIdentifier,
                             lock: lock(for: .eclipses))
                         ObstructionSection(day: day, lock: lock(for: .terrain))
-                        AnnualSection(
-                            place: state.place,
-                            selected: state.day,
-                            // The peak the core already refined for this day.
-                            // Scanning for it a second time inside the annual
-                            // sweep cost another twenty five ephemeris
-                            // evaluations and could disagree with the figure the
-                            // sun section prints two screens above.
-                            selectedMaximum: day.report.maximumSolarAltitude,
-                            lock: lock(for: .annualPaths))
-                        ExportSection(day: day, place: state.place, lock: lock(for: .export))
                     } else {
                         DataLoadingRow()
+                    }
+
+                    // Outside the branch on purpose. The curve is a property of
+                    // the place and the year, and the day report is dropped
+                    // while a new one is built, so a section held inside that
+                    // branch is destroyed and rebuilt on every change of date.
+                    // Its `task` would then re sweep the year whatever its key
+                    // said, which is the cost the key was narrowed to avoid.
+                    AnnualSection(
+                        place: state.place,
+                        selected: state.day,
+                        // The peak the core already refined for this day.
+                        // Scanning for it a second time inside the annual sweep
+                        // cost another twenty five ephemeris evaluations and
+                        // could disagree with the figure the sun section prints
+                        // two screens above.
+                        selectedMaximum: day?.report.maximumSolarAltitude,
+                        lock: lock(for: .annualPaths))
+
+                    if let day {
+                        ExportSection(day: day, place: state.place, lock: lock(for: .export))
                     }
 
                     DataFooter()

@@ -16,6 +16,8 @@ struct RootView: View {
     }
 
     @State private var tab: Tab = .sky
+    /// Driven by the app, which sets it when a widget taps sunlit://paywall.
+    @Binding var showingPaywall: Bool
 
     var body: some View {
         TabView(selection: $tab) {
@@ -33,5 +35,8 @@ struct RootView: View {
                 .tag(Tab.data)
         }
         .tint(SkyColors.sun)
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
+        }
     }
 }

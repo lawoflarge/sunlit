@@ -19,8 +19,8 @@ struct AnnualSection: View {
     /// report the screen already holds. Scanning for it inside the year would
     /// be a second answer to a question the core has already answered exactly,
     /// and two figures for one quantity on one screen is a defect whichever of
-    /// them is right.
-    let selectedMaximum: Double
+    /// them is right. Nil while that report is being rebuilt.
+    let selectedMaximum: Double?
     var lock: DataLock?
 
     @State private var year: AnnualYear?
@@ -49,11 +49,13 @@ struct AnnualSection: View {
 
                 HairlineDivider()
 
-                DataRow(
-                    label: AnnualStrings.thisDate,
-                    value: format.degrees(selectedMaximum) ?? "",
-                    spoken: format.spokenDegrees(selectedMaximum),
-                    caption: format.day(selected))
+                if let selectedMaximum {
+                    DataRow(
+                        label: AnnualStrings.thisDate,
+                        value: format.degrees(selectedMaximum) ?? "",
+                        spoken: format.spokenDegrees(selectedMaximum),
+                        caption: format.day(selected))
+                }
 
                 DataRow(
                     label: AnnualStrings.spread,
