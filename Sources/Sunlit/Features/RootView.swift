@@ -22,16 +22,32 @@ struct RootView: View {
     var body: some View {
         TabView(selection: $tab) {
             SkyView()
-                .tabItem { Label("tab.sky", systemImage: "sun.horizon") }
+                .tabItem {
+                    Label(String(localized: "tab.sky", defaultValue: "Sky",
+                                 comment: "Tab title for the home screen"),
+                          systemImage: "sun.horizon")
+                }
                 .tag(Tab.sky)
             ARView()
-                .tabItem { Label("tab.ar", systemImage: "camera.viewfinder") }
+                .tabItem {
+                    Label(String(localized: "tab.ar", defaultValue: "AR",
+                                 comment: "Tab title for the camera overlay"),
+                          systemImage: "camera.viewfinder")
+                }
                 .tag(Tab.ar)
             MapPlanView()
-                .tabItem { Label("tab.map", systemImage: "map") }
+                .tabItem {
+                    Label(String(localized: "tab.map", defaultValue: "Map",
+                                 comment: "Tab title for the map planning view"),
+                          systemImage: "map")
+                }
                 .tag(Tab.map)
             DataView()
-                .tabItem { Label("tab.data", systemImage: "tablecells") }
+                .tabItem {
+                    Label(String(localized: "tab.data", defaultValue: "Data",
+                                 comment: "Tab title for the tables and calendar"),
+                          systemImage: "tablecells")
+                }
                 .tag(Tab.data)
         }
         .tint(SkyColors.sun)

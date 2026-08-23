@@ -51,6 +51,11 @@ targets:
       # at validation rather than at build.
       - path: Sources/Sunlit/Resources/Assets.xcassets
         buildPhase: resources
+      # The string catalogue. Named explicitly for the same reason cities.bin
+      # is: the build script asserts ten .lproj folders land in the bundle, and
+      # a resource that arrives by accident can leave the same way.
+      - path: Sources/Sunlit/Resources/Localizable.xcstrings
+        buildPhase: resources
     dependencies:
       - target: SunlitCore
       - target: SunlitWidgets

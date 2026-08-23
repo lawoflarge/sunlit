@@ -418,12 +418,12 @@ struct MilkyWaySection: View {
         case .galacticCentreBelowHorizon:
             return String(
                 localized: "data.milkyWay.limit.belowHorizon",
-                defaultValue: "The galactic centre never rises ten degrees above the horizon from this place tonight. It stands higher the further south you go.",
+                defaultValue: "The galactic centre never rises ten degrees above the horizon from this place tonight. It climbs highest from around twenty nine degrees south, where it passes overhead, and sits lower from anywhere further north or further south of that.",
                 comment: "Why there is no Milky Way window")
         case .twilight:
             return String(
                 localized: "data.milkyWay.limit.twilight",
-                defaultValue: "The sun never sinks eighteen degrees below the horizon tonight, so the sky never becomes astronomically dark. This is the northern summer case.",
+                defaultValue: "The sun never sinks eighteen degrees below the horizon tonight, so the sky never becomes astronomically dark. This is the high latitude summer, whichever hemisphere you are in.",
                 comment: "Why there is no Milky Way window")
         case .moonlight:
             return String(
@@ -453,7 +453,7 @@ private enum MoonStrings {
     static var caption: String {
         String(
             localized: "data.moon.caption",
-            defaultValue: "Phase, illumination and distance at local noon. Rise and set include the moon's own parallax, which lifts it by nearly a degree.",
+            defaultValue: "Phase, illumination and distance at local noon. Rise and set account for the moon's parallax, which makes it sit almost a degree lower than it would seen from the centre of the earth, so moonrise falls later than a flat calculation gives.",
             comment: "What instant the moon figures refer to")
     }
     static var moonrise: String {

@@ -796,7 +796,7 @@ struct SettingsView: View {
 
             Text(String(
                 localized: "settings.offline",
-                defaultValue: "Every figure in Sunlit is computed on this device. Nothing is collected, nothing is sent, and the app works with no network at all.",
+                defaultValue: "Every figure in Sunlit is computed on this device. Nothing about you is collected and nothing is sent. Every calculation works in aeroplane mode; only Apple's map tiles and the time zone of a newly dropped pin need a connection.",
                 comment: "States the offline and no data promise"))
                 .font(SunlitType.caption)
                 .fixedSize(horizontal: false, vertical: true)

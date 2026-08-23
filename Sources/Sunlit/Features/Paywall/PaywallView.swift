@@ -198,7 +198,7 @@ struct PaywallView: View {
                 symbol: "checkmark",
                 title: String(
                     localized: "paywall.free.offline",
-                    defaultValue: "Every figure computed on your device, with no network",
+                    defaultValue: "Every figure computed on your device, no account, no tracking",
                     comment: "Free tier item")),
         ]
     }

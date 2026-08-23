@@ -285,7 +285,7 @@ private enum EclipseStrings {
     static var obscurationCaption: String {
         String(
             localized: "data.eclipse.obscurationCaption",
-            defaultValue: "Fraction of the sun's area covered at maximum. Not the magnitude squared, and always the smaller of the two.",
+            defaultValue: "Fraction of the sun's area covered at maximum. Never larger than the magnitude, because a bite taken out of the edge of a disc removes less of its area than of its width.",
             comment: "What obscuration means and how it differs from magnitude")
     }
     static var sunAltitude: String {

@@ -87,6 +87,18 @@ def main():
                    encoding="utf-8")
     print(f"{len(keys)} keys extracted to {out.relative_to(ROOT)}")
 
+    # A key whose value is the key itself was written as Text("area.thing") with
+    # no defaultValue. SwiftUI looks it up, finds nothing, and renders the
+    # identifier. This shipped four tab titles reading "tab.sky", "tab.ar",
+    # "tab.map" and "tab.data", and no reader of the English caught it; a
+    # translator did, because a key is not translatable.
+    bare = sorted(k for k, v in keys.items() if k == v)
+    if bare:
+        print(f"\n{len(bare)} keys have no English text, so the app shows the key itself:")
+        for k in bare:
+            print(f"  {k}")
+        return 1
+
     literal_english = [k for k in keys if " " in k]
     if literal_english:
         print(f"\n{len(literal_english)} keys look like English copy rather than "

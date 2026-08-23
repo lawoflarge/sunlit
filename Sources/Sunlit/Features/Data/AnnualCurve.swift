@@ -465,7 +465,7 @@ private enum AnnualStrings {
     static var spreadCaption: String {
         String(
             localized: "data.annual.spreadCaption",
-            defaultValue: "The difference between the highest and the lowest the midday sun gets here. It is about forty seven degrees anywhere the sun rises all year.",
+            defaultValue: "The difference between the highest and the lowest the midday sun gets here. Outside the tropics it is about forty seven degrees, twice the tilt of the earth. Inside them it is less, because the noon sun passes overhead twice a year and turns back.",
             comment: "Explains the annual range figure")
     }
     static var belowHorizon: String {

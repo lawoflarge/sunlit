@@ -95,7 +95,7 @@ struct AcknowledgementsView: View {
 
             Text(String(
                 localized: "credits.methods.detail",
-                defaultValue: "Every figure in Sunlit is computed on your device from published algorithms. No position, no time and no place is ever sent anywhere, and no server is asked for an answer.",
+                defaultValue: "Every figure in Sunlit is computed on your device from published algorithms. No server is ever asked for a sun, moon or sky figure, and nothing about you is collected or sent. Two things do use the network, both of them Apple's and neither of them a calculation: the map tiles in the Map view, and the time zone of a pin you drop somewhere new.",
                 comment: "States that all computation is local"))
                 .font(SunlitType.body)
                 .fixedSize(horizontal: false, vertical: true)
