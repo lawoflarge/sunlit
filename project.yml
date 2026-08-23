@@ -73,7 +73,6 @@ targets:
         CODE_SIGN_STYLE: Manual
         CODE_SIGN_IDENTITY: "Apple Distribution"
         PROVISIONING_PROFILE_SPECIFIER: "Sunlit App Store"
-        CODE_SIGN_ENTITLEMENTS: Sources/Sunlit/Sunlit.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         ENABLE_PREVIEWS: YES
@@ -108,7 +107,6 @@ targets:
         CODE_SIGN_STYLE: Manual
         CODE_SIGN_IDENTITY: "Apple Distribution"
         PROVISIONING_PROFILE_SPECIFIER: "Sunlit Widgets App Store"
-        CODE_SIGN_ENTITLEMENTS: Sources/SunlitWidgets/SunlitWidgets.entitlements
         SKIP_INSTALL: YES
   SunlitCoreTests:
     type: bundle.unit-test

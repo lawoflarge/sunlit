@@ -205,7 +205,6 @@
 		82561199AF20C96517D5B9E1 /* ProCapability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProCapability.swift; sourceTree = "<group>"; };
 		82DBA9780B0FFCDBF2F3C785 /* Nutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nutation.swift; sourceTree = "<group>"; };
 		876889284EB815C0FF0C87BF /* SkyOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyOverlay.swift; sourceTree = "<group>"; };
-		897AB2F1BCF592BB83B612D6 /* Sunlit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunlit.entitlements; sourceTree = "<group>"; };
 		89994E699BB34DC63D100943 /* SPATables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPATables.swift; sourceTree = "<group>"; };
 		8A2EFDEDA0D0B0064B5D9639 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9436A7B11A256AC713B235A4 /* DayArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayArc.swift; sourceTree = "<group>"; };
@@ -245,7 +244,6 @@
 		FC5B0B8FD1A90CE7E6D38223 /* HeadingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingProvider.swift; sourceTree = "<group>"; };
 		FDC3B7CF03F69E4134765387 /* CaptureHarness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureHarness.swift; sourceTree = "<group>"; };
 		FEC3AD8E4695A1AB572F727C /* GlobalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHeader.swift; sourceTree = "<group>"; };
-		FFA13724C4C3B94C6F8791DF /* SunlitWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunlitWidgets.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,7 +453,6 @@
 				6A7450767EC5F436B37C0417 /* LockScreenWidgets.swift */,
 				200617E35936F1959B9BD5F3 /* NextEventWidget.swift */,
 				BA2B4A98CA2CE09369727275 /* SunlitWidgetBundle.swift */,
-				FFA13724C4C3B94C6F8791DF /* SunlitWidgets.entitlements */,
 				550FC459345CF1BF0A76A8E4 /* WidgetProvider.swift */,
 			);
 			path = SunlitWidgets;
@@ -559,7 +556,6 @@
 				6582C7A90456CADB44576CB0 /* Store */,
 				B977844B129BDD202687B232 /* AppState.swift */,
 				63E245B7349FEA9E3E085EFE /* Info.plist */,
-				897AB2F1BCF592BB83B612D6 /* Sunlit.entitlements */,
 				608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */,
 			);
 			path = Sunlit;
@@ -888,7 +884,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Sources/Sunlit/Sunlit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				ENABLE_PREVIEWS = YES;
@@ -911,7 +906,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Sources/Sunlit/Sunlit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				ENABLE_PREVIEWS = YES;
@@ -1132,7 +1126,6 @@
 		D4CDCD47B1E45C5DB922C65C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Sources/SunlitWidgets/SunlitWidgets.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1186,7 +1179,6 @@
 		FBAB6201BE454BA3AA2ADA66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Sources/SunlitWidgets/SunlitWidgets.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				GENERATE_INFOPLIST_FILE = NO;

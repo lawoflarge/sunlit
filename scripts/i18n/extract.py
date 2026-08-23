@@ -49,7 +49,11 @@ def main():
         if not root.exists():
             continue
         for path in sorted(root.rglob("*.swift")):
-            if "/Debug/" in str(path):
+            # Developer tooling, not shipped copy. DesignPreview renders the
+            # palette at nine solar altitudes for a human to judge; its labels
+            # are never seen by a user and would pad the catalogue with two
+            # English sentences that no translator should be asked to handle.
+            if "/Debug/" in str(path) or path.name == "DesignPreview.swift":
                 continue
             text = path.read_text(encoding="utf-8")
             for line_number, line in enumerate(text.splitlines(), start=1):

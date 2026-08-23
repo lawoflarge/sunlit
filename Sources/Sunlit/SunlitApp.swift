@@ -43,7 +43,6 @@ struct SunlitApp: App {
                         CaptureHarness.apply(configuration, to: state)
                     }
                     #endif
-                    publishToWidgets()
                 }
                 .onOpenURL { url in
                     // A locked widget tile taps through to here. Anything else
@@ -54,22 +53,8 @@ struct SunlitApp: App {
                     }
                 }
                 .onChange(of: state.place) { _, _ in
-                    publishToWidgets()
                 }
         }
     }
 
-    /// Writes the selected place into the shared suite and asks WidgetKit to
-    /// rebuild.
-    ///
-    /// Without this the widget has no place to compute for and shows its setup
-    /// prompt forever, which is what a purchase that promised widgets would
-    /// look like to someone who had paid for it.
-    private func publishToWidgets() {
-        guard let defaults = UserDefaults(suiteName: StoreService.sharedSuiteName) else { return }
-        if let encoded = try? JSONEncoder().encode(state.place) {
-            defaults.set(encoded, forKey: "sunlit.selectedPlace")
-        }
-        WidgetCenter.shared.reloadAllTimelines()
-    }
 }

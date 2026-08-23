@@ -88,7 +88,11 @@ reporter, no advertising and no tracking SDK of any kind. The App Privacy answer
 is Data Not Collected, which is accurate. Saved places and the measured horizon
 profile are written to a file inside the app container and never leave the device.
 Privacy policy: https://sunlit-app.vercel.app/privacy
-Terms of Use: https://sunlit-app.vercel.app/terms
+Terms of Use: the paywall links to Apple's standard EULA at
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ which is the
+licence that applies. Our own supplementary terms, which repeat the clear sky
+caveat and state what the purchase includes, are at
+https://sunlit-app.vercel.app/terms
 
 ATTRIBUTION
 The offline city list is GeoNames cities15000, licensed CC BY 4.0. The attribution

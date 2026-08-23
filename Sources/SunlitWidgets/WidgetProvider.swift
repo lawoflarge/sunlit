@@ -3,14 +3,25 @@ import SwiftUI
 import WidgetKit
 import SunlitCore
 
-// MARK: - The shared suite
+// MARK: - Where the widget gets its two facts
 
-/// The only thing that crosses the process boundary: which place, and whether the
-/// purchase is present.
+import CoreLocation
+import StoreKit
+
+/// The only two things the widget needs that it cannot compute: where the reader
+/// is, and whether the purchase is present.
 ///
-/// Every number the widgets show is computed here, in the extension, by `SunlitCore`.
-/// Nothing is passed across from the app, because a widget that renders a value the
-/// app wrote an hour ago is a widget that is wrong an hour later.
+/// Neither crosses a process boundary, and that is deliberate. An app group would
+/// work, but it cannot be provisioned from the App Store Connect API at all: there
+/// is no /v1/appGroups endpoint, so the group can only be created by hand in the
+/// developer portal, and until it exists every archive fails with "provisioning
+/// profile doesn't support the group". Both facts are available to an extension
+/// directly, so the group buys nothing and costs a manual step.
+///
+/// Every number the widgets show is computed here, in the extension, by
+/// `SunlitCore`. Nothing is passed across from the app, because a widget that
+/// renders a value the app wrote an hour ago is a widget that is wrong an hour
+/// later.
 ///
 /// The extension can afford this, but not carelessly. Measured with an optimised
 /// build, one `DayReport` costs 52 ms at Berlin, 55 ms at Singapore and 74 ms at
@@ -20,66 +31,66 @@ import SunlitCore
 /// screen all belong to today.
 enum SunlitSharedStore {
 
-    /// Must match the app group on both targets. When the group is missing or not yet
-    /// provisioned, `UserDefaults(suiteName:)` returns nil and everything below falls
-    /// back rather than trapping.
-    static let suiteName = "group.com.levinschwab.sunlit"
-
-    enum Key {
-        /// A JSON encoded `Place`, written by the app whenever the header changes.
-        ///
-        /// Nothing in the app writes this yet. Until something does, every family
-        /// renders the setup state rather than figures for somewhere else.
-        static let place = "sunlit.selectedPlace"
-        /// The entitlement for `ProCapability.widgets`.
-        ///
-        /// This string is one half of a contract and the other half is
-        /// `StoreService.entitlementKey` in the app target. They must be identical
-        /// or the purchase never reaches the extension and the widgets stay locked
-        /// for someone who paid. They were not identical: the app wrote
-        /// `pro.entitled` and this read `sunlit.proUnlocked`.
-        static let isPro = "pro.entitled"
-    }
-
-    static var defaults: UserDefaults? {
-        UserDefaults(suiteName: suiteName)
-    }
-
-    /// The place the app last selected, or nil when the app has never written one.
+    /// The reader's own location.
     ///
-    /// Nil rather than a stand-in. The widget cannot ask CoreLocation, so before the
-    /// app has shared a place there is nothing truthful to show for "here", and the
-    /// families that have no room for a caption, `accessoryCircular` above all, would
-    /// otherwise count down to a golden hour somewhere the reader has never been with
-    /// nothing on the tile to say so. That is a fabricated measurement wearing a real
-    /// one's clothes. The setup state says what is actually true instead.
+    /// A widget extension may read this when its Info.plist sets
+    /// `NSWidgetWantsLocation` and the containing app holds when-in-use
+    /// authorisation. The system hands over the last known fix rather than
+    /// starting the hardware, which is exactly right here: a tenth of a degree of
+    /// latitude moves sunrise by well under a minute, so a stale fix from across
+    /// town is not a stale answer.
+    ///
+    /// Returns nil when authorisation has never been granted. Nil rather than a
+    /// stand-in: the families with no room for a caption, `accessoryCircular` above
+    /// all, would otherwise count down to a golden hour somewhere the reader has
+    /// never been, with nothing on the tile to say so. That is a fabricated
+    /// measurement wearing a real one's clothes.
     static func place() -> Place? {
-        guard
-            let data = defaults?.data(forKey: Key.place),
-            let stored = try? JSONDecoder().decode(Place.self, from: data)
-        else {
+        let manager = CLLocationManager()
+        let status = manager.authorizationStatus
+        guard status == .authorizedWhenInUse || status == .authorizedAlways,
+              let fix = manager.location else {
             return nil
         }
-        return stored
+        return Place(
+            name: "",
+            geographic: Coordinates.Geographic(
+                latitude: fix.coordinate.latitude,
+                longitude: fix.coordinate.longitude,
+                // A negative altitude is CoreLocation saying it does not know,
+                // not a place below sea level.
+                elevation: fix.verticalAccuracy > 0 ? max(0, fix.altitude) : 0),
+            // The device's own zone is the right one for the device's own
+            // position, and it needs no network to resolve.
+            timeZoneIdentifier: TimeZone.current.identifier,
+            isCurrentLocation: true)
     }
 
     /// Whether `ProCapability.widgets` is unlocked.
     ///
-    /// Named for the capability rather than for the purchase, and asked through this
-    /// one function rather than scattered across the four widgets, for the same reason
-    /// the app asks `ProGate` rather than reading a flag: there is one place to look
-    /// when the free tier has to be reasoned about. The extension cannot link the
-    /// app target, so it cannot call `ProGate` itself; this is the nearest thing to it
-    /// that a second process can have.
-    static func allowsWidgets() -> Bool {
-        defaults?.bool(forKey: Key.isPro) ?? false
+    /// Read from StoreKit directly. `Transaction.currentEntitlements` is served by
+    /// the system to any process in the app's group of targets, so the extension
+    /// gets the same answer the app does without either of them writing it down,
+    /// and there is no key for the two sides to disagree about. An earlier version
+    /// passed it through shared defaults under two different key names and the
+    /// purchase could never unlock a single tile.
+    static func allowsWidgets() async -> Bool {
+        for await result in Transaction.currentEntitlements {
+            guard case .verified(let transaction) = result else { continue }
+            if transaction.productID == "com.levinschwab.sunlit.pro",
+               transaction.revocationDate == nil {
+                return true
+            }
+        }
+        return false
     }
 
     /// The Royal Observatory. Longitude zero by definition, which makes it the one
     /// coordinate on earth that is a statement rather than a guess.
     ///
-    /// A stand-in for the gallery previews and for `placeholder(in:)`, which WidgetKit
-    /// renders redacted. Never a substitute for the reader's own place on a live tile.
+    /// A stand-in for the gallery previews and for `placeholder(in:)`, which
+    /// WidgetKit renders redacted. Never a substitute for the reader's own place on
+    /// a live tile.
     static let fallbackPlace = Place(
         name: "Greenwich",
         geographic: Coordinates.Geographic(latitude: 51.4779, longitude: -0.0015, elevation: 47),
@@ -584,13 +595,13 @@ enum SunlitEntryBuilder {
     /// Every figure in it is zero and no view may read one: each of the four branches
     /// on `needsSetup` before it touches a number. The zeros are not a measurement and
     /// are never drawn as one.
-    static func setupEntry(at instant: Date) -> SunlitEntry {
+    static func setupEntry(at instant: Date, isUnlocked: Bool = false) -> SunlitEntry {
         SunlitEntry(
             date: instant,
             placeName: "",
             timeZone: .current,
             latitude: 0,
-            isUnlocked: SunlitSharedStore.allowsWidgets(),
+            isUnlocked: isUnlocked,
             needsSetup: true,
             solarAltitude: 0,
             solarAzimuth: 0,
@@ -653,10 +664,14 @@ struct SunlitTimelineProvider: TimelineProvider {
     /// carries no figure a reader can act on. Both go through the report memo, so the
     /// four widgets in the gallery share one computation rather than paying for eight.
     func placeholder(in context: Context) -> SunlitEntry {
+        // Synchronous by protocol, and rendered redacted by WidgetKit, so the
+        // entitlement it carries is never read by anything a person sees.
+        // Asking StoreKit here would mean blocking on an async sequence inside a
+        // synchronous callback, which is how a provider deadlocks.
         SunlitEntryBuilder.singleEntry(
             at: Date(),
             place: SunlitSharedStore.place() ?? SunlitSharedStore.fallbackPlace,
-            isUnlocked: SunlitSharedStore.allowsWidgets()
+            isUnlocked: false
         )
     }
 
@@ -671,34 +686,40 @@ struct SunlitTimelineProvider: TimelineProvider {
     /// the real structure, one honest line.
     func getSnapshot(in context: Context, completion: @escaping (SunlitEntry) -> Void) {
         let now = Date()
-        guard let place = SunlitSharedStore.place() else {
-            completion(SunlitEntryBuilder.setupEntry(at: now))
-            return
+        Task {
+            let isUnlocked = await SunlitSharedStore.allowsWidgets()
+            guard let place = SunlitSharedStore.place() else {
+                completion(SunlitEntryBuilder.setupEntry(at: now, isUnlocked: isUnlocked))
+                return
+            }
+            completion(
+                SunlitEntryBuilder.singleEntry(at: now, place: place, isUnlocked: isUnlocked))
         }
-        completion(
-            SunlitEntryBuilder.singleEntry(
-                at: now,
-                place: place,
-                isUnlocked: SunlitSharedStore.allowsWidgets()
-            )
-        )
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<SunlitEntry>) -> Void) {
         let now = Date()
+        Task {
+            let isUnlocked = await SunlitSharedStore.allowsWidgets()
+            buildTimeline(at: now, isUnlocked: isUnlocked, completion: completion)
+        }
+    }
 
-        // No place has ever been shared, so there is nothing to compute and nothing to
-        // count down to. One entry, and an hourly backstop: the app is expected to call
-        // `WidgetCenter.shared.reloadAllTimelines()` the moment it writes a place, and
-        // this is only what happens if it does not.
+    private func buildTimeline(
+        at now: Date,
+        isUnlocked: Bool,
+        completion: @escaping (Timeline<SunlitEntry>) -> Void
+    ) {
+        // Location has never been authorised, so there is nothing truthful to
+        // compute and nothing to count down to. One entry, and an hourly backstop:
+        // the app calls WidgetCenter.shared.reloadAllTimelines() the moment
+        // authorisation changes, and this is only what happens if it does not.
         guard let place = SunlitSharedStore.place() else {
             completion(Timeline(
-                entries: [SunlitEntryBuilder.setupEntry(at: now)],
+                entries: [SunlitEntryBuilder.setupEntry(at: now, isUnlocked: isUnlocked)],
                 policy: .after(now.addingTimeInterval(3600))))
             return
         }
-
-        let isUnlocked = SunlitSharedStore.allowsWidgets()
 
         let reports = SunlitEntryBuilder.reports(covering: now, place: place)
         let events = SunlitEntryBuilder.events(in: reports)
