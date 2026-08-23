@@ -31,6 +31,17 @@ struct PaywallView: View {
 
     private var store: StoreService? { injectedStore ?? ownedStore }
 
+    /// Whether Pro is already owned.
+    ///
+    /// `ProGate` is asked first, because it is the object the rest of the app
+    /// asks and it is already correct by the time this screen opens. Reading only
+    /// this screen's own service would show "Unlock everything" to someone who
+    /// owns it, for as long as a freshly built service takes to finish its first
+    /// entitlement pass.
+    private var isUnlocked: Bool {
+        state.pro.isPurchased || store?.isEntitled == true
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             header
@@ -66,6 +77,10 @@ struct PaywallView: View {
                 defaultValue: "Sunlit Pro",
                 comment: "Title of the purchase screen"))
                 .font(SunlitType.title)
+                // Every other Text on this screen already wraps. This one sits in
+                // an HStack beside a 44 point button, which is exactly where a
+                // Text truncates at the accessibility sizes instead.
+                .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
 
             Spacer(minLength: 8)
@@ -199,7 +214,7 @@ struct PaywallView: View {
                     comment: "Heading of the list of paid capabilities"),
                 note: String(
                     localized: "paywall.pro.note",
-                    defaultValue: "Ten capabilities, all of them offline as well.",
+                    defaultValue: "Everything below works offline too.",
                     comment: "Caption under the paid heading"))
 
             // Driven off the capability list itself, so this screen cannot
@@ -220,7 +235,7 @@ struct PaywallView: View {
 
     private var priceSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if store?.isEntitled == true {
+            if isUnlocked {
                 unlockedBlock
             } else {
                 purchaseBlock
@@ -600,7 +615,7 @@ private extension ProCapability {
         case .savedPlaces:
             return String(
                 localized: "paywall.capability.savedPlaces.detail",
-                defaultValue: "Search 25,000 cities offline, drop a pin anywhere, and keep the places you work at.",
+                defaultValue: "Search over 30,000 cities offline, drop a pin anywhere, and keep the places you work at.",
                 comment: "Paid capability detail")
         case .moon:
             return String(

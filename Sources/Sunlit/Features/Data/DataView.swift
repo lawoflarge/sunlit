@@ -1,4 +1,3 @@
-import StoreKit
 import SwiftUI
 import SunlitCore
 
@@ -14,50 +13,87 @@ import SunlitCore
 /// The screen scrolls end to end and carries no control pinned outside the
 /// scroll view. Two apps in this portfolio were taken down for a primary button
 /// that the largest Dynamic Type size pushed under the fold, and a tabulation is
-/// the screen most likely to grow past a canvas.
+/// the screen most likely to grow past a canvas. The one thing above the scroll
+/// view is the shared header, which is pinned to the top and so is the one
+/// position from which nothing can be pushed under the fold.
 struct DataView: View {
 
     @Environment(AppState.self) private var state
 
     @State private var day: DataDay?
 
+    @State private var showingPlacePicker = false
+    @State private var showingDatePicker = false
+
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 28) {
-                DataContextRow(place: state.place, selected: state.day)
+        let altitude = skyAltitude
+        return VStack(spacing: 0) {
+            // The same header the Sky and Map tabs carry. Without it this tab
+            // shows the figures for a place and a date that it offers no way to
+            // change, which is the exact complaint about the competing product
+            // that one shared header exists to answer.
+            GlobalHeader(
+                showingPlacePicker: $showingPlacePicker,
+                showingDatePicker: $showingDatePicker,
+                solarAltitude: altitude)
 
-                if let day {
-                    SunSection(day: day, lock: selectionLock)
-                    TwilightSection(day: day, lock: selectionLock)
-                    GoldenBlueSection(day: day, lock: selectionLock)
-                    MoonSection(day: day, lock: lock(for: .moon))
-                    MilkyWaySection(day: day, lock: lock(for: .milkyWay))
-                    EclipseSection(
-                        place: state.place,
-                        after: day.report.date,
-                        timeZoneIdentifier: state.place.timeZoneIdentifier,
-                        lock: lock(for: .eclipses))
-                    ObstructionSection(day: day, lock: lock(for: .terrain))
-                    AnnualSection(
-                        place: state.place,
-                        selected: state.day,
-                        lock: lock(for: .annualPaths))
-                    ExportSection(day: day, place: state.place, lock: lock(for: .export))
-                } else {
-                    DataLoadingRow()
+            ScrollView {
+                // Lazy on purpose: the eclipse search and the annual sweep are
+                // started by the `task` of their own section, so a section that
+                // has never been scrolled to has never cost anything.
+                LazyVStack(alignment: .leading, spacing: 28) {
+                    DataContextRow(place: state.place, selected: state.day)
+
+                    if let day {
+                        SunSection(day: day, lock: selectionLock)
+                        TwilightSection(day: day, lock: selectionLock)
+                        GoldenBlueSection(day: day, lock: selectionLock)
+                        MoonSection(day: day, lock: lock(for: .moon))
+                        MilkyWaySection(day: day, lock: lock(for: .milkyWay))
+                        EclipseSection(
+                            place: state.place,
+                            after: day.report.date,
+                            timeZoneIdentifier: state.place.timeZoneIdentifier,
+                            lock: lock(for: .eclipses))
+                        ObstructionSection(day: day, lock: lock(for: .terrain))
+                        AnnualSection(
+                            place: state.place,
+                            selected: state.day,
+                            // The peak the core already refined for this day.
+                            // Scanning for it a second time inside the annual
+                            // sweep cost another twenty five ephemeris
+                            // evaluations and could disagree with the figure the
+                            // sun section prints two screens above.
+                            selectedMaximum: day.report.maximumSolarAltitude,
+                            lock: lock(for: .annualPaths))
+                        ExportSection(day: day, place: state.place, lock: lock(for: .export))
+                    } else {
+                        DataLoadingRow()
+                    }
+
+                    DataFooter()
                 }
-
-                DataFooter()
+                .padding(.horizontal, 20)
+                .padding(.top, 14)
+                .padding(.bottom, 44)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 14)
-            .padding(.bottom, 44)
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .adaptiveSky(
-            solarAltitude: skyAltitude,
+            solarAltitude: altitude,
             moonIllumination: day?.noon.moonPhase.illuminatedFraction ?? 0)
         .task(id: key) { await reload() }
+        // The shared screens, not local imitations. The altitude is handed over
+        // explicitly because `adaptiveSky` publishes it into the environment of
+        // the content it wraps and a sheet is presented from outside that.
+        .sheet(isPresented: $showingPlacePicker) {
+            PlacePickerView()
+                .environment(\.solarAltitude, altitude)
+        }
+        .sheet(isPresented: $showingDatePicker) {
+            DatePickerSheet()
+                .environment(\.solarAltitude, altitude)
+        }
     }
 
     // MARK: Loading
@@ -86,6 +122,11 @@ struct DataView: View {
 
     @MainActor
     private func reload() async {
+        // Dropped before the new one is built. `DataContextRow` and the header
+        // above it read the live place and date, so a result kept across the
+        // change prints one place's sunrise under another place's name for as
+        // long as the sweep takes.
+        day = nil
         let place = state.place
         let selected = state.day
         let computed = await Task.detached(priority: .userInitiated) {
@@ -97,12 +138,28 @@ struct DataView: View {
 
     // MARK: Sky
 
+    /// The instant the sky is painted for.
+    ///
+    /// Following the wall clock is only meaningful on the day being lived
+    /// through. `AppState.instant` answers `Date()` whenever the scrubber is
+    /// idle, so on any other date the nearest sample in the selected day is one
+    /// of its two endpoints and the whole screen would be painted for midnight
+    /// whatever date was chosen. Sky and Map resolve it exactly this way.
+    private var displayInstant: Date {
+        if state.scrubSeconds != nil { return state.instant }
+        if state.isToday { return Date() }
+        return state.place
+            .startOfLocalDay(containing: state.day)
+            .date
+            .addingTimeInterval(43_200)
+    }
+
     /// The altitude the background is painted for. Taken from the day's own
     /// samples rather than computed here, so the Data tab agrees with every
     /// other view about what the sky looks like at this instant.
     private var skyAltitude: Double {
         guard let day else { return 0 }
-        let wanted = JulianDay(date: state.instant).value
+        let wanted = JulianDay(date: displayInstant).value
         var best = day.report.samples.first
         var distance = Double.infinity
         for sample in day.report.samples {
@@ -409,8 +466,16 @@ struct DataSection<Content: View>: View {
                 unlockBlock(lock)
             }
         }
+        // The one shared purchase screen, not a copy of it. A second StoreKit
+        // flow in this file wrote the entitlement to `ProGate` alone, which left
+        // the app group the widget extension reads untouched and the widget
+        // timelines unreloaded, so a purchase made from this tab unlocked the
+        // app and not the widgets it had just been sold. It also carried no
+        // terms or privacy link under its purchase button, which is the exact
+        // omission that had a submission in this portfolio rejected.
         .sheet(isPresented: $showingUnlock) {
-            DataProSheet()
+            PaywallView()
+                .environment(\.solarAltitude, solarAltitude)
         }
     }
 
@@ -439,9 +504,14 @@ struct DataSection<Content: View>: View {
                                 SkyPalette.componentBorder(solarAltitude: solarAltitude),
                                 lineWidth: 1 / displayScale)
                     }
+                    // Inside the label, not outside the button. A minimum frame
+                    // applied to a `Button` lays the button out inside a larger
+                    // box without moving its hit region, which stays the label's
+                    // own bounds: eleven points of padding either side of a body
+                    // line is 42 points, and 42 is not 44.
+                    .sunlitTouchTarget()
             }
             .buttonStyle(.plain)
-            .sunlitTouchTarget()
             .accessibilityLabel(Text(DataStrings.unlockButton))
             .accessibilityHint(Text(lock.explanation))
         }
@@ -573,8 +643,10 @@ struct DataLoadingRow: View {
 
 // MARK: - Header and footer
 
-/// Place, date and clock. Not a control: the header that changes them governs
-/// all four views and lives above the tab bar.
+/// Place, date and clock, written out in full. Not a control: the control is
+/// the shared `GlobalHeader` at the top of this screen. This row exists because
+/// the header abbreviates, and every figure below it is expressed in a clock
+/// the header does not name.
 struct DataContextRow: View {
 
     let place: Place
@@ -619,164 +691,6 @@ struct DataFooter: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)
-    }
-}
-
-// MARK: - The route out of a locked section
-
-/// Names what stays free before it names what costs money, then sells the one
-/// non consumable through StoreKit 2 and the existing `ProGate`.
-///
-/// Deliberately small and self contained. It exists so that a greyed section
-/// leads somewhere rather than into a dead end; the store milestone replaces
-/// this view wholesale and nothing in this territory reads its internals.
-struct DataProSheet: View {
-
-    @Environment(AppState.self) private var state
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var product: Product?
-    @State private var working = false
-    @State private var status: String?
-
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(DataStrings.proFreeTitle)
-                            .font(SunlitType.title)
-                        Text(DataStrings.proFreeBody)
-                            .font(SunlitType.body)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .accessibilityElement(children: .combine)
-
-                    Divider()
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(DataStrings.proPaidTitle)
-                            .font(SunlitType.title)
-                        Text(DataStrings.proPaidBody)
-                            .font(SunlitType.body)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .accessibilityElement(children: .combine)
-
-                    if let status {
-                        Text(status)
-                            .font(SunlitType.body)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        Button {
-                            Task { await buy() }
-                        } label: {
-                            HStack(spacing: 8) {
-                                if working { ProgressView() }
-                                Text(purchaseTitle)
-                                    .font(SunlitType.body)
-                                    .fontWeight(.semibold)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 13)
-                            .overlay {
-                                Capsule(style: .continuous)
-                                    .strokeBorder(Color.primary.opacity(0.7), lineWidth: 1)
-                            }
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(product == nil || working)
-                        .frame(minHeight: SunlitLayout.minimumTouchTarget)
-                        .accessibilityLabel(Text(purchaseTitle))
-
-                        Button {
-                            Task { await restore() }
-                        } label: {
-                            Text(DataStrings.proRestore)
-                                .font(SunlitType.body)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 11)
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(working)
-                        .frame(minHeight: SunlitLayout.minimumTouchTarget)
-                        .accessibilityLabel(Text(DataStrings.proRestore))
-                    }
-                }
-                .padding(20)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .navigationTitle(Text(DataStrings.proTitle))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text(DataStrings.done)
-                    }
-                    .accessibilityLabel(Text(DataStrings.done))
-                }
-            }
-        }
-        .task { await loadProduct() }
-    }
-
-    private var purchaseTitle: String {
-        guard let product else { return DataStrings.proUnavailable }
-        let price = product.displayPrice
-        return String(
-            localized: "data.pro.buy",
-            defaultValue: "Unlock everything for \(price)",
-            comment: "Primary purchase button, with the storefront price")
-    }
-
-    @MainActor
-    private func loadProduct() async {
-        product = try? await Product.products(for: [ProCapability.productIdentifier]).first
-    }
-
-    @MainActor
-    private func buy() async {
-        guard let product else { return }
-        working = true
-        defer { working = false }
-        do {
-            let outcome = try await product.purchase()
-            switch outcome {
-            case .success(let verification):
-                if case .verified(let transaction) = verification {
-                    await transaction.finish()
-                    state.pro.setPurchased(true)
-                    dismiss()
-                }
-            case .pending:
-                status = DataStrings.proPending
-            case .userCancelled:
-                break
-            @unknown default:
-                break
-            }
-        } catch {
-            status = DataStrings.proFailed
-        }
-    }
-
-    @MainActor
-    private func restore() async {
-        working = true
-        defer { working = false }
-        try? await AppStore.sync()
-        for await entitlement in StoreKit.Transaction.currentEntitlements {
-            guard case .verified(let transaction) = entitlement,
-                  transaction.productID == ProCapability.productIdentifier else { continue }
-            state.pro.setPurchased(true)
-            dismiss()
-            return
-        }
-        status = DataStrings.proNothingToRestore
     }
 }
 
@@ -835,73 +749,6 @@ enum DataStrings {
 
     static var done: String {
         String(localized: "data.done", defaultValue: "Done", comment: "Dismisses a sheet")
-    }
-
-    static var proTitle: String {
-        String(localized: "data.pro.title", defaultValue: "Sunlit Pro", comment: "Title of the purchase sheet")
-    }
-
-    static var proFreeTitle: String {
-        String(
-            localized: "data.pro.freeTitle",
-            defaultValue: "What stays free",
-            comment: "Heading for the free tier, named before the purchase")
-    }
-
-    static var proFreeBody: String {
-        String(
-            localized: "data.pro.freeBody",
-            defaultValue: "Today, at your current location, in all four views, forever. Sun position, compass, sun path, sunrise, sunset, all three twilights, golden and blue hour, solar noon, day length, shadow length, and the clear sky UV and irradiance models.",
-            comment: "What the app does without any purchase")
-    }
-
-    static var proPaidTitle: String {
-        String(
-            localized: "data.pro.paidTitle",
-            defaultValue: "What one purchase adds",
-            comment: "Heading for the paid tier")
-    }
-
-    static var proPaidBody: String {
-        String(
-            localized: "data.pro.paidBody",
-            defaultValue: "Any date, past or future. Any place. The moon, its phase, its path and its calendar. The Milky Way window. The sun's path across the year. Your measured skyline and the periods it blocks the sun. Eclipses with local contact times. Widgets, event notifications, and export. One purchase, no subscription.",
-            comment: "What the single non consumable unlocks")
-    }
-
-    static var proRestore: String {
-        String(
-            localized: "data.pro.restore",
-            defaultValue: "Restore a previous purchase",
-            comment: "Restores an earlier purchase on the same Apple Account")
-    }
-
-    static var proUnavailable: String {
-        String(
-            localized: "data.pro.unavailable",
-            defaultValue: "The store is not reachable right now",
-            comment: "Shown on the purchase button when the product could not be loaded")
-    }
-
-    static var proPending: String {
-        String(
-            localized: "data.pro.pending",
-            defaultValue: "The purchase is waiting for approval.",
-            comment: "Ask to Buy and similar deferred purchases")
-    }
-
-    static var proFailed: String {
-        String(
-            localized: "data.pro.failed",
-            defaultValue: "The purchase could not be completed.",
-            comment: "A purchase threw an error")
-    }
-
-    static var proNothingToRestore: String {
-        String(
-            localized: "data.pro.nothingToRestore",
-            defaultValue: "No earlier purchase was found on this Apple Account.",
-            comment: "Restore found no entitlement")
     }
 
     /// Stands in for a figure that has not been computed because the section is

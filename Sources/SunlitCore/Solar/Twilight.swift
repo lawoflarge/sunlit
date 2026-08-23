@@ -87,9 +87,11 @@ public enum Twilight {
         let nautical = crossingsInDay(at: nauticalAltitude)
         let astronomical = crossingsInDay(at: astronomicalAltitude)
 
-        // Transit, antitransit and the polar flags are taken over exactly the
-        // local day, so solar noon and solar midnight are guaranteed to be
-        // instants the day actually contains.
+        // The polar flags, like the sweep's own transit and antitransit below,
+        // are taken over exactly the local day and over its in-day crossings,
+        // so solar noon and solar midnight are guaranteed to be instants the
+        // day actually contains and a crossing the filter rejected cannot make
+        // a polar day look like an ordinary one.
         let alwaysAbove = sunCrossings.isEmpty
             && day.samples.allSatisfy { $0.altitude > Refraction.sunriseAltitude }
         let alwaysBelow = sunCrossings.isEmpty

@@ -15,6 +15,12 @@ struct AnnualSection: View {
 
     let place: Place
     let selected: Date
+    /// The highest the sun reaches on the selected date, taken from the day
+    /// report the screen already holds. Scanning for it inside the year would
+    /// be a second answer to a question the core has already answered exactly,
+    /// and two figures for one quantity on one screen is a defect whichever of
+    /// them is right.
+    let selectedMaximum: Double
     var lock: DataLock?
 
     @State private var year: AnnualYear?
@@ -28,7 +34,9 @@ struct AnnualSection: View {
             if lock != nil {
                 placeholder
             } else if let year {
-                AnnualCurveChart(year: year)
+                AnnualCurveChart(
+                    year: year,
+                    selectedDayIndex: AnnualYear.dayIndex(of: selected, place: place))
 
                 ForEach(year.markers, id: \.kind) { marker in
                     DataRow(
@@ -43,8 +51,8 @@ struct AnnualSection: View {
 
                 DataRow(
                     label: AnnualStrings.thisDate,
-                    value: format.degrees(year.selectedMaximum) ?? "",
-                    spoken: format.spokenDegrees(year.selectedMaximum),
+                    value: format.degrees(selectedMaximum) ?? "",
+                    spoken: format.spokenDegrees(selectedMaximum),
                     caption: format.day(selected))
 
                 DataRow(
@@ -88,13 +96,18 @@ struct AnnualSection: View {
 
     // MARK: Building
 
+    /// Deliberately without the selected day in it. The curve is a property of
+    /// a place and a year: nothing in it moves when the reader steps the date
+    /// by one, and the upright that marks the selection is drawn from a
+    /// calendar subtraction. Keying on the day made a single tap on the date
+    /// picker re sweep the whole year, which is about three and a half thousand
+    /// ephemeris evaluations for a picture that does not change.
     private struct Key: Equatable {
         let latitude: Double
         let longitude: Double
         let elevation: Double
         let zone: String
         let year: Int
-        let day: Date
         let locked: Bool
     }
 
@@ -105,7 +118,6 @@ struct AnnualSection: View {
             elevation: place.elevation,
             zone: place.timeZoneIdentifier,
             year: AnnualYear.year(of: selected, place: place),
-            day: selected,
             locked: lock != nil)
     }
 
@@ -115,10 +127,14 @@ struct AnnualSection: View {
             year = nil
             return
         }
+        // Dropped first: the rows beneath the curve are captioned with dates,
+        // and holding the previous place's year under them would caption one
+        // place's solstice altitude with another place's calendar.
+        year = nil
         let capturedPlace = self.place
-        let capturedDate = self.selected
+        let capturedYear = AnnualYear.year(of: selected, place: place)
         let built = await Task.detached(priority: .utility) {
-            AnnualYear.compute(place: capturedPlace, selected: capturedDate)
+            AnnualYear.compute(place: capturedPlace, year: capturedYear)
         }.value
         guard !Task.isCancelled else { return }
         year = built
@@ -149,8 +165,6 @@ struct AnnualYear: Sendable {
     let dayCount: Int
     let points: [Point]
     let markers: [Marker]
-    let selectedDayIndex: Int
-    let selectedMaximum: Double
     let lowest: Double
     let highest: Double
 
@@ -169,11 +183,23 @@ struct AnnualYear: Sendable {
         return calendar
     }
 
-    static func compute(place: Place, selected: Date) -> AnnualYear {
+    /// Which day of `year` a date falls on, in the place's own calendar. Pure
+    /// arithmetic, so the view can do it on the main actor between frames.
+    static func dayIndex(of date: Date, place: Place) -> Int {
         let calendar = calendar(for: place)
-        let year = calendar.component(.year, from: selected)
+        let year = calendar.component(.year, from: date)
+        guard let startOfYear = calendar.date(from: DateComponents(year: year, month: 1, day: 1))
+        else { return 0 }
+        let dayCount = calendar.range(of: .day, in: .year, for: startOfYear)?.count ?? 365
+        let raw = calendar.dateComponents(
+            [.day], from: startOfYear, to: calendar.startOfDay(for: date)).day ?? 0
+        return min(max(raw, 0), dayCount - 1)
+    }
+
+    static func compute(place: Place, year: Int) -> AnnualYear {
+        let calendar = calendar(for: place)
         let startOfYear = calendar.date(from: DateComponents(year: year, month: 1, day: 1))
-            ?? calendar.startOfDay(for: selected)
+            ?? Date()
         let dayCount = calendar.range(of: .day, in: .year, for: startOfYear)?.count ?? 365
 
         func localMidnight(dayIndex: Int) -> JulianDay {
@@ -277,19 +303,12 @@ struct AnnualYear: Sendable {
         addSolstice(.decemberSolstice, maximum: false)
         markers.sort { $0.dayIndex < $1.dayIndex }
 
-        let selectedMidnight = calendar.startOfDay(for: selected)
-        let rawIndex = calendar.dateComponents([.day], from: startOfYear, to: selectedMidnight).day ?? 0
-        let selectedIndex = min(max(rawIndex, 0), dayCount - 1)
-
         let altitudes = points.map { $0.maximumAltitude }
         return AnnualYear(
             year: year,
             dayCount: dayCount,
             points: points,
             markers: markers,
-            selectedDayIndex: selectedIndex,
-            selectedMaximum: peakAltitude(
-                dayStart: localMidnight(dayIndex: selectedIndex), place: place),
             lowest: altitudes.min() ?? 0,
             highest: altitudes.max() ?? 0)
     }
@@ -334,6 +353,10 @@ struct AnnualYear: Sendable {
 struct AnnualCurveChart: View {
 
     let year: AnnualYear
+    /// Which day of the year the heavier upright stands on. Passed in rather
+    /// than stored on `AnnualYear`, so that stepping the date moves one line
+    /// instead of rebuilding the curve.
+    let selectedDayIndex: Int
 
     @Environment(\.solarAltitude) private var solarAltitude
     @Environment(\.displayScale) private var displayScale
@@ -394,8 +417,8 @@ struct AnnualCurveChart: View {
 
         // The selected date, heavier, in the reading ink rather than the rule.
         var selected = Path()
-        selected.move(to: CGPoint(x: x(year.selectedDayIndex), y: plot.minY))
-        selected.addLine(to: CGPoint(x: x(year.selectedDayIndex), y: plot.maxY))
+        selected.move(to: CGPoint(x: x(selectedDayIndex), y: plot.minY))
+        selected.addLine(to: CGPoint(x: x(selectedDayIndex), y: plot.maxY))
         context.stroke(selected, with: .color(ink), lineWidth: hairline * 2)
 
         var curve = Path()

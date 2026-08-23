@@ -176,6 +176,10 @@ struct MoonSection: View {
             syzygies = nil
             return
         }
+        // Dropped before the new search starts, so the next new moon of the
+        // previous place cannot sit under the current place's heading while
+        // this one runs.
+        syzygies = nil
         let place = report.place
         let start = report.date
         let found = await Task.detached(priority: .utility) {

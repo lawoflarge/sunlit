@@ -37,9 +37,13 @@ struct ExportSection: View {
                             SkyPalette.componentBorder(solarAltitude: solarAltitude),
                             lineWidth: 1 / displayScale)
                 }
+                // Inside the label. A minimum frame on the `Button` itself lays
+                // the button out in a larger box without enlarging its hit
+                // region, which stays the label's own bounds: 42 points tall at
+                // the default text size.
+                .sunlitTouchTarget()
             }
             .buttonStyle(.plain)
-            .sunlitTouchTarget()
             .accessibilityLabel(Text(ExportStrings.open))
             .accessibilityHint(Text(ExportStrings.caption))
         }
@@ -152,8 +156,11 @@ struct ExportSheet: View {
                         Capsule(style: .continuous)
                             .strokeBorder(Color.primary.opacity(0.7), lineWidth: 1)
                     }
+                    // Inside the label, for the same reason as everywhere else
+                    // in this territory: a frame on the control does not move
+                    // the region a finger can land on.
+                    .sunlitTouchTarget()
                 }
-                .frame(minHeight: SunlitLayout.minimumTouchTarget)
                 .accessibilityLabel(Text(action))
             } else if working {
                 HStack(spacing: 10) {
@@ -184,7 +191,14 @@ struct ExportSheet: View {
     @MainActor
     private func prepare() async {
         working = true
-        csvURL = DayExport.writeCSV(day: day, place: place)
+        // The spreadsheet is text and a file write, so it goes off the main
+        // actor. The picture cannot: `ImageRenderer` lays out a SwiftUI view and
+        // is main actor bound by construction.
+        let capturedDay = day
+        let capturedPlace = place
+        csvURL = await Task.detached(priority: .userInitiated) {
+            DayExport.writeCSV(day: capturedDay, place: capturedPlace)
+        }.value
         imageURL = DayExport.writeImage(day: day, place: place)
         working = false
     }

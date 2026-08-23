@@ -34,17 +34,24 @@ struct PurchaseButton: View {
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.vertical, verticalPadding)
+                // Inside the label, not outside the Button. A frame applied to
+                // the Button pads the layout around it; the tappable region
+                // belongs to the label, so the minimum has to be stated here or
+                // the control merely looks 44 points tall. It also has to be
+                // stated at all: both paddings are `ScaledMetric`, so at the
+                // smallest text size they shrink to about 11 points each and the
+                // pill measures roughly 40, under the floor, at the one setting
+                // nobody thinks to check.
+                .frame(minHeight: SunlitLayout.minimumTouchTarget)
                 .background {
                     RoundedRectangle(cornerRadius: 14, style: .continuous)
                         .fill(fill)
                 }
                 .foregroundStyle(onFill)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .disabled(!isEnabled)
-        // Outermost, after every padding and every background, because the rule
-        // is about the area a fingertip can land on.
-        .sunlitTouchTarget()
         // No `accessibilityElement(children: .ignore)` here. A Button is already
         // one accessibility element; wrapping it in another makes the label and
         // value below apply to the wrapper and never reach the button, and
@@ -153,6 +160,10 @@ struct PaywallSecondaryButton: View {
             HStack(spacing: 8) {
                 Text(title)
                     .font(SunlitType.body)
+                    // "Restore purchase" becomes "Kauf wiederherstellen" and
+                    // "Restaurar la compra"; without this the longest of the ten
+                    // truncates instead of wrapping at the accessibility sizes.
+                    .fixedSize(horizontal: false, vertical: true)
                 if isBusy {
                     ProgressView()
                         .progressViewStyle(.circular)
@@ -160,16 +171,25 @@ struct PaywallSecondaryButton: View {
             }
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
+            // After the padding, so the floor raises a small control and never
+            // inflates one that already clears it. Measured, not assumed: body
+            // leading is about 20 points and the scaled padding about 11 each, so
+            // this capsule stood 42 points tall at the default text size and
+            // about 35 at the smallest. Restore is a control App Review presses,
+            // and it was under the floor.
+            .frame(
+                minWidth: SunlitLayout.minimumTouchTarget,
+                minHeight: SunlitLayout.minimumTouchTarget)
             .overlay {
                 Capsule(style: .continuous)
                     .strokeBorder(
                         SkyPalette.componentBorder(solarAltitude: solarAltitude),
                         lineWidth: 1 / displayScale)
             }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .disabled(isBusy)
-        .sunlitTouchTarget()
         // See PurchaseButton: never wrap a Button in another accessibility
         // element, or these two modifiers land on the wrapper.
         .accessibilityLabel(Text(title))

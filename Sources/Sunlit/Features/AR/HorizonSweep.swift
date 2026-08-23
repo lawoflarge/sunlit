@@ -187,7 +187,13 @@ struct HorizonSweepSection: View {
                     action: onUnlockRequested)
             }
         }
-        .opacity(isUnlocked ? 1 : 0.6)
+        // No fade over the locked state. The design system has no headroom at
+        // the ink crossover, where the audited floor is 4.55 to 1: a tenth of
+        // fade breaks it and six tenths is not close. This section fading took
+        // the explanation of what the purchase buys, and the button that leads
+        // to it, below the contrast the rest of the app guarantees. The lock is
+        // carried by the glyph beside the heading, by the disabled controls,
+        // and by the row above.
     }
 
     private var explanation: String {
@@ -226,63 +232,76 @@ struct HorizonSweepSection: View {
 
     /// Press and hold, and a plain tap works too.
     ///
-    /// A drag gesture with no minimum distance fires the moment the finger
-    /// lands, so a tap records the sector the frame is on and a hold keeps
-    /// recording while the user turns. A `LongPressGesture` would swallow the
-    /// tap and a `Button` would not report the release.
+    /// A `Button` with a style that watches `isPressed`, not a `DragGesture`.
+    /// The gesture read better and was wrong: this control sits inside the
+    /// scroll view, and when a UIScrollView takes over a touch it cancels the
+    /// SwiftUI gesture, which delivers `onChanged` but never `onEnded`. The
+    /// session was then left recording with nothing on screen to say so, and
+    /// the attitude stream in `ARView` kept feeding it readings while the user
+    /// scrolled and turned. `HorizonProfile.record` keeps the highest reading
+    /// per sector, so those readings could not be undone except by starting
+    /// over, and a skyline raised by a stray pan at the sky deletes a sunrise.
+    /// A button's pressed state is driven by the same machinery the scroll view
+    /// cancels, so it goes false exactly when the touch is taken away.
+    ///
+    /// The button's own action takes a single reading, which is what a tap
+    /// means and also what VoiceOver activation means, so there is no separate
+    /// accessibility path to keep in step.
     private var recordButton: some View {
-        let label = sweep.isRecording
+        Button(action: takeOneReading) {
+            Text(recordLabel)
+                .font(SunlitType.body)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(HoldToRecordStyle(
+            isRecording: sweep.isRecording,
+            solarAltitude: solarAltitude,
+            pressedChanged: { isPressed in
+                // Release always stops, whatever the state of the permission or
+                // the compass. Guarding the release on `canRecord` would leave
+                // the session running for good if the heading went bad while a
+                // finger was down, which is exactly the failure this rewrite
+                // exists to remove.
+                guard isPressed else {
+                    sweep.endRecording()
+                    return
+                }
+                guard canRecord else { return }
+                sweep.beginRecording()
+                sweep.record(aim: aim)
+            }))
+        .disabled(!canRecord)
+        .accessibilityLabel(Text(String(
+            localized: "ar.sweep.record.axLabel",
+            defaultValue: "Record the skyline",
+            comment: "Accessibility label of the sweep record button")))
+        .accessibilityValue(Text(recordAccessibilityValue))
+        .accessibilityHint(Text(String(
+            localized: "ar.sweep.record.axHint",
+            defaultValue: "Aim the centre of the frame at the skyline and activate once for each direction",
+            comment: "Accessibility hint of the sweep record button")))
+    }
+
+    private var recordLabel: String {
+        sweep.isRecording
             ? String(
                 localized: "ar.sweep.recording", defaultValue: "Recording",
                 comment: "State of the sweep button while a reading is being taken")
             : String(
                 localized: "ar.sweep.record", defaultValue: "Hold to record",
                 comment: "Sweep button that records the skyline while it is held")
+    }
 
-        return Text(label)
-            .font(SunlitType.body)
-            .frame(maxWidth: .infinity)
-            .sunlitTouchTarget(minimum: 56)
-            .contentShape(Rectangle())
-            .overlay {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .strokeBorder(
-                        sweep.isRecording
-                            ? SkyColors.sun
-                            : SkyPalette.componentBorder(solarAltitude: solarAltitude),
-                        lineWidth: 1)
-            }
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        guard canRecord else { return }
-                        if !sweep.isRecording { sweep.beginRecording() }
-                        sweep.record(aim: aim)
-                    }
-                    .onEnded { _ in sweep.endRecording() }
-            )
-            .disabled(!canRecord)
-            .accessibilityElement(children: .ignore)
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(Text(String(
-                localized: "ar.sweep.record.axLabel",
-                defaultValue: "Record the skyline",
-                comment: "Accessibility label of the sweep record button")))
-            .accessibilityValue(Text(recordAccessibilityValue))
-            .accessibilityHint(Text(String(
-                localized: "ar.sweep.record.axHint",
-                defaultValue: "Aim the centre of the frame at the skyline and activate once for each direction",
-                comment: "Accessibility hint of the sweep record button")))
-            // A press and hold cannot be performed with VoiceOver running, so
-            // an activation takes one reading on its own. Sweeping then means
-            // turning a little and activating again, which is slower than
-            // holding and turning but is the same measurement.
-            .accessibilityAction {
-                guard canRecord else { return }
-                sweep.beginRecording()
-                sweep.record(aim: aim)
-                sweep.endRecording()
-            }
+    /// One reading, for a tap and for a VoiceOver activation.
+    ///
+    /// A press and hold cannot be performed with VoiceOver running, so sweeping
+    /// there means turning a little and activating again. Slower than holding
+    /// and turning, and the same measurement.
+    private func takeOneReading() {
+        guard canRecord else { return }
+        sweep.beginRecording()
+        sweep.record(aim: aim)
+        sweep.endRecording()
     }
 
     private var recordAccessibilityValue: String {
@@ -298,6 +317,37 @@ struct HorizonSweepSection: View {
                 comment: "Spoken state of the sweep record button while the heading cannot be trusted")
         }
         return sectorsValue
+    }
+}
+
+// MARK: - Hold to record
+
+/// Draws the sweep button and reports its pressed state.
+///
+/// `configuration.isPressed` is the one press signal in SwiftUI that a scroll
+/// view cancels honestly: it goes true when the finger lands and false when the
+/// touch ends OR when the scroll view takes the touch away. That second case is
+/// the whole reason this type exists.
+private struct HoldToRecordStyle: ButtonStyle {
+
+    let isRecording: Bool
+    let solarAltitude: Double
+    let pressedChanged: (Bool) -> Void
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .sunlitTouchTarget(minimum: 56)
+            .overlay {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .strokeBorder(
+                        isRecording
+                            ? SkyColors.sun
+                            : SkyPalette.componentBorder(solarAltitude: solarAltitude),
+                        lineWidth: 1)
+            }
+            .onChange(of: configuration.isPressed) { _, isPressed in
+                pressedChanged(isPressed)
+            }
     }
 }
 

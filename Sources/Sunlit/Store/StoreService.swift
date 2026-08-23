@@ -135,7 +135,19 @@ final class StoreService {
     // MARK: Wiring
 
     private let gate: ProGate
-    private var updates: Task<Void, Never>?
+    /// Two attributes, each earning its place.
+    ///
+    /// `@ObservationIgnored` because no view observes the listener, and because
+    /// `@Observable` otherwise rewrites this into a tracked property, which
+    /// `nonisolated(unsafe)` cannot then apply to. The compiler says so: without
+    /// it, "'nonisolated(unsafe)' has no effect on property 'updates'".
+    ///
+    /// `nonisolated(unsafe)` because `deinit` is nonisolated and cannot read a
+    /// main actor isolated stored property, and `deinit` is the only place the
+    /// listener can be cancelled when a view built this service itself. Every
+    /// other access is on the main actor, and `deinit` runs when no other
+    /// reference to this object exists, so there is nothing to race with.
+    @ObservationIgnored private nonisolated(unsafe) var updates: Task<Void, Never>?
     private var hasStarted = false
 
     /// Creating the service starts it. The `Transaction.updates` listener has to
@@ -169,6 +181,16 @@ final class StoreService {
         updates?.cancel()
         updates = nil
         hasStarted = false
+    }
+
+    /// An unstructured `Task` runs on after the handle that started it is
+    /// released, and this one is parked on `Transaction.updates` forever. The
+    /// listener captures `self` weakly, so it does no work once the service is
+    /// gone, but it is never finished either. Views build a service of their own
+    /// when the app did not inject one, and a sheet opened five times would
+    /// otherwise leave five live iterators behind it.
+    deinit {
+        updates?.cancel()
     }
 
     // MARK: Product
@@ -211,6 +233,10 @@ final class StoreService {
             return
         }
 
+        // The previous result belongs to the previous attempt. Left in place it
+        // sits under the button reading "Cancelled. Nothing was charged." while
+        // the App Store sheet for the new attempt is open on top of it.
+        outcome = nil
         isPurchasing = true
         defer { isPurchasing = false }
 
@@ -257,6 +283,7 @@ final class StoreService {
     /// `currentEntitlements` at launch without any prompt.
     func restore() async {
         guard !isRestoring else { return }
+        outcome = nil
         isRestoring = true
         defer { isRestoring = false }
 

@@ -371,14 +371,19 @@ extension ARScene {
             SkyPoint(azimuth: $0.moon.azimuth, altitude: $0.moon.altitude)
         }
 
-        // One sample every five minutes, so every twelfth entry is an exact
-        // local hour. Marks are kept only where the sun is near enough to the
-        // horizon to be worth labelling; below that they pile up underground.
+        // `DayReport` samples every ten minutes from local midnight, so every
+        // sixth entry is an exact local hour. Marks are kept only where the sun
+        // is near enough to the horizon to be worth labelling; below that they
+        // pile up underground.
+        //
+        // Floored at one because the stride is used as a modulus: if the core
+        // ever samples more coarsely than an hour this would be zero, and a
+        // remainder by zero traps rather than degrading.
         let hourFormatter = DateFormatter()
         hourFormatter.locale = locale
         hourFormatter.timeZone = zone
         hourFormatter.setLocalizedDateFormatFromTemplate("j")
-        let samplesPerHour = Int(3600 / DayReport.samplePeriodSeconds)
+        let samplesPerHour = max(1, Int(3600 / DayReport.samplePeriodSeconds))
         for (index, sample) in report.samples.enumerated() where index % samplesPerHour == 0 {
             guard index < report.samples.count - 1 else { continue }
             guard sample.sun.altitude > -6 else { continue }
@@ -436,9 +441,23 @@ extension ARScene {
         // here. Drawing the galactic plane over a blue sky would be a promise
         // the sky cannot keep.
         skyIsAstronomicallyDark = moment.sun.altitude < MilkyWay.darkSunAltitude
-        galacticPlane = MilkyWay
+        galacticPlane = skyIsAstronomicallyDark ? galacticPlaneCurve(
+            at: julianDay, place: place) : []
+    }
+
+    /// The galactic equator, closed.
+    ///
+    /// `MilkyWay.galacticPlane` samples galactic longitude from zero up to but
+    /// not including three hundred and sixty, so the last sample stops two
+    /// degrees short of the first. The equator is a closed great circle, and
+    /// without the repeat the band has a gap in it that reads as a break in the
+    /// data rather than as the end of a sample list.
+    private func galacticPlaneCurve(at julianDay: JulianDay, place: Place) -> [SkyPoint] {
+        var curve = MilkyWay
             .galacticPlane(at: julianDay, place: place.geographic, samples: 180)
             .map { SkyPoint(azimuth: $0.azimuth, altitude: $0.altitude) }
+        if let first = curve.first { curve.append(first) }
+        return curve
     }
 
     private static func referencePath(
@@ -508,6 +527,17 @@ struct SkyOverlay: View {
 
     private var dimmed: Color { SkyColors.disabled(solarAltitude: solarAltitude) }
     private var instrument: Color { SkyPalette.instrumentLine(solarAltitude: solarAltitude) }
+    /// The audited ink. Every accent mark is backed with it.
+    ///
+    /// `SkyColors` states the rule and this file was breaking it. Swept over
+    /// the whole altitude domain with `SkyContrast.paintedColours`, each accent
+    /// bottoms out at 1.00 to 1 against the sky it is drawn on: sun `FFB020` at
+    /// about eleven degrees of solar altitude, moon `8FB8FF` at twelve, Milky
+    /// Way `C9A6FF` at nine. They separate by hue alone. On the camera denied
+    /// path the backdrop IS that gradient, so an unbacked sun marker is not
+    /// faint there, it is absent, and it is absent for every reader working
+    /// from luminance: greyscale, Color Filters, a bright screen outdoors.
+    private var ink: Color { SkyPalette.foreground(solarAltitude: solarAltitude) }
 
     var body: some View {
         Canvas { context, _ in
@@ -530,27 +560,41 @@ struct SkyOverlay: View {
             }
 
             if layers.milkyWay, scene.skyIsAstronomicallyDark {
-                let colour = layers.milkyWayLocked || layers.selectionLocked
-                    ? dimmed : SkyColors.milkyWay
-                draw(scene.galacticPlane, in: &context, colour: colour, width: heavyline)
+                // `accented` is false exactly when the mark is already drawn in
+                // the audited ink at the disabled opacity, which carries its own
+                // luminance. Backing that would make a locked layer look live.
+                let accented = !(layers.milkyWayLocked || layers.selectionLocked)
+                let colour = accented ? SkyColors.milkyWay : dimmed
+                draw(
+                    scene.galacticPlane, in: &context,
+                    colour: colour, width: heavyline, backed: accented)
                 if let centre = scene.galacticCentre, let point = projection.project(centre) {
-                    context.stroke(
-                        Path(ellipseIn: CGRect(x: point.x - 9, y: point.y - 9, width: 18, height: 18)),
-                        with: .color(colour), lineWidth: heavyline)
+                    let disc = CGRect(x: point.x - 9, y: point.y - 9, width: 18, height: 18)
+                    if accented {
+                        context.stroke(
+                            Path(ellipseIn: disc), with: .color(ink), lineWidth: heavyline * 2)
+                    }
+                    context.stroke(Path(ellipseIn: disc), with: .color(colour), lineWidth: heavyline)
                 }
             }
 
             if layers.moon {
-                let colour = layers.moonLocked || layers.selectionLocked ? dimmed : SkyColors.moon
-                draw(scene.moonPath, in: &context, colour: colour, width: heavyline)
-                drawMoonMarker(in: &context, colour: colour)
+                let accented = !(layers.moonLocked || layers.selectionLocked)
+                let colour = accented ? SkyColors.moon : dimmed
+                draw(
+                    scene.moonPath, in: &context,
+                    colour: colour, width: heavyline, backed: accented)
+                drawMoonMarker(in: &context, colour: colour, backed: accented)
             }
 
             if layers.sun {
-                let colour = layers.selectionLocked ? dimmed : SkyColors.sun
-                draw(scene.sunPath, in: &context, colour: colour, width: heavyline)
-                drawHourMarks(in: &context, colour: colour)
-                drawSunMarker(in: &context, colour: colour)
+                let accented = !layers.selectionLocked
+                let colour = accented ? SkyColors.sun : dimmed
+                draw(
+                    scene.sunPath, in: &context,
+                    colour: colour, width: heavyline, backed: accented)
+                drawHourMarks(in: &context, colour: colour, backed: accented)
+                drawSunMarker(in: &context, colour: colour, backed: accented)
             }
 
             for run in layers.sweepTrace {
@@ -569,18 +613,32 @@ struct SkyOverlay: View {
 
     // MARK: Pieces
 
+    /// Strokes a sky curve, optionally over a wider stroke of the audited ink.
+    ///
+    /// The underlay is what turns an accent into a mark rather than a hue: it
+    /// is drawn first and twice as wide, so the accent keeps its colour and
+    /// gains an edge that survives the sky it crosses. `ArcTrack` does the same
+    /// thing for the same reason.
     private func draw(
         _ points: [SkyPoint],
         in context: inout GraphicsContext,
         colour: Color,
         width: Double,
-        dash: [CGFloat] = []
+        dash: [CGFloat] = [],
+        backed: Bool = false
     ) {
         let runs = projection.polylines(points)
         guard !runs.isEmpty else { return }
         var path = Path()
         for run in runs {
             path.addLines(run)
+        }
+        if backed {
+            context.stroke(
+                path,
+                with: .color(ink),
+                style: StrokeStyle(
+                    lineWidth: width * 2, lineCap: .round, lineJoin: .round, dash: dash))
         }
         context.stroke(
             path,
@@ -598,23 +656,38 @@ struct SkyOverlay: View {
         }
     }
 
-    private func drawHourMarks(in context: inout GraphicsContext, colour: Color) {
+    private func drawHourMarks(in context: inout GraphicsContext, colour: Color, backed: Bool) {
         for mark in scene.sunHourMarks {
             guard let point = projection.project(mark.point) else { continue }
             let tick = CGRect(x: point.x - 3, y: point.y - 3, width: 6, height: 6)
+            if backed {
+                context.stroke(
+                    Path(ellipseIn: tick), with: .color(ink), lineWidth: hairline * 3)
+            }
             context.stroke(Path(ellipseIn: tick), with: .color(colour), lineWidth: hairline)
+            // The hour is something the reader reads, and `SkyColors` reserves
+            // reading to the audited ink: the accent would put a 1.00 to 1
+            // figure over a daylit sky. When the layer is locked the colour
+            // already IS the ink, at the disabled opacity, so passing it
+            // through keeps the locked state looking locked.
             let text = Text(mark.label)
                 .font(SunlitType.metricSmall)
-                .foregroundStyle(colour)
+                .foregroundStyle(backed ? ink : colour)
             context.draw(text, at: CGPoint(x: point.x, y: point.y - 14), anchor: .center)
         }
     }
 
-    private func drawSunMarker(in context: inout GraphicsContext, colour: Color) {
+    private func drawSunMarker(in context: inout GraphicsContext, colour: Color, backed: Bool) {
         guard let point = projection.project(scene.sunNow) else { return }
         let disc = CGRect(x: point.x - 10, y: point.y - 10, width: 20, height: 20)
+        if backed {
+            context.stroke(Path(ellipseIn: disc), with: .color(ink), lineWidth: heavyline * 2)
+        }
         context.fill(Path(ellipseIn: disc), with: .color(colour))
         let ring = CGRect(x: point.x - 17, y: point.y - 17, width: 34, height: 34)
+        if backed {
+            context.stroke(Path(ellipseIn: ring), with: .color(ink), lineWidth: hairline * 3)
+        }
         context.stroke(Path(ellipseIn: ring), with: .color(colour), lineWidth: hairline)
     }
 
@@ -625,9 +698,12 @@ struct SkyOverlay: View {
     /// pointing the wrong way is worse than no crescent. The fraction is the
     /// figure that decides whether the moon spoils a night photograph, and it is
     /// also printed underneath the viewport.
-    private func drawMoonMarker(in context: inout GraphicsContext, colour: Color) {
+    private func drawMoonMarker(in context: inout GraphicsContext, colour: Color, backed: Bool) {
         guard let point = projection.project(scene.moonNow) else { return }
         let disc = CGRect(x: point.x - 9, y: point.y - 9, width: 18, height: 18)
+        if backed {
+            context.stroke(Path(ellipseIn: disc), with: .color(ink), lineWidth: heavyline * 2)
+        }
         context.fill(
             Path(ellipseIn: disc),
             with: .color(colour.opacity(max(0.12, min(1, scene.moonIllumination)))))

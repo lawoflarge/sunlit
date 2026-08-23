@@ -212,6 +212,11 @@ struct EclipseSection: View {
             searching = false
             return
         }
+        // Dropped before the new search starts. Every row in this section is
+        // captioned "as this place will see them", so holding the previous
+        // place's contact times across a change of place is not a stale figure,
+        // it is a false statement about where the reader is standing.
+        found = nil
         searching = true
         let geographic = place.geographic
         let start = after
