@@ -9,6 +9,21 @@ the left, crests above centre, and lands on the horizon on the right, with the
 sun as a filled amber disc riding the arc at 45 degrees of elevation on the
 ascending side, so the icon reads as a path with the sun still climbing it.
 
+Three decisions worth keeping:
+
+  The arc is an exact semicircle centred on the horizon. arc_left_x, arc_right_x
+  and arc_apex_y are chosen so half chord equals sagitta, which is what makes
+  the shape read as a sun path rather than as a generic arch.
+
+  The sun sits low on the ascending branch, at sun_t 0.25, which is 45 degrees
+  of elevation. Higher up the arc the disc would poke above the apex and the
+  silhouette would lose its dome, which is the thing that survives 29 points.
+
+  A clear sky gap is knocked out of the arc around the disc. Amber on a light
+  warm tone is only about 1.5:1 in luminance and no light warm tone reaches 3:1
+  against #FFB020, so the disc is separated from the arc by hue and by that gap
+  rather than by brightness. silhouette-test.py measures all three.
+
 Every dimension in PARAMS is a fraction of the canvas side, so the icon renders
 identically at any size. The render is deterministic: two runs produce the same
 bytes.
@@ -60,9 +75,7 @@ PARAMS = {
     "horizon_y": 0.665,
     "horizon_w": 0.0117,
 
-    # The arc. Endpoints sit on the horizon; the apex is well above centre.
-    # left_x, right_x and apex_y are chosen so the arc is an exact semicircle
-    # centred on the horizon, which is why the shape reads as a sun path.
+    # The arc.
     "arc_left_x": 0.100,
     "arc_right_x": 0.900,
     "arc_apex_y": 0.265,
@@ -71,16 +84,11 @@ PARAMS = {
     # Ink colour shared by the arc and the horizon hairline.
     "line_color": "#FFE7BE",
 
-    # The sun. sun_t runs 0 at the left end of the arc to 1 at the right end,
-    # so 0.25 is 45 degrees of elevation on the ascending branch.
+    # The sun. sun_t runs 0 at the left end of the arc to 1 at the right end.
     "sun_t": 0.25,
-    "sun_r": 0.1016,
+    "sun_r": 0.0980,
     "sun_color": "#FFB020",
-
-    # Clear-sky gap knocked out of the arc around the sun. Amber on cream has
-    # only 1.5:1 luminance contrast, so the sun is separated from the arc
-    # geometrically rather than tonally. See silhouette-test.py.
-    "sun_gap": 0.0488,
+    "sun_gap": 0.0320,
 
     # Subtle warm halo. Drawn under the arc so it never closes the gap.
     "halo_color": "#FFCE6A",
@@ -109,8 +117,8 @@ def geometry(p, side):
     cx = (x0 + x1) / 2.0
     cy = ya + radius
 
-    # Pillow screen convention: angles in degrees, 0 at 3 o'clock, growing
-    # clockwise because y points down. 270 is the top of the circle.
+    # Screen convention: angles in degrees, 0 at 3 o'clock, growing clockwise
+    # because y points down. 270 is the top of the circle.
     a_start = math.degrees(math.atan2(yh - cy, x0 - cx)) % 360.0
     a_end = math.degrees(math.atan2(yh - cy, x1 - cx)) % 360.0
     if a_end <= a_start:
@@ -126,6 +134,7 @@ def geometry(p, side):
         "horizon_w": p["horizon_w"] * side,
         "r_sun": p["sun_r"] * side,
         "gap": p["sun_gap"] * side,
+        "sun_t": p["sun_t"],
     }
     g["r_hole"] = g["r_sun"] + g["gap"]
     g["sun"] = arc_point(g, p["sun_t"])
@@ -201,7 +210,7 @@ def halo_layer(side, g, p):
 
 
 def ink_layer(side, g, p):
-    """Horizon hairline and arc, with the clear-sky gap punched out."""
+    """Horizon hairline and arc, with the clear sky gap punched out."""
     layer = Image.new("RGBA", (side, side), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
     ink = rgb(p["line_color"]) + (255,)
@@ -209,8 +218,8 @@ def ink_layer(side, g, p):
     half = g["horizon_w"] / 2.0
     d.rectangle([0, g["horizon_y"] - half, side, g["horizon_y"] + half], fill=ink)
 
-    # The arc is stamped as overlapping discs, which gives an exact round cap
-    # at both ends and leaves no doubt about which side the width falls on.
+    # The arc is stamped as overlapping discs, which gives an exact round cap at
+    # both ends and leaves no doubt about which side of the path the width falls.
     brush = g["arc_w"] / 2.0
     steps = max(2, int(math.ceil(g["arc_len"] / (brush / 4.0))))
     for k in range(steps + 1):

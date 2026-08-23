@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy | Sunlit</title>
+<meta name="description" content="Sunlit collects nothing. No account, no analytics, no advertising, no server of ours. Every calculation happens on your iPhone and everything it saves stays there.">
+<link rel="canonical" href="https://sunlit-app.vercel.app/privacy.html">
+<meta name="theme-color" content="#F1F5FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070B18" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sunlit">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://sunlit-app.vercel.app/privacy.html">
+<meta property="og:title" content="Privacy | Sunlit">
+<meta property="og:description" content="Sunlit collects nothing. No account, no analytics, no advertising, no server of ours. Every calculation happens on your iPhone and everything it saves stays there.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy | Sunlit">
+<meta name="twitter:description" content="Sunlit collects nothing. Every calculation happens on your iPhone and everything it saves stays there.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%230B1024'/%3E%3Cpath%20d='M12%2045a20%2020%200%200%201%2040%200'%20fill='none'%20stroke='%23FFB020'%20stroke-width='3.2'%20stroke-linecap='round'/%3E%3Cpath%20d='M8%2045h48'%20stroke='%238FB8FF'%20stroke-width='3.2'%20stroke-linecap='round'%20opacity='.75'/%3E%3Ccircle%20cx='32'%20cy='25'%20r='7'%20fill='%23FFB020'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#0B1024"/>
+      <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M8 45h48" stroke="#8FB8FF" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="32" cy="25" r="7" fill="#FFB020"/>
+    </svg>
+    <b>Sunlit</b>
+  </a>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html" aria-current="page">Privacy</a>
+  </nav>
+</div></header>
+
+<main id="main" class="doc"><div class="wrap">
+  <p class="eyebrow">Privacy policy</p>
+  <h1>Privacy</h1>
+  <p class="updated num">Last updated 23 August 2026. Applies to Sunlit for iPhone.</p>
+
+  <div class="note" style="max-width:40em">
+    <p><strong>Sunlit collects nothing.</strong> There is no account, no sign up, no
+      analytics, no advertising and no server of ours anywhere. Every figure the app
+      shows is computed on your iPhone, and everything the app saves is saved on your
+      iPhone. In App Store Connect, Sunlit is declared as Data Not Collected, because
+      that is what it does.</p>
+  </div>
+
+  <div class="doc-body">
+    <h2>What Sunlit saves, and where</h2>
+    <p>Sunlit writes a small amount of information into its own storage on your iPhone:
+      the places you save, the horizon profiles you measure, the date and place you last
+      looked at, your units and display settings, and whether the purchase is unlocked.</p>
+    <p>All of it lives inside the app's container on the device. It is not uploaded,
+      because the app contains no code that uploads anything. If you have iCloud Backup
+      switched on, that container is part of your ordinary iPhone backup, exactly like
+      any other app's data. That backup is a matter between you and Apple, and nobody
+      else can read it.</p>
+
+    <h2>Calculations never leave the device</h2>
+    <p>The astronomical core is arithmetic, and every table it needs is inside the app:
+      the periodic terms for the sun and the moon, the nutation series, the ozone
+      climatology, the magnetic model and the city list. Put the phone in aeroplane mode
+      and every number on every screen still appears. No calculation contacts a server,
+      ours or anyone else's.</p>
+
+    <h2>The three things that can use a connection</h2>
+    <p>None of them is required, and none of them sends anything to us, because there is
+      no us to send it to. Each one is handled by Apple's own frameworks and goes to
+      Apple under Apple's privacy policy.</p>
+    <ul>
+      <li><b>Searching Apple Maps for a place name.</b> Only while you are typing in the
+        place search field, and only if a connection exists. The embedded city list is
+        searched at the same time and needs no connection at all, so search still works
+        offline.</li>
+      <li><b>Resolving the time zone of a pin you drop on the map.</b> The coordinate goes
+        to Apple's geocoder. With no connection, Sunlit falls back to the time zone of
+        your device and says so on the screen rather than guessing quietly.</li>
+      <li><b>Buying, or restoring, Sunlit Pro.</b> The App Store handles the payment.</li>
+    </ul>
+
+    <h2>Location</h2>
+    <p>Sunlit asks for location so that it can place you at your own coordinate. The
+      coordinate is used inside the app to compute positions, and it is written to
+      storage only if you save that place yourself. It is never transmitted by Sunlit,
+      to us or to anybody else.</p>
+    <p>You can refuse the permission and still use the app. Choose a place by name from
+      the embedded city list, or drop a pin on the map, and everything else works
+      exactly the same.</p>
+
+    <h2>Camera</h2>
+    <p>The AR view draws the paths of the sun and the moon over a live camera image, and
+      the horizon sweep lets you trace your own skyline by aiming at it. Camera frames
+      are used to draw that view and are then discarded. Sunlit does not record video,
+      does not save frames, and sends no image anywhere.</p>
+    <p>What a horizon sweep saves is 36 numbers: one apparent altitude for each ten
+      degrees of azimuth. If you refuse the camera permission, the app carries on
+      without the camera image.</p>
+
+    <h2>What Sunlit does not do</h2>
+    <ul>
+      <li>No account, no email address, no password.</li>
+      <li>No analytics, no telemetry, no crash reporting service.</li>
+      <li>No advertising, no advertising identifier, no tracking of any kind.</li>
+      <li>No third party software development kits.</li>
+      <li>No server operated by us. There is nowhere for your data to be sent.</li>
+      <li>No sharing or selling of anything, to anybody, ever.</li>
+    </ul>
+
+    <h2>The purchase</h2>
+    <p>Sunlit Pro is a single non consumable purchase handled entirely by Apple. The app
+      asks Apple whether the Apple Account signed in on this device owns the purchase,
+      and receives yes or no. We never see your name, your email address, your Apple
+      Account or your payment details. Apple's privacy policy governs that transaction:
+      <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>.</p>
+
+    <h2>Notifications and widgets</h2>
+    <p>Event notifications are worked out on the device and handed to iOS, which delivers
+      them locally. There is no push server, and no notification ever leaves your iPhone.
+      Widgets compute their own values on the device as well, in an extension of the same
+      app, and refresh at event boundaries.</p>
+
+    <h2>Children</h2>
+    <p>Sunlit is rated 4+ and collects no personal data from anybody, at any age.</p>
+
+    <h2>Deleting everything</h2>
+    <p>Deleting the app removes everything it stored. There is no copy on any server, so
+      there is nothing to request, nothing to export and nothing else to erase. A
+      purchase stays with your Apple Account and can be restored later at no cost.</p>
+
+    <h2 id="geonames">Credits and licences</h2>
+    <p>The city list embedded in Sunlit is derived from
+      <a href="https://www.geonames.org">GeoNames</a> and is used under the Creative
+      Commons Attribution 4.0 International licence,
+      <a href="https://creativecommons.org/licenses/by/4.0/">creativecommons.org/licenses/by/4.0</a>.
+      The same credit appears inside the app, in Settings.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the date at the top changes with it. Because the app
+      collects nothing, any change would be a matter of wording rather than of practice.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about privacy go straight to a person:
+      <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a></p>
+    <p class="small">Levin David Schwab, Paulinenstrasse 1/2, 71263 Weil der Stadt,
+      Germany.</p>
+  </div>
+</div></main>
+
+<footer class="site-foot"><div class="wrap">
+  <span>Sunlit &middot; Levin David Schwab</span>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
+  </nav>
+</div></footer>
+</body>
+</html>

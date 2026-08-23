@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support | Sunlit</title>
+<meta name="description" content="Answers about the AR view, compass accuracy and calibration, what is free, restoring a purchase, and why the UV and irradiance figures are clear sky models.">
+<link rel="canonical" href="https://sunlit-app.vercel.app/support.html">
+<meta name="theme-color" content="#F1F5FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070B18" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sunlit">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://sunlit-app.vercel.app/support.html">
+<meta property="og:title" content="Support | Sunlit">
+<meta property="og:description" content="Answers about the AR view, compass accuracy and calibration, what is free, restoring a purchase, and why the UV and irradiance figures are clear sky models.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Support | Sunlit">
+<meta name="twitter:description" content="Answers about the AR view, compass calibration, the free tier, restoring a purchase and the clear sky models.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%230B1024'/%3E%3Cpath%20d='M12%2045a20%2020%200%200%201%2040%200'%20fill='none'%20stroke='%23FFB020'%20stroke-width='3.2'%20stroke-linecap='round'/%3E%3Cpath%20d='M8%2045h48'%20stroke='%238FB8FF'%20stroke-width='3.2'%20stroke-linecap='round'%20opacity='.75'/%3E%3Ccircle%20cx='32'%20cy='25'%20r='7'%20fill='%23FFB020'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#0B1024"/>
+      <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M8 45h48" stroke="#8FB8FF" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="32" cy="25" r="7" fill="#FFB020"/>
+    </svg>
+    <b>Sunlit</b>
+  </a>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/support.html" aria-current="page">Support</a>
+    <a href="/privacy.html">Privacy</a>
+  </nav>
+</div></header>
+
+<main id="main" class="doc"><div class="wrap">
+  <p class="eyebrow">Support</p>
+  <h1>Answers, and a person to write to.</h1>
+
+  <div class="contact" style="margin-top:26px">
+    <div class="k">Email</div>
+    <p class="addr" style="margin:6px 0 12px"><a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a></p>
+    <p class="small" style="margin:0">Write in English or German. Please say which iPhone
+      and which version of iOS you are on, and what you were doing when the problem
+      appeared. A screenshot answers more than a paragraph does.</p>
+  </div>
+
+  <ul class="toc">
+    <li><a href="#ar">Opening the AR view</a></li>
+    <li><a href="#compass">Compass accuracy</a></li>
+    <li><a href="#free">Free and Pro</a></li>
+    <li><a href="#restore">Restoring a purchase</a></li>
+    <li><a href="#uv">UV and irradiance</a></li>
+    <li><a href="#offline">Offline</a></li>
+    <li><a href="#horizon">Measuring your skyline</a></li>
+    <li><a href="#sunrise">Times that differ</a></li>
+  </ul>
+
+  <div class="qa" style="margin-top:30px">
+
+    <section id="ar">
+      <h2>How do I open the AR view?</h2>
+      <p>Sunlit has four views: <b>Sky</b>, <b>AR</b>, <b>Map</b> and <b>Data</b>. Choose
+        <b>AR</b>. The first time you do, iOS asks for permission to use the camera,
+        because the view draws the paths of the sun and the moon over the live image.
+        Allow it and the camera appears with the paths on top of it.</p>
+      <p>If you refuse, the AR view still opens, without the camera image behind it. To
+        change your mind later, open the iPhone <b>Settings</b> app, scroll down to
+        <b>Sunlit</b> and switch <b>Camera</b> on.</p>
+      <p>Hold the phone upright and turn slowly. The amber curve is the path of the sun
+        for the selected date. The moon path, the solstice and equinox reference curves
+        and the galactic plane of the Milky Way are part of Sunlit Pro.</p>
+    </section>
+
+    <section id="compass">
+      <h2>Why does the direction wander, and how do I calibrate it?</h2>
+      <p>The magnetometer in a phone measures the magnetic field of the earth, and it is
+        a weak field. Anything magnetic close by competes with it: a case or wallet with
+        magnets, a MagSafe charger, a car dashboard, a tripod head, a loudspeaker, steel
+        in a wall, a metal desk. This is a property of the hardware, not of the app, and
+        it is the single most common complaint about every augmented reality sun app
+        there is.</p>
+      <p>Sunlit does not hide it. The AR view carries a chip showing the current heading
+        uncertainty in degrees, at all times, and it turns amber when iOS reports that
+        the compass needs calibrating.</p>
+      <p><b>To calibrate:</b> step away from metal and from anything magnetic, take the
+        phone out of a magnetic case, then move it slowly in a figure of eight, turning
+        your wrist as you go, for a few seconds. The figure on the chip should drop.</p>
+      <p><b>Two iOS settings matter.</b> In the iPhone <b>Settings</b> app, under
+        <b>Privacy and Security</b>, <b>Location Services</b>, <b>System Services</b>,
+        <b>Compass Calibration</b> should be on. In the same <b>Location Services</b>
+        list, Sunlit should be allowed <b>While Using the App</b>.</p>
+      <p><b>Sunlit works in true north, not magnetic north.</b> It reads the attitude of
+        the device in the true north reference frame rather than a raw magnetic heading,
+        and it applies the magnetic declination for your position from a model carried
+        inside the app, so it needs no connection to know the difference. If you compare
+        it against a magnetic compass, the two will disagree by the local declination,
+        which is several degrees in most of the world.</p>
+    </section>
+
+    <section id="free">
+      <h2>What is free, and what does the purchase unlock?</h2>
+      <p><b>Free, permanently:</b> today, at your current location, in all four views.
+        That covers the position of the sun, the compass, the path of the sun in AR,
+        sunrise and sunset, civil, nautical and astronomical twilight, golden hour and
+        blue hour, solar noon, day length, shadow length, and the clear sky UV and
+        irradiance models for today. It is not a trial and it does not expire.</p>
+      <p><b>Sunlit Pro</b> is a single purchase at 9.99 EUR, shown in your own currency
+        by the App Store. It is not a subscription and there is nothing to cancel. It
+        adds:</p>
+      <ul>
+        <li>Any date, past or future</li>
+        <li>Saved places beyond your current location</li>
+        <li>The moon: phase, path, rise, set and calendar</li>
+        <li>The Milky Way: galactic centre, galactic plane and visibility windows</li>
+        <li>Annual path overlays with the solstice and equinox curves</li>
+        <li>A measured horizon profile and obstruction periods</li>
+        <li>Eclipses with visibility and obscuration at your place</li>
+        <li>Widgets and event notifications</li>
+        <li>Export to CSV and image</li>
+      </ul>
+    </section>
+
+    <section id="restore">
+      <h2>I bought Sunlit Pro and it is locked again</h2>
+      <p>Open <b>Settings</b> inside Sunlit and tap <b>Restore purchases</b>. That asks
+        Apple whether the Apple Account signed in on this device owns Sunlit Pro, and
+        unlocks it if the answer is yes.</p>
+      <p>If it stays locked, check that you are signed in with the same Apple Account you
+        bought it with. A phone set up from a different account is the usual reason. A
+        purchase belongs to an Apple Account, not to a device, so there is never anything
+        to pay a second time.</p>
+      <p>Refunds are handled by Apple rather than by us, at
+        <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+    </section>
+
+    <section id="uv">
+      <h2>Are the UV index and the irradiance figures measurements?</h2>
+      <p><b>No. They are clear sky models,</b> and Sunlit labels them as models wherever
+        they appear. The phone has no ultraviolet sensor, and Sunlit has no weather
+        feed.</p>
+      <p>The UV index is computed from the altitude of the sun, a total column ozone
+        climatology for your latitude and time of year, your elevation, and the current
+        distance from the earth to the sun. The irradiance figures come from a standard
+        clear sky formula, split into a direct and a diffuse component.</p>
+      <p>What they tell you is what a cloudless sky would deliver at that moment, at that
+        place. Cloud, haze, dust and pollution are not in the model, so under an overcast
+        sky the real value is far lower. They are a planning tool for light, not a health
+        instrument, and they should not be used for medical or safety decisions.</p>
+    </section>
+
+    <section id="offline">
+      <h2>Does Sunlit work without a connection?</h2>
+      <p>Yes. Every astronomical figure is computed on the device from tables carried
+        inside the app, so aeroplane mode changes nothing about the numbers, anywhere in
+        the world, on any date.</p>
+      <p>Three optional things use a connection when one is there: searching Apple Maps
+        by name, resolving the time zone of a bare coordinate you dropped on the map, and
+        buying or restoring the purchase. The city list, the magnetic model and every
+        ephemeris table are already on your phone.</p>
+    </section>
+
+    <section id="place">
+      <h2>How do I change the place or the date?</h2>
+      <p>Both live in the header at the top of the screen and both govern all four views
+        at once. Tap the place to search by name or to pick a saved place; tap the date to
+        move to another day. On the <b>Map</b> view you can also tap anywhere to move the
+        pin, and the rest of the app follows.</p>
+      <p>Place names come from GeoNames: about 25,000 cities with a coordinate, an
+        elevation and a time zone, carried inside the app, which is why the search works
+        offline. It is used under the Creative Commons Attribution 4.0 licence. If a
+        place you want is not in the list, drop a pin instead. That works anywhere.</p>
+    </section>
+
+    <section id="location">
+      <h2>Sunlit cannot see where I am</h2>
+      <p>Open the iPhone <b>Settings</b> app, scroll down to <b>Sunlit</b>, tap
+        <b>Location</b> and choose <b>While Using the App</b>. Indoors a first fix can
+        take a few seconds.</p>
+      <p>You can also refuse location entirely and still use Sunlit: search for a place by
+        name, or drop a pin on the map.</p>
+    </section>
+
+    <section id="horizon">
+      <h2>How do I measure my own skyline?</h2>
+      <p>Open the <b>AR</b> view and start the horizon sweep, then turn slowly through a
+        full circle with your skyline in the middle of the frame. Sunlit stores the result
+        as 36 sectors of ten degrees, each holding the apparent altitude of whatever is in
+        the way. You can also type the altitudes in by hand, or leave the horizon flat at
+        zero degrees, which is what almost every other app assumes.</p>
+      <p>With a profile stored, Sunlit gives you sunrise and sunset over your own skyline
+        as well as over a flat horizon, shows the difference between the two, and lists
+        the periods when the sun is behind an obstruction. The measured horizon is part of
+        Sunlit Pro.</p>
+    </section>
+
+    <section id="sunrise">
+      <h2>Sunlit gives a different sunrise from another app</h2>
+      <p>Two reasons, and both are deliberate.</p>
+      <p>First, most apps give you sunrise over a flat horizon at sea level. If you have
+        measured your skyline, Sunlit uses your skyline instead, and shows both figures so
+        that you can see how much the hill or the building costs you.</p>
+      <p>Second, Sunlit models atmospheric refraction and takes the apparent size of the
+        disc into account, so its times are for the upper edge of the disc meeting your
+        horizon. Small differences of seconds between careful apps are normal and come
+        from these choices rather than from an error.</p>
+    </section>
+
+    <section id="polar">
+      <h2>There is no sunrise for the date I picked</h2>
+      <p>Above the Arctic circle and below the Antarctic circle there are dates on which
+        the sun never rises and dates on which it never sets. Sunlit says polar day or
+        polar night rather than printing a time that does not exist. The event solver
+        reports the absence of an event instead of inventing one, for the moon as well as
+        for the sun.</p>
+    </section>
+
+    <section id="widgets">
+      <h2>Widgets and notifications</h2>
+      <p>Sunlit offers a small and a medium home screen widget and two lock screen
+        widgets. Add one the usual way: touch and hold the home screen or the lock screen,
+        then choose Sunlit from the widget list. They refresh at event boundaries rather
+        than on a fixed clock, so a countdown can sit still for a while and then move.</p>
+      <p>Event notifications are scheduled on your phone by iOS and are delivered locally,
+        with no server involved. If none arrive, open the iPhone <b>Settings</b> app, go
+        to <b>Notifications</b>, find <b>Sunlit</b> and make sure <b>Allow
+        Notifications</b> is on. Widgets and notifications are both part of Sunlit Pro.</p>
+    </section>
+
+    <section id="export">
+      <h2>How do I get the numbers out?</h2>
+      <p>In the <b>Data</b> view, choose export. Sunlit writes the figures as a CSV file
+        or the chart as an image and hands it to iOS, so you can save it or send it on.
+        Export is part of Sunlit Pro.</p>
+    </section>
+
+    <section id="device">
+      <h2>Which iPhones, and which languages?</h2>
+      <p>Sunlit runs on iPhone with iOS 17 or later. There is no iPad version and no Apple
+        Watch app. The AR view needs a camera and a magnetometer, which every supported
+        iPhone has.</p>
+      <p>The app is written in English, German, French, Italian, Spanish, Spanish for
+        Mexico, Dutch, Polish, Japanese and Brazilian Portuguese. Numbers, dates and units
+        follow the conventions of the language you are in.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Something else</h2>
+      <p>Write to <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a> and you
+        will get a reply from a person. Bug reports, wrong numbers and requests for a
+        language are all welcome. If you believe a figure is wrong, say which place, which
+        date, which time and which value, and it can be checked against the reference
+        sources directly.</p>
+    </section>
+
+  </div>
+</div></main>
+
+<footer class="site-foot"><div class="wrap">
+  <span>Sunlit &middot; Levin David Schwab</span>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
+  </nav>
+</div></footer>
+</body>
+</html>

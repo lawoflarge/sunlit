@@ -1,3 +1,5 @@
+import Foundation
+
 /// Truncated VSOP87 periodic terms and IAU 1980 nutation terms used by the
 /// NREL Solar Position Algorithm.
 ///
@@ -10,12 +12,24 @@
 /// (pvlib/spa.py) and s-bear/sun-position (sunposition.py); all three agree
 /// digit for digit on all 321 rows.
 ///
-/// These are the corrected tables. On 07-NOV-2006 NREL corrected three terms
-/// in L and two in R, so the worked example in the printed report, which
-/// gives L = 24.0182616917 degrees for the test instant, is reproduced here
-/// as 24.0182614713 degrees. That difference of 2.2e-7 degrees is the
-/// correction, not a transcription error, and it is three orders of magnitude
-/// below the algorithm's stated uncertainty of 0.0003 degrees.
+/// These are the corrected tables. The 07-NOV-2006 revision of spa.c reads
+/// "Corrected 3 earth periodic terms in the L_TERMS array. Corrected 2 earth
+/// periodic terms in the R_TERMS array", and the values here are the ones
+/// from after that revision.
+///
+/// With these tables the worked example in the report reproduces exactly. For
+/// 2003-10-17 19:30:30 UT with delta T = 67 seconds the report publishes
+/// L = 24.0182616917 degrees, B = -0.0001011219 degrees and
+/// R = 0.9965422974 AU; these tables give all three to every published digit.
+///
+/// One trap when checking that by hand: the report prints the Julian day
+/// rounded to six decimals as 2452930.312847, while the instant is really
+/// 2452930.3128472222. Feeding the printed value back in moves L by
+/// 2.2e-7 degrees, because the Earth's heliocentric longitude advances about
+/// 0.99 degrees per day and the rounding is 2.2e-7 of a day. That offset is
+/// an artefact of the printed precision. It is not a table correction and not
+/// a transcription error, and seeing it is not a reason to accept a
+/// disagreement of that size from any other cause.
 public enum SPATables {
 
     /// Earth heliocentric longitude terms L0 through L5, in units of 1e-8

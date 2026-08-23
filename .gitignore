@@ -10,3 +10,4 @@ DerivedData/
 *.cer
 node_modules/
 .vercel/
+.venv/

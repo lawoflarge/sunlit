@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunlit: Sun &amp; Moon Tracker for iPhone</title>
+<meta name="description" content="Sunlit computes the sun, the moon and the Milky Way on your iPhone, for any date and any place, without asking a server. Sky, AR, map and data views. Free to install.">
+<link rel="canonical" href="https://sunlit-app.vercel.app/">
+<meta name="theme-color" content="#F1F5FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070B18" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sunlit">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://sunlit-app.vercel.app/">
+<meta property="og:title" content="Sunlit: Sun &amp; Moon Tracker for iPhone">
+<meta property="og:description" content="Sunlit computes the sun, the moon and the Milky Way on your iPhone, for any date and any place, without asking a server. Sky, AR, map and data views. Free to install.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sunlit: Sun &amp; Moon Tracker for iPhone">
+<meta name="twitter:description" content="Sun, moon and Milky Way, computed on the device for any date and any place. Free to install, with one optional purchase.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%230B1024'/%3E%3Cpath%20d='M12%2045a20%2020%200%200%201%2040%200'%20fill='none'%20stroke='%23FFB020'%20stroke-width='3.2'%20stroke-linecap='round'/%3E%3Cpath%20d='M8%2045h48'%20stroke='%238FB8FF'%20stroke-width='3.2'%20stroke-linecap='round'%20opacity='.75'/%3E%3Ccircle%20cx='32'%20cy='25'%20r='7'%20fill='%23FFB020'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#0B1024"/>
+      <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M8 45h48" stroke="#8FB8FF" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="32" cy="25" r="7" fill="#FFB020"/>
+    </svg>
+    <b>Sunlit</b>
+  </a>
+  <nav>
+    <a href="/" aria-current="page">Overview</a>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html">Privacy</a>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Sun, moon and Milky Way, for iPhone</p>
+  <h1>Know where the sun will be, before you get there.</h1>
+  <p class="lead">Sunlit works out the position of the sun, the moon and the galactic
+    centre of the Milky Way for any date and any place on earth. Every figure is
+    computed on your iPhone. Nothing is fetched from a server to produce it, and
+    nothing about you is sent anywhere.</p>
+
+  <div class="stats" style="margin:30px 0 40px">
+    <div><div class="k">Platform</div><div class="v">iPhone, iOS 17</div></div>
+    <div><div class="k">To install</div><div class="v">Free</div></div>
+    <div><div class="k">One purchase</div><div class="v">9.99 EUR</div></div>
+    <div><div class="k">Languages</div><div class="v">Ten</div></div>
+  </div>
+  <!-- When the App Store record is live, paste the listing link here, for example:
+       <p><a class="cta" href="https://apps.apple.com/app/idXXXXXXXXXX">Download on the App Store</a></p>
+       Do not publish a link before the app id exists. -->
+
+  <figure>
+    <div class="panel">
+      <svg viewBox="0 0 720 460" role="img" aria-labelledby="skyT skyD" preserveAspectRatio="xMidYMid meet">
+        <title id="skyT">Altitude of the sun and the moon through one day at Berlin</title>
+        <desc id="skyD">A chart of altitude against local time for 23 August 2026. The sun
+          rises at 06:02, reaches 48.8 degrees at 13:09 and sets at 20:15. The moon rises
+          at 18:31. The background runs from deep blue at the top of the sky to amber at
+          the horizon.</desc>
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#101736"/>
+            <stop offset=".20" stop-color="#23214A"/>
+            <stop offset=".42" stop-color="#4A2B5A"/>
+            <stop offset=".64" stop-color="#8A4149"/>
+            <stop offset=".84" stop-color="#D4762C"/>
+            <stop offset="1" stop-color="#FFB020"/>
+          </linearGradient>
+          <radialGradient id="glow">
+            <stop offset="0" stop-color="#FFE3A8" stop-opacity=".9"/>
+            <stop offset=".45" stop-color="#FFB020" stop-opacity=".34"/>
+            <stop offset="1" stop-color="#FFB020" stop-opacity="0"/>
+          </radialGradient>
+          <clipPath id="plot"><rect x="0" y="0" width="720" height="430"/></clipPath>
+        </defs>
+
+        <rect width="720" height="460" fill="#070B18"/>
+        <rect width="720" height="330" fill="url(#sky)"/>
+        <rect x="0" y="300.5" width="720" height="49.1" fill="#FFB020" opacity=".14"/>
+
+        <g stroke="#FFFFFF" stroke-width="1" opacity=".12">
+          <line x1="124" y1="48" x2="124" y2="430"/>
+          <line x1="204" y1="48" x2="204" y2="430"/>
+          <line x1="284" y1="48" x2="284" y2="430"/>
+          <line x1="364" y1="48" x2="364" y2="430"/>
+          <line x1="444" y1="48" x2="444" y2="430"/>
+          <line x1="524" y1="48" x2="524" y2="430"/>
+          <line x1="604" y1="48" x2="604" y2="430"/>
+          <line x1="44" y1="109.1" x2="684" y2="109.1"/>
+          <line x1="44" y1="182.7" x2="684" y2="182.7"/>
+          <line x1="44" y1="256.4" x2="684" y2="256.4"/>
+        </g>
+
+        <g clip-path="url(#plot)" fill="none" stroke-linejoin="round" stroke-linecap="round">
+          <polyline points="44.0,326.2 49.3,331.6 54.7,337.3 60.0,343.2 65.3,349.4 70.7,355.8 76.0,362.5 81.3,369.3 86.7,376.3 92.0,383.5 97.3,390.9 102.7,398.5 108.0,406.2 113.3,414.0 118.7,421.9 124.0,430.0 129.3,438.2 134.7,446.5 140.0,454.8 145.3,463.2 150.7,471.7 156.0,480.3 161.3,488.9 166.7,497.5 172.0,506.1 177.3,514.7 182.7,523.3 188.0,531.9 193.3,540.4 198.7,548.9 204.0,557.3 209.3,565.6 214.7,573.7 220.0,581.7 225.3,589.5 230.7,597.1 236.0,604.3 241.3,611.3 246.7,617.9 252.0,624.0 257.3,629.7 262.7,634.8 268.0,639.3 273.3,640.0 278.7,640.0 284.0,640.0 289.3,640.0 294.7,640.0 300.0,640.0 305.3,640.0 310.7,640.0 316.0,640.0 321.3,638.2 326.7,633.5 332.0,628.3 337.3,622.5 342.7,616.2 348.0,609.5 353.3,602.4 358.7,595.0 364.0,587.4 369.3,579.5 374.7,571.4 380.0,563.2 385.3,554.8 390.7,546.4 396.0,537.8 401.3,529.2 406.7,520.6 412.0,511.9 417.3,503.2 422.7,494.5 428.0,485.8 433.3,477.2 438.7,468.6 444.0,460.0 449.3,451.5 454.7,443.1 460.0,434.7 465.3,426.5 470.7,418.4 476.0,410.3 481.3,402.4 486.7,394.6 492.0,387.0 497.3,379.6 502.7,372.3 508.0,365.1 513.3,358.2 518.7,351.5 524.0,345.0 529.3,338.7 534.7,332.7 540.0,326.9 545.3,321.4 550.7,316.2 556.0,311.2 561.3,306.6 566.7,302.3 572.0,298.3 577.3,294.6 582.7,291.3 588.0,288.3 593.3,285.7 598.7,283.5 604.0,281.6 609.3,280.1 614.7,279.1 620.0,278.4 625.3,278.1 630.7,278.2 636.0,278.7 641.3,279.6 646.7,280.9 652.0,282.5 657.3,284.6 662.7,287.0 668.0,289.8 673.3,293.0 678.7,296.5 684.0,300.4" stroke="#8FB8FF" stroke-width="2" opacity=".92"/>
+          <polyline points="44.0,449.0 49.3,451.6 54.7,453.8 60.0,455.5 65.3,456.6 70.7,457.3 76.0,457.4 81.3,457.1 86.7,456.2 92.0,454.8 97.3,453.0 102.7,450.6 108.0,447.8 113.3,444.5 118.7,440.7 124.0,436.5 129.3,432.0 134.7,427.0 140.0,421.6 145.3,415.9 150.7,409.9 156.0,403.5 161.3,396.9 166.7,390.0 172.0,382.8 177.3,375.4 182.7,367.8 188.0,360.0 193.3,352.0 198.7,343.8 204.0,335.5 209.3,327.1 214.7,318.5 220.0,309.9 225.3,301.1 230.7,292.3 236.0,283.4 241.3,274.5 246.7,265.6 252.0,256.6 257.3,247.7 262.7,238.8 268.0,229.9 273.3,221.0 278.7,212.3 284.0,203.6 289.3,195.0 294.7,186.6 300.0,178.3 305.3,170.2 310.7,162.3 316.0,154.6 321.3,147.2 326.7,140.1 332.0,133.3 337.3,126.9 342.7,120.9 348.0,115.3 353.3,110.1 358.7,105.5 364.0,101.5 369.3,98.0 374.7,95.1 380.0,92.9 385.3,91.3 390.7,90.5 396.0,90.3 401.3,90.9 406.7,92.1 412.0,94.0 417.3,96.6 422.7,99.8 428.0,103.6 433.3,107.9 438.7,112.8 444.0,118.2 449.3,124.0 454.7,130.3 460.0,136.9 465.3,143.9 470.7,151.2 476.0,158.7 481.3,166.6 486.7,174.6 492.0,182.8 497.3,191.2 502.7,199.7 508.0,208.3 513.3,217.1 518.7,225.9 524.0,234.8 529.3,243.7 534.7,252.7 540.0,261.6 545.3,270.6 550.7,279.6 556.0,288.5 561.3,297.3 566.7,306.2 572.0,314.9 577.3,323.5 582.7,332.1 588.0,340.5 593.3,348.7 598.7,356.8 604.0,364.8 609.3,372.5 614.7,380.1 620.0,387.4 625.3,394.5 630.7,401.3 636.0,407.8 641.3,414.1 646.7,420.0 652.0,425.6 657.3,430.8 662.7,435.6 668.0,440.0 673.3,444.0 678.7,447.6 684.0,450.7" stroke="#FFB020" stroke-width="2.6"/>
+        </g>
+
+        <rect x="0" y="330" width="720" height="100" fill="#070B18" opacity=".55"/>
+
+        <g stroke="#FFFFFF" stroke-width="1" opacity=".24" stroke-dasharray="2 5">
+          <line x1="44" y1="359.5" x2="684" y2="359.5"/>
+          <line x1="44" y1="388.9" x2="684" y2="388.9"/>
+          <line x1="44" y1="418.4" x2="684" y2="418.4"/>
+        </g>
+        <line x1="20" y1="330" x2="700" y2="330" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/>
+        <line x1="0" y1="430" x2="720" y2="430" stroke="#FFFFFF" stroke-width="1" opacity=".18"/>
+        <line x1="577.3" y1="70" x2="577.3" y2="430" stroke="#FFFFFF" stroke-width="1" opacity=".34" stroke-dasharray="3 4"/>
+
+        <circle cx="577.3" cy="294.6" r="8" fill="#8FB8FF"/>
+        <circle cx="577.3" cy="323.5" r="30" fill="url(#glow)"/>
+        <circle cx="577.3" cy="323.5" r="9" fill="#FFB020"/>
+
+        <g class="chrome">
+          <g stroke-linecap="round">
+            <line x1="60" y1="30" x2="84" y2="30" stroke="#FFB020" stroke-width="2.6"/>
+            <line x1="128" y1="30" x2="152" y2="30" stroke="#8FB8FF" stroke-width="2"/>
+          </g>
+          <rect x="212" y="23" width="14" height="14" fill="#FFB020" opacity=".34"/>
+          <g fill="#FFFFFF" opacity=".78">
+            <text x="90" y="34">Sun</text>
+            <text x="158" y="34">Moon</text>
+            <text x="234" y="34">Golden hour</text>
+            <text x="676" y="34" text-anchor="end">Berlin, 23 August 2026</text>
+            <text x="577.3" y="60" text-anchor="middle">20:00</text>
+          </g>
+          <g fill="#FFFFFF" opacity=".6" text-anchor="end">
+            <text x="36" y="113">45&#176;</text>
+            <text x="36" y="186.7">30&#176;</text>
+            <text x="36" y="260.4">15&#176;</text>
+            <text x="36" y="334">0&#176;</text>
+            <text x="36" y="363.5">-6&#176;</text>
+            <text x="36" y="392.9">-12&#176;</text>
+            <text x="36" y="422.4">-18&#176;</text>
+          </g>
+          <g fill="#FFFFFF" opacity=".6" text-anchor="middle">
+            <text x="44" y="449">00:00</text>
+            <text x="204" y="449">06:00</text>
+            <text x="364" y="449">12:00</text>
+            <text x="524" y="449">18:00</text>
+            <text x="684" y="449">24:00</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <figcaption>An example day, computed for Berlin on 23 August 2026. The amber
+      curve is the altitude of the sun through the local day, the blue curve is the
+      moon. The shaded band is golden hour, from six degrees above the horizon down
+      to four degrees below it. The dashed lines mark the civil, nautical and
+      astronomical twilight thresholds at six, twelve and eighteen degrees below
+      the horizon.</figcaption>
+  </figure>
+
+  <div class="readout">
+    <div><div class="k">Sun azimuth</div><div class="v num sun">286.9&#176;</div></div>
+    <div><div class="k">Sun altitude</div><div class="v num sun">1.3&#176;</div></div>
+    <div><div class="k">Next event</div><div class="v num">20:15 <small>sunset</small></div></div>
+    <div><div class="k">Moon</div><div class="v num moon">82% <small>waxing gibbous</small></div></div>
+  </div>
+
+  <div class="rail" style="margin-top:14px">
+    <div><div class="v num">03:43</div><div class="k">First light</div></div>
+    <div><div class="v num">05:39</div><div class="k">Golden hour</div></div>
+    <div><div class="v num">06:02</div><div class="k">Sunrise</div></div>
+    <div><div class="v num">13:09</div><div class="k">Solar noon</div></div>
+    <div><div class="v num">19:28</div><div class="k">Golden hour</div></div>
+    <div><div class="v num">20:15</div><div class="k">Sunset</div></div>
+    <div><div class="v num">22:33</div><div class="k">Last light</div></div>
+  </div>
+  <p class="small num" style="margin-top:14px">Day length 14 h 12 m 50 s, which is
+    3 m 51 s shorter than the day before.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Adaptive Sky</p>
+    <h2>The background is a readout, not decoration.</h2>
+    <p class="lead">Most sun apps put a photograph behind the numbers. Sunlit puts the
+      sky. The gradient is interpolated from the real altitude of the sun at the
+      moment and the place you have selected, so four in the morning does not look
+      like noon. Drag the time scrubber and the background moves with the figures.</p>
+  </div>
+
+  <div class="bands">
+    <div class="band"><div class="sw b1"></div><div class="bt">
+      <div class="deg num">Below -18&#176;</div>
+      <div class="desc">Deep night. The sun is far enough down that it adds no light to the sky.</div></div></div>
+    <div class="band"><div class="sw b2"></div><div class="bt">
+      <div class="deg num">-18&#176; to -6&#176;</div>
+      <div class="desc">Astronomical into nautical and civil twilight. Navy turning to violet.</div></div></div>
+    <div class="band"><div class="sw b3"></div><div class="bt">
+      <div class="deg num">-6&#176; to 0&#176;</div>
+      <div class="desc">Civil twilight, violet into rose. Blue hour sits inside this band.</div></div></div>
+    <div class="band"><div class="sw b4"></div><div class="bt">
+      <div class="deg num">0&#176; to +6&#176;</div>
+      <div class="desc">Golden, rose into amber. The half of golden hour that is above the horizon.</div></div></div>
+    <div class="band"><div class="sw b5"></div><div class="bt">
+      <div class="deg num">+6&#176; to +30&#176;</div>
+      <div class="desc">Morning into day, amber giving way to sky blue.</div></div></div>
+    <div class="band"><div class="sw b6"></div><div class="bt">
+      <div class="deg num">Above +30&#176;</div>
+      <div class="desc">Full day. A flat, bright blue that lets the instrument layer read.</div></div></div>
+  </div>
+
+  <p class="small" style="margin-top:18px;max-width:44em">Above the gradient there is one
+    instrument layer and nothing else: hairlines, tabular figures, no drop shadows and no
+    glass. Text is held to a contrast ratio of at least 4.5 to 1 against the darkest and
+    the lightest sky the gradient can produce.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Four views</p>
+    <h2>One place, one date, four ways of looking at it.</h2>
+    <p class="lead">A header carries the place and the date, and it governs everything.
+      Change either one and all four views follow.</p>
+  </div>
+
+  <div class="cards two-up">
+    <div class="card">
+      <svg class="glyph" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 28a14 14 0 0 1 28 0"/><path d="M3 28h34"/>
+        <circle cx="29.9" cy="18.1" r="3.4" fill="#FFB020" stroke="none"/>
+      </svg>
+      <h3>Sky</h3>
+      <p>The home screen. The arc of the day drawn across the adaptive gradient, with
+        the sun and the moon at their true positions on it. A time scrubber sits under
+        it; drag it and the whole screen moves through the day, background included.</p>
+      <ul>
+        <li>Azimuth, altitude, and the next event with a countdown</li>
+        <li>The clear sky UV and irradiance models for the moment</li>
+        <li>The day rail: first light, sunrise, golden hour, solar noon, golden hour, sunset, last light</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <svg class="glyph" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 13V9a3 3 0 0 1 3-3h4"/><path d="M27 6h4a3 3 0 0 1 3 3v4"/>
+        <path d="M34 27v4a3 3 0 0 1-3 3h-4"/><path d="M13 34H9a3 3 0 0 1-3-3v-4"/>
+        <path d="M9 26a11 11 0 0 1 22 0"/>
+        <circle cx="27.8" cy="18.2" r="3" fill="#FFB020" stroke="none"/>
+      </svg>
+      <h3>AR</h3>
+      <p>The live camera with the paths of the sun and the moon drawn over the world in
+        front of you, hour marks along each, and the summer solstice, winter solstice and
+        equinox paths as reference curves.</p>
+      <ul>
+        <li>A chip shows the current heading uncertainty in degrees and turns amber when the compass needs calibrating</li>
+        <li>The galactic plane of the Milky Way appears once the selected instant is dark enough</li>
+        <li>Sweep the camera along your skyline and Sunlit records it as a horizon profile</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <svg class="glyph" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M20 5c4.4 0 8 3.5 8 7.9 0 5.9-8 13.1-8 13.1S12 18.8 12 12.9C12 8.5 15.6 5 20 5z"/>
+        <circle cx="20" cy="12.9" r="2.8"/>
+        <path d="M21 28.5 33 34" stroke="#FFB020"/><path d="M19 28.5 7 33.4" stroke="#FFB020"/>
+      </svg>
+      <h3>Map</h3>
+      <p>The pin, and the directions that matter from it. Sunrise and sunset rays in the
+        sun accent, the moon rays in its own, and the path of the day laid over the
+        terrain you are standing on.</p>
+      <ul>
+        <li>A shadow projection for an object whose height you set</li>
+        <li>Tap anywhere to move the pin, and every other view follows</li>
+        <li>The coordinate of a dropped pin is exact with no connection</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <svg class="glyph" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 11h28"/><path d="M6 20h28"/><path d="M6 29h28"/>
+        <path d="M6 11h11" stroke="#FFB020" stroke-width="2.6"/>
+        <path d="M23 20h11" stroke="#8FB8FF" stroke-width="2.6"/>
+      </svg>
+      <h3>Data</h3>
+      <p>The tabulation, for people who want the numbers rather than the picture. All
+        three twilights, solar noon, day length and how much it has changed since
+        yesterday.</p>
+      <ul>
+        <li>The moon phase calendar, with rise and set</li>
+        <li>Upcoming solar and lunar eclipses, with visibility and obscuration at the selected place</li>
+        <li>The altitude curve across the whole year, and export to CSV and image</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">The core</p>
+    <h2>What it computes, and how well.</h2>
+    <p class="lead">Sunlit carries the ephemeris rather than calling one. The
+      astronomical core is plain Swift with no user interface and no network, which is
+      what makes it possible to check it against published reference values by the
+      thousand.</p>
+  </div>
+  <div class="tablewrap">
+    <table class="wide">
+      <thead><tr><th scope="col">Quantity</th><th scope="col">Method</th><th scope="col">Accuracy of the method</th></tr></thead>
+      <tbody>
+        <tr><td>Solar position</td><td>NREL Solar Position Algorithm, Reda and Andreas</td><td class="n num">0.0003 degrees</td></tr>
+        <tr><td>Delta T</td><td>Espenak and Meeus polynomial series</td><td class="n num">1 second, 1900 to 2100</td></tr>
+        <tr><td>Nutation</td><td>IAU 1980 series, 63 terms</td><td class="n num">0.001 arcsecond</td></tr>
+        <tr><td>Refraction</td><td>Bennett, corrected for pressure and temperature</td><td class="n num">0.1 arcminute above 5 degrees</td></tr>
+        <tr><td>Lunar position</td><td>Meeus chapter 47, truncated ELP-2000/82</td><td class="n num">10 arcseconds in longitude</td></tr>
+        <tr><td>Rise, set and twilight</td><td>Altitude sampled every 60 seconds, then bisected</td><td class="n num">Solved to 1 second</td></tr>
+        <tr><td>Eclipses</td><td>Topocentric separation of the two discs, with parallax</td><td class="n">Bounded by the lunar ephemeris</td></tr>
+        <tr><td>Milky Way</td><td>Sagittarius A star, precessed to the date</td><td class="n num">0.01 degrees</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small" style="margin-top:16px;max-width:44em">The core is held to reference
+    values from the NOAA solar calculator, the United States Naval Observatory, JPL
+    Horizons and the NASA eclipse canon, as fixtures that run before any build ships.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Honesty</p>
+    <h2>What Sunlit measures, and what it models.</h2>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <p><strong>UV and irradiance are clear sky models.</strong> They are not
+        measurements. Sunlit has no light sensor and no weather feed. The figures say
+        what a cloudless sky would deliver at that solar altitude, that elevation and
+        that time of year. Cloud, haze and dust are not in them, and they carry a model
+        label everywhere they appear.</p>
+    </div>
+    <div class="note moon">
+      <p><strong>The compass says how sure it is.</strong> Heading comes from device
+        attitude in the true north reference frame rather than a raw magnetic reading,
+        with magnetic declination from a model carried inside the app. The AR view shows
+        the current heading uncertainty in degrees at all times. A direction without an
+        uncertainty is a guess with a confident face.</p>
+    </div>
+    <div class="note way">
+      <p><strong>Polar day and polar night are said out loud.</strong> There are places
+        and dates where the sun does not rise, and places and dates where it does not
+        set. Sunlit reports that in words instead of printing a time that never
+        happens.</p>
+    </div>
+    <div class="note">
+      <p><strong>Your horizon is not flat.</strong> Sweep the camera along your skyline
+        and Sunlit stores it as 36 sectors of ten degrees, then works out sunrise and
+        sunset against that profile instead of against a flat horizon, and shows you the
+        difference between the two.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Places and dates</p>
+    <h2>Scout a place you have never stood in.</h2>
+  </div>
+  <div class="cards two-up">
+    <div class="card">
+      <h3>Search that works with no connection</h3>
+      <p>About 25,000 cities are carried inside the app with their coordinate, their
+        elevation and their time zone, so a text search resolves with the aeroplane mode
+        switch on. Where a connection is available, Sunlit can search Apple Maps as well.</p>
+      <p class="small">The embedded city list is derived from GeoNames and is used under
+        the Creative Commons Attribution 4.0 licence. The credit is repeated in the app
+        and on the <a href="/privacy.html#geonames">privacy page</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Or drop a pin anywhere</h3>
+      <p>Tap the map and the whole app moves to that coordinate. Offline the coordinate
+        is exact; the time zone of a bare coordinate needs a lookup, and if there is no
+        connection Sunlit tells you it has fallen back to the time zone of your device
+        rather than guessing quietly.</p>
+      <p class="small">Widgets and event notifications are computed locally too, and the
+        widget timelines refresh at event boundaries rather than on a fixed clock.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="pricing"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Price</p>
+    <h2>Today, where you are, is free forever.</h2>
+    <p class="lead">Not a trial and not a countdown. The free tier covers the current
+      location and the current date in all four views, permanently. One purchase opens
+      every other date, every other place, and the moon.</p>
+  </div>
+  <div class="cards two-up">
+    <div class="card tier">
+      <h3>Free</h3>
+      <p class="price">Today, at your current location, in all four views</p>
+      <ul>
+        <li>Sun position and compass</li>
+        <li>The path of the sun in AR</li>
+        <li>Sunrise and sunset</li>
+        <li>Civil, nautical and astronomical twilight</li>
+        <li>Golden hour and blue hour</li>
+        <li>Solar noon and day length</li>
+        <li>Shadow length</li>
+        <li>The clear sky UV and irradiance models for today</li>
+      </ul>
+    </div>
+    <div class="card tier pro">
+      <h3>Sunlit Pro <span class="tag">9.99 EUR</span></h3>
+      <p class="price">One payment. Not a subscription.</p>
+      <ul>
+        <li>Any date, past or future</li>
+        <li>Saved places beyond the current location</li>
+        <li>The moon: phase, path, rise, set and calendar</li>
+        <li>The Milky Way: galactic centre, galactic plane and visibility windows</li>
+        <li>Annual path overlays with the solstice and equinox curves</li>
+        <li>A measured horizon profile and obstruction periods</li>
+        <li>Eclipses with visibility and obscuration at your place</li>
+        <li>Widgets and event notifications</li>
+        <li>Export to CSV and image</li>
+      </ul>
+    </div>
+  </div>
+  <p class="small" style="margin-top:18px;max-width:44em">The App Store shows the price in
+    your own currency and collects the payment. Sunlit never sees your name, your address
+    or your payment details.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Privacy</p>
+    <h2>It collects nothing at all.</h2>
+    <p class="lead">No account, no sign up, no analytics, no advertising, no tracking and
+      no third party software development kits. Your saved places, your measured horizons
+      and your settings stay in the app's own storage on your iPhone. Location and camera
+      are used on the device and are never transmitted by Sunlit.</p>
+    <p><a href="/privacy.html">Read the full privacy policy</a></p>
+  </div>
+  <hr class="rule">
+  <div style="margin-top:36px">
+    <h3>Ten languages</h3>
+    <p class="small measure">Numbers, dates and units follow the conventions of the
+      language you are in, including the decimal separator and the choice between a 12
+      and a 24 hour clock.</p>
+    <ul class="langs">
+      <li>English</li><li>Deutsch</li><li>Fran&ccedil;ais</li><li>Italiano</li>
+      <li>Espa&ntilde;ol</li><li>Espa&ntilde;ol de M&eacute;xico</li><li>Nederlands</li>
+      <li>Polski</li><li>&#26085;&#26412;&#35486;</li><li>Portugu&ecirc;s do Brasil</li>
+    </ul>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="site-foot"><div class="wrap">
+  <span>Sunlit &middot; Levin David Schwab</span>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
+  </nav>
+</div></footer>
+</body>
+</html>
