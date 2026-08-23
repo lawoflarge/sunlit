@@ -35,28 +35,72 @@ DEVICE_CORNER = 68
 DEVICE_BORDER = 10
 
 
-def font(size, weight="Bold"):
-    """A system font at a real weight.
+# Fonts in preference order. The first one that can draw every character of the
+# string is used, which is decided per string rather than per language: a
+# Japanese poster may still contain "Sunlit" and "AR", and a Polish one contains
+# characters Helvetica happens to have while Japanese ones it does not.
+FONT_CANDIDATES = [
+    "/System/Library/Fonts/Helvetica.ttc",
+    "/System/Library/Fonts/Hiragino Sans GB.ttc",
+    "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+    "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+]
 
-    SF Pro is not readable by Pillow from its .ttc on every machine, so this
-    walks a short list and reports which one it used rather than silently
-    falling back to the bitmap default, which would make every poster look
-    broken in a way that is easy to miss at thumbnail size.
+_TOFU_CACHE = {}
+
+
+def _renders(font, character):
+    """Whether a font has a real glyph for a character.
+
+    U+FFFF is a permanent noncharacter, so whatever a font draws for it is that
+    font's missing-glyph box. A character that renders identically to it has no
+    glyph. This is done by rendering rather than by parsing the font, because it
+    needs no extra library and it measures the thing that actually reaches the
+    poster.
     """
-    candidates = [
-        f"/System/Library/Fonts/SFNS{'Display' if weight == 'Bold' else 'Text'}.ttf",
-        "/System/Library/Fonts/Helvetica.ttc",
-        "/Library/Fonts/Arial Unicode.ttf",
-        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
-    ]
-    for path in candidates:
-        if os.path.exists(path):
-            try:
-                return ImageFont.truetype(path, size)
-            except OSError:
-                continue
-    raise RuntimeError("no usable font found; posters would render in the "
-                       "bitmap default and look broken at thumbnail size")
+    key = (font.path, font.size)
+    if key not in _TOFU_CACHE:
+        image = Image.new("L", (96, 96), 0)
+        ImageDraw.Draw(image).text((8, 8), "\uFFFF", font=font, fill=255)
+        _TOFU_CACHE[key] = image.tobytes()
+    image = Image.new("L", (96, 96), 0)
+    ImageDraw.Draw(image).text((8, 8), character, font=font, fill=255)
+    return image.tobytes() != _TOFU_CACHE[key]
+
+
+def font(size, text=""):
+    """A font that can actually draw `text` at `size`.
+
+    This exists because the first version of this file picked Helvetica and the
+    Japanese posters came out as eight screens of empty rectangles. Helvetica
+    has none of the fourteen Japanese characters in the copy, and nothing in the
+    pipeline noticed: the images were the right size, the layout was right, and
+    the text was tofu. Nothing but looking at it, or this check, catches that.
+    """
+    needed = {c for c in text if not c.isspace()}
+    for path in FONT_CANDIDATES:
+        if not os.path.exists(path):
+            continue
+        try:
+            candidate = ImageFont.truetype(path, size)
+        except OSError:
+            continue
+        if all(_renders(candidate, c) for c in needed):
+            return candidate
+
+    missing_report = []
+    for path in FONT_CANDIDATES:
+        if not os.path.exists(path):
+            continue
+        try:
+            candidate = ImageFont.truetype(path, size)
+        except OSError:
+            continue
+        missing = [c for c in needed if not _renders(candidate, c)]
+        missing_report.append(f"{os.path.basename(path)} cannot draw {''.join(sorted(missing))}")
+    raise RuntimeError(
+        "no font on this machine can draw every character of "
+        f"{text!r}. Tried: " + "; ".join(missing_report))
 
 
 def gradient(height_fraction_top=0.0):
@@ -76,6 +120,22 @@ def gradient(height_fraction_top=0.0):
 
 
 def wrap(draw, text, typeface, max_width):
+    """Break a string into lines that fit.
+
+    Two strategies, because Japanese has no spaces. Breaking on whitespace turns
+    a Japanese headline into one unbreakable word that runs off the canvas,
+    which is exactly what the first version did: the text rendered, the image
+    was the right size, and half the sentence was outside the frame.
+
+    Japanese is broken between characters instead, which is what Japanese
+    typesetting does anyway. The only refinement is that a line may not START
+    with a character that is forbidden at the head of a line, the small kana and
+    the closing punctuation, which is the kinsoku rule a reader would notice
+    being broken.
+    """
+    if " " not in text.strip():
+        return _wrap_by_character(draw, text, typeface, max_width)
+
     words = text.split()
     lines, current = [], ""
     for word in words:
@@ -90,6 +150,28 @@ def wrap(draw, text, typeface, max_width):
     return lines
 
 
+# Characters that may not begin a line in Japanese typesetting.
+NO_LINE_START = "\u3001\u3002\uff0c\uff0e\uff09\u300d\u300f\u3041\u3043\u3045\u3047\u3049\u3063\u3083\u3085\u3087\u3093\u30a1\u30a3\u30a5\u30a7\u30a9\u30c3\u30e3\u30e5\u30e7\u30fc\u30f3"
+
+
+def _wrap_by_character(draw, text, typeface, max_width):
+    lines, current = [], ""
+    for character in text:
+        trial = current + character
+        if draw.textlength(trial, font=typeface) <= max_width or not current:
+            current = trial
+            continue
+        # Do not start the next line with a character that cannot begin one.
+        if character in NO_LINE_START:
+            current = trial
+            continue
+        lines.append(current)
+        current = character
+    if current:
+        lines.append(current)
+    return lines
+
+
 def headline_poster(shot_path, headline, subhead, out_path):
     """Shots one to three: headline above, device below."""
     image = gradient()
@@ -99,13 +181,15 @@ def headline_poster(shot_path, headline, subhead, out_path):
     # English overflows in German and Polish, which is the failure this loop
     # exists to prevent, and it is checked rather than hoped for.
     size = 104
-    while size > 54:
-        typeface = font(size)
-        lines = wrap(draw, headline, typeface, WIDTH - 2 * MARGIN)
-        if len(lines) <= 3:
+    available = WIDTH - 2 * MARGIN
+    while size > 40:
+        typeface = font(size, headline)
+        lines = wrap(draw, headline, typeface, available)
+        widest = max((draw.textlength(line, font=typeface) for line in lines), default=0)
+        if len(lines) <= 3 and widest <= available:
             break
         size -= 4
-    typeface = font(size)
+    typeface = font(size, headline)
     lines = wrap(draw, headline, typeface, WIDTH - 2 * MARGIN)
 
     y = HEADLINE_TOP
@@ -114,7 +198,7 @@ def headline_poster(shot_path, headline, subhead, out_path):
         y += int(size * 1.18)
 
     if subhead:
-        sub_face = font(46, "Regular")
+        sub_face = font(46, subhead)
         for line in wrap(draw, subhead, sub_face, WIDTH - 2 * MARGIN)[:2]:
             draw.text((MARGIN, y + 18), line, font=sub_face, fill=SUN)
             y += 58
@@ -153,7 +237,7 @@ def full_bleed_poster(shot_path, caption, out_path):
 
     if caption:
         draw = ImageDraw.Draw(image, "RGBA")
-        typeface = font(50)
+        typeface = font(50, caption)
         lines = wrap(draw, caption, typeface, WIDTH - 2 * MARGIN)[:2]
         block = len(lines) * 64 + 56
         # A scrim rather than a solid bar: the screenshot underneath is the point,
@@ -166,6 +250,25 @@ def full_bleed_poster(shot_path, caption, out_path):
 
     image.save(out_path, "PNG")
     return image.size
+
+
+def _text_overflows_margin(path, probe=8):
+    """Report rows where bright pixels sit inside the margin.
+
+    A last line of defence over the whole composition rather than over one
+    string: it catches a headline that ran off the canvas, a caption that was
+    measured with a different font from the one it was drawn with, and anything
+    else that puts ink where the margin should be. Only the top third is
+    examined, because the device frame legitimately fills the margin lower down.
+    """
+    image = Image.open(path).convert("L")
+    rows = []
+    for y in range(0, int(HEIGHT * 0.33), probe):
+        for x in list(range(0, 6)) + list(range(WIDTH - 6, WIDTH)):
+            if image.getpixel((x, y)) > 170:
+                rows.append(y)
+                break
+    return rows[:5]
 
 
 def main():
@@ -187,6 +290,11 @@ def main():
         else:
             size = full_bleed_poster(shot, entry.get("caption", ""), out)
         assert size == (WIDTH, HEIGHT), f"{out} is {size}, expected {(WIDTH, HEIGHT)}"
+        overflow = _text_overflows_margin(out)
+        if overflow:
+            print(f"  {index:02d}  {os.path.basename(out)}  TEXT REACHES THE EDGE at rows {overflow}",
+                  file=sys.stderr)
+            return 1
         print(f"  {index:02d}  {os.path.basename(out)}  {size[0]}x{size[1]}")
     return 0
 
