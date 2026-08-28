@@ -11,12 +11,24 @@ final class ProGate {
     /// Whether the non-consumable has been purchased.
     private(set) var isPurchased: Bool = false
 
+    /// Whether the first entitlement check has come back.
+    ///
+    /// `isPurchased` starts false, so until then a buyer looks exactly like a
+    /// free reader. For a locked feature that only meant a moment of a lock
+    /// symbol; for advertising it would mean the consent form on launch for
+    /// somebody who has paid. While this is false the app hands the ad kit
+    /// `nil` and the kit does nothing at all.
+    private(set) var hasSettled = false
+
     /// When frozen, the store's asynchronous entitlement refresh cannot change
     /// the answer. Used only by the screenshot harness.
     private var isFrozen = false
 
     /// Set by the store layer when entitlements change, and by tests.
     func setPurchased(_ purchased: Bool) {
+        // Before the freeze check on purpose: the answer has come back either
+        // way, and a frozen gate is one that already knows what it is.
+        hasSettled = true
         guard !isFrozen else { return }
         isPurchased = purchased
     }
@@ -26,6 +38,7 @@ final class ProGate {
         isFrozen = false
         isPurchased = purchased
         isFrozen = true
+        hasSettled = true
     }
 
     /// The one question every gated feature asks.

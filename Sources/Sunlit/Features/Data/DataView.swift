@@ -19,6 +19,7 @@ import SunlitCore
 struct DataView: View {
 
     @Environment(AppState.self) private var state
+    @Environment(AdsController.self) private var ads
 
     @State private var day: DataDay?
 
@@ -91,6 +92,14 @@ struct DataView: View {
                 .padding(.bottom, 44)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+
+            // The last element of the outer VStack, deliberately not inside the
+            // LazyVStack: every section in there starts its own search from its
+            // own task, and nothing may be moved in or out of a date dependent
+            // branch. Below the scroll view the banner takes scrolling room and
+            // covers no figure. The screen carries no pinned control, so there
+            // is nothing here for the banner to push under the fold.
+            AdBannerView(ads: ads)
         }
         .adaptiveSky(
             solarAltitude: altitude,

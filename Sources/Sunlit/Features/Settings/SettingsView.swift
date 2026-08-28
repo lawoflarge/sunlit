@@ -278,6 +278,7 @@ enum SunlitEventNotifications {
 struct SettingsView: View {
 
     @Environment(AppState.self) private var state
+    @Environment(AdsController.self) private var ads
     @Environment(\.openURL) private var openURL
     @Environment(\.displayScale) private var displayScale
 
@@ -347,6 +348,10 @@ struct SettingsView: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
         }
+        // A list of switches and links, no measured figure anywhere on it. The
+        // purchase button sits inside the scroll, so no text size can push it
+        // behind the banner.
+        .safeAreaInset(edge: .bottom) { AdBannerView(ads: ads) }
         .sunlitSheetSky(
             solarAltitude: altitude,
             moonIllumination: moment.moonPhase.illuminatedFraction)
@@ -752,7 +757,7 @@ struct SettingsView: View {
     private var purchaseFreeText: String {
         String(
             localized: "settings.purchase.free",
-            defaultValue: "Today at your current location is free forever, in all four views. One purchase adds every other date and place, the moon, the Milky Way, annual paths, a swept skyline, eclipses, widgets, notifications and export.",
+            defaultValue: "Today at your current location is free forever, in all four views, with advertising. One purchase removes the advertising and adds every other date and place, the moon, the Milky Way, annual paths, a swept skyline, eclipses, widgets, notifications and export.",
             comment: "States what the free tier covers and what the purchase adds")
     }
 
@@ -824,10 +829,31 @@ struct SettingsView: View {
 
             Text(String(
                 localized: "settings.offline",
-                defaultValue: "Every figure in Sunlit is computed on this device. Nothing about you is collected and nothing is sent. Every calculation works in aeroplane mode; only Apple's map tiles and the time zone of a newly dropped pin need a connection.",
-                comment: "States the offline and no data promise"))
+                defaultValue: "Every figure in Sunlit is computed on this device, and every calculation works in aeroplane mode. What needs a connection is Apple's map tiles, the time zone of a newly dropped pin, and the advertising the free version carries. Sunlit Pro removes the advertising; the astronomy never left your device either way.",
+                comment: "States the offline promise and what advertising changes about it"))
                 .font(SunlitType.caption)
                 .fixedSize(horizontal: false, vertical: true)
+
+            // Required by the GDPR once the consent form has asked for
+            // anything. Shown only when UMP says so, and never once the
+            // purchase has removed the advertising.
+            if ads.isPrivacyOptionsRequired {
+                Button {
+                    Task { await ads.showPrivacyOptionsForm() }
+                } label: {
+                    HStack(spacing: 8) {
+                        Text(adPrivacyTitle).font(SunlitType.body)
+                        Spacer(minLength: 8)
+                        Image(systemName: "chevron.right")
+                            .imageScale(.small)
+                            .accessibilityHidden(true)
+                    }
+                    .frame(minHeight: SunlitLayout.minimumTouchTarget)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(adPrivacyTitle))
+            }
 
             Text(versionText)
                 .font(SunlitType.caption)
@@ -838,6 +864,12 @@ struct SettingsView: View {
         String(localized: "settings.acknowledgements",
                defaultValue: "Data and methods",
                comment: "Link to the acknowledgements screen")
+    }
+
+    private var adPrivacyTitle: String {
+        String(localized: "settings.adPrivacy",
+               defaultValue: "Advertising privacy choices",
+               comment: "Opens the consent form again so the reader can change their advertising choices")
     }
 
     private func linkRow(title: String, url: URL?) -> some View {

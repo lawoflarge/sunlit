@@ -122,7 +122,7 @@ struct PaywallView: View {
                     comment: "Heading of the list of things that never cost money"),
                 note: String(
                     localized: "paywall.free.note",
-                    defaultValue: "No account, no advertising, nothing collected. This is not a trial and it does not expire.",
+                    defaultValue: "No account, and none of your figures are collected. The free tier is paid for by advertising, which the one purchase removes. This is not a trial and it does not expire.",
                     comment: "Caption under the free heading"))
 
             VStack(alignment: .leading, spacing: 14) {
@@ -198,7 +198,7 @@ struct PaywallView: View {
                 symbol: "checkmark",
                 title: String(
                     localized: "paywall.free.offline",
-                    defaultValue: "Every figure computed on your device, no account, no tracking",
+                    defaultValue: "Every figure computed on your device, and no account",
                     comment: "Free tier item")),
         ]
     }
@@ -216,6 +216,23 @@ struct PaywallView: View {
                     localized: "paywall.pro.note",
                     defaultValue: "Everything below works offline too.",
                     comment: "Caption under the paid heading"))
+
+            // Deliberately not a `ProCapability`: that list is what the gate
+            // unlocks, and removing the advertising is not a capability the
+            // gate can be asked about. It stands first because it is the one
+            // thing on this screen the reader can already see for themselves.
+            VStack(alignment: .leading, spacing: 16) {
+                PaywallFeatureRow(item: PaywallItem(
+                    symbol: "rectangle.slash",
+                    title: String(
+                        localized: "paywall.pro.noAds",
+                        defaultValue: "No advertising",
+                        comment: "Paid item: the purchase removes the advertising"),
+                    note: String(
+                        localized: "paywall.pro.noAds.note",
+                        defaultValue: "The free tier carries a banner on the data tab and in settings. Sunlit shows no full screen adverts anywhere, bought or not.",
+                        comment: "Says exactly where the advertising appears and what the purchase removes")))
+            }
 
             // Driven off the capability list itself, so this screen cannot
             // promise a capability the gate does not know about, and cannot

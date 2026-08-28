@@ -24577,61 +24577,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No account, no advertising, nothing collected. This is not a trial and it does not expire."
+            "value": "No account, and none of your figures are collected. The free tier is paid for by advertising, which the one purchase removes. This is not a trial and it does not expire."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kein Konto, keine Werbung, nichts wird erfasst. Das ist keine Testphase und läuft nicht ab."
+            "value": "Kein Konto, und keine deiner Zahlen wird erfasst. Die kostenlose Fassung finanziert sich über Werbung, und der einmalige Kauf nimmt sie weg. Das ist keine Testphase und läuft nicht ab."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pas de compte, pas de publicité, rien de collecté. Ce n’est pas un essai et cela n’expire pas."
+            "value": "Pas de compte, et aucune de tes valeurs n'est collectée. La version gratuite est financée par la publicité, que l'achat unique retire. Ce n'est pas un essai et cela n'expire pas."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nessun account, nessuna pubblicità, nessun dato raccolto. Non è una prova e non scade."
+            "value": "Nessun account, e nessuno dei tuoi valori viene raccolto. La versione gratuita è finanziata dalla pubblicità, che l'acquisto unico rimuove. Non è una prova e non scade."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin cuenta, sin publicidad, sin recopilar nada. Esto no es una prueba y no caduca."
+            "value": "Sin cuenta, y no se recoge ninguno de tus datos. La versión gratuita se financia con publicidad, y la compra única la quita. No es una prueba y no caduca."
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin cuenta, sin publicidad, sin nada recolectado. No es una prueba y no expira."
+            "value": "Sin cuenta, y no se recoge ninguno de tus datos. La versión gratuita se financia con publicidad, y la compra única la quita. No es una prueba y no caduca."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geen account, geen advertenties, niets verzameld. Dit is geen proefversie en het verloopt niet."
+            "value": "Geen account, en geen van je waarden wordt verzameld. De gratis versie wordt betaald door advertenties, die de eenmalige aankoop weghaalt. Dit is geen proefversie en verloopt niet."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bez konta, bez reklam, bez zbierania danych. To nie jest wersja próbna i nie wygasa."
+            "value": "Bez konta, żadna z twoich wartości nie jest zbierana. Darmowa wersja utrzymuje się z reklam, które jednorazowy zakup usuwa. To nie jest okres próbny i nie wygasa."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "アカウント不要、広告なし、収集なし。試用版ではなく、期限もありません。"
+            "value": "アカウントなし、数値も一切収集しない。無料版は広告でまかなわれていて、買い切りの購入がそれを取り除く。試用版ではなく、期限もない。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem conta, sem publicidade, nada coletado. Isto não é um teste e não expira."
+            "value": "Sem conta, e nenhum dos seus valores é coletado. A versão gratuita é paga por anúncios, que a compra única remove. Não é um teste e não expira."
           }
         }
       }
@@ -24642,61 +24642,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every figure computed on your device, no account, no tracking"
+            "value": "Every figure computed on your device, and no account"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Wert auf dem Gerät berechnet, kein Konto, kein Tracking"
+            "value": "Jede Zahl auf deinem Gerät berechnet, und kein Konto"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque valeur calculée sur votre appareil, sans compte, sans suivi"
+            "value": "Chaque valeur calculée sur ton appareil, et pas de compte"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni valore calcolato sul tuo dispositivo, nessun account, nessun tracciamento"
+            "value": "Ogni valore calcolato sul tuo dispositivo, e nessun account"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todas las cifras calculadas en tu dispositivo, sin cuenta y sin seguimiento"
+            "value": "Cada dato calculado en tu dispositivo, y sin cuenta"
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada cifra calculada en tu dispositivo, sin cuenta, sin rastreo"
+            "value": "Cada dato calculado en tu dispositivo, y sin cuenta"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elk cijfer op je toestel berekend, geen account, geen tracking"
+            "value": "Elk getal op je toestel berekend, en geen account"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Każda wartość obliczana na twoim urządzeniu, bez konta, bez śledzenia"
+            "value": "Każda wartość obliczona na twoim urządzeniu, bez konta"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "すべての数値を端末上で計算、アカウント不要、追跡なし"
+            "value": "すべての数値を端末上で計算、アカウントなし"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todos os valores calculados no seu dispositivo, sem conta, sem rastreamento"
+            "value": "Cada valor calculado no seu aparelho, e sem conta"
           }
         }
       }
@@ -25867,6 +25867,136 @@
           "stringUnit": {
             "state": "translated",
             "value": "O que a compra adiciona"
+          }
+        }
+      }
+    },
+    "paywall.pro.noAds": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No advertising"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Werbung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune publicité"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna pubblicità"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin publicidad"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin publicidad"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen advertenties"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez reklam"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "広告なし"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem anúncios"
+          }
+        }
+      }
+    },
+    "paywall.pro.noAds.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The free tier carries a banner on the data tab and in settings. Sunlit shows no full screen adverts anywhere, bought or not."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die kostenlose Fassung zeigt ein Banner auf dem Daten-Reiter und in den Einstellungen. Vollbildanzeigen gibt es in Sunlit nirgends, gekauft oder nicht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La version gratuite affiche une bannière dans l'onglet Données et dans les réglages. Sunlit n'affiche aucune publicité plein écran, achetée ou non."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versione gratuita mostra un banner nella scheda Dati e nelle impostazioni. Sunlit non mostra pubblicità a schermo intero da nessuna parte, acquistata o meno."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versión gratuita muestra un banner en la pestaña Datos y en los ajustes. Sunlit no muestra anuncios a pantalla completa en ningún sitio, se compre o no."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versión gratuita muestra un banner en la pestaña Datos y en los ajustes. Sunlit no muestra anuncios a pantalla completa en ninguna parte, se compre o no."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De gratis versie toont een banner op het tabblad Gegevens en in de instellingen. Sunlit toont nergens advertenties op volledig scherm, gekocht of niet."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W darmowej wersji baner pojawia się na karcie Dane i w ustawieniach. Sunlit nigdzie nie pokazuje reklam pełnoekranowych, kupionych czy nie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無料版ではデータタブと設定にバナーが出る。Sunlit は購入の有無にかかわらず、どこにも全画面広告を出さない。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A versão gratuita mostra um banner na aba Dados e nos ajustes. O Sunlit não mostra anúncios em tela cheia em lugar nenhum, comprado ou não."
           }
         }
       }
@@ -27756,6 +27886,71 @@
         }
       }
     },
+    "settings.adPrivacy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advertising privacy choices"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenschutzeinstellungen für Werbung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choix de confidentialité publicitaire"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferenze privacy per la pubblicità"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opciones de privacidad de la publicidad"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opciones de privacidad de la publicidad"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacyvoorkeuren voor advertenties"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia prywatności reklam"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "広告のプライバシー設定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opções de privacidade dos anúncios"
+          }
+        }
+      }
+    },
     "settings.horizon": {
       "extractionState": "manual",
       "localizations": {
@@ -28737,61 +28932,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every figure in Sunlit is computed on this device. Nothing about you is collected and nothing is sent. Every calculation works in aeroplane mode; only Apple's map tiles and the time zone of a newly dropped pin need a connection."
+            "value": "Every figure in Sunlit is computed on this device, and every calculation works in aeroplane mode. What needs a connection is Apple's map tiles, the time zone of a newly dropped pin, and the advertising the free version carries. Sunlit Pro removes the advertising; the astronomy never left your device either way."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Wert in Sunlit wird auf diesem Gerät berechnet. Nichts über die eigene Person wird erfasst und nichts gesendet. Jede Berechnung funktioniert im Flugmodus, nur die Kartenkacheln von Apple und die Zeitzone einer neu gesetzten Markierung brauchen eine Verbindung."
+            "value": "Jede Zahl in Sunlit wird auf diesem Gerät berechnet, und jede Rechnung funktioniert im Flugmodus. Eine Verbindung brauchen Apples Kartenkacheln, die Zeitzone eines neu gesetzten Pins und die Werbung der kostenlosen Fassung. Sunlit Pro nimmt die Werbung weg; die Astronomie hat dein Gerät ohnehin nie verlassen."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque valeur de Sunlit est calculée sur cet appareil. Rien vous concernant n’est collecté et rien n’est envoyé. Tous les calculs fonctionnent en mode avion ; seules les tuiles de carte d’Apple et le fuseau horaire d’un repère tout juste déposé demandent une connexion."
+            "value": "Chaque valeur de Sunlit est calculée sur cet appareil, et chaque calcul fonctionne en mode avion. Ce qui demande une connexion : les tuiles de carte d'Apple, le fuseau horaire d'une épingle qui vient d'être posée, et la publicité de la version gratuite. Sunlit Pro retire la publicité ; l'astronomie n'a de toute façon jamais quitté ton appareil."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni valore di Sunlit è calcolato su questo dispositivo. Non viene raccolto né inviato nulla che ti riguardi. Ogni calcolo funziona in modalità aereo: solo le tessere della mappa di Apple e il fuso orario di un segnaposto appena messo hanno bisogno di una connessione."
+            "value": "Ogni valore in Sunlit è calcolato su questo dispositivo, e ogni calcolo funziona in modalità aereo. Servono una connessione le mappe di Apple, il fuso orario di uno spillo appena posato e la pubblicità della versione gratuita. Sunlit Pro rimuove la pubblicità; l'astronomia non ha comunque mai lasciato il tuo dispositivo."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todas las cifras de Sunlit se calculan en este dispositivo. No se recopila nada sobre ti y no se envía nada. Todos los cálculos funcionan en modo avión; solo los mosaicos del mapa de Apple y la zona horaria de un marcador recién soltado necesitan conexión."
+            "value": "Cada dato de Sunlit se calcula en este dispositivo, y todos los cálculos funcionan en modo avión. Necesitan conexión los mapas de Apple, la zona horaria de un pin recién puesto y la publicidad de la versión gratuita. Sunlit Pro quita la publicidad; la astronomía nunca salió de tu dispositivo de todos modos."
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada cifra de Sunlit se calcula en este dispositivo. No se recolecta nada sobre ti y no se envía nada. Todos los cálculos funcionan en modo avión; solo las teselas del mapa de Apple y la zona horaria de un pin recién colocado necesitan conexión."
+            "value": "Cada dato de Sunlit se calcula en este dispositivo, y todos los cálculos funcionan en modo avión. Necesitan conexión los mapas de Apple, la zona horaria de un pin recién puesto y la publicidad de la versión gratuita. Sunlit Pro quita la publicidad; la astronomía nunca salió de tu dispositivo de todos modos."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elk cijfer in Sunlit wordt op dit toestel berekend. Er wordt niets over jou verzameld en niets verstuurd. Elke berekening werkt in vliegtuigmodus; alleen de kaarttegels van Apple en de tijdzone van een pas geplaatste speld hebben een verbinding nodig."
+            "value": "Elk getal in Sunlit wordt op dit toestel berekend, en elke berekening werkt in vliegtuigmodus. Een verbinding hebben de kaarttegels van Apple nodig, de tijdzone van een net geplaatste speld, en de advertenties van de gratis versie. Sunlit Pro haalt de advertenties weg; de astronomie verliet je toestel sowieso nooit."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Każda wartość w Sunlit jest obliczana na tym urządzeniu. Nic o tobie nie jest zbierane i nic nie jest wysyłane. Wszystkie obliczenia działają w trybie samolotowym, a połączenia wymagają tylko kafelki mapy od Apple i strefa czasowa nowo postawionej pinezki."
+            "value": "Każda wartość w Sunlit jest liczona na tym urządzeniu, a każde obliczenie działa w trybie samolotowym. Połączenia wymagają kafelki map Apple, strefa czasowa świeżo postawionej pinezki i reklamy w darmowej wersji. Sunlit Pro usuwa reklamy; astronomia i tak nigdy nie opuściła twojego urządzenia."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sunlit のすべての数値はこの端末上で計算されます。あなたに関する情報は収集も送信もされません。計算はすべて機内モードでも動きます。接続が必要なのは Apple の地図タイルと、新しく置いたピンのタイムゾーンだけです。"
+            "value": "Sunlit の数値はすべてこの端末で計算され、どの計算も機内モードで動く。通信が必要なのは Apple の地図タイル、新しく置いたピンのタイムゾーン、そして無料版の広告。Sunlit Pro は広告を取り除く。天文計算はもともと端末から出ていない。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todos os valores do Sunlit são calculados neste dispositivo. Nada sobre você é coletado e nada é enviado. Todo cálculo funciona em modo avião; só os blocos de mapa da Apple e o fuso horário de um marcador recém-solto precisam de conexão."
+            "value": "Cada valor do Sunlit é calculado neste aparelho, e todo cálculo funciona em modo avião. Precisam de conexão os blocos de mapa da Apple, o fuso horário de um alfinete recém-colocado e os anúncios da versão gratuita. O Sunlit Pro remove os anúncios; a astronomia nunca saiu do seu aparelho de qualquer forma."
           }
         }
       }
@@ -28997,61 +29192,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Today at your current location is free forever, in all four views. One purchase adds every other date and place, the moon, the Milky Way, annual paths, a swept skyline, eclipses, widgets, notifications and export."
+            "value": "Today at your current location is free forever, in all four views, with advertising. One purchase removes the advertising and adds every other date and place, the moon, the Milky Way, annual paths, a swept skyline, eclipses, widgets, notifications and export."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Heute am aktuellen Standort ist für immer gratis, in allen vier Ansichten. Ein Kauf ergänzt jedes andere Datum und jeden anderen Ort, den Mond, die Milchstraße, die Jahresbahnen, ein aufgenommenes Horizontprofil, Finsternisse, Widgets, Mitteilungen und den Export."
+            "value": "Heute an deinem aktuellen Ort ist für immer kostenlos, in allen vier Ansichten, mit Werbung. Ein Kauf nimmt die Werbung weg und bringt jedes andere Datum und jeden anderen Ort, den Mond, die Milchstraße, Jahresbahnen, eine abgetastete Skyline, Finsternisse, Widgets, Mitteilungen und den Export."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aujourd’hui à votre position actuelle est gratuit pour toujours, dans les quatre vues. Un seul achat ajoute toutes les autres dates et tous les autres lieux, la Lune, la Voie lactée, les courses annuelles, une ligne d’horizon balayée, les éclipses, les widgets, les notifications et l’exportation."
+            "value": "Aujourd'hui à ta position actuelle est gratuit pour toujours, dans les quatre vues, avec de la publicité. Un achat retire la publicité et ajoute toutes les autres dates et tous les autres lieux, la lune, la Voie lactée, les trajectoires annuelles, un horizon relevé, les éclipses, les widgets, les notifications et l'export."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Oggi nella tua posizione attuale è gratis per sempre, in tutte e quattro le viste. Un unico acquisto aggiunge ogni altra data e ogni altro luogo, la Luna, la Via Lattea, i percorsi annuali, un profilo scansionato, le eclissi, i widget, le notifiche e l'esportazione."
+            "value": "Oggi nella tua posizione attuale è gratis per sempre, in tutte e quattro le viste, con pubblicità. Un acquisto rimuove la pubblicità e aggiunge ogni altra data e ogni altro luogo, la luna, la Via Lattea, i percorsi annuali, uno skyline rilevato, le eclissi, i widget, le notifiche e l'esportazione."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hoy en tu ubicación actual es gratis para siempre, en las cuatro vistas. Una compra añade todas las demás fechas y lugares, la luna, la Vía Láctea, las trayectorias anuales, un perfil barrido, los eclipses, los widgets, los avisos y la exportación."
+            "value": "Hoy en tu ubicación actual es gratis para siempre, en las cuatro vistas, con publicidad. Una compra quita la publicidad y añade cualquier otra fecha y lugar, la luna, la Vía Láctea, las trayectorias anuales, un horizonte trazado, los eclipses, los widgets, las notificaciones y la exportación."
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hoy en tu ubicación actual es gratis para siempre, en las cuatro vistas. Una compra agrega todas las demás fechas y lugares, la luna, la Vía Láctea, las trayectorias anuales, un perfil del horizonte barrido, los eclipses, los widgets, las notificaciones y la exportación."
+            "value": "Hoy en tu ubicación actual es gratis para siempre, en las cuatro vistas, con publicidad. Una compra quita la publicidad y añade cualquier otra fecha y lugar, la luna, la Vía Láctea, las trayectorias anuales, un horizonte trazado, los eclipses, los widgets, las notificaciones y la exportación."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vandaag op je huidige locatie is voor altijd gratis, in alle vier de weergaven. Eén aankoop voegt elke andere datum en plaats toe, de maan, de Melkweg, jaarbanen, een gescand horizonprofiel, verduisteringen, widgets, meldingen en export."
+            "value": "Vandaag op je huidige locatie is voor altijd gratis, in alle vier de weergaven, met advertenties. Eén aankoop haalt de advertenties weg en voegt elke andere datum en plaats toe, de maan, de Melkweg, jaarbanen, een ingemeten skyline, eclipsen, widgets, meldingen en export."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dzisiejszy dzień w bieżącej lokalizacji jest darmowy na zawsze, we wszystkich czterech widokach. Jeden zakup dodaje każdą inną datę i miejsce, Księżyc, Drogę Mleczną, roczne drogi Słońca, zeskanowaną linię horyzontu, zaćmienia, widżety, powiadomienia i eksport."
+            "value": "Dziś w twojej obecnej lokalizacji jest za darmo na zawsze, we wszystkich czterech widokach, z reklamami. Zakup usuwa reklamy i dodaje każdą inną datę i miejsce, księżyc, Drogę Mleczną, roczne trajektorie, zmierzoną panoramę, zaćmienia, widżety, powiadomienia i eksport."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "現在地の今日は、4つのビューすべてで永久に無料です。1回の購入で、他のすべての日付と地点、月、天の川、年間の軌道、走査した稜線、日食と月食、ウィジェット、通知、書き出しが加わります。"
+            "value": "現在地の今日は、4つの画面すべてで永久に無料。ただし広告が付く。購入すると広告が消え、ほかのすべての日付と場所、月、天の川、年間の軌道、実測したスカイライン、日食と月食、ウィジェット、通知、書き出しが加わる。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hoje na sua localização atual é grátis para sempre, nas quatro visualizações. Uma compra adiciona todas as outras datas e locais, a lua, a Via Láctea, as trajetórias anuais, um perfil varrido, os eclipses, os widgets, as notificações e a exportação."
+            "value": "Hoje na sua localização atual é grátis para sempre, nas quatro telas, com anúncios. Uma compra remove os anúncios e adiciona qualquer outra data e lugar, a lua, a Via Láctea, as trajetórias anuais, um horizonte medido, eclipses, widgets, notificações e exportação."
           }
         }
       }

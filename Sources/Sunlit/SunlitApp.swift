@@ -11,6 +11,7 @@ struct SunlitApp: App {
     @State private var heading = HeadingProvider()
     /// Set when a widget tap arrives on sunlit://paywall.
     @State private var showingPaywall = false
+    @State private var ads = AdsController(configuration: .sunlit)
 
     init() {
         // A real place rather than a null island, so the first frame is useful
@@ -32,6 +33,10 @@ struct SunlitApp: App {
                 .environment(store)
                 .environment(location)
                 .environment(heading)
+                // `hasSettled` and not the bare `isPurchased`: until the first
+                // entitlement check is back, a buyer is indistinguishable from
+                // a free reader, and nil holds the whole ad stack until then.
+                .adKit(ads, isPremium: adsPremiumState)
                 .preferredColorScheme(.dark)
                 .task {
                     // The transaction listener has to be running before any
@@ -59,4 +64,13 @@ struct SunlitApp: App {
         }
     }
 
+    /// `nil` until the entitlement is known, so a buyer never meets the consent
+    /// form on launch. A poster run counts as bought whether or not it grants
+    /// Pro: a Google test banner in a store screenshot makes the shot useless.
+    private var adsPremiumState: Bool? {
+        #if DEBUG
+        if CaptureHarness.configuration() != nil { return true }
+        #endif
+        return state.pro.hasSettled ? state.pro.isPurchased : nil
+    }
 }

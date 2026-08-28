@@ -21,6 +21,26 @@ settings:
     SWIFT_STRICT_CONCURRENCY: minimal
     SWIFT_EMIT_LOC_STRINGS: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+# The advertising SDK. It forces the App Privacy declaration in App Store
+# Connect off "Data Not Collected" and onto a full tracking disclosure, with
+# the first build that carries it.
+#
+# Two packages, not one: the ads package pulls the consent package in itself,
+# but `import UserMessagingPlatform` needs the product as a target dependency.
+# The SPM product is called GoogleUserMessagingPlatform, the Swift module
+# UserMessagingPlatform.
+#
+# Only the Sunlit target depends on these. Never SunlitWidgets, and never
+# SunlitCore, which the widget extension links: a dependency added there would
+# pull an advertising framework into a lock screen widget. Checked with
+# `otool -L` on the built .appex, not assumed.
+packages:
+  GoogleMobileAds:
+    url: https://github.com/googleads/swift-package-manager-google-mobile-ads
+    from: "13.0.0"
+  GoogleUserMessagingPlatform:
+    url: https://github.com/googleads/swift-package-manager-google-user-messaging-platform
+    from: "3.0.0"
 targets:
   Sunlit:
     type: application
@@ -56,9 +76,17 @@ targets:
       # a resource that arrives by accident can leave the same way.
       - path: Sources/Sunlit/Resources/Localizable.xcstrings
         buildPhase: resources
+      # The Info.plist string catalogue, which carries the tracking permission
+      # text in the same ten languages. Named for the same reason.
+      - path: Sources/Sunlit/Resources/InfoPlist.xcstrings
+        buildPhase: resources
     dependencies:
       - target: SunlitCore
       - target: SunlitWidgets
+      - package: GoogleMobileAds
+        product: GoogleMobileAds
+      - package: GoogleUserMessagingPlatform
+        product: GoogleUserMessagingPlatform
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.levinschwab.sunlit

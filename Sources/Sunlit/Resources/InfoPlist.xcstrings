@@ -1,0 +1,72 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSUserTrackingUsageDescription": {
+      "comment": "The ATT dialogue text. App Review reads it. It has to say what the reader gets from saying yes, and that saying no takes nothing away.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit can show advertising that fits you instead of advertising picked at random. Say no and nothing about the app changes: every figure, every view and your location stay exactly as they are."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit kann dir Werbung zeigen, die zu dir passt, statt zufällig ausgewählter. Sag nein, und an der App ändert sich nichts: jede Zahl, jede Ansicht und dein Standort bleiben genau so."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit peut afficher des publicités qui te correspondent plutôt que des publicités prises au hasard. Refuse, et rien ne change dans l'app : chaque valeur, chaque vue et ta position restent identiques."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit può mostrarti pubblicità in linea con i tuoi interessi invece che scelte a caso. Rifiuta, e nell'app non cambia nulla: ogni valore, ogni vista e la tua posizione restano identici."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit puede mostrarte publicidad que encaja contigo en vez de publicidad elegida al azar. Di que no y en la app no cambia nada: cada dato, cada vista y tu ubicación siguen igual."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit puede mostrarte publicidad que encaja contigo en vez de publicidad elegida al azar. Di que no y en la app no cambia nada: cada dato, cada vista y tu ubicación siguen igual."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit kan advertenties tonen die bij je passen in plaats van willekeurig gekozen advertenties. Zeg nee en er verandert niets aan de app: elk getal, elke weergave en je locatie blijven precies hetzelfde."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit może pokazywać reklamy dopasowane do ciebie zamiast wybranych losowo. Odmów, a w aplikacji nic się nie zmieni: każda wartość, każdy widok i twoja lokalizacja zostają bez zmian."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunlit は、無作為に選ばれた広告ではなく、あなたに合った広告を表示できる。断ってもアプリは何も変わらない。すべての数値、すべての画面、現在地はそのまま。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Sunlit pode mostrar anúncios que combinam com você em vez de anúncios escolhidos ao acaso. Diga não e nada no app muda: cada valor, cada tela e sua localização continuam iguais."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
