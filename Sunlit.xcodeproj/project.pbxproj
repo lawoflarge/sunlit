@@ -10,11 +10,14 @@
 		0027441B33C2EC3FD7A9A31B /* CoreReachabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AC8883BBE3B72D0C4439F /* CoreReachabilityTests.swift */; };
 		0038022101E8D1876DC1C568 /* SkyMoment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DD80BFBA548D8D34C03A5 /* SkyMoment.swift */; };
 		01A4EDAF88E04647447CE7A8 /* HorizonProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12DE1EDACBAB9C9B2236F57 /* HorizonProfile.swift */; };
+		03B7CE5165E3B6E53BC63988 /* AdConfiguration+Sunlit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8EB8C2B21BF2A32DFE54B5 /* AdConfiguration+Sunlit.swift */; };
 		03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */; };
+		05003B7634BBAC21733E75F4 /* AdConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEE48BC0B058861CF63254A /* AdConfiguration.swift */; };
 		08BC43FA0BDB3696C1E9F551 /* SunlitCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AB684653FE3A89417032624 /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7116B4785F8E33B45AE3D6 /* PurchaseButton.swift */; };
 		0F2A8472CFBE144837E578D1 /* DesignPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AEF0CF6C2D3DF31812725D /* DesignPreview.swift */; };
 		14F54E54C878AFC6F400099D /* SolarPositionSPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A1201581333BE76B3050C5 /* SolarPositionSPA.swift */; };
+		16C5E417EC08E48DC3064AE5 /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E39558D34989055F92219E /* InterstitialAdManager.swift */; };
 		1A0204902F67543BC5043140 /* DayArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436A7B11A256AC713B235A4 /* DayArc.swift */; };
 		1A62CDD5E816941E1E9A832D /* TwilightTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86509F74C9662EDDFDCCEF /* TwilightTable.swift */; };
 		1B95AFD93565C003648FB6F7 /* PlacePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F1A0A752041CC95916FD28 /* PlacePickerView.swift */; };
@@ -25,6 +28,7 @@
 		2BD4A45A79768C4D6AEA75BA /* SkyOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876889284EB815C0FF0C87BF /* SkyOverlay.swift */; };
 		35C65B69929F0570EEE9A4AC /* MoonTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194299370B1232B5766EFD2 /* MoonTables.swift */; };
 		366213731D628048BAB54C30 /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
+		38DD70C80A597F89C33845E9 /* AdsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478093BE8E1C630B889BDE2A /* AdsController.swift */; };
 		395AA980F2C9ABD3342F3B93 /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FC459345CF1BF0A76A8E4 /* WidgetProvider.swift */; };
 		486E2C2B770BE5E88F2AB730 /* SkyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B15DA6C6387D9A51967019D /* SkyColors.swift */; };
 		496B62BBE370F71192AC1900 /* NextEventWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200617E35936F1959B9BD5F3 /* NextEventWidget.swift */; };
@@ -36,6 +40,7 @@
 		5728222F238A450665EDC0D2 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6340D80C28D2F0BCF31144 /* LocationProvider.swift */; };
 		59031773DA6EFFA456CB1C42 /* Twilight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A68CAD665AE29A713880A /* Twilight.swift */; };
 		5A0D0F3A7239095C1025BFC0 /* SavedPlacesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4279BE4A901621EEE93E2D85 /* SavedPlacesStore.swift */; };
+		5EF72E5CC4600CB33588B2D4 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4FCBE3B1295A709ADC27DB /* AdBannerView.swift */; };
 		60AFB7B8C3BFF833FD856964 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794DB501BC051218FBC0D12 /* CameraPreview.swift */; };
 		63E7F330F2B91E1F2306BE58 /* SkyPaletteContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBC17A651A7EF90AB366BE /* SkyPaletteContrastTests.swift */; };
 		6765ED59389C3ED1F4574F28 /* DatePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D835582A71FECE0C0B354D /* DatePickerSheet.swift */; };
@@ -43,6 +48,7 @@
 		69ED9BC56004334B25D0F6B6 /* AnnualCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F7ACAE1189EC2DFC4F428 /* AnnualCurve.swift */; };
 		6B28AA5BE49889C624697EAC /* Irradiance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34256D28C1D38C65A64F652 /* Irradiance.swift */; };
 		6CCFF6D50FF31AEA8ABC38B1 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E004930F84ADD967123D99D /* Place.swift */; };
+		6EAC3414B775AA6F6920F18A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B4027781DBCFED5ECC2A9E10 /* InfoPlist.xcstrings */; };
 		73C8550D46648BFC2D0CA8ED /* SunlitWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7E324B87F0B9EF852F5850EC /* SunlitWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7B0E4B9A6E4885367EB13B86 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A2B0D16AD133F0935BA10 /* PaywallView.swift */; };
 		7B4C3FA35D2FC36F0E43FA90 /* SkyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63759296B476792D9111CF8 /* SkyView.swift */; };
@@ -50,6 +56,7 @@
 		7DA772F5BB01149C754598E2 /* Nutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DBA9780B0FFCDBF2F3C785 /* Nutation.swift */; };
 		7E52A8567E41F93294E66CAB /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F8C9C1CB85CDE74BB48DC /* Angle.swift */; };
 		7E7A273532DEA2A1DB380AE9 /* SolarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B7B1AF71EC183D8DA31AA1 /* SolarDay.swift */; };
+		7ECE5EF99E564A1E79406CA7 /* AdConsentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B56925EA079ECE65372AEF /* AdConsentCoordinator.swift */; };
 		7F1DBD586F8AF42985382788 /* EventRail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC667D9A3AECE1C7F031E3D5 /* EventRail.swift */; };
 		84AF9502F7CC27F1E0687C89 /* DayArcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77F612EAC5194C02755A13C /* DayArcWidget.swift */; };
 		868B76C7338A84B1CBA05398 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F224EB00700AFD5B1E87F4C1 /* Localizable.xcstrings */; };
@@ -72,12 +79,14 @@
 		D025FD063AA9857C10BC0C79 /* CityIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23E69860AC602F8A12BA74 /* CityIndex.swift */; };
 		D0B3167151155853FEC67B1F /* ProGateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E78832D3522D29AEFAAFA09 /* ProGateTests.swift */; };
 		D296141541D31EEBDDF1166E /* EclipseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D09CE2C31839C4A9FC228D9 /* EclipseList.swift */; };
+		D426209C6B1A762C6EB418C1 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 3702ED7162FCC7B06CA535E6 /* GoogleUserMessagingPlatform */; };
 		D58DBC1BA3698DBA21103E36 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E44C69F4B8598307A306BE /* Coordinates.swift */; };
 		D661D94C694A19F6279726C0 /* DeltaT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571323539D58A08F2C3A5172 /* DeltaT.swift */; };
 		DEAFEF81398495249F9022A9 /* ProGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB60DA73F75A6AC7544534B /* ProGate.swift */; };
 		DEC9899E86A552B5C213534F /* SkyPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA4F2BACF029E05FD23FA6 /* SkyPalette.swift */; };
 		DFF961A86B853967385C21BB /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
 		E526E6F4254CEF15C93CF365 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF879DF1B77A73C138CB4B5 /* ARView.swift */; };
+		E878668096F2BF05037FF059 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 7E14650190E6F929FF9A56FF /* GoogleMobileAds */; };
 		E8ADF96426F53E132690D01E /* SPATables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89994E699BB34DC63D100943 /* SPATables.swift */; };
 		EAA8E14E47734EC379ED9450 /* SunlitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */; };
 		EEB55536F4BDF2C28750AFD9 /* InstrumentComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F5C76121C4724218281D5 /* InstrumentComponents.swift */; };
@@ -181,12 +190,15 @@
 		2F4145DD8BEF489487542526 /* DayReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayReport.swift; sourceTree = "<group>"; };
 		374F7B4F831A0BB788C20F46 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		37D835582A71FECE0C0B354D /* DatePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerSheet.swift; sourceTree = "<group>"; };
+		38B56925EA079ECE65372AEF /* AdConsentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConsentCoordinator.swift; sourceTree = "<group>"; };
 		4010ED7160C0CB4CEB81AD73 /* ExportSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSheet.swift; sourceTree = "<group>"; };
 		4279BE4A901621EEE93E2D85 /* SavedPlacesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPlacesStore.swift; sourceTree = "<group>"; };
 		44AEF0CF6C2D3DF31812725D /* DesignPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPreview.swift; sourceTree = "<group>"; };
+		478093BE8E1C630B889BDE2A /* AdsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsController.swift; sourceTree = "<group>"; };
 		4B0AC8883BBE3B72D0C4439F /* CoreReachabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreReachabilityTests.swift; sourceTree = "<group>"; };
 		4B23E69860AC602F8A12BA74 /* CityIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityIndex.swift; sourceTree = "<group>"; };
 		4C7116B4785F8E33B45AE3D6 /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
+		4D8EB8C2B21BF2A32DFE54B5 /* AdConfiguration+Sunlit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdConfiguration+Sunlit.swift"; sourceTree = "<group>"; };
 		550FC459345CF1BF0A76A8E4 /* WidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProvider.swift; sourceTree = "<group>"; };
 		55C98DBDF61F76C083CC4BE9 /* MapPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlanView.swift; sourceTree = "<group>"; };
 		5630B21E105C066E818F4E8A /* SunlitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SunlitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +210,7 @@
 		6546B79A574B22429E1901B2 /* MoonPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPosition.swift; sourceTree = "<group>"; };
 		6A7450767EC5F436B37C0417 /* LockScreenWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidgets.swift; sourceTree = "<group>"; };
 		6AF879DF1B77A73C138CB4B5 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
+		6CEE48BC0B058861CF63254A /* AdConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConfiguration.swift; sourceTree = "<group>"; };
 		6F3F7ACAE1189EC2DFC4F428 /* AnnualCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnualCurve.swift; sourceTree = "<group>"; };
 		6F6F5C76121C4724218281D5 /* InstrumentComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentComponents.swift; sourceTree = "<group>"; };
 		6F8A68CAD665AE29A713880A /* Twilight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twilight.swift; sourceTree = "<group>"; };
@@ -215,6 +228,7 @@
 		99E44C69F4B8598307A306BE /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		9A2DF244D8C4DF849EC88C79 /* JulianDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JulianDay.swift; sourceTree = "<group>"; };
 		9B15DA6C6387D9A51967019D /* SkyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyColors.swift; sourceTree = "<group>"; };
+		9B4FCBE3B1295A709ADC27DB /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		9EB60DA73F75A6AC7544534B /* ProGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProGate.swift; sourceTree = "<group>"; };
 		A34256D28C1D38C65A64F652 /* Irradiance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Irradiance.swift; sourceTree = "<group>"; };
 		A61C0B66DBC7ECFF54B1F27C /* DirectionRays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionRays.swift; sourceTree = "<group>"; };
@@ -222,6 +236,7 @@
 		A7F1A0A752041CC95916FD28 /* PlacePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePickerView.swift; sourceTree = "<group>"; };
 		AD982D89FD81375434CF15F4 /* HorizonSweep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonSweep.swift; sourceTree = "<group>"; };
 		B1F6FB82E4D1599095AF8FB7 /* Sunlit.storekit */ = {isa = PBXFileReference; path = Sunlit.storekit; sourceTree = "<group>"; };
+		B4027781DBCFED5ECC2A9E10 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B977844B129BDD202687B232 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BA2B4A98CA2CE09369727275 /* SunlitWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunlitWidgetBundle.swift; sourceTree = "<group>"; };
 		BB0503ECFD4764F10FFE1819 /* cities.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = cities.bin; sourceTree = "<group>"; };
@@ -236,6 +251,7 @@
 		D4881A83DEFD341EB824FF6B /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		E0EB91317E1A10F5B41F595C /* TimeScrubber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeScrubber.swift; sourceTree = "<group>"; };
 		E12442FC29536ED6AF6B8653 /* Refraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refraction.swift; sourceTree = "<group>"; };
+		E9E39558D34989055F92219E /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
 		EA8E211FF73E18277C68427A /* RiseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiseSet.swift; sourceTree = "<group>"; };
 		EC667D9A3AECE1C7F031E3D5 /* EventRail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRail.swift; sourceTree = "<group>"; };
 		EF633DC91C30474261B98115 /* ShadowProjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowProjection.swift; sourceTree = "<group>"; };
@@ -272,6 +288,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFF961A86B853967385C21BB /* SunlitCore.framework in Frameworks */,
+				E878668096F2BF05037FF059 /* GoogleMobileAds in Frameworks */,
+				D426209C6B1A762C6EB418C1 /* GoogleUserMessagingPlatform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +307,19 @@
 				0D86509F74C9662EDDFDCCEF /* TwilightTable.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		0CF817DCE5B236F3509B3110 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				9B4FCBE3B1295A709ADC27DB /* AdBannerView.swift */,
+				6CEE48BC0B058861CF63254A /* AdConfiguration.swift */,
+				4D8EB8C2B21BF2A32DFE54B5 /* AdConfiguration+Sunlit.swift */,
+				38B56925EA079ECE65372AEF /* AdConsentCoordinator.swift */,
+				478093BE8E1C630B889BDE2A /* AdsController.swift */,
+				E9E39558D34989055F92219E /* InterstitialAdManager.swift */,
+			);
+			path = Ads;
 			sourceTree = "<group>";
 		};
 		0DBB999A610176D8FD79A3B9 /* Geo */ = {
@@ -370,6 +401,7 @@
 			children = (
 				79F66075586BD3552536FACA /* Cities */,
 				262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */,
+				B4027781DBCFED5ECC2A9E10 /* InfoPlist.xcstrings */,
 				F224EB00700AFD5B1E87F4C1 /* Localizable.xcstrings */,
 			);
 			path = Resources;
@@ -553,6 +585,7 @@
 		DCF8F2342F76E0BC5106B82C /* Sunlit */ = {
 			isa = PBXGroup;
 			children = (
+				0CF817DCE5B236F3509B3110 /* Ads */,
 				5941EF4A3CB2B7C3A10F8C72 /* Debug */,
 				5D3EA7B867057186CE44B697 /* Design */,
 				7010C9CA36A14A934028C90E /* Features */,
@@ -641,6 +674,8 @@
 			);
 			name = Sunlit;
 			packageProductDependencies = (
+				7E14650190E6F929FF9A56FF /* GoogleMobileAds */,
+				3702ED7162FCC7B06CA535E6 /* GoogleUserMessagingPlatform */,
 			);
 			productName = Sunlit;
 			productReference = 2257AECE5E03207BC16F62D0 /* Sunlit.app */;
@@ -730,6 +765,10 @@
 			);
 			mainGroup = CD8466A7BE705413988C1347;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C8F94D8289CB4C372AC481BE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				082379E07D0AB11261AB38AE /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3295F5235DC3B6BFC1AD75E9 /* Products */;
 			projectDirPath = "";
@@ -750,6 +789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */,
+				6EAC3414B775AA6F6920F18A /* InfoPlist.xcstrings in Resources */,
 				868B76C7338A84B1CBA05398 /* Localizable.xcstrings in Resources */,
 				1FF2A007E491AEC4D19D5E66 /* cities.bin in Resources */,
 			);
@@ -793,6 +833,11 @@
 			files = (
 				E526E6F4254CEF15C93CF365 /* ARView.swift in Sources */,
 				7CF87FA45CC5510528EE5692 /* AcknowledgementsView.swift in Sources */,
+				5EF72E5CC4600CB33588B2D4 /* AdBannerView.swift in Sources */,
+				03B7CE5165E3B6E53BC63988 /* AdConfiguration+Sunlit.swift in Sources */,
+				05003B7634BBAC21733E75F4 /* AdConfiguration.swift in Sources */,
+				7ECE5EF99E564A1E79406CA7 /* AdConsentCoordinator.swift in Sources */,
+				38DD70C80A597F89C33845E9 /* AdsController.swift in Sources */,
 				69ED9BC56004334B25D0F6B6 /* AnnualCurve.swift in Sources */,
 				9C613F3FA69F25AB847DC3AC /* AppState.swift in Sources */,
 				60AFB7B8C3BFF833FD856964 /* CameraPreview.swift in Sources */,
@@ -809,6 +854,7 @@
 				56D84D1CB686B1981482F8D0 /* HeadingProvider.swift in Sources */,
 				C664D1031028CF9D4727B64E /* HorizonSweep.swift in Sources */,
 				EEB55536F4BDF2C28750AFD9 /* InstrumentComponents.swift in Sources */,
+				16C5E417EC08E48DC3064AE5 /* InterstitialAdManager.swift in Sources */,
 				5728222F238A450665EDC0D2 /* LocationProvider.swift in Sources */,
 				FE6A5A14B7A6BFF226954E0D /* MapPlanView.swift in Sources */,
 				F94648AEB2597645916C284B /* MetricBlock.swift in Sources */,
@@ -974,7 +1020,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1787924916;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = R95M36AU2X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -996,7 +1042,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1015,7 +1061,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1787924916;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1057,7 +1103,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1787924916;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1111,7 +1157,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1787924916;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = R95M36AU2X;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1127,7 +1173,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1289,6 +1335,38 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		082379E07D0AB11261AB38AE /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		C8F94D8289CB4C372AC481BE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3702ED7162FCC7B06CA535E6 /* GoogleUserMessagingPlatform */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 082379E07D0AB11261AB38AE /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
+			productName = GoogleUserMessagingPlatform;
+		};
+		7E14650190E6F929FF9A56FF /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8F94D8289CB4C372AC481BE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6F660DFE40489319A7EA66E0 /* Project object */;
 }

@@ -2,11 +2,12 @@ Sunlit computes the position of the sun, the moon and the centre of the Milky Wa
 on the device, for any date and any place. No account, no sign in, no demo
 credentials. Launching goes straight to the Sky view.
 
-NO ACCOUNT OR NETWORK NEEDED TO TEST
+NO ACCOUNT NEEDED TO TEST
 Every figure is computed locally. In aeroplane mode every calculation, curve and
-table still works, including the offline city search over 34,106 entries. Two
-things use a network, both Apple's: the map tiles, and the time zone of a pin
-dropped somewhere new. What is drawn on the map is computed locally.
+table still works, including the offline city search over 34,106 entries.
+The ads need a network. Two other things use one, both Apple's: the map tiles,
+and the time zone of a pin dropped somewhere new. What is drawn on the map is
+computed locally.
 
 THE FOUR VIEWS are tabs at the bottom: Sky (home, the gradient is drawn from the
 real solar altitude, drag the scrubber to move through the day), AR (camera with
@@ -56,17 +57,16 @@ invented time. These are the only accuracy claims made, each verified against
 published reference values.
 
 PRIVACY
-The app collects nothing: no account, no email, no analytics, no crash reporter,
-no advertising, no tracking SDK. The App Privacy answer is Data Not Collected.
-Saved places and the measured skyline are written inside the app container and
-never leave the device.
+No account, no email. Saved places and the skyline stay in the app container.
+Advertising comes from the Google Mobile Ads SDK; UMP consent and ATT run first
+and its privacy control sits at the foot of the Data tab. Sunlit Pro removes it.
 Privacy: https://sunlit-app.vercel.app/privacy
 Terms: the paywall links to Apple's standard EULA; supplementary terms are at
 https://sunlit-app.vercel.app/terms
 
 ATTRIBUTION
-The offline city list is GeoNames cities15000, CC BY 4.0, credited in Settings,
-in the repository and on the website.
+The offline city list is GeoNames cities15000, CC BY 4.0, credited in the place
+picker, in the repository and on the website.
 
 DEVICE: iPhone only, portrait, iOS 17.0 and later.
 CONTACT: Levin Schwab, levin.schwab@gmx.de
