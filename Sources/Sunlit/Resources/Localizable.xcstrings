@@ -5201,6 +5201,71 @@
         }
       }
     },
+    "data.adPrivacy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advertising privacy choices"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenschutzeinstellungen für Werbung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choix de confidentialité publicitaire"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferenze privacy per la pubblicità"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opciones de privacidad de la publicidad"
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opciones de privacidad de la publicidad"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacyvoorkeuren voor advertenties"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia prywatności reklam"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "広告のプライバシー設定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opções de privacidade dos anúncios"
+          }
+        }
+      }
+    },
     "data.annual.belowHorizon": {
       "extractionState": "manual",
       "localizations": {
@@ -10017,61 +10082,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every figure here is computed on this device from the selected place and date. Nothing on this screen needs a network."
+            "value": "Every figure here is computed on this device from the selected place and date. The one thing on this screen that needs a network is the advertisement below, which Sunlit Pro removes."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Wert hier wird auf diesem Gerät aus dem gewählten Ort und Datum berechnet. Nichts auf diesem Bildschirm braucht ein Netz."
+            "value": "Jede Zahl hier wird auf diesem Gerät aus dem gewählten Ort und Datum berechnet. Das Einzige auf diesem Bildschirm, das eine Verbindung braucht, ist die Anzeige darunter, und Sunlit Pro nimmt sie weg."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque valeur ici est calculée sur cet appareil à partir du lieu et de la date sélectionnés. Rien sur cet écran n’a besoin d’un réseau."
+            "value": "Chaque valeur ici est calculée sur cet appareil à partir du lieu et de la date choisis. La seule chose sur cet écran qui demande une connexion est la publicité en dessous, que Sunlit Pro retire."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni valore qui è calcolato su questo dispositivo a partire dal luogo e dalla data selezionati. Niente in questa schermata ha bisogno della rete."
+            "value": "Ogni valore qui è calcolato su questo dispositivo dal luogo e dalla data scelti. L'unica cosa su questa schermata che richiede una connessione è la pubblicità sotto, che Sunlit Pro rimuove."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todas las cifras de aquí se calculan en este dispositivo a partir del lugar y la fecha seleccionados. Nada de esta pantalla necesita red."
+            "value": "Cada dato de aquí se calcula en este dispositivo a partir del lugar y la fecha elegidos. Lo único de esta pantalla que necesita conexión es el anuncio de abajo, que Sunlit Pro quita."
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada cifra de aquí se calcula en este dispositivo a partir del lugar y la fecha seleccionados. Nada de esta pantalla necesita red."
+            "value": "Cada dato de aquí se calcula en este dispositivo a partir del lugar y la fecha elegidos. Lo único de esta pantalla que necesita conexión es el anuncio de abajo, que Sunlit Pro quita."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elk cijfer hier wordt op dit toestel berekend uit de gekozen plaats en datum. Niets op dit scherm heeft een netwerk nodig."
+            "value": "Elk getal hier wordt op dit toestel berekend uit de gekozen plaats en datum. Het enige op dit scherm dat een verbinding nodig heeft, is de advertentie eronder, en Sunlit Pro haalt die weg."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Każda wartość tutaj jest obliczana na tym urządzeniu z wybranego miejsca i daty. Nic na tym ekranie nie potrzebuje sieci."
+            "value": "Każda wartość tutaj jest liczona na tym urządzeniu z wybranego miejsca i daty. Jedyne, co na tym ekranie wymaga połączenia, to reklama poniżej, którą Sunlit Pro usuwa."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ここのすべての数値は、選択した地点と日付から端末上で計算されます。この画面にネットワークは不要です。"
+            "value": "ここの数値はすべて、選んだ場所と日付からこの端末で計算される。この画面で通信が必要なのは下の広告だけで、Sunlit Pro はそれを取り除く。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todos os valores daqui são calculados neste dispositivo a partir do local e da data selecionados. Nada nesta tela precisa de rede."
+            "value": "Cada valor aqui é calculado neste aparelho a partir do lugar e da data escolhidos. A única coisa nesta tela que precisa de conexão é o anúncio abaixo, que o Sunlit Pro remove."
           }
         }
       }
@@ -25942,61 +26007,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The free tier carries a banner on the data tab and in settings. Sunlit shows no full screen adverts anywhere, bought or not."
+            "value": "The free tier carries a banner under the tabulation on the Data tab. Sunlit shows no full screen adverts anywhere, bought or not."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die kostenlose Fassung zeigt ein Banner auf dem Daten-Reiter und in den Einstellungen. Vollbildanzeigen gibt es in Sunlit nirgends, gekauft oder nicht."
+            "value": "Die kostenlose Fassung zeigt ein Banner unter der Tabelle auf dem Daten-Reiter. Vollbildanzeigen gibt es in Sunlit nirgends, gekauft oder nicht."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La version gratuite affiche une bannière dans l'onglet Données et dans les réglages. Sunlit n'affiche aucune publicité plein écran, achetée ou non."
+            "value": "La version gratuite affiche une bannière sous le tableau de l'onglet Données. Sunlit n'affiche aucune publicité plein écran, achetée ou non."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La versione gratuita mostra un banner nella scheda Dati e nelle impostazioni. Sunlit non mostra pubblicità a schermo intero da nessuna parte, acquistata o meno."
+            "value": "La versione gratuita mostra un banner sotto la tabella nella scheda Dati. Sunlit non mostra pubblicità a schermo intero da nessuna parte, acquistata o meno."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La versión gratuita muestra un banner en la pestaña Datos y en los ajustes. Sunlit no muestra anuncios a pantalla completa en ningún sitio, se compre o no."
+            "value": "La versión gratuita muestra un banner bajo la tabla de la pestaña Datos. Sunlit no muestra anuncios a pantalla completa en ningún sitio, se compre o no."
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "La versión gratuita muestra un banner en la pestaña Datos y en los ajustes. Sunlit no muestra anuncios a pantalla completa en ninguna parte, se compre o no."
+            "value": "La versión gratuita muestra un banner bajo la tabla de la pestaña Datos. Sunlit no muestra anuncios a pantalla completa en ninguna parte, se compre o no."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "De gratis versie toont een banner op het tabblad Gegevens en in de instellingen. Sunlit toont nergens advertenties op volledig scherm, gekocht of niet."
+            "value": "De gratis versie toont een banner onder de tabel op het tabblad Gegevens. Sunlit toont nergens advertenties op volledig scherm, gekocht of niet."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "W darmowej wersji baner pojawia się na karcie Dane i w ustawieniach. Sunlit nigdzie nie pokazuje reklam pełnoekranowych, kupionych czy nie."
+            "value": "W darmowej wersji baner pojawia się pod tabelą na karcie Dane. Sunlit nigdzie nie pokazuje reklam pełnoekranowych, kupionych czy nie."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "無料版ではデータタブと設定にバナーが出る。Sunlit は購入の有無にかかわらず、どこにも全画面広告を出さない。"
+            "value": "無料版ではデータタブの表の下にバナーが出る。Sunlit は購入の有無にかかわらず、どこにも全画面広告を出さない。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A versão gratuita mostra um banner na aba Dados e nos ajustes. O Sunlit não mostra anúncios em tela cheia em lugar nenhum, comprado ou não."
+            "value": "A versão gratuita mostra um banner abaixo da tabela na aba Dados. O Sunlit não mostra anúncios em tela cheia em lugar nenhum, comprado ou não."
           }
         }
       }
@@ -27882,71 +27947,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dados e métodos"
-          }
-        }
-      }
-    },
-    "settings.adPrivacy": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Advertising privacy choices"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Datenschutzeinstellungen für Werbung"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choix de confidentialité publicitaire"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preferenze privacy per la pubblicità"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opciones de privacidad de la publicidad"
-          }
-        },
-        "es-MX": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opciones de privacidad de la publicidad"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacyvoorkeuren voor advertenties"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia prywatności reklam"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "広告のプライバシー設定"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opções de privacidade dos anúncios"
           }
         }
       }

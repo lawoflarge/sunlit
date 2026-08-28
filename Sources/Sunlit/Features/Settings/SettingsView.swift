@@ -278,7 +278,6 @@ enum SunlitEventNotifications {
 struct SettingsView: View {
 
     @Environment(AppState.self) private var state
-    @Environment(AdsController.self) private var ads
     @Environment(\.openURL) private var openURL
     @Environment(\.displayScale) private var displayScale
 
@@ -348,10 +347,6 @@ struct SettingsView: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
         }
-        // A list of switches and links, no measured figure anywhere on it. The
-        // purchase button sits inside the scroll, so no text size can push it
-        // behind the banner.
-        .safeAreaInset(edge: .bottom) { AdBannerView(ads: ads) }
         .sunlitSheetSky(
             solarAltitude: altitude,
             moonIllumination: moment.moonPhase.illuminatedFraction)
@@ -834,27 +829,6 @@ struct SettingsView: View {
                 .font(SunlitType.caption)
                 .fixedSize(horizontal: false, vertical: true)
 
-            // Required by the GDPR once the consent form has asked for
-            // anything. Shown only when UMP says so, and never once the
-            // purchase has removed the advertising.
-            if ads.isPrivacyOptionsRequired {
-                Button {
-                    Task { await ads.showPrivacyOptionsForm() }
-                } label: {
-                    HStack(spacing: 8) {
-                        Text(adPrivacyTitle).font(SunlitType.body)
-                        Spacer(minLength: 8)
-                        Image(systemName: "chevron.right")
-                            .imageScale(.small)
-                            .accessibilityHidden(true)
-                    }
-                    .frame(minHeight: SunlitLayout.minimumTouchTarget)
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(Text(adPrivacyTitle))
-            }
-
             Text(versionText)
                 .font(SunlitType.caption)
         }
@@ -864,12 +838,6 @@ struct SettingsView: View {
         String(localized: "settings.acknowledgements",
                defaultValue: "Data and methods",
                comment: "Link to the acknowledgements screen")
-    }
-
-    private var adPrivacyTitle: String {
-        String(localized: "settings.adPrivacy",
-               defaultValue: "Advertising privacy choices",
-               comment: "Opens the consent form again so the reader can change their advertising choices")
     }
 
     private func linkRow(title: String, url: URL?) -> some View {

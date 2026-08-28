@@ -701,18 +701,40 @@ struct DataContextRow: View {
 
 /// What the whole screen is, and what it is not.
 struct DataFooter: View {
+    @Environment(AdsController.self) private var ads
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HairlineDivider()
-            Text(DataStrings.footerOffline)
+            VStack(alignment: .leading, spacing: 10) {
+                HairlineDivider()
+                Text(DataStrings.footerOffline)
+                    .font(SunlitType.caption)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(DataStrings.clearSkyModel)
+                    .font(SunlitType.caption)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityElement(children: .combine)
+
+            // The GDPR requires the reader to be able to change their consent,
+            // and it has to be somewhere they can actually get to. Settings is
+            // the natural home for it, but SettingsView has no entry point in
+            // this build: RootView has four tabs and none of them opens it.
+            // So the control sits at the foot of the one screen that carries
+            // the advertising, which is also where it is easiest to connect
+            // with what it is about. Shown only when UMP asks for it, and
+            // never for somebody who has bought Pro.
+            if ads.isPrivacyOptionsRequired {
+                Button(DataStrings.adPrivacy) {
+                    Task { await ads.showPrivacyOptionsForm() }
+                }
                 .font(SunlitType.caption)
-                .fixedSize(horizontal: false, vertical: true)
-            Text(DataStrings.clearSkyModel)
-                .font(SunlitType.caption)
-                .fixedSize(horizontal: false, vertical: true)
+                .frame(minHeight: SunlitLayout.minimumTouchTarget, alignment: .leading)
+                .accessibilityLabel(Text(DataStrings.adPrivacy))
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityElement(children: .combine)
     }
 }
 
@@ -765,8 +787,15 @@ enum DataStrings {
     static var footerOffline: String {
         String(
             localized: "data.footer.offline",
-            defaultValue: "Every figure here is computed on this device from the selected place and date. Nothing on this screen needs a network.",
+            defaultValue: "Every figure here is computed on this device from the selected place and date. The one thing on this screen that needs a network is the advertisement below, which Sunlit Pro removes.",
             comment: "Footer of the Data screen")
+    }
+
+    static var adPrivacy: String {
+        String(
+            localized: "data.adPrivacy",
+            defaultValue: "Advertising privacy choices",
+            comment: "Opens the consent form again so the reader can change their advertising choices")
     }
 
     static var done: String {

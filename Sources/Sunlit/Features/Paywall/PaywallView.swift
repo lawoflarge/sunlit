@@ -230,7 +230,7 @@ struct PaywallView: View {
                         comment: "Paid item: the purchase removes the advertising"),
                     note: String(
                         localized: "paywall.pro.noAds.note",
-                        defaultValue: "The free tier carries a banner on the data tab and in settings. Sunlit shows no full screen adverts anywhere, bought or not.",
+                        defaultValue: "The free tier carries a banner under the tabulation on the Data tab. Sunlit shows no full screen adverts anywhere, bought or not.",
                         comment: "Says exactly where the advertising appears and what the purchase removes")))
             }
 
