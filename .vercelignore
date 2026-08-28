@@ -1,0 +1,8 @@
+# Nur `web` wird ausgeliefert. Ohne diese Datei laedt Vercel das GANZE
+# Repository hoch, also auch Quelltext und Bauartefakte. Das ist zweifach
+# schaedlich: der Upload kann Geheimnisse mitnehmen, und ab einigen zehntausend
+# Dateien bricht der Deploy ab.
+*
+!web
+!web/**
+!vercel.json
