@@ -12,7 +12,7 @@ struct RootView: View {
     @Environment(AppState.self) private var state
 
     enum Tab: Hashable {
-        case sky, ar, map, data
+        case sky, ar, map, data, settings
     }
 
     @State private var tab: Tab = .sky
@@ -49,6 +49,17 @@ struct RootView: View {
                           systemImage: "tablecells")
                 }
                 .tag(Tab.data)
+            // Ohne diesen Reiter war SettingsView im ganzen Projekt von nirgendwo
+            // erreichbar. Dort liegen die Ereignis-Mitteilungen, die der Store in
+            // zehn Sprachen als Pro-Funktion verkauft, und der Weg, die Einwilligung
+            // zur Werbung zu widerrufen.
+            SettingsView()
+                .tabItem {
+                    Label(String(localized: "tab.settings", defaultValue: "Settings",
+                                 comment: "Tab title for the settings view"),
+                          systemImage: "gearshape")
+                }
+                .tag(Tab.settings)
         }
         .tint(SkyColors.sun)
         .sheet(isPresented: $showingPaywall) {
