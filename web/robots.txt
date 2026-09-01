@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# KI-Assistenten duerfen die Seite lesen - sie empfehlen Apps weiter
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://sunlit-app.vercel.app/sitemap.xml

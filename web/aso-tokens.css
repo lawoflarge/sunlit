@@ -1,0 +1,13 @@
+/* Markentoken je App. --brand-ink haelt 4.5:1 auf Weiss,
+   --brand-soft 4.5:1 auf dunklem Grund - beide sind gemessen, nicht geschaetzt. */
+:root{
+  --brand:      #382850;
+  --brand-2:    #202040;
+  --brand-ink:  #382850;
+  --brand-soft: #896BB5;
+  --on-brand:   #FFFFFF;
+}
+/* Der Badge behaelt Apples Seitenverhaeltnis - Verzerren verstoesst gegen die Richtlinien. */
+.aso-badge{display:inline-block;line-height:0}
+.aso-badge img{height:55px;width:auto;max-width:100%}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
