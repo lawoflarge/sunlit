@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Hour Calculator for iPhone | Sunlit</title>
+<meta name="description" content="Golden hour is a band of solar altitudes, not a fixed time. What the band is, why two apps print different times, how long it lasts at your latitude, and where to read it free on iPhone.">
+
+<meta property="og:locale" content="en_US">
+
+<meta property="og:title" content="Golden Hour Calculator for iPhone | Sunlit">
+<meta property="og:description" content="Golden hour is a band of solar altitudes, not a fixed time. What the band is, why two apps print different times, how long it lasts at your latitude, and where to read it free on iPhone.">
+
+<meta name="twitter:title" content="Golden Hour Calculator for iPhone | Sunlit">
+<meta name="twitter:description" content="Golden hour is an altitude band, not an hour. Why apps disagree, and how long it really lasts where you are.">
+
+<link rel="stylesheet" href="/aso-tokens.css">
+<link rel="stylesheet" href="/style.css">
+<!-- aso:head:start -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#382850">
+<meta name="apple-itunes-app" content="app-id=6804486604, app-argument=https://sunlit-app.vercel.app/support">
+<link rel="canonical" href="https://sunlit-app.vercel.app/support">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sunlit">
+<meta property="og:url" content="https://sunlit-app.vercel.app/support">
+<meta property="og:image" content="https://sunlit-app.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sunlit: Sun &amp; Moon Tracker on the App Store">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sunlit-app.vercel.app/og-image.png">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<!-- aso:head:end -->
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#0B1024"/>
+      <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M8 45h48" stroke="#8FB8FF" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="32" cy="25" r="7" fill="#FFB020"/>
+    </svg>
+    <b>Sunlit</b>
+  </a>
+  <nav>
+    <a class="home" href="/">Overview</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/">Sunlit</a> &rsaquo; Guides</p>
+  <h1>Golden hour calculator for iPhone</h1>
+  <p class="lead">Golden hour is not an hour and it does not start at a fixed clock time. It is a band of solar altitudes, and how long the sun takes to cross it depends on where you are standing and what day it is.</p>
+
+  <div class="cta">
+    <a class="aso-badge" href="https://apps.apple.com/app/id6804486604?ct=hero-golden-hour-calculator&amp;mt=8" data-aso-cta="hero-golden-hour-calculator">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/app-store-badge-white.svg">
+        <img src="/app-store-badge.svg" width="165" height="55" alt="Download Sunlit on the App Store">
+      </picture>
+    </a>
+    <p class="cta-note">Free to install. iPhone with iOS 17 or later. Today at your current
+      location is free forever in all four views, and Sunlit Pro is one payment of 9.99 EUR
+      that opens every other date and place.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="doc-body">
+    <h2>Golden hour is an angle, not a clock</h2>
+    <p>The name is the problem. Golden hour is not an hour and it does not start at a
+      fixed time. It is a band of solar altitudes, and it lasts exactly as long as the
+      sun takes to cross that band where you are standing. Sunlit uses the band that
+      photographers usually mean: the sun between <strong>4 degrees below the horizon and
+      6 degrees above it</strong>. Blue hour sits directly underneath, from 6 degrees
+      below the horizon up to 4 degrees below.</p>
+    <p>Once you hold the definition in degrees, three things that look like bugs turn out
+      to be geometry.</p>
+
+    <h2>Why two apps print two different times</h2>
+    <p>They are almost never both wrong. They are usually answering slightly different
+      questions.</p>
+    <ul>
+      <li><strong>A different band.</strong> Some tools end golden hour at the horizon,
+        some at 6 degrees above it, some run it to 10. A two degree disagreement at the
+        top of the band is many minutes on the ground.</li>
+      <li><strong>Refraction, or none.</strong> The atmosphere lifts the sun by roughly
+        half a degree when it is near the horizon. Half a degree is about the width of
+        the sun itself, so ignoring refraction moves sunrise by minutes.</li>
+      <li><strong>Your elevation, or sea level.</strong> Standing higher lets you see the
+        sun before somebody at the shoreline does.</li>
+      <li><strong>The horizon it assumes.</strong> Almost every published sunrise time is
+        the time the sun clears a flat sea horizon. Almost nobody stands on a flat sea
+        horizon.</li>
+    </ul>
+    <p>Sunlit takes the refracted altitude, takes the elevation of the place, and solves
+      the crossing numerically rather than interpolating between samples, so the answer
+      does not degrade at high latitude or on a grazing event.</p>
+
+    <h2>How long it lasts depends on where you are</h2>
+    <p>The width of the band is fixed at 10 degrees. The speed the sun crosses it is not.
+      Near the equator the sun goes down almost vertically and the golden band is crossed
+      in something like forty minutes. Far north the sun slides down at a shallow angle,
+      and in high summer above roughly 70 degrees north it can sit inside the golden band
+      from evening until morning without ever leaving it. That is why a single number
+      copied from a photography blog is worthless, and why the app solves it for the place
+      and the date you actually picked.</p>
+
+    <h2>What to read on the screen</h2>
+    <ol class="steps">
+      <li>
+        <h3>Open the Sky view</h3>
+        <p>The arc across the background is the altitude of the sun through the local day.
+          The shaded band across it is golden hour, and blue hour is the strip below it.
+          Where the arc crosses the band is where the light you want lives.</p>
+      </li>
+      <li>
+        <h3>Read the day rail</h3>
+        <p>Underneath, in order: first light, sunrise, golden hour ends, solar noon,
+          golden hour begins, sunset, last light. Those are solved times for the place in
+          the header, not a table for the nearest city.</p>
+      </li>
+      <li>
+        <h3>Drag the time scrubber</h3>
+        <p>The background is not decoration. It is interpolated from the real solar
+          altitude at the instant you are pointing at, so four in the morning does not
+          look like noon. Drag it to the start of the band and the azimuth underneath
+          tells you which way to face.</p>
+      </li>
+      <li>
+        <h3>Check it against your actual skyline</h3>
+        <p>A published golden hour assumes nothing is in the way. Sweep the camera along
+          your horizon and Sunlit stores it as 36 sectors of ten degrees, then works out
+          when the sun really clears the ridge or the building and how long you lose. The
+          measured horizon is part of Sunlit Pro.</p>
+      </li>
+    </ol>
+
+    <h2>What this costs</h2>
+    <p>Golden hour and blue hour for today, at the place you are standing, are free
+      forever, along with sunrise, sunset, all three twilights, solar noon, day length and
+      shadow length. Scouting a different date or a place you are not standing in is what
+      Sunlit Pro opens, for one payment of 9.99 EUR. Nothing renews.</p>
+    <p>If you want the same numbers as a table rather than a picture, the Data view lists
+      civil, nautical and astronomical twilight at 6, 12 and 18 degrees below the horizon,
+      solar noon, day length, and how much the day grew or shrank since yesterday.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="cta-band">
+    <div>
+      <h2>Read today's golden hour where you are standing.</h2>
+      <p>Free to install, and today at your current location stays free in all four views.</p>
+    </div>
+    <a class="aso-badge" href="https://apps.apple.com/app/id6804486604?ct=mid-golden-hour&amp;mt=8" data-aso-cta="mid-golden-hour">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/app-store-badge-white.svg">
+        <img src="/app-store-badge.svg" width="165" height="55" loading="lazy" alt="Download Sunlit on the App Store">
+      </picture>
+    </a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">More guides</p>
+    <h2>The rest of the set.</h2>
+  </div>
+  <div class="guides">
+    <a href="/sun-path-ar">
+      <span class="g-k">AR</span>
+      <span class="g-t">See the sun path through the camera</span>
+      <span class="g-d">Hour marks on the live image, and what the heading uncertainty chip means.</span>
+    </a>
+    <a href="/apartment-sun-exposure">
+      <span class="g-k">Renting and buying</span>
+      <span class="g-t">Check the light in a flat</span>
+      <span class="g-d">A five minute routine at the viewing, and why December is the real test.</span>
+    </a>
+    <a href="/garden-sun-hours">
+      <span class="g-k">Gardening</span>
+      <span class="g-t">Count the sun hours on a bed</span>
+      <span class="g-d">Full sun, part sun and shade are hour counts. How to get the count.</span>
+    </a>
+    <a href="/shadow-length-calculator">
+      <span class="g-k">Planning</span>
+      <span class="g-t">Shadow length calculator</span>
+      <span class="g-d">One line of trigonometry, a worked example, and where it breaks down.</span>
+    </a>
+    <a href="/milky-way-photography-planner">
+      <span class="g-k">Astro</span>
+      <span class="g-t">Plan a Milky Way frame</span>
+      <span class="g-d">Three conditions have to line up. Which one is usually blocking you.</span>
+    </a>
+    <a href="/photopills-alternative">
+      <span class="g-k">Comparison</span>
+      <span class="g-t">Sunlit next to PhotoPills</span>
+      <span class="g-d">An honest side by side, including where PhotoPills is the better buy.</span>
+    </a>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="site-foot"><div class="wrap">
+  <span>Sunlit &middot; Levin David Schwab</span>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/#uses">Guides</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
+  </nav>
+</div></footer>
+
+<!-- Funnel-Messung: Seitenaufruf -> App-Store-Klick.
+     Vercel Web Analytics ist cookielos; das Ereignis nennt nur den Platz des Knopfes. -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(function(){
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="apps.apple.com"]');
+    if(!a)return;
+    va('event',{name:'appstore_click',data:{
+      placement:a.getAttribute('data-aso-cta')||'unmarked',
+      page:location.pathname
+    }});
+  },{capture:true,passive:true});
+})();
+</script>
+</body>
+</html>

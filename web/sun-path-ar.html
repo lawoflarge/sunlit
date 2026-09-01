@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>See the Sun Path in AR on iPhone | Sunlit</title>
+<meta name="description" content="Hold your iPhone up and the sun path lands on the live camera, with hour marks and the solstice and equinox curves behind it. How the heading is derived, what the uncertainty chip means, and how to calibrate a wandering compass.">
+
+<meta property="og:locale" content="en_US">
+
+<meta property="og:title" content="See the Sun Path in AR on iPhone | Sunlit">
+<meta property="og:description" content="Hold your iPhone up and the sun path lands on the live camera, with hour marks and the solstice and equinox curves behind it. How the heading is derived, what the uncertainty chip means, and how to calibrate a wandering compass.">
+
+<meta name="twitter:title" content="See the Sun Path in AR on iPhone | Sunlit">
+<meta name="twitter:description" content="The sun path over the live camera, with hour marks, solstice curves, and a heading uncertainty you can actually see.">
+
+<link rel="stylesheet" href="/aso-tokens.css">
+<link rel="stylesheet" href="/style.css">
+<!-- aso:head:start -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#382850">
+<meta name="apple-itunes-app" content="app-id=6804486604, app-argument=https://sunlit-app.vercel.app/support">
+<link rel="canonical" href="https://sunlit-app.vercel.app/support">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sunlit">
+<meta property="og:url" content="https://sunlit-app.vercel.app/support">
+<meta property="og:image" content="https://sunlit-app.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sunlit: Sun &amp; Moon Tracker on the App Store">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sunlit-app.vercel.app/og-image.png">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<!-- aso:head:end -->
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#0B1024"/>
+      <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M8 45h48" stroke="#8FB8FF" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="32" cy="25" r="7" fill="#FFB020"/>
+    </svg>
+    <b>Sunlit</b>
+  </a>
+  <nav>
+    <a class="home" href="/">Overview</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/">Sunlit</a> &rsaquo; Guides</p>
+  <h1>See the sun path in AR on your iPhone</h1>
+  <p class="lead">Hold the phone up and the track of the sun lands on the live camera image, hour by hour, with the solstice and equinox paths behind it. In August you can see where the light will fall in December.</p>
+
+  <div class="cta">
+    <a class="aso-badge" href="https://apps.apple.com/app/id6804486604?ct=hero-sun-path-ar&amp;mt=8" data-aso-cta="hero-sun-path-ar">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/app-store-badge-white.svg">
+        <img src="/app-store-badge.svg" width="165" height="55" alt="Download Sunlit on the App Store">
+      </picture>
+    </a>
+    <p class="cta-note">Free to install. iPhone with iOS 17 or later. Today at your current
+      location is free forever in all four views, and Sunlit Pro is one payment of 9.99 EUR
+      that opens every other date and place.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="doc-body">
+    <h2>What an AR sun path actually shows you</h2>
+    <p>Hold the phone up and Sunlit draws the track the sun takes across the sky on top of
+      the live camera image, with a tick at every whole local hour along it. The moon path
+      runs beside it. Behind both sit three reference curves: the summer solstice, the
+      winter solstice and the equinox. That is the part that answers the question people
+      actually have. In August you can stand in a room and see where the light will fall
+      in December.</p>
+    <p>The solstice and equinox curves are drawn for the nominal calendar dates rather
+      than the solved instants, and they are labelled that way. The difference at the
+      solstice is under a hundredth of a degree of solar declination, which is invisible
+      at the scale of a curve on a phone screen.</p>
+  </div>
+
+  <div class="shots" style="max-width:520px">
+    <figure>
+      <img src="/shots/01.webp" width="221" height="480" loading="lazy" decoding="async"
+        alt="The Sunlit AR view with the path of the sun drawn over the sky, hour marks along it, and a readout giving sun azimuth 292.8 degrees and sun altitude minus 5.1 degrees.">
+      <figcaption>Hour marks along the path, azimuth and altitude below.</figcaption>
+    </figure>
+    <figure>
+      <img src="/shots/04.webp" width="221" height="480" loading="lazy" decoding="async"
+        alt="The Sunlit Sky view with golden hour drawn as a band across the arc of the day and the day's light events listed underneath.">
+      <figcaption>The same instant, read as a chart instead.</figcaption>
+    </figure>
+  </div>
+
+  <div class="doc-body" style="margin-top:36px">
+    <h2>The compass is the hard part, and the app says so</h2>
+    <p>Every AR sun app lives or dies on the heading, and the heading comes from a
+      magnetometer measuring a weak field. Anything magnetic nearby competes with it: a
+      MagSafe charger, a case or wallet with magnets in it, a car dashboard, a tripod
+      head, a loudspeaker, steel in a wall, a metal desk. This is a property of the
+      hardware, not of any one app, and it is the single most common complaint about the
+      whole category.</p>
+    <p>Sunlit takes heading from device attitude in the true north reference frame rather
+      than from a raw magnetic reading, with magnetic declination from a model carried
+      inside the app. More usefully, it shows you how sure it is: a chip in the corner
+      gives the current heading uncertainty in degrees at all times, and it turns amber
+      when iOS reports that the compass needs calibrating. A direction printed without an
+      uncertainty is a guess wearing a confident face.</p>
+
+    <h3>To calibrate a wandering compass</h3>
+    <ul>
+      <li>Step away from metal and from anything magnetic, and take the phone out of a
+        magnetic case.</li>
+      <li>Move it slowly in a figure of eight, turning your wrist as you go, for a few
+        seconds.</li>
+      <li>Watch the figure on the chip. It should drop. If it does not, you are still
+        standing next to something the magnetometer can feel.</li>
+    </ul>
+
+    <h2>If you refuse the camera</h2>
+    <p>iOS asks for the camera the first time you open the AR view, because the view draws
+      over the live image. If you say no, the view still opens. The paths are drawn over
+      the sky colour instead, and everything else on the screen keeps working. You can
+      change your mind later in the iPhone Settings app, under Sunlit, by switching Camera
+      on.</p>
+
+    <h2>The Milky Way in AR</h2>
+    <p>Once the selected instant is astronomically dark, meaning the sun is more than 18
+      degrees below the horizon, the galactic plane joins the sun and moon paths on the
+      overlay, with the galactic centre marked on it. It is deliberately not drawn over a
+      blue sky, because a band of the Milky Way painted across daylight is a promise the
+      sky is not going to keep. The <a href="/milky-way-photography-planner">Milky Way
+      planner guide</a> goes through the three conditions that have to line up.</p>
+
+    <h2>What is free</h2>
+    <p>The AR sun path for today, at the place you are standing, is free forever, together
+      with the heading uncertainty chip and the sun readouts. The moon path, the solstice
+      and equinox reference curves, the galactic plane and the measured horizon sweep are
+      part of Sunlit Pro, one payment of 9.99 EUR with nothing renewing.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="cta-band">
+    <div>
+      <h2>Point it at the sky and watch the path land on it.</h2>
+      <p>The AR sun path for today at your location is free, and the app tells you how sure the compass is.</p>
+    </div>
+    <a class="aso-badge" href="https://apps.apple.com/app/id6804486604?ct=mid-sun-path-ar&amp;mt=8" data-aso-cta="mid-sun-path-ar">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/app-store-badge-white.svg">
+        <img src="/app-store-badge.svg" width="165" height="55" loading="lazy" alt="Download Sunlit on the App Store">
+      </picture>
+    </a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">More guides</p>
+    <h2>The rest of the set.</h2>
+  </div>
+  <div class="guides">
+    <a href="/golden-hour-calculator">
+      <span class="g-k">Photography</span>
+      <span class="g-t">Golden hour calculator</span>
+      <span class="g-d">The altitude band behind the times, and why two apps disagree.</span>
+    </a>
+    <a href="/apartment-sun-exposure">
+      <span class="g-k">Renting and buying</span>
+      <span class="g-t">Check the light in a flat</span>
+      <span class="g-d">A five minute routine at the viewing, and why December is the real test.</span>
+    </a>
+    <a href="/garden-sun-hours">
+      <span class="g-k">Gardening</span>
+      <span class="g-t">Count the sun hours on a bed</span>
+      <span class="g-d">Full sun, part sun and shade are hour counts. How to get the count.</span>
+    </a>
+    <a href="/shadow-length-calculator">
+      <span class="g-k">Planning</span>
+      <span class="g-t">Shadow length calculator</span>
+      <span class="g-d">One line of trigonometry, a worked example, and where it breaks down.</span>
+    </a>
+    <a href="/milky-way-photography-planner">
+      <span class="g-k">Astro</span>
+      <span class="g-t">Plan a Milky Way frame</span>
+      <span class="g-d">Three conditions have to line up. Which one is usually blocking you.</span>
+    </a>
+    <a href="/photopills-alternative">
+      <span class="g-k">Comparison</span>
+      <span class="g-t">Sunlit next to PhotoPills</span>
+      <span class="g-d">An honest side by side, including where PhotoPills is the better buy.</span>
+    </a>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="site-foot"><div class="wrap">
+  <span>Sunlit &middot; Levin David Schwab</span>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/#uses">Guides</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
+  </nav>
+</div></footer>
+
+<!-- Funnel-Messung: Seitenaufruf -> App-Store-Klick.
+     Vercel Web Analytics ist cookielos; das Ereignis nennt nur den Platz des Knopfes. -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(function(){
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="apps.apple.com"]');
+    if(!a)return;
+    va('event',{name:'appstore_click',data:{
+      placement:a.getAttribute('data-aso-cta')||'unmarked',
+      page:location.pathname
+    }});
+  },{capture:true,passive:true});
+})();
+</script>
+</body>
+</html>

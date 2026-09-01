@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shadow Length Calculator for iPhone | Sunlit</title>
+<meta name="description" content="Shadow length is height divided by the tangent of the solar altitude. A table of the ratios, why refraction matters near the horizon, why there is no number below it, and how to read it on iPhone.">
+
+<meta property="og:locale" content="en_US">
+
+<meta property="og:title" content="Shadow Length Calculator for iPhone | Sunlit">
+<meta property="og:description" content="Shadow length is height divided by the tangent of the solar altitude. A table of the ratios, why refraction matters near the horizon, why there is no number below it, and how to read it on iPhone.">
+
+<meta name="twitter:title" content="Shadow Length Calculator for iPhone | Sunlit">
+<meta name="twitter:description" content="Shadow length is height over the tangent of the sun's altitude. The ratios, the traps, and where to read it.">
+
+<link rel="stylesheet" href="/aso-tokens.css">
+<link rel="stylesheet" href="/style.css">
+<!-- aso:head:start -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#382850">
+<meta name="apple-itunes-app" content="app-id=6804486604, app-argument=https://sunlit-app.vercel.app/support">
+<link rel="canonical" href="https://sunlit-app.vercel.app/support">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sunlit">
+<meta property="og:url" content="https://sunlit-app.vercel.app/support">
+<meta property="og:image" content="https://sunlit-app.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sunlit: Sun &amp; Moon Tracker on the App Store">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sunlit-app.vercel.app/og-image.png">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<!-- aso:head:end -->
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="/">
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="#0B1024"/>
+      <path d="M12 45a20 20 0 0 1 40 0" fill="none" stroke="#FFB020" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M8 45h48" stroke="#8FB8FF" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+      <circle cx="32" cy="25" r="7" fill="#FFB020"/>
+    </svg>
+    <b>Sunlit</b>
+  </a>
+  <nav>
+    <a class="home" href="/">Overview</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/">Sunlit</a> &rsaquo; Guides</p>
+  <h1>Shadow length calculator for iPhone</h1>
+  <p class="lead">Shadow length is one line of trigonometry, and the ratio is the same for everything standing in the same place at the same instant. The interesting part is what happens near the horizon.</p>
+
+  <div class="cta">
+    <a class="aso-badge" href="https://apps.apple.com/app/id6804486604?ct=hero-shadow-length-calculator&amp;mt=8" data-aso-cta="hero-shadow-length-calculator">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/app-store-badge-white.svg">
+        <img src="/app-store-badge.svg" width="165" height="55" alt="Download Sunlit on the App Store">
+      </picture>
+    </a>
+    <p class="cta-note">Free to install. iPhone with iOS 17 or later. Today at your current
+      location is free forever in all four views, and Sunlit Pro is one payment of 9.99 EUR
+      that opens every other date and place.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="doc-body">
+    <h2>The whole calculation is one line</h2>
+    <p>A vertical object of height <em>h</em> standing on level ground, with the sun at an
+      apparent altitude <em>a</em> above the horizon, casts a shadow of length</p>
+    <p class="num" style="font-size:21px;font-weight:600"><em>length</em> = <em>h</em> /
+      tan(<em>a</em>)</p>
+    <p>The shadow points along the sun's azimuth plus 180 degrees. The ratio of length to
+      height is the cotangent of the altitude, which means it is the same for every object
+      standing there at that instant. Measure one shadow and you know them all.</p>
+  </div>
+
+  <div class="tablewrap" style="max-width:44em">
+    <table class="two">
+      <thead><tr><th scope="col">Sun altitude</th><th scope="col">Shadow, as a multiple of height</th><th scope="col">A 2 m person</th></tr></thead>
+      <tbody>
+        <tr><td>60 degrees</td><td class="n num">0.58</td><td class="n num">1.2 m</td></tr>
+        <tr><td>45 degrees</td><td class="n num">1.00</td><td class="n num">2.0 m</td></tr>
+        <tr><td>30 degrees</td><td class="n num">1.73</td><td class="n num">3.5 m</td></tr>
+        <tr><td>15 degrees</td><td class="n num">3.73</td><td class="n num">7.5 m</td></tr>
+        <tr><td>5 degrees</td><td class="n num">11.4</td><td class="n num">22.9 m</td></tr>
+        <tr><td>1 degree</td><td class="n num">57.3</td><td class="n num">114.6 m</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-body" style="margin-top:36px">
+    <h2>Two details that decide whether the answer is any good</h2>
+    <p><strong>Use the refracted altitude.</strong> The atmosphere bends the ray on its way
+      in, so the sun appears higher than it geometrically is, by about half a degree near
+      the horizon. The shadow follows the light as it arrives, not the direction the sun
+      really lies in. At an altitude of half a degree that difference is the gap between a
+      shadow of a hundred times the height and no shadow at all. Sunlit uses the apparent
+      altitude, with a refraction model corrected for pressure and temperature.</p>
+    <p><strong>Below the horizon there is no number.</strong> As the altitude goes to zero
+      the tangent goes to zero and the length goes to infinity. It is not a very long
+      shadow, it is an unbounded one, and an app that prints a figure for it is printing a
+      lie. Sunlit returns no shadow length at or below the horizon and says so on the
+      screen, which is what the "None" in the readout means.</p>
+
+    <h2>What people use it for</h2>
+    <ul>
+      <li><strong>Row spacing for solar panels.</strong> The controlling case is the low
+        winter sun, not the summer one. Pick your worst acceptable date, read the minimum
+        working altitude, and the ratio gives you the pitch between rows.</li>
+      <li><strong>A fence, a hedge or an extension.</strong> Set the height and see how far
+        into the neighbouring garden or the room the shadow reaches at the hours that
+        matter.</li>
+      <li><strong>Photography and film.</strong> A long shadow is a compositional element
+        with a known length and a known direction, hours before you get there.</li>
+      <li><strong>Reading a photograph.</strong> If you know the height of an object and
+        the length of its shadow, the ratio gives you the solar altitude, and the direction
+        of the shadow gives you the azimuth.</li>
+    </ul>
+
+    <h2>Where the flat ground assumption breaks</h2>
+    <p>The formula is exact geometry on level ground and it says nothing about the world.
+      It does not know whether the ground slopes, whether anything is standing where the
+      shadow would fall, or whether the sun is already behind a ridge. That last one
+      matters: a shadow computed for an instant when your measured skyline has the sun
+      hidden is a shadow nobody will see. Sunlit keeps the two separate, and the measured
+      horizon profile is what tells you which is which.</p>
+
+    <h2>Reading it in the app</h2>
+    <p>Shadow length for today, at the place you are standing, sits in the Sky view
+      readout next to azimuth and altitude, and it is free forever. Drag the time scrubber
+      and it moves with the day. On the Map view you can set the height of an object and
+      see the shadow projected over the terrain in the right direction. Other dates, other
+      places and the measured skyline are part of Sunlit Pro, one payment of 9.99 EUR.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="cta-band">
+    <div>
+      <h2>Shadow length for today, free, in the Sky view.</h2>
+      <p>Drag the time scrubber and watch the length and the direction move with the sun.</p>
+    </div>
+    <a class="aso-badge" href="https://apps.apple.com/app/id6804486604?ct=mid-shadow-length-calculator&amp;mt=8" data-aso-cta="mid-shadow-length-calculator">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/app-store-badge-white.svg">
+        <img src="/app-store-badge.svg" width="165" height="55" loading="lazy" alt="Download Sunlit on the App Store">
+      </picture>
+    </a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">More guides</p>
+    <h2>The rest of the set.</h2>
+  </div>
+  <div class="guides">
+    <a href="/golden-hour-calculator">
+      <span class="g-k">Photography</span>
+      <span class="g-t">Golden hour calculator</span>
+      <span class="g-d">The altitude band behind the times, and why two apps disagree.</span>
+    </a>
+    <a href="/sun-path-ar">
+      <span class="g-k">AR</span>
+      <span class="g-t">See the sun path through the camera</span>
+      <span class="g-d">Hour marks on the live image, and what the heading uncertainty chip means.</span>
+    </a>
+    <a href="/apartment-sun-exposure">
+      <span class="g-k">Renting and buying</span>
+      <span class="g-t">Check the light in a flat</span>
+      <span class="g-d">A five minute routine at the viewing, and why December is the real test.</span>
+    </a>
+    <a href="/garden-sun-hours">
+      <span class="g-k">Gardening</span>
+      <span class="g-t">Count the sun hours on a bed</span>
+      <span class="g-d">Full sun, part sun and shade are hour counts. How to get the count.</span>
+    </a>
+    <a href="/milky-way-photography-planner">
+      <span class="g-k">Astro</span>
+      <span class="g-t">Plan a Milky Way frame</span>
+      <span class="g-d">Three conditions have to line up. Which one is usually blocking you.</span>
+    </a>
+    <a href="/photopills-alternative">
+      <span class="g-k">Comparison</span>
+      <span class="g-t">Sunlit next to PhotoPills</span>
+      <span class="g-d">An honest side by side, including where PhotoPills is the better buy.</span>
+    </a>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="site-foot"><div class="wrap">
+  <span>Sunlit &middot; Levin David Schwab</span>
+  <nav>
+    <a href="/">Overview</a>
+    <a href="/#uses">Guides</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:levin.schwab@gmx.de">levin.schwab@gmx.de</a>
+  </nav>
+</div></footer>
+
+<!-- Funnel-Messung: Seitenaufruf -> App-Store-Klick.
+     Vercel Web Analytics ist cookielos; das Ereignis nennt nur den Platz des Knopfes. -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(function(){
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="apps.apple.com"]');
+    if(!a)return;
+    va('event',{name:'appstore_click',data:{
+      placement:a.getAttribute('data-aso-cta')||'unmarked',
+      page:location.pathname
+    }});
+  },{capture:true,passive:true});
+})();
+</script>
+</body>
+</html>
