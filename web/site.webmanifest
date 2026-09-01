@@ -1,7 +1,7 @@
 {
   "name": "Sunlit: Sun & Moon Tracker",
   "short_name": "Sunlit",
-  "description": "Stand where you will shoot, point your iPhone at the sky, and see exactly where the sun and the moon will be at any hour of any day. All of it computed on the device, with no accou",
+  "description": "Stand where you will shoot, point your iPhone at the sky, and see exactly where the sun and the moon will be at any hour of any day.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0B0B0F",

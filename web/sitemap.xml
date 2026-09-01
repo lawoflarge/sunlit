@@ -7,19 +7,61 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sunlit-app.vercel.app/support/</loc>
+    <loc>https://sunlit-app.vercel.app/apartment-sun-exposure</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sunlit-app.vercel.app/privacy/</loc>
+    <loc>https://sunlit-app.vercel.app/garden-sun-hours</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/golden-hour-calculator</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/milky-way-photography-planner</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/photopills-alternative</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/shadow-length-calculator</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/sun-path-ar</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/support</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunlit-app.vercel.app/privacy</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://sunlit-app.vercel.app/terms/</loc>
+    <loc>https://sunlit-app.vercel.app/terms</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
