@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy | Sunlit</title>
-<meta name="description" content="Sunlit collects nothing. No account, no analytics, no advertising, no server of ours. Every calculation happens on your iPhone and everything it saves stays there.">
+<meta name="description" content="What Sunlit stores on your iPhone and what leaves it. No account, no analytics of ours, no server of ours. The free version shows advertising from Google's ad kit, and Sunlit Pro removes it.">
 
 <meta property="og:locale" content="en_US">
 
 <meta property="og:title" content="Privacy | Sunlit">
-<meta property="og:description" content="Sunlit collects nothing. No account, no analytics, no advertising, no server of ours. Every calculation happens on your iPhone and everything it saves stays there.">
+<meta property="og:description" content="What Sunlit stores on your iPhone and what leaves it. No account, no analytics of ours, no server of ours. The free version shows advertising from Google's ad kit, and Sunlit Pro removes it.">
 
 <meta name="twitter:title" content="Privacy | Sunlit">
-<meta name="twitter:description" content="Sunlit collects nothing. Every calculation happens on your iPhone and everything it saves stays there.">
+<meta name="twitter:description" content="Every calculation happens on your iPhone. The free version shows advertising from Google's ad kit, and Sunlit Pro removes it.">
 
 <link rel="stylesheet" href="style.css">
 <!-- aso:head:start -->
@@ -59,14 +59,16 @@
 <main id="main" class="doc"><div class="wrap">
   <p class="eyebrow">Privacy policy</p>
   <h1>Privacy</h1>
-  <p class="updated num">Last updated 23 August 2026. Applies to Sunlit for iPhone.</p>
+  <p class="updated num">Last updated 2 September 2026. Applies to Sunlit for iPhone.</p>
 
   <div class="note" style="max-width:40em">
-    <p><strong>Sunlit collects nothing.</strong> There is no account, no sign up, no
-      analytics, no advertising and no server of ours anywhere. Every figure the app
-      shows is computed on your iPhone, and everything the app saves is saved on your
-      iPhone. In App Store Connect, Sunlit is declared as Data Not Collected, because
-      that is what it does.</p>
+    <p><strong>Sunlit gathers nothing about you.</strong> There is no account, no sign
+      up, no analytics of ours and no server of ours anywhere. Every figure the app shows
+      is computed on your iPhone, and everything the app saves is saved on your iPhone.
+      One thing does involve a company other than Apple: the free version shows
+      advertising, which Google's ad kit loads over the network and only after you have
+      agreed to it. <a href="#advertising">Advertising in the free version</a> sets out
+      exactly what that means, and Sunlit Pro removes it.</p>
   </div>
 
   <div class="doc-body">
@@ -87,10 +89,11 @@
       and every number on every screen still appears. No calculation contacts a server,
       ours or anyone else's.</p>
 
-    <h2>The three things that can use a connection</h2>
-    <p>None of them is required, and none of them sends anything to us, because there is
-      no us to send it to. Each one is handled by Apple's own frameworks and goes to
-      Apple under Apple's privacy policy.</p>
+    <h2>What can use a connection</h2>
+    <p>None of these is required, and none of them sends anything to us, because there is
+      no us to send it to. The first three are handled by Apple's own frameworks and go to
+      Apple under Apple's privacy policy. The fourth is the advertising in the free
+      version, and it is the only one that reaches a company other than Apple.</p>
     <ul>
       <li><b>Searching Apple Maps for a place name.</b> Only while you are typing in the
         place search field, and only if a connection exists. The embedded city list is
@@ -100,6 +103,9 @@
         to Apple's geocoder. With no connection, Sunlit falls back to the time zone of
         your device and says so on the screen rather than guessing quietly.</li>
       <li><b>Buying, or restoring, Sunlit Pro.</b> The App Store handles the payment.</li>
+      <li><b>Loading an advert in the free version.</b> Google's ad kit contacts Google,
+        and only once you have consented to it. A copy with Sunlit Pro never does this at
+        all. See <a href="#advertising">Advertising in the free version</a>.</li>
     </ul>
 
     <h2>Location</h2>
@@ -123,12 +129,69 @@
     <h2>What Sunlit does not do</h2>
     <ul>
       <li>No account, no email address, no password.</li>
-      <li>No analytics, no telemetry, no crash reporting service.</li>
-      <li>No advertising, no advertising identifier, no tracking of any kind.</li>
-      <li>No third party software development kits.</li>
+      <li>No analytics service of ours, no attribution kit, no crash reporting service.</li>
+      <li>No third party kit apart from Google's advertising kit, which the next section
+        describes and which a copy with Sunlit Pro never starts.</li>
       <li>No server operated by us. There is nowhere for your data to be sent.</li>
-      <li>No sharing or selling of anything, to anybody, ever.</li>
+      <li>Nothing you enter is shared or sold. Your places, your horizon profiles, your
+        settings and your location are never passed to the advertising kit, and never to
+        anybody else.</li>
     </ul>
+
+    <h2 id="advertising">Advertising in the free version</h2>
+    <p>The free version of Sunlit shows advertising. It appears as a single banner at the
+      foot of the <b>Data</b> tab, below the scrolling column of figures. The Sky tab, the
+      AR view, the Map and Settings carry no banner, and the app shows no full screen
+      advert anywhere in it. <strong>Sunlit Pro removes the advertising entirely.</strong></p>
+    <p>The adverts are delivered by the <strong>Google Mobile Ads SDK</strong>. The
+      provider is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland,
+      for users in the European Economic Area, the United Kingdom and Switzerland, and
+      Google LLC elsewhere. To fill an advert slot, Google receives technical data from the
+      device such as an IP address, device and operating system characteristics and, if you
+      allow it, an advertising identifier.</p>
+    <div class="tablewrap" style="margin:18px 0">
+      <table class="wide">
+        <thead>
+          <tr><th>Data type</th><th>Processed by the app</th><th>Reaches a third party</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Saved places, horizon profiles, settings, your location</b></td>
+            <td>Written to your device only</td>
+            <td>No. It is never passed to the advertising kit or to anyone else</td>
+          </tr>
+          <tr>
+            <td><b>Advertising identifier (IDFA)</b></td>
+            <td>Only if you allow it in the App Tracking Transparency prompt</td>
+            <td>Google, for advertising, and only with your permission</td>
+          </tr>
+          <tr>
+            <td><b>Technical request data for an advert</b></td>
+            <td>Sent by Google's kit when an advert is loaded</td>
+            <td>Google, on the basis of your consent</td>
+          </tr>
+          <tr>
+            <td><b>Contact details, location, purchase history</b></td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Your consent comes first.</strong> Before the advertising kit is started at
+      all, the app shows Google's User Messaging Platform consent form, and iOS then asks
+      its own App Tracking Transparency question. Only after that does any advert load. The
+      legal basis is your consent, Art. 6(1)(a) GDPR, and you may withdraw it at any time
+      with effect for the future: open the <b>Data</b> tab, scroll to the foot of it and
+      choose <b>Advertising privacy choices</b>. Buying Sunlit Pro removes the advertising
+      altogether, and with it the whole of this section: a copy that owns Pro starts no
+      advertising kit, shows no consent form and asks no tracking question.</p>
+    <p>Google's own processing is described at
+      <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">policies.google.com/privacy</a>
+      and, for advertising specifically, at
+      <a href="https://business.safety.google/privacy/" rel="noopener noreferrer" target="_blank">business.safety.google/privacy</a>.
+      Beyond Google's advertising kit, Sunlit contains no analytics service of ours, no
+      attribution kit and no crash reporting service.</p>
 
     <h2>The purchase</h2>
     <p>Sunlit Pro is a single non consumable purchase handled entirely by Apple. The app
@@ -143,8 +206,23 @@
       Widgets compute their own values on the device as well, in an extension of the same
       app, and refresh at event boundaries.</p>
 
+    <h2>This website</h2>
+    <p>These pages set no cookies. The pages that describe the app use
+      <strong>Vercel Web Analytics</strong>, a cookieless measurement service of the
+      hosting provider. It sets no identifier, stores nothing on your device and builds no
+      profile of you. It counts page views, and it counts clicks on the App Store button
+      together with the place that button occupies on the page and the path of the page it
+      sat on. Nothing in it is evaluated per person, and none of it is passed on to anybody
+      else.</p>
+    <p>The site is hosted by <strong>Vercel Inc.</strong>, 340 S Lemon Ave #4133, Walnut,
+      CA 91789, USA. Its privacy policy is at
+      <a href="https://vercel.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">vercel.com/legal/privacy-policy</a>.</p>
+
     <h2>Children</h2>
-    <p>Sunlit is rated 4+ and collects no personal data from anybody, at any age.</p>
+    <p>Sunlit is not directed at children, and the app itself gathers no personal data
+      from anybody, at any age. The one processing that involves a third party is the
+      advertising in the free version, described above, and it runs only where consent has
+      been given for it.</p>
 
     <h2>Deleting everything</h2>
     <p>Deleting the app removes everything it stored. There is no copy on any server, so
@@ -159,8 +237,9 @@
       The same credit appears inside the app, in Settings.</p>
 
     <h2>Changes to this policy</h2>
-    <p>If this policy changes, the date at the top changes with it. Because the app
-      collects nothing, any change would be a matter of wording rather than of practice.</p>
+    <p>If this policy changes, the date at the top changes with it. This page describes
+      the app as it is released today: should a future version process data differently,
+      the page is updated before that version ships.</p>
 
     <h2>Contact</h2>
     <p>Questions about privacy go straight to a person:
