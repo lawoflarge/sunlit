@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy | Sunlit</title>
-<meta name="description" content="What Sunlit stores on your iPhone and what leaves it. No account, no analytics of ours, no server of ours. The free version shows advertising from Google's ad kit, and Sunlit Pro removes it.">
+<meta name="description" content="What Sunlit stores on your iPhone and what leaves it. Your astronomy data stays on your device. Optional app recommendations use anonymous aggregate counts. The free version also shows Google advertising.">
 
 <meta property="og:locale" content="en_US">
 
 <meta property="og:title" content="Privacy | Sunlit">
-<meta property="og:description" content="What Sunlit stores on your iPhone and what leaves it. No account, no analytics of ours, no server of ours. The free version shows advertising from Google's ad kit, and Sunlit Pro removes it.">
+<meta property="og:description" content="What Sunlit stores on your iPhone and what leaves it. Your astronomy data stays on your device. Optional app recommendations use anonymous aggregate counts. The free version also shows Google advertising.">
 
 <meta name="twitter:title" content="Privacy | Sunlit">
 <meta name="twitter:description" content="Every calculation happens on your iPhone. The free version shows advertising from Google's ad kit, and Sunlit Pro removes it.">
@@ -80,8 +80,7 @@
     <p>Sunlit writes a small amount of information into its own storage on your iPhone:
       the places you save, the horizon profiles you measure, the date and place you last
       looked at, your units and display settings, and whether the purchase is unlocked.</p>
-    <p>All of it lives inside the app's container on the device. It is not uploaded,
-      because the app contains no code that uploads anything. If you have iCloud Backup
+    <p>All of this private astronomy data lives inside the app's container on the device. It is not uploaded to the recommendation service or the developer. If you have iCloud Backup
       switched on, that container is part of your ordinary iPhone backup, exactly like
       any other app's data. That backup is a matter between you and Apple, and nobody
       else can read it.</p>
@@ -94,10 +93,7 @@
       ours or anyone else's.</p>
 
     <h2>What can use a connection</h2>
-    <p>None of these is required, and none of them sends anything to us, because there is
-      no us to send it to. The first three are handled by Apple's own frameworks and go to
-      Apple under Apple's privacy policy. The fourth is the advertising in the free
-      version, and it is the only one that reaches a company other than Apple.</p>
+    <p>These optional connections support place search, purchases, advertising and app recommendations. The first three listed below use Apple's frameworks under Apple's privacy policy. Advertising contacts Google, while recommendations contact the Supabase-hosted service and Apple's image servers as described above.</p>
     <ul>
       <li><b>Searching Apple Maps for a place name.</b> Only while you are typing in the
         place search field, and only if a connection exists. The embedded city list is
@@ -110,6 +106,7 @@
       <li><b>Loading an advert in the free version.</b> Google's ad kit contacts Google,
         and only once you have consented to it. A copy with Sunlit Pro never does this at
         all. See <a href="#advertising">Advertising in the free version</a>.</li>
+      <li><b>Recommendations for our other apps.</b> Settings can load a source-specific list, app icons and anonymous aggregate view/open counts through the services described above.</li>
     </ul>
 
     <h2>Location</h2>
@@ -221,15 +218,10 @@
       <a href="https://vercel.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">vercel.com/legal/privacy-policy</a>.</p>
 
     <h2>Children</h2>
-    <p>Sunlit is not directed at children, and the app itself gathers no personal data
-      from anybody, at any age. The one processing that involves a third party is the
-      advertising in the free version, described above, and it runs only where consent has
-      been given for it.</p>
+    <p>Sunlit is not directed at children and does not knowingly collect their personal data. The recommendation and hosting requests described above do not include private astronomy data. Advertising in the free version is processed by Google and runs only where the required consent has been given.</p>
 
     <h2>Deleting everything</h2>
-    <p>Deleting the app removes everything it stored. There is no copy on any server, so
-      there is nothing to request, nothing to export and nothing else to erase. A
-      purchase stays with your Apple Account and can be restored later at no cost.</p>
+    <p>Deleting the app removes its local astronomy data. The developer has no server copy of that content. Aggregate recommendation counts have no identifier with which to find or delete a person’s events; hosting providers process technical connection data as described above. A purchase stays with your Apple Account and can be restored later at no cost.</p>
 
     <h2 id="geonames">Credits and licences</h2>
     <p>The city list embedded in Sunlit is derived from
