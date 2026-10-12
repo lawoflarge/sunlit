@@ -53,7 +53,7 @@ struct RootView: View {
             // erreichbar. Dort liegen die Ereignis-Mitteilungen, die der Store in
             // zehn Sprachen als Pro-Funktion verkauft, und der Weg, die Einwilligung
             // zur Werbung zu widerrufen.
-            SettingsView()
+            SettingsView(isActive: tab == .settings && !showingPaywall)
                 .tabItem {
                     Label(String(localized: "tab.settings", defaultValue: "Settings",
                                  comment: "Tab title for the settings view"),

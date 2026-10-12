@@ -28926,71 +28926,6 @@
         }
       }
     },
-    "settings.offline": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Every figure in Sunlit is computed on this device, and every calculation works in aeroplane mode. What needs a connection is Apple's map tiles, the time zone of a newly dropped pin, and the advertising the free version carries. Sunlit Pro removes the advertising; the astronomy never left your device either way."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jede Zahl in Sunlit wird auf diesem Gerät berechnet, und jede Rechnung funktioniert im Flugmodus. Eine Verbindung brauchen Apples Kartenkacheln, die Zeitzone eines neu gesetzten Pins und die Werbung der kostenlosen Fassung. Sunlit Pro nimmt die Werbung weg; die Astronomie hat dein Gerät ohnehin nie verlassen."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chaque valeur de Sunlit est calculée sur cet appareil, et chaque calcul fonctionne en mode avion. Ce qui demande une connexion : les tuiles de carte d'Apple, le fuseau horaire d'une épingle qui vient d'être posée, et la publicité de la version gratuite. Sunlit Pro retire la publicité ; l'astronomie n'a de toute façon jamais quitté ton appareil."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ogni valore in Sunlit è calcolato su questo dispositivo, e ogni calcolo funziona in modalità aereo. Servono una connessione le mappe di Apple, il fuso orario di uno spillo appena posato e la pubblicità della versione gratuita. Sunlit Pro rimuove la pubblicità; l'astronomia non ha comunque mai lasciato il tuo dispositivo."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cada dato de Sunlit se calcula en este dispositivo, y todos los cálculos funcionan en modo avión. Necesitan conexión los mapas de Apple, la zona horaria de un pin recién puesto y la publicidad de la versión gratuita. Sunlit Pro quita la publicidad; la astronomía nunca salió de tu dispositivo de todos modos."
-          }
-        },
-        "es-MX": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cada dato de Sunlit se calcula en este dispositivo, y todos los cálculos funcionan en modo avión. Necesitan conexión los mapas de Apple, la zona horaria de un pin recién puesto y la publicidad de la versión gratuita. Sunlit Pro quita la publicidad; la astronomía nunca salió de tu dispositivo de todos modos."
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elk getal in Sunlit wordt op dit toestel berekend, en elke berekening werkt in vliegtuigmodus. Een verbinding hebben de kaarttegels van Apple nodig, de tijdzone van een net geplaatste speld, en de advertenties van de gratis versie. Sunlit Pro haalt de advertenties weg; de astronomie verliet je toestel sowieso nooit."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Każda wartość w Sunlit jest liczona na tym urządzeniu, a każde obliczenie działa w trybie samolotowym. Połączenia wymagają kafelki map Apple, strefa czasowa świeżo postawionej pinezki i reklamy w darmowej wersji. Sunlit Pro usuwa reklamy; astronomia i tak nigdy nie opuściła twojego urządzenia."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sunlit の数値はすべてこの端末で計算され、どの計算も機内モードで動く。通信が必要なのは Apple の地図タイル、新しく置いたピンのタイムゾーン、そして無料版の広告。Sunlit Pro は広告を取り除く。天文計算はもともと端末から出ていない。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cada valor do Sunlit é calculado neste aparelho, e todo cálculo funciona em modo avião. Precisam de conexão os blocos de mapa da Apple, o fuso horário de um alfinete recém-colocado e os anúncios da versão gratuita. O Sunlit Pro remove os anúncios; a astronomia nunca saiu do seu aparelho de qualquer forma."
-          }
-        }
-      }
-    },
     "settings.openSystemSettings": {
       "extractionState": "manual",
       "localizations": {
@@ -38152,6 +38087,71 @@
           "stringUnit": {
             "state": "translated",
             "value": "O sol não se põe hoje"
+          }
+        }
+      }
+    },
+    "settings.offline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every astronomy calculation works on this device, including in aeroplane mode. Apple’s maps, new place time zones, Google advertising and optional app recommendations use a connection. Recommendations use anonymous aggregate counts, never your saved places or astronomy data. Pro removes Google advertising."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle astronomischen Berechnungen funktionieren auf diesem Gerät, auch im Flugmodus. Apples Karten, Zeitzonen neuer Orte, Google-Werbung und optionale App-Empfehlungen nutzen eine Verbindung. Empfehlungen verwenden anonyme Zähler, niemals gespeicherte Orte oder astronomische Daten. Pro entfernt Google-Werbung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les calculs astronomiques fonctionnent sur cet appareil, même en mode avion. Les cartes Apple, les fuseaux horaires de nouveaux lieux, la publicité Google et les recommandations d’apps utilisent une connexion. Les recommandations utilisent des compteurs anonymes, jamais vos lieux enregistrés ni vos données astronomiques. Pro supprime la publicité Google."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I calcoli astronomici funzionano sul dispositivo, anche in modalità aereo. Le mappe Apple, i fusi orari di nuovi luoghi, la pubblicità Google e i consigli di app usano una connessione. I consigli usano conteggi anonimi, mai i luoghi salvati o i dati astronomici. Pro rimuove la pubblicità Google."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los cálculos astronómicos funcionan en este dispositivo, incluso en modo avión. Los mapas de Apple, las zonas horarias de nuevos lugares, la publicidad de Google y las recomendaciones de apps usan una conexión. Las recomendaciones usan recuentos anónimos, nunca tus lugares guardados ni tus datos astronómicos. Pro elimina la publicidad de Google."
+          }
+        },
+        "es-MX": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los cálculos astronómicos funcionan en este dispositivo, incluso en modo avión. Los mapas de Apple, las zonas horarias de nuevos lugares, la publicidad de Google y las recomendaciones de apps usan una conexión. Las recomendaciones usan conteos anónimos, nunca tus lugares guardados ni tus datos astronómicos. Pro elimina la publicidad de Google."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Astronomische berekeningen werken op dit apparaat, ook in vliegtuigmodus. Apple-kaarten, tijdzones van nieuwe plaatsen, Google-advertenties en appaanbevelingen gebruiken een verbinding. Aanbevelingen gebruiken anonieme tellingen, nooit je opgeslagen plaatsen of astronomische gegevens. Pro verwijdert Google-advertenties."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obliczenia astronomiczne działają na tym urządzeniu, także w trybie samolotowym. Mapy Apple, strefy czasowe nowych miejsc, reklamy Google i polecenia aplikacji korzystają z połączenia. Polecenia używają anonimowych liczników, nigdy zapisanych miejsc ani danych astronomicznych. Pro usuwa reklamy Google."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "天文計算は機内モードでもこのデバイス上で動作します。Appleの地図、新しい場所のタイムゾーン、Google広告、アプリのおすすめには接続が必要です。おすすめでは匿名の集計数を使用し、保存した場所や天文データは使用しません。ProはGoogle広告を削除します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os cálculos astronômicos funcionam neste dispositivo, inclusive no modo avião. Mapas da Apple, fusos horários de novos locais, anúncios do Google e recomendações de apps usam uma conexão. As recomendações usam contagens anônimas, nunca seus locais salvos ou dados astronômicos. Pro remove os anúncios do Google."
           }
         }
       }

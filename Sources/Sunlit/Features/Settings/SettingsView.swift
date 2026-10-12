@@ -1,4 +1,5 @@
 import SwiftUI
+import CrossPromotionUI
 import UIKit
 import UserNotifications
 import SunlitCore
@@ -276,6 +277,9 @@ enum SunlitEventNotifications {
 // MARK: - Settings
 
 struct SettingsView: View {
+    var isActive = true
+    @State private var promotions = AppPromotions.makeStore()
+
 
     @Environment(AppState.self) private var state
     @Environment(\.openURL) private var openURL
@@ -324,6 +328,7 @@ struct SettingsView: View {
         let moment = SkyMoment.at(state.julianDay, place: state.place)
         let altitude = moment.sun.altitude
 
+        PromotionViewport { viewport in
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 SunlitSheetHeader(
@@ -342,11 +347,17 @@ struct SettingsView: View {
                 HairlineDivider()
                 purchaseSection(altitude: altitude)
                 HairlineDivider()
+                if let promotions {
+                    AppPromotionSection(store: promotions, viewport: (!isActive || showingHorizon || showingAcknowledgements) ? .zero : viewport)
+                }
+
                 aboutSection(altitude: altitude)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
         }
+        }
+        .promotionLifecycle(promotions, isActive: isActive)
         .sunlitSheetSky(
             solarAltitude: altitude,
             moonIllumination: moment.moonPhase.illuminatedFraction)
@@ -824,7 +835,7 @@ struct SettingsView: View {
 
             Text(String(
                 localized: "settings.offline",
-                defaultValue: "Every figure in Sunlit is computed on this device, and every calculation works in aeroplane mode. What needs a connection is Apple's map tiles, the time zone of a newly dropped pin, and the advertising the free version carries. Sunlit Pro removes the advertising; the astronomy never left your device either way.",
+                defaultValue: "Every astronomy calculation works on this device, including in aeroplane mode. Apple’s maps, new place time zones, Google advertising and optional app recommendations use a connection. Recommendations use anonymous aggregate counts, never your saved places or astronomy data. Pro removes Google advertising.",
                 comment: "States the offline promise and what advertising changes about it"))
                 .font(SunlitType.caption)
                 .fixedSize(horizontal: false, vertical: true)

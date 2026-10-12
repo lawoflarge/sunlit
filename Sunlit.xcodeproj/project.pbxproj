@@ -36,6 +36,7 @@
 		4D741EA0F3DD7C60F1B97C4F /* Eclipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F9083DDA13F86F16663329 /* Eclipse.swift */; };
 		50740501AB1A8F3A833D48D4 /* MoonPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6546B79A574B22429E1901B2 /* MoonPosition.swift */; };
 		527AD2E0AEAEFE8FD0CBE40E /* CaptureHarness.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC3B7CF03F69E4134765387 /* CaptureHarness.swift */; };
+		5517BE3A23267173464421E2 /* Promotions.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6A3133500E4E1A7BFA67A58C /* Promotions.xcstrings */; };
 		56D84D1CB686B1981482F8D0 /* HeadingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5B0B8FD1A90CE7E6D38223 /* HeadingProvider.swift */; };
 		5728222F238A450665EDC0D2 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6340D80C28D2F0BCF31144 /* LocationProvider.swift */; };
 		59031773DA6EFFA456CB1C42 /* Twilight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A68CAD665AE29A713880A /* Twilight.swift */; };
@@ -44,6 +45,7 @@
 		60AFB7B8C3BFF833FD856964 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794DB501BC051218FBC0D12 /* CameraPreview.swift */; };
 		63E7F330F2B91E1F2306BE58 /* SkyPaletteContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBC17A651A7EF90AB366BE /* SkyPaletteContrastTests.swift */; };
 		6765ED59389C3ED1F4574F28 /* DatePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D835582A71FECE0C0B354D /* DatePickerSheet.swift */; };
+		6854C7C918BA7510D314D055 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 7E14650190E6F929FF9A56FF /* GoogleMobileAds */; };
 		692DCF1B635E54977A72DE54 /* UVIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0E721638F4E88BF8F425E /* UVIndex.swift */; };
 		69ED9BC56004334B25D0F6B6 /* AnnualCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F7ACAE1189EC2DFC4F428 /* AnnualCurve.swift */; };
 		6B28AA5BE49889C624697EAC /* Irradiance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34256D28C1D38C65A64F652 /* Irradiance.swift */; };
@@ -76,21 +78,24 @@
 		BB22E65D60E2015F1630C430 /* ExportSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010ED7160C0CB4CEB81AD73 /* ExportSheet.swift */; };
 		C664D1031028CF9D4727B64E /* HorizonSweep.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD982D89FD81375434CF15F4 /* HorizonSweep.swift */; };
 		C66C3E8224BE286B068548E9 /* DirectionRays.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C0B66DBC7ECFF54B1F27C /* DirectionRays.swift */; };
+		CE6ABC85E94071261E3235D5 /* AppPromotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE16913AA8B7542C7104EDB3 /* AppPromotions.swift */; };
 		D025FD063AA9857C10BC0C79 /* CityIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23E69860AC602F8A12BA74 /* CityIndex.swift */; };
+		D0A2480C3B73B72B54B2C53F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 30E8354060715EE12E831D70 /* PrivacyInfo.xcprivacy */; };
 		D0B3167151155853FEC67B1F /* ProGateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E78832D3522D29AEFAAFA09 /* ProGateTests.swift */; };
 		D296141541D31EEBDDF1166E /* EclipseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D09CE2C31839C4A9FC228D9 /* EclipseList.swift */; };
-		D426209C6B1A762C6EB418C1 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 3702ED7162FCC7B06CA535E6 /* GoogleUserMessagingPlatform */; };
+		D426209C6B1A762C6EB418C1 /* CrossPromotionUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5507D4983A0CF7C2942EBEFF /* CrossPromotionUI */; };
 		D58DBC1BA3698DBA21103E36 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E44C69F4B8598307A306BE /* Coordinates.swift */; };
 		D661D94C694A19F6279726C0 /* DeltaT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571323539D58A08F2C3A5172 /* DeltaT.swift */; };
 		DEAFEF81398495249F9022A9 /* ProGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB60DA73F75A6AC7544534B /* ProGate.swift */; };
 		DEC9899E86A552B5C213534F /* SkyPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA4F2BACF029E05FD23FA6 /* SkyPalette.swift */; };
 		DFF961A86B853967385C21BB /* SunlitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5630B21E105C066E818F4E8A /* SunlitCore.framework */; };
 		E526E6F4254CEF15C93CF365 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF879DF1B77A73C138CB4B5 /* ARView.swift */; };
-		E878668096F2BF05037FF059 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 7E14650190E6F929FF9A56FF /* GoogleMobileAds */; };
+		E878668096F2BF05037FF059 /* CrossPromotionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B6CC4C28754AF9AFCE4439B /* CrossPromotionCore */; };
 		E8ADF96426F53E132690D01E /* SPATables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89994E699BB34DC63D100943 /* SPATables.swift */; };
 		EAA8E14E47734EC379ED9450 /* SunlitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */; };
 		EEB55536F4BDF2C28750AFD9 /* InstrumentComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F5C76121C4724218281D5 /* InstrumentComponents.swift */; };
 		EEF25C2B0624415C3B9F202C /* ProCapability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82561199AF20C96517D5B9E1 /* ProCapability.swift */; };
+		EF5C8F141D9A1F2D3B374E16 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 3702ED7162FCC7B06CA535E6 /* GoogleUserMessagingPlatform */; };
 		F1745D405DCEA189D1CDA4B5 /* Refraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12442FC29536ED6AF6B8653 /* Refraction.swift */; };
 		F44E2223562BDB5273E7C5C0 /* SunlitWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B4A98CA2CE09369727275 /* SunlitWidgetBundle.swift */; };
 		F88C2FEDDB37124721541809 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE0867A48E3C051D164F61D /* Shadow.swift */; };
@@ -188,6 +193,7 @@
 		2C0E27E865FF14E135F3636B /* MetricBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricBlock.swift; sourceTree = "<group>"; };
 		2C9A2B0D16AD133F0935BA10 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		2F4145DD8BEF489487542526 /* DayReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayReport.swift; sourceTree = "<group>"; };
+		30E8354060715EE12E831D70 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		374F7B4F831A0BB788C20F46 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		37D835582A71FECE0C0B354D /* DatePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerSheet.swift; sourceTree = "<group>"; };
 		38B56925EA079ECE65372AEF /* AdConsentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConsentCoordinator.swift; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 		608FFEC9D8F1615AE0B38384 /* SunlitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunlitApp.swift; sourceTree = "<group>"; };
 		63E245B7349FEA9E3E085EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6546B79A574B22429E1901B2 /* MoonPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPosition.swift; sourceTree = "<group>"; };
+		6A3133500E4E1A7BFA67A58C /* Promotions.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Promotions.xcstrings; sourceTree = "<group>"; };
 		6A7450767EC5F436B37C0417 /* LockScreenWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidgets.swift; sourceTree = "<group>"; };
 		6AF879DF1B77A73C138CB4B5 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		6CEE48BC0B058861CF63254A /* AdConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConfiguration.swift; sourceTree = "<group>"; };
@@ -263,6 +270,7 @@
 		FA95C4D09696F19F36DDC696 /* MoonCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonCalendar.swift; sourceTree = "<group>"; };
 		FC5B0B8FD1A90CE7E6D38223 /* HeadingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingProvider.swift; sourceTree = "<group>"; };
 		FDC3B7CF03F69E4134765387 /* CaptureHarness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureHarness.swift; sourceTree = "<group>"; };
+		FE16913AA8B7542C7104EDB3 /* AppPromotions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPromotions.swift; sourceTree = "<group>"; };
 		FEC3AD8E4695A1AB572F727C /* GlobalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,9 +295,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E878668096F2BF05037FF059 /* CrossPromotionCore in Frameworks */,
+				D426209C6B1A762C6EB418C1 /* CrossPromotionUI in Frameworks */,
 				DFF961A86B853967385C21BB /* SunlitCore.framework in Frameworks */,
-				E878668096F2BF05037FF059 /* GoogleMobileAds in Frameworks */,
-				D426209C6B1A762C6EB418C1 /* GoogleUserMessagingPlatform in Frameworks */,
+				6854C7C918BA7510D314D055 /* GoogleMobileAds in Frameworks */,
+				EF5C8F141D9A1F2D3B374E16 /* GoogleUserMessagingPlatform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +413,8 @@
 				262A5D93BCBD1AE8F1EF5717 /* Assets.xcassets */,
 				B4027781DBCFED5ECC2A9E10 /* InfoPlist.xcstrings */,
 				F224EB00700AFD5B1E87F4C1 /* Localizable.xcstrings */,
+				30E8354060715EE12E831D70 /* PrivacyInfo.xcprivacy */,
+				6A3133500E4E1A7BFA67A58C /* Promotions.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -529,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				374F7B4F831A0BB788C20F46 /* AcknowledgementsView.swift */,
+				FE16913AA8B7542C7104EDB3 /* AppPromotions.swift */,
 				D3A2F0608EC7BD80C73343F2 /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -674,6 +687,8 @@
 			);
 			name = Sunlit;
 			packageProductDependencies = (
+				7B6CC4C28754AF9AFCE4439B /* CrossPromotionCore */,
+				5507D4983A0CF7C2942EBEFF /* CrossPromotionUI */,
 				7E14650190E6F929FF9A56FF /* GoogleMobileAds */,
 				3702ED7162FCC7B06CA535E6 /* GoogleUserMessagingPlatform */,
 			);
@@ -766,6 +781,7 @@
 			mainGroup = CD8466A7BE705413988C1347;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				9A35FD0FEB45F1F261F17030 /* XCRemoteSwiftPackageReference "lawoflarge.app" */,
 				C8F94D8289CB4C372AC481BE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				082379E07D0AB11261AB38AE /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
 			);
@@ -791,6 +807,8 @@
 				03DD71B326FD5BFC9505BB20 /* Assets.xcassets in Resources */,
 				6EAC3414B775AA6F6920F18A /* InfoPlist.xcstrings in Resources */,
 				868B76C7338A84B1CBA05398 /* Localizable.xcstrings in Resources */,
+				D0A2480C3B73B72B54B2C53F /* PrivacyInfo.xcprivacy in Resources */,
+				5517BE3A23267173464421E2 /* Promotions.xcstrings in Resources */,
 				1FF2A007E491AEC4D19D5E66 /* cities.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -839,6 +857,7 @@
 				7ECE5EF99E564A1E79406CA7 /* AdConsentCoordinator.swift in Sources */,
 				38DD70C80A597F89C33845E9 /* AdsController.swift in Sources */,
 				69ED9BC56004334B25D0F6B6 /* AnnualCurve.swift in Sources */,
+				CE6ABC85E94071261E3235D5 /* AppPromotions.swift in Sources */,
 				9C613F3FA69F25AB847DC3AC /* AppState.swift in Sources */,
 				60AFB7B8C3BFF833FD856964 /* CameraPreview.swift in Sources */,
 				527AD2E0AEAEFE8FD0CBE40E /* CaptureHarness.swift in Sources */,
@@ -1020,7 +1039,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1787924916;
+				CROSS_PROMOTION_BASE_URL = "https://zovzimsewjkjmazckhua.supabase.co/functions/v1/cross-promotion";
+				CURRENT_PROJECT_VERSION = 1787924917;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = R95M36AU2X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1042,7 +1062,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1061,7 +1081,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1787924916;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1103,7 +1123,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1787924916;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1157,7 +1177,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1787924916;
+				CROSS_PROMOTION_BASE_URL = "https://zovzimsewjkjmazckhua.supabase.co/functions/v1/cross-promotion";
+				CURRENT_PROJECT_VERSION = 1787924917;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = R95M36AU2X;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1173,7 +1194,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1345,6 +1366,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		9A35FD0FEB45F1F261F17030 /* XCRemoteSwiftPackageReference "lawoflarge.app" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lawoflarge/lawoflarge.app.git";
+			requirement = {
+				kind = revision;
+				revision = 168dd73615cde4a62f92b0064aee3048c628c5a4;
+			};
+		};
 		C8F94D8289CB4C372AC481BE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
@@ -1360,6 +1389,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 082379E07D0AB11261AB38AE /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
 			productName = GoogleUserMessagingPlatform;
+		};
+		5507D4983A0CF7C2942EBEFF /* CrossPromotionUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A35FD0FEB45F1F261F17030 /* XCRemoteSwiftPackageReference "lawoflarge.app" */;
+			productName = CrossPromotionUI;
+		};
+		7B6CC4C28754AF9AFCE4439B /* CrossPromotionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A35FD0FEB45F1F261F17030 /* XCRemoteSwiftPackageReference "lawoflarge.app" */;
+			productName = CrossPromotionCore;
 		};
 		7E14650190E6F929FF9A56FF /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;

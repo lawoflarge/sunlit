@@ -12,8 +12,9 @@ options:
   groupSortPosition: top
 settings:
   base:
-    MARKETING_VERSION: "1.1.0"
-    CURRENT_PROJECT_VERSION: "1787924916"
+    CROSS_PROMOTION_BASE_URL: "https://zovzimsewjkjmazckhua.supabase.co/functions/v1/cross-promotion"
+    MARKETING_VERSION: "1.1.1"
+    CURRENT_PROJECT_VERSION: "1787924917"
     DEVELOPMENT_TEAM: R95M36AU2X
     SWIFT_VERSION: "5.0"
     IPHONEOS_DEPLOYMENT_TARGET: "17.0"
@@ -35,6 +36,9 @@ settings:
 # pull an advertising framework into a lock screen widget. Checked with
 # `otool -L` on the built .appex, not assumed.
 packages:
+  CrossPromotion:
+    url: https://github.com/lawoflarge/lawoflarge.app.git
+    revision: 168dd73615cde4a62f92b0064aee3048c628c5a4
   GoogleMobileAds:
     url: https://github.com/googleads/swift-package-manager-google-mobile-ads
     from: "13.0.0"
@@ -81,6 +85,10 @@ targets:
       - path: Sources/Sunlit/Resources/InfoPlist.xcstrings
         buildPhase: resources
     dependencies:
+      - package: CrossPromotion
+        product: CrossPromotionCore
+      - package: CrossPromotion
+        product: CrossPromotionUI
       - target: SunlitCore
       - target: SunlitWidgets
       - package: GoogleMobileAds
